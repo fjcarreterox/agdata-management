@@ -58,25 +58,49 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4">
-				<h2>Get Started</h2>
+				<h2>Gestión de clientes</h2>
 				<p>The controller generating this page is found at <code>APPPATH/classes/controller/welcome.php</code>.</p>
 				<p>This view can be found at <code>APPPATH/views/welcome/index.php</code>.</p>
 				<p>You can modify these files to get your application started quickly.</p>
 			</div>
 			<div class="col-md-4">
-				<h2>Learn</h2>
+				<h2>Facturación</h2>
 				<p>The best way to learn FuelPHP is reading through the <a href="http://docs.fuelphp.com">Documentation</a>.</p>
 				<p>Another good resource is the <a href="http://fuelphp.com/forums">Forums</a>.  They are fairly active, and you can usually get a response quickly.</p>
 			</div>
 			<div class="col-md-4">
-				<h2>Gestión de la aplicación</h2>
+				<h2>Documentación</h2>
 				<ul>
 					<li><a href="usuario">Gestión de usuarios</a></li>
+                    <li><a href="roles">Gestión de roles</a></li>
 					<li><a href="http://github.com/fuel/fuel">Gestión de clientes</a></li>
 					<li><a href="http://fuelphp.com/contribute/issue-tracker">Gestión de llamadas comerciales</a></li>
 				</ul>
 			</div>
 		</div>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Captación</h2>
+                <p>The controller generating this page is found at <code>APPPATH/classes/controller/welcome.php</code>.</p>
+                <p>This view can be found at <code>APPPATH/views/welcome/index.php</code>.</p>
+                <p>You can modify these files to get your application started quickly.</p>
+            </div>
+            <div class="col-md-4">
+                <h2>Administración</h2>
+                <p>The best way to learn FuelPHP is reading through the <a href="http://docs.fuelphp.com">Documentation</a>.</p>
+                <p>Another good resource is the <a href="http://fuelphp.com/forums">Forums</a>.  They are fairly active, and you can usually get a response quickly.</p>
+            </div>
+            <div class="col-md-4">
+                <h2>Gestión de la aplicación</h2>
+                <ul>
+                    <li><a href="usuario">Gestión de usuarios</a></li>
+                    <li><a href="roles">Gestión de roles</a></li>
+                    <li><a href="tipo/clientes">Tipología de clientes</a></li>
+                    <li><a href="http://github.com/fuel/fuel">Gestión de clientes</a></li>
+                    <li><a href="http://fuelphp.com/contribute/issue-tracker">Gestión de llamadas comerciales</a></li>
+                </ul>
+            </div>
+        </div>
 		<hr/>
 		<footer>
 			<p class="pull-right">Page rendered in {exec_time}s using {mem_usage}mb of memory.</p>

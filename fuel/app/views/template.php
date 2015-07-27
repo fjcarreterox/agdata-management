@@ -11,6 +11,10 @@
 <body>
 	<div class="container">
 		<div class="col-md-12">
+            <a alt="Ir al menú principal" href="http://localhost/agdata-gestion/public/" class="no-decoration">
+                <?php echo Asset::img('logo.png',array("class"=>"logo","alt"=>"Ir al menú principal")); ?>
+                <h1>A.G.DATA S.L.</h1></a>
+            <hr>
 			<h1><?php echo $title; ?></h1>
 			<hr>
 <?php if (Session::get_flash('success')): ?>
@@ -34,11 +38,11 @@
 <?php echo $content; ?>
 		</div>
 		<footer>
-			<p class="pull-right">Page rendered in {exec_time}s using {mem_usage}mb of memory.</p>
-			<p>
+			<p class="pull-right">Sesión iniciada como USER (ROL).</p>
+			<!--<p>
 				<a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.<br>
 				<small>Version: <?php echo e(Fuel::VERSION); ?></small>
-			</p>
+			</p>-->
 		</footer>
 	</div>
 </body>
