@@ -96,7 +96,7 @@
                     <li><a href="usuario">Gestión de usuarios</a></li>
                     <li><a href="roles">Gestión de roles</a></li>
                     <li><a href="tipo/clientes">Tipología de clientes</a></li>
-                    <li><a href="http://github.com/fuel/fuel">Gestión de clientes</a></li>
+                    <li><a href="servicios">Gestión de servicios ofrecidos</a></li>
                     <li><a href="http://fuelphp.com/contribute/issue-tracker">Gestión de llamadas comerciales</a></li>
                 </ul>
             </div>

@@ -9,6 +9,7 @@ return array (
         0 => '001_create_usuarios',
         1 => '002_create_roles',
         2 => '003_create_tipo_clientes',
+        3 => '004_create_servicios',
       ),
     ),
     'module' => 
