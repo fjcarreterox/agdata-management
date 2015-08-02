@@ -4,18 +4,17 @@
 	<meta charset="utf-8">
 	<title><?php echo $title; ?></title>
 	<?php echo Asset::css('bootstrap.css'); ?>
-	<style>
-		body { margin: 40px; }
-	</style>
+    <?php echo Asset::css('main.css'); ?>
 </head>
 <body>
 	<div class="container">
 		<div class="col-md-12">
             <a alt="Ir al menú principal" href="http://localhost/agdata-gestion/public/" class="no-decoration">
                 <?php echo Asset::img('logo.png',array("class"=>"logo","alt"=>"Ir al menú principal")); ?>
-                <h1>A.G.DATA S.L.</h1></a>
-            <hr>
-			<h1><?php echo $title; ?></h1>
+                </a>
+            <h1>A.G.DATA S.L.</h1>
+            <br/>
+			<h2><?php echo $title; ?></h2>
 			<hr>
 <?php if (Session::get_flash('success')): ?>
 			<div class="alert alert-success">

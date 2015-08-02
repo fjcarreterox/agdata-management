@@ -59,9 +59,11 @@
 		<div class="row">
 			<div class="col-md-4">
 				<h2>Gestión de clientes</h2>
-				<p>The controller generating this page is found at <code>APPPATH/classes/controller/welcome.php</code>.</p>
-				<p>This view can be found at <code>APPPATH/views/welcome/index.php</code>.</p>
-				<p>You can modify these files to get your application started quickly.</p>
+                <ul>
+
+                    <li><a href="clientes">Clientes consolidados</a></li>
+                </ul>
+
 			</div>
 			<div class="col-md-4">
 				<h2>Facturación</h2>
@@ -71,7 +73,7 @@
 			<div class="col-md-4">
 				<h2>Documentación</h2>
 				<ul>
-					<li><a href="usuario">Gestión de usuarios</a></li>
+					<li><a href="usuario">Generación de nueva documentación</a></li>
                     <li><a href="roles">Gestión de roles</a></li>
 					<li><a href="http://github.com/fuel/fuel">Gestión de clientes</a></li>
 					<li><a href="http://fuelphp.com/contribute/issue-tracker">Gestión de llamadas comerciales</a></li>
@@ -81,9 +83,10 @@
         <div class="row">
             <div class="col-md-4">
                 <h2>Captación</h2>
-                <p>The controller generating this page is found at <code>APPPATH/classes/controller/welcome.php</code>.</p>
-                <p>This view can be found at <code>APPPATH/views/welcome/index.php</code>.</p>
-                <p>You can modify these files to get your application started quickly.</p>
+                <ul>
+                    <li><a href="clientes">Clientes potenciales</a></li>
+                    <li><a href="http://fuelphp.com/contribute/issue-tracker">Gestión de llamadas comerciales</a></li>
+                </ul>
             </div>
             <div class="col-md-4">
                 <h2>Administración</h2>
@@ -97,7 +100,7 @@
                     <li><a href="roles">Gestión de roles</a></li>
                     <li><a href="tipo/clientes">Tipología de clientes</a></li>
                     <li><a href="servicios">Gestión de servicios ofrecidos</a></li>
-                    <li><a href="http://fuelphp.com/contribute/issue-tracker">Gestión de llamadas comerciales</a></li>
+                    <li><a href="estados/cliente">Estados del cliente</a></li>
                 </ul>
             </div>
         </div>
