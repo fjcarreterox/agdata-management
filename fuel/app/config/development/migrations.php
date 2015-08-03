@@ -12,6 +12,7 @@ return array (
         3 => '004_create_servicios',
         4 => '005_create_clientes',
         5 => '006_create_estados_clientes',
+        6 => '007_create_agendas',
       ),
     ),
     'module' => 

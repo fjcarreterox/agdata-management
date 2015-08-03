@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>FuelPHP Framework</title>
+	<title>Área de gestión de A.G.DATA</title>
 	<?php echo Asset::css('bootstrap.css'); ?>
 	<style>
 		#logo{
@@ -67,16 +67,11 @@
 			</div>
 			<div class="col-md-4">
 				<h2>Facturación</h2>
-				<p>The best way to learn FuelPHP is reading through the <a href="http://docs.fuelphp.com">Documentation</a>.</p>
-				<p>Another good resource is the <a href="http://fuelphp.com/forums">Forums</a>.  They are fairly active, and you can usually get a response quickly.</p>
-			</div>
+            </div>
 			<div class="col-md-4">
 				<h2>Documentación</h2>
 				<ul>
 					<li><a href="usuario">Generación de nueva documentación</a></li>
-                    <li><a href="roles">Gestión de roles</a></li>
-					<li><a href="http://github.com/fuel/fuel">Gestión de clientes</a></li>
-					<li><a href="http://fuelphp.com/contribute/issue-tracker">Gestión de llamadas comerciales</a></li>
 				</ul>
 			</div>
 		</div>
@@ -85,7 +80,7 @@
                 <h2>Captación</h2>
                 <ul>
                     <li><a href="clientes">Clientes potenciales</a></li>
-                    <li><a href="http://fuelphp.com/contribute/issue-tracker">Gestión de llamadas comerciales</a></li>
+                    <li><a href="agenda">Agenda</a></li>
                 </ul>
             </div>
             <div class="col-md-4">
