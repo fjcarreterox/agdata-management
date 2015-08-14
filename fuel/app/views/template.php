@@ -7,15 +7,16 @@
     <?php echo Asset::css('main.css'); ?>
 </head>
 <body>
+    <header></header>
 	<div class="container">
-		<div class="col-md-12">
+        <div class="col-md-12 cabecera">
             <a alt="Ir al menú principal" href="http://localhost/agdata-gestion/public/" class="no-decoration">
                 <?php echo Asset::img('logo.png',array("class"=>"logo","alt"=>"Ir al menú principal")); ?>
-                </a>
-            <h1>A.G.DATA S.L.</h1>
-            <br/>
-			<h2><?php echo $title; ?></h2>
-			<hr>
+                <h1>AGDATA S.L.</h1>
+            </a>
+            <h2>Área de gestión interna</h2>
+			<!--<h3><?php /*echo $title;*/ ?></h3>-->
+			<hr/>
 <?php if (Session::get_flash('success')): ?>
 			<div class="alert alert-success">
 				<strong>Success</strong>

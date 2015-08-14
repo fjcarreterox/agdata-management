@@ -35,17 +35,17 @@ class Model_Cliente extends Model
 	public static function validate($factory)
 	{
 		$val = Validation::forge($factory);
-		$val->add_field('nombre', 'Nombre', 'required|max_length[255]');
-		$val->add_field('tipo', 'Tipo', 'required|valid_string[numeric]');
-		$val->add_field('cif_nif', 'Cif Nif', 'required|max_length[255]');
-		$val->add_field('direccion', 'Direccion', 'required|max_length[255]');
-		$val->add_field('cpostal', 'Cpostal', 'required|valid_string[numeric]');
-		$val->add_field('loc', 'Loc', 'required|max_length[255]');
-		$val->add_field('prov', 'Prov', 'required|max_length[255]');
-		$val->add_field('tel', 'Tel', 'required|valid_string[numeric]');
-		$val->add_field('pweb', 'Pweb', 'required|max_length[255]');
+		$val->add_field('nombre', 'Nombre o Razón social', 'required|max_length[255]');
+		$val->add_field('tipo', 'Tipo de cliente', 'required|valid_string[numeric]');
+		//$val->add_field('cif_nif', 'Cif Nif', 'required|max_length[255]');
+		//$val->add_field('direccion', 'Direccion', 'required|max_length[255]');
+		//$val->add_field('cpostal', 'Cpostal', 'required|valid_string[numeric]');
+		//$val->add_field('loc', 'Loc', 'required|max_length[255]');
+		$val->add_field('prov', 'Provincia', 'required|max_length[255]');
+		$val->add_field('tel', 'Teléfono', 'required|valid_string[numeric]');
+		//$val->add_field('pweb', 'Pweb', 'required|max_length[255]');
 		$val->add_field('actividad', 'Actividad', 'required|max_length[255]');
-		$val->add_field('observ', 'Observ', 'required|max_length[255]');
+		//$val->add_field('observ', 'Observ', 'required|max_length[255]');
 		$val->add_field('estado', 'Estado', 'required|valid_string[numeric]');
 
 		return $val;

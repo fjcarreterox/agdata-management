@@ -60,8 +60,8 @@
 			<div class="col-md-4">
 				<h2>Gestión de clientes</h2>
                 <ul>
-
-                    <li><a href="clientes">Clientes consolidados</a></li>
+                    <li><a href="clientes">Clientes en activo</a></li>
+                    <li><a href="personal">Personal de cliente y relación con AGDATA</a></li>
                 </ul>
 
 			</div>
@@ -96,6 +96,7 @@
                     <li><a href="tipo/clientes">Tipología de clientes</a></li>
                     <li><a href="servicios">Gestión de servicios ofrecidos</a></li>
                     <li><a href="estados/cliente">Estados del cliente</a></li>
+                    <li><a href="relacion">Tipos de relaciones de personal con AGDATA</a></li>
                 </ul>
             </div>
         </div>
