@@ -13,6 +13,8 @@ return array (
         4 => '005_create_clientes',
         5 => '006_create_estados_clientes',
         6 => '007_create_agendas',
+        7 => '008_create_personals',
+        8 => '009_create_relacions',
       ),
     ),
     'module' => 
