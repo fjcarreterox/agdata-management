@@ -7,8 +7,14 @@ class Controller_Clientes extends Controller_Template
 		$data['clientes'] = Model_Cliente::find('all');
 		$this->template->title = "Clientes";
 		$this->template->content = View::forge('clientes/index', $data);
-
 	}
+
+    public function action_activos()
+    {
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>4)));
+        $this->template->title = "Clientes";
+        $this->template->content = View::forge('clientes/index', $data);
+    }
 
 	public function action_view($id = null)
 	{
@@ -16,13 +22,11 @@ class Controller_Clientes extends Controller_Template
 
 		if ( ! $data['cliente'] = Model_Cliente::find($id))
 		{
-			Session::set_flash('error', 'Could not find cliente #'.$id);
+			Session::set_flash('error', 'No se ha podido localizar al cliente solicitado.');
 			Response::redirect('clientes');
 		}
-
 		$this->template->title = "Cliente";
 		$this->template->content = View::forge('clientes/view', $data);
-
 	}
 
 	public function action_create()
@@ -50,14 +54,11 @@ class Controller_Clientes extends Controller_Template
 
 				if ($cliente and $cliente->save())
 				{
-					Session::set_flash('success', 'Added cliente #'.$cliente->id.'.');
-
+					Session::set_flash('success', 'Nuevo cliente añadido al sistema.');
 					Response::redirect('clientes');
 				}
-
-				else
-				{
-					Session::set_flash('error', 'Could not save cliente.');
+				else{
+					Session::set_flash('error', 'No se ha podido crear el cliente. Inténtelo más tarde.');
 				}
 			}
 			else
@@ -129,10 +130,8 @@ class Controller_Clientes extends Controller_Template
 
 			$this->template->set_global('cliente', $cliente, false);
 		}
-
 		$this->template->title = "Clientes";
 		$this->template->content = View::forge('clientes/edit');
-
 	}
 
 	public function action_delete($id = null)
@@ -143,16 +142,11 @@ class Controller_Clientes extends Controller_Template
 		{
 			$cliente->delete();
 
-			Session::set_flash('success', 'Deleted cliente #'.$id);
+			Session::set_flash('success', 'Cliente borrado del sistema.');
 		}
-
-		else
-		{
-			Session::set_flash('error', 'Could not delete cliente #'.$id);
+		else{
+			Session::set_flash('error', 'No se ha podido eliminar el cliente solicitado.');
 		}
-
 		Response::redirect('clientes');
-
 	}
-
 }

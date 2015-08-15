@@ -60,8 +60,9 @@
 			<div class="col-md-4">
 				<h2>Gestión de clientes</h2>
                 <ul>
-                    <li><a href="clientes">Clientes en activo</a></li>
+                    <li><a href="clientes/activos">Clientes en activo</a></li>
                     <li><a href="personal">Personal de cliente y relación con AGDATA</a></li>
+                    <li><a href="clientes">Listado completo de clientes</a></li>
                 </ul>
 
 			</div>

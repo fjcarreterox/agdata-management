@@ -19,7 +19,7 @@
 			<hr/>
 <?php if (Session::get_flash('success')): ?>
 			<div class="alert alert-success">
-				<strong>Success</strong>
+				<strong>¡Correcto!</strong>
 				<p>
 				<?php echo implode('</p><p>', e((array) Session::get_flash('success'))); ?>
 				</p>
@@ -27,7 +27,7 @@
 <?php endif; ?>
 <?php if (Session::get_flash('error')): ?>
 			<div class="alert alert-danger">
-				<strong>Error</strong>
+				<strong>Error...</strong>
 				<p>
 				<?php echo implode('</p><p>', e((array) Session::get_flash('error'))); ?>
 				</p>
@@ -41,7 +41,7 @@
 			<p class="pull-right">Sesión iniciada como USER (ROL).</p>
 			<!--<p>
 				<a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.<br>
-				<small>Version: <?php echo e(Fuel::VERSION); ?></small>
+				<small>Version: <?php /*echo e(Fuel::VERSION);*/ ?></small>
 			</p>-->
 		</footer>
 	</div>
