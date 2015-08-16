@@ -12,7 +12,14 @@ class Controller_Clientes extends Controller_Template
     public function action_activos()
     {
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>4)));
-        $this->template->title = "Clientes";
+        $this->template->title = "Clientes activos";
+        $this->template->content = View::forge('clientes/index', $data);
+    }
+
+    public function action_potenciales()
+    {
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array(array('estado','<',4))));
+        $this->template->title = "Clientes potenciales";
         $this->template->content = View::forge('clientes/index', $data);
     }
 
@@ -24,8 +31,12 @@ class Controller_Clientes extends Controller_Template
 		{
 			Session::set_flash('error', 'No se ha podido localizar al cliente solicitado.');
 			Response::redirect('clientes');
-		}
-		$this->template->title = "Cliente";
+		}else{
+            $data['ficha'] = Model_Ficha::find('first',array('where'=>array('idcliente'=>$id)));
+            $data['contactos'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$id)));
+        }
+
+		$this->template->title = "Ficha de cliente";
 		$this->template->content = View::forge('clientes/view', $data);
 	}
 

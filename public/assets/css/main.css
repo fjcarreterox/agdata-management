@@ -1,7 +1,7 @@
 body {
     margin: 10px;
     border: 1px solid #999;
-    font-size: 1.8em;
+    font-size: 1.7em;
 }
 
 header{
@@ -29,4 +29,15 @@ h1 {
     font-family: serif;
     margin-left: 20px;
     color: #0050b9;
+}
+
+h3.datos_cliente{
+    text-decoration: underline;
+    margin: 20px;
+    font-size: 1.6em;
+}
+
+.muted {
+    color: #0050b9;
+    font-weight: bolder;
 }

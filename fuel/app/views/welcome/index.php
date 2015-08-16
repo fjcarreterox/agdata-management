@@ -80,7 +80,7 @@
             <div class="col-md-4">
                 <h2>Captación</h2>
                 <ul>
-                    <li><a href="clientes">Clientes potenciales</a></li>
+                    <li><a href="clientes/potenciales">Clientes potenciales</a></li>
                     <li><a href="agenda">Agenda</a></li>
                 </ul>
             </div>
