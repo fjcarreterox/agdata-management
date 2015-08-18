@@ -1,8 +1,8 @@
 <h2>Ficha completa del cliente: <span class='muted'><?php echo $cliente->nombre; ?></span> </h2>
 <br/>
-<h3 class="datos_cliente">Datos básicos</h3>
+<h3 class="datos_cliente">1. Datos básicos</h3>
 <p>En la siguiente tabla mostramos los datos comúnes a todo tipo de clientes: <strong>estado, DNI/NIF, tipo de cliente,
-dirección completa, teléfono, página web, actividad a la que se dedica y observaciones</strong>.</p>
+dirección completa, teléfono, página web, actividad a la que se dedica y las observaciones</strong> que estimemos oportunas.</p>
 <table class="table table-striped table-bordered table-hover">
     <thead></thead>
     <tbody>
@@ -30,7 +30,7 @@ dirección completa, teléfono, página web, actividad a la que se dedica y obse
 <br/>
 <br/>
 <?php if(($cliente->estado == 4)):?>
-    <h3 class="datos_cliente">Datos adicionales</h3>
+    <h3 class="datos_cliente">2. Datos específicos</h3>
     <?php if(empty($ficha)):?>
         <p>Se ha detectado que este cliente se ha pasado al estado <strong>ACTIVO</strong> pero aún no tiene creada su ficha completa de cliente con los
 datos específicos requeridos para gestionar adecuadamente los servicios contratados.</p>
@@ -39,7 +39,8 @@ datos específicos requeridos para gestionar adecuadamente los servicios contrat
     <?php else: ?>
 
         <p>Los clientes <strong>activos</strong> deben tener cumplimentados ciertos campos adicionales que nos ayuden a gestionar los servicios
-        contratados. Los presentamos a continuación:</p>
+        contratados.</p>
+        <p>Son los siguientes:</p>
         <table class="table table-striped table-bordered table-hover table-responsive">
             <tbody>
                 <tr>
@@ -80,28 +81,28 @@ datos específicos requeridos para gestionar adecuadamente los servicios contrat
                 </tr>
                 <tr>
                     <td><strong>Fecha envío correo de bienvenida</strong></td>
-                    <td><?php echo $ficha->fecha_bienvenida; ?></td>
+                    <td><?php echo date_conv($ficha->fecha_bienvenida); ?></td>
                 </tr>
                 <tr>
                     <td><strong>Fecha de auditoría</strong></td>
-                    <td><?php echo $ficha->fecha_auditoria; ?></td>
+                    <td><?php echo date_conv($ficha->fecha_auditoria); ?></td>
                 </tr>
                 <tr>
                     <td><strong>Fecha de firma del contrato</strong></td>
-                    <td><?php echo $ficha->fecha_firma; ?></td>
+                    <td><?php echo date_conv($ficha->fecha_firma); ?></td>
                 </tr>
 
             </tbody>
         </table>
-        <?php echo Html::anchor('clientes/edit/'.$cliente->id, 'Editar datos específicos',array('class'=>'btn btn-success')); ?> &nbsp;&nbsp;
+        <?php echo Html::anchor('ficha/edit/'.$cliente->id, 'Editar datos específicos',array('class'=>'btn btn-success')); ?> &nbsp;&nbsp;
         <?php echo Html::anchor('clientes', 'Volver al listado de clientes',array('class'=>'btn btn-danger')); ?>
     <?php endif; ?>
 <?php endif;?>
 <br/>
 <br/>
-<h3 class="datos_cliente">Personas de contacto</h3>
+<h3 class="datos_cliente">3. Personas de contacto</h3>
 <?php if(empty($contactos)): ?>
-    <p>No se ha encontrado aún personal del cliente registrado en nuestro sistema.</p>
+    <p>No se ha encontrado aún personal de este cliente registrado en nuestro sistema.</p>
 <?php else: ?>
     <table class="table table-striped table-bordered table-hover table-responsive">
         <thead>
@@ -124,3 +125,4 @@ datos específicos requeridos para gestionar adecuadamente los servicios contrat
         </tbody>
     </table>
 <?php endif; ?>
+<?php echo Html::anchor('personal/create_in_costumer/'.$cliente->id, 'Añadir personal',array('class'=>'btn btn-success')); ?>

@@ -10,17 +10,16 @@ class Controller_Ficha extends Controller_Template
 		//$this->template->content = View::forge('ficha/index', $data);
 	}
 
-	public function action_view($id = null)
+	public function action_view($idcliente = null)
 	{
-		is_null($id) and Response::redirect('ficha');
+		is_null($idcliente) and Response::redirect('ficha');
 
-		if ( ! $data['ficha'] = Model_Ficha::find($id))
-		{
-			Session::set_flash('error', 'Could not find ficha #'.$id);
-			Response::redirect('ficha');
+		if ( ! $data['ficha'] = Model_Ficha::find('first',$idcliente)){
+			Session::set_flash('error', 'No se ha podido localizar la ficha de cliente solicitada.');
+			Response::redirect('clientes');
 		}
 
-		$this->template->title = "Ficha";
+		$this->template->title = "Ficha de cliente";
 		$this->template->content = View::forge('ficha/view', $data);
 
 	}
@@ -69,20 +68,18 @@ class Controller_Ficha extends Controller_Template
 		$this->template->content = View::forge('ficha/create',$data);
 	}
 
-	public function action_edit($id = null)
+	public function action_edit($idcliente = null)
 	{
-		is_null($id) and Response::redirect('ficha');
+		is_null($idcliente) and Response::redirect('clientes');
 
-		if ( ! $ficha = Model_Ficha::find($id))
-		{
-			Session::set_flash('error', 'Could not find ficha #'.$id);
+		if ( ! $ficha = Model_Ficha::find('first',array('where'=>array('idcliente'=>$idcliente)))){
+			Session::set_flash('error', 'No se ha podido localizar la ficha de cliente solicitada.');
 			Response::redirect('ficha');
 		}
 
 		$val = Model_Ficha::validate('edit');
 
-		if ($val->run())
-		{
+		if ($val->run()){
 			$ficha->idcliente = Input::post('idcliente');
 			$ficha->movil_contacto = Input::post('movil_contacto');
 			$ficha->email_contacto = Input::post('email_contacto');
@@ -97,21 +94,14 @@ class Controller_Ficha extends Controller_Template
 			$ficha->iban = Input::post('iban');
 			$ficha->fecha_firma = Input::post('fecha_firma');
 
-			if ($ficha->save())
-			{
-				Session::set_flash('success', 'Updated ficha #' . $id);
-
-				Response::redirect('ficha');
-			}
-
-			else
-			{
-				Session::set_flash('error', 'Could not update ficha #' . $id);
+			if ($ficha->save()){
+				Session::set_flash('success', 'Ficha de cliente actualizada.');
+				Response::redirect('clientes/view/'.$idcliente);
+			}else{
+				Session::set_flash('error', 'No se ha podido actualizar la ficha de cliente solicitada.');
 			}
 		}
-
-		else
-		{
+		else{
 			if (Input::method() == 'POST')
 			{
 				$ficha->idcliente = $val->validated('idcliente');
@@ -127,14 +117,12 @@ class Controller_Ficha extends Controller_Template
 				$ficha->fecha_auditoria = $val->validated('fecha_auditoria');
 				$ficha->iban = $val->validated('iban');
 				$ficha->fecha_firma = $val->validated('fecha_firma');
-
 				Session::set_flash('error', $val->error());
 			}
-
 			$this->template->set_global('ficha', $ficha, false);
 		}
 
-		$this->template->title = "Fichas";
+		$this->template->title = "Datos específicos de la ficha de cliente";
 		$this->template->content = View::forge('ficha/edit');
 
 	}

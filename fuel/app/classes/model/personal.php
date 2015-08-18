@@ -30,8 +30,8 @@ class Model_Personal extends Model
 		$val = Validation::forge($factory);
 		$val->add_field('idcliente', 'Idcliente', 'required|valid_string[numeric]');
 		$val->add_field('nombre', 'Nombre', 'required|max_length[255]');
-		$val->add_field('dni', 'Dni', 'required|max_length[255]');
-		$val->add_field('cargofuncion', 'Cargofuncion', 'required|max_length[255]');
+		//$val->add_field('dni', 'Dni', 'required|max_length[255]');
+		//$val->add_field('cargofuncion', 'Cargofuncion', 'required|max_length[255]');
 		$val->add_field('relacion', 'Relacion', 'required|valid_string[numeric]');
 
 		return $val;

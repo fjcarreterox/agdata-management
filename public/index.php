@@ -49,6 +49,7 @@ if ( ! file_exists(COREPATH.'classes'.DIRECTORY_SEPARATOR.'autoloader.php'))
 // Activate the framework class autoloader
 require COREPATH.'classes'.DIRECTORY_SEPARATOR.'autoloader.php';
 class_alias('Fuel\\Core\\Autoloader', 'Autoloader');
+require APPPATH.'helpers'.DIRECTORY_SEPARATOR.'generics.php';
 
 // Exception route processing closure
 $routerequest = function($route = null, $e = false)

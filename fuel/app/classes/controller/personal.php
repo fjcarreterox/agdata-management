@@ -81,6 +81,44 @@ class Controller_Personal extends Controller_Template
 		$this->template->content = View::forge('personal/create',$data);
 	}
 
+    public function action_create_in_costumer($idcliente)
+    {
+        if (Input::method() == 'POST')
+        {
+            $val = Model_Personal::validate('create');
+
+            if ($val->run())
+            {
+                $personal = Model_Personal::forge(array(
+                    'idcliente' => Input::post('idcliente'),
+                    'nombre' => Input::post('nombre'),
+                    'dni' => Input::post('dni'),
+                    'cargofuncion' => Input::post('cargofuncion'),
+                    'relacion' => Input::post('relacion'),
+                ));
+
+                if ($personal and $personal->save())
+                {
+                    Session::set_flash('success', 'Añadido nuevo trabajador al sistema.');
+                    Response::redirect('personal/list');
+                }
+                else
+                {
+                    Session::set_flash('error', 'No se pudo almacenar los datos del trabajador.');
+                }
+            }
+            else
+            {
+                Session::set_flash('error', $val->error());
+            }
+        }
+        $data["clientes"][0] = Model_Cliente::find($idcliente);
+        $data["relaciones"] = Model_Relacion::find('all',array('order_by'=>'nombre'));
+
+        $this->template->title = "Alta de Personal";
+        $this->template->content = View::forge('personal/create_in_costumer',$data);
+    }
+
 	public function action_edit($id = null)
 	{
 		is_null($id) and Response::redirect('personal/list');
