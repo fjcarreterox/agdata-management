@@ -81,6 +81,7 @@
                 <h2>Captación</h2>
                 <ul>
                     <li><a href="clientes/potenciales">Clientes potenciales</a></li>
+                    <li><a href="presupuesto">Presupuestos</a></li>
                     <li><a href="agenda">Agenda</a></li>
                 </ul>
             </div>
