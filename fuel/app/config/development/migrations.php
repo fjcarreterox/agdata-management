@@ -16,6 +16,7 @@ return array (
         7 => '008_create_personals',
         8 => '009_create_relacions',
         9 => '010_create_fichas',
+        10 => '011_create_estados_presupuestos',
       ),
     ),
     'module' => 
