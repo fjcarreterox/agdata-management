@@ -36,6 +36,10 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::label('Estado', 'idestado', array('class'=>'control-label')); ?>
 			<?php echo Form::select('idestado', Input::post('idestado', isset($presupuesto) ? $presupuesto->idestado : ''),$estados_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Idestado')); ?>
 		</div>
+        <div class="form-group">
+            <?php echo Form::label('Observaciones', 'observaciones', array('class'=>'control-label')); ?>
+            <?php echo Form::input('observaciones', Input::post('observaciones', isset($presupuesto) ? $presupuesto->observaciones : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Observaciones relevantes sobre el presupuesto realizado')); ?>
+        </div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
 			<?php echo Form::submit('submit', 'Guardar cambios', array('class' => 'btn btn-primary')); ?>

@@ -14,11 +14,11 @@ class Controller_Presupuesto extends Controller_Template
 
 		if ( ! $data['presupuesto'] = Model_Presupuesto::find($id))
 		{
-			Session::set_flash('error', 'Could not find presupuesto #'.$id);
+			Session::set_flash('error', 'No se ha podido localizar el presupuesto solicitado.');
 			Response::redirect('presupuesto');
 		}
 
-		$this->template->title = "Presupuesto";
+		$this->template->title = "Ver detalle del presupuesto";
 		$this->template->content = View::forge('presupuesto/view', $data);
 	}
 
@@ -37,6 +37,7 @@ class Controller_Presupuesto extends Controller_Template
 					'fecha_entrega' => Input::post('fecha_entrega'),
 					'importe' => Input::post('importe'),
 					'idestado' => Input::post('idestado'),
+					'observaciones' => Input::post('observaciones'),
 				));
 
 				if ($presupuesto and $presupuesto->save())
@@ -79,6 +80,7 @@ class Controller_Presupuesto extends Controller_Template
 			$presupuesto->fecha_entrega = Input::post('fecha_entrega');
 			$presupuesto->importe = Input::post('importe');
 			$presupuesto->idestado = Input::post('idestado');
+			$presupuesto->observaciones = Input::post('observaciones');
 
 			if ($presupuesto->save()){
 				Session::set_flash('success', 'Presupuesto Núm. ' . $presupuesto->num_p .' actualizado.');
@@ -97,6 +99,7 @@ class Controller_Presupuesto extends Controller_Template
 				$presupuesto->fecha_entrega = $val->validated('fecha_entrega');
 				$presupuesto->importe = $val->validated('importe');
 				$presupuesto->idestado = $val->validated('idestado');
+				$presupuesto->observaciones = $val->validated('observaciones');
 				Session::set_flash('error', $val->error());
 			}
 			$this->template->set_global('presupuesto', $presupuesto, false);
@@ -104,7 +107,7 @@ class Controller_Presupuesto extends Controller_Template
         $data["clientes"][0] = Model_Cliente::find('first',array('where'=>array('id'=>$presupuesto->idcliente)));
         $data["estados"] = Model_Estados_Presupuesto::find('all',array('order_by'=>'id'));
 
-        $this->template->title = "Presupuestos";
+        $this->template->title = "Editando presupuesto";
 		$this->template->content = View::forge('presupuesto/edit',$data);
 
 	}
@@ -116,17 +119,12 @@ class Controller_Presupuesto extends Controller_Template
 		if ($presupuesto = Model_Presupuesto::find($id))
 		{
 			$presupuesto->delete();
-
-			Session::set_flash('success', 'Deleted presupuesto #'.$id);
+			Session::set_flash('success', 'Presupuesto borrado satisfactoriamente.');
 		}
-
-		else
-		{
-			Session::set_flash('error', 'Could not delete presupuesto #'.$id);
+		else{
+			Session::set_flash('error', 'No se ha podido borrar el presupuesto solicitado.');
 		}
-
 		Response::redirect('presupuesto');
-
 	}
 
 }

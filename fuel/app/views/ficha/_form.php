@@ -1,5 +1,8 @@
-<?php echo Form::open(array("class"=>"form-horizontal")); ?>
-    <p>Rellena todos los datos posibles de la siguiente ficha para que se encuentre lo más completa y actualizada posible:</p>
+<?php
+$rep_ops = array(0=>'NO',1=>'SÍ');
+
+echo Form::open(array("class"=>"form-horizontal")); ?>
+    <p>Rellena todos los datos posibles de la siguiente ficha para que se encuentre lo más completa y actualizada posible.</p>
 	<fieldset>
 		<div class="form-group">
 			<?php echo Form::input('idcliente', Input::post('idcliente', isset($ficha) ? $ficha->idcliente : $idcliente), array('class' => 'col-md-4 form-control', 'type'=>'hidden')); ?>
@@ -27,15 +30,15 @@
 		</div>
 		<div class="form-group">
 			<?php echo Form::label('Núm. aproximado de trabajadores', 'num_trabajadores', array('class'=>'control-label')); ?>
-			<?php echo Form::input('num_trabajadores', Input::post('num_trabajadores', isset($ficha) ? $ficha->num_trabajadores : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Número de trabajadores que el cliente tiene contratados (de manera aproximada)')); ?>
+			<?php echo Form::input('num_trabajadores', Input::post('num_trabajadores', isset($ficha) ? $ficha->num_trabajadores : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Número de trabajadores que el cliente tiene contratados (de manera aproximada)','type'=>'number')); ?>
 		</div>
 		<div class="form-group">
 			<?php echo Form::label('Núm. de equipos informáticos', 'num_equipos', array('class'=>'control-label')); ?>
-			<?php echo Form::input('num_equipos', Input::post('num_equipos', isset($ficha) ? $ficha->num_equipos : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Número de equipos informáticos que hay en el cliente')); ?>
+			<?php echo Form::input('num_equipos', Input::post('num_equipos', isset($ficha) ? $ficha->num_equipos : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Número de equipos informáticos que hay en el cliente','type'=>'number')); ?>
 		</div>
 		<div class="form-group">
 			<?php echo Form::label('¿Poseen los trabajadores representación legal?', 'representacion_legal', array('class'=>'control-label')); ?>
-			<?php echo Form::input('representacion_legal', Input::post('representacion_legal', isset($ficha) ? $ficha->representacion_legal : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Representacion legal')); ?>
+			<?php echo Form::select('representacion_legal', Input::post('representacion_legal', isset($ficha) ? $ficha->representacion_legal : ''),$rep_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Representacion legal')); ?>
 		</div>
 		<!--<div class="form-group">
 			<?php /*echo Form::label('Fecha de envío del correo de bienvenida', 'fecha_bienvenida', array('class'=>'control-label'));*/ ?>

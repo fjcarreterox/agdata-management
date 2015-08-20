@@ -3,6 +3,7 @@
 <h3 class="datos_cliente">1. Datos básicos</h3>
 <p>En la siguiente tabla mostramos los datos comúnes a todo tipo de clientes: <strong>estado, DNI/NIF, tipo de cliente,
 dirección completa, teléfono, página web, actividad a la que se dedica y las observaciones</strong> que estimemos oportunas.</p>
+<br/>
 <table class="table table-striped table-bordered table-hover">
     <thead></thead>
     <tbody>
@@ -73,7 +74,11 @@ datos específicos requeridos para gestionar adecuadamente los servicios contrat
                 </tr>
                 <tr>
                     <td><strong>Representacion legal</strong></td>
-                    <td><?php echo $ficha->representacion_legal; ?></td>
+                    <td><?php
+                        if($ficha->representacion_legal)
+                            echo "SÍ";
+                        else
+                            echo "NO";?></td>
                 </tr>
                 <tr>
                     <td><strong>Código IBAN</strong></td>

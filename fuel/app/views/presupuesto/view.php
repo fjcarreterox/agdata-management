@@ -18,5 +18,9 @@
 <p>
 	<strong>Estado:</strong>
 	<?php echo Model_Estados_Presupuesto::find($presupuesto->idestado)->get('nombre'); ?></p>
+<p>
+    <strong>Observaciones:</strong>
+    <?php echo $presupuesto->observaciones; ?></p>
+<br/>
 <?php echo Html::anchor('presupuesto/edit/'.$presupuesto->id, 'Editar',array('class'=>'btn btn-success')); ?>&nbsp;&nbsp;
 <?php echo Html::anchor('presupuesto', 'Volver al listado',array('class'=>'btn btn-danger')); ?>
