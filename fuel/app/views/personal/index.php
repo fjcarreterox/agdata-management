@@ -6,7 +6,6 @@
 		<tr>
 			<th>Nombre</th>
 			<th>DNI</th>
-			<th>Cargo/función</th>
             <th>Cliente</th>
 			<th>Relación con AGDATA</th>
 			<th>&nbsp;</th>
@@ -17,7 +16,6 @@
         <tr>
 			<td><?php echo $item->nombre; ?></td>
 			<td><?php echo $item->dni; ?></td>
-			<td><?php echo $item->cargofuncion; ?></td>
             <td><?php echo Model_Cliente::find($item->idcliente)->get('nombre'); ?></td>
 			<td><?php echo Model_Relacion::find($item->relacion)->get('nombre'); ?></td>
 			<td>

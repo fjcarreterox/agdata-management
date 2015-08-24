@@ -11,6 +11,8 @@ class Create_personals
 			'idcliente' => array('constraint' => 11, 'type' => 'int'),
 			'nombre' => array('constraint' => 255, 'type' => 'varchar'),
 			'dni' => array('constraint' => 255, 'type' => 'varchar'),
+			'tlfno' => array('constraint' => 11, 'type' => 'int'),
+			'email' => array('constraint' => 100, 'type' => 'varchar'),
 			'cargofuncion' => array('constraint' => 255, 'type' => 'varchar'),
 			'relacion' => array('constraint' => 11, 'type' => 'int'),
 			'created_at' => array('constraint' => 11, 'type' => 'int', 'null' => true),

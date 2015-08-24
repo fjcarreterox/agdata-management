@@ -1,11 +1,10 @@
 <?php
 class Controller_Personal extends Controller_Template
 {
-
 	public function action_index()
 	{
 		$data['personals'] = Model_Personal::find('all');
-		$this->template->title = "Personal";
+		$this->template->title = "Personal del cliente";
 		$this->template->content = View::forge('personal/index', $data);
 	}
 
@@ -56,6 +55,8 @@ class Controller_Personal extends Controller_Template
 					'idcliente' => Input::post('idcliente'),
 					'nombre' => Input::post('nombre'),
 					'dni' => Input::post('dni'),
+					'tlfno' => Input::post('tlfno'),
+					'email' => Input::post('email'),
 					'cargofuncion' => Input::post('cargofuncion'),
 					'relacion' => Input::post('relacion'),
 				));
@@ -77,6 +78,7 @@ class Controller_Personal extends Controller_Template
 		}
         $data["clientes"] = Model_Cliente::find('all',array('order_by'=>'nombre'));
         $data["relaciones"] = Model_Relacion::find('all',array('order_by'=>'nombre'));
+
 		$this->template->title = "Alta de Personal";
 		$this->template->content = View::forge('personal/create',$data);
 	}
@@ -93,6 +95,8 @@ class Controller_Personal extends Controller_Template
                     'idcliente' => Input::post('idcliente'),
                     'nombre' => Input::post('nombre'),
                     'dni' => Input::post('dni'),
+                    'tlfno' => Input::post('tlfno'),
+                    'email' => Input::post('email'),
                     'cargofuncion' => Input::post('cargofuncion'),
                     'relacion' => Input::post('relacion'),
                 ));
@@ -136,35 +140,36 @@ class Controller_Personal extends Controller_Template
 			$personal->idcliente = Input::post('idcliente');
 			$personal->nombre = Input::post('nombre');
 			$personal->dni = Input::post('dni');
+			$personal->tlfno = Input::post('tlfno');
+			$personal->email = Input::post('email');
 			$personal->cargofuncion = Input::post('cargofuncion');
 			$personal->relacion = Input::post('relacion');
 
-			if ($personal->save())
-			{
+			if ($personal->save()){
 				Session::set_flash('success', 'Datos del trabajador actualizados');
 				Response::redirect('personal/list');
 			}
-			else
-			{
+			else{
 				Session::set_flash('error', 'No se han podido actualizar los datos del trabajador.');
 			}
 		}
-		else
-		{
+		else{
 			if (Input::method() == 'POST')
 			{
 				$personal->idcliente = $val->validated('idcliente');
 				$personal->nombre = $val->validated('nombre');
 				$personal->dni = $val->validated('dni');
+				$personal->tlfno = $val->validated('tlfno');
+				$personal->email = $val->validated('email');
 				$personal->cargofuncion = $val->validated('cargofuncion');
 				$personal->relacion = $val->validated('relacion');
-
 				Session::set_flash('error', $val->error());
 			}
 			$this->template->set_global('personal', $personal, false);
 		}
         $data["clientes"] = Model_Cliente::find('all',array('order_by'=>'nombre'));
         $data["relaciones"] = Model_Relacion::find('all',array('order_by'=>'nombre'));
+
 		$this->template->title = "Personal";
 		$this->template->content = View::forge('personal/edit',$data);
 	}
@@ -173,14 +178,11 @@ class Controller_Personal extends Controller_Template
 	{
 		is_null($id) and Response::redirect('personal/list');
 
-		if ($personal = Model_Personal::find($id))
-		{
+		if ($personal = Model_Personal::find($id)){
 			$personal->delete();
-
 			Session::set_flash('success', 'Trabajador borrado del sistema.');
 		}
-		else
-		{
+		else{
 			Session::set_flash('error', 'No se ha podido borrar al trabajado especificado.');
 		}
 		Response::redirect('personal/list');

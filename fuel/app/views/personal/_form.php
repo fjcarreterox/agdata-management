@@ -30,6 +30,14 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::label('DNI', 'dni', array('class'=>'control-label')); ?>
 			<?php echo Form::input('dni', Input::post('dni', isset($personal) ? $personal->dni : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'DNI con letra del trabajador')); ?>
 		</div>
+        <div class="form-group">
+            <?php echo Form::label('Teléfono de contacto', 'tlfno', array('class'=>'control-label')); ?>
+            <?php echo Form::input('tlfno', Input::post('tlfno', isset($personal) ? $personal->tlfno : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Teléfono donde podremos contactar con él')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo Form::label('E-mail ', 'email', array('class'=>'control-label')); ?>
+            <?php echo Form::input('email', Input::post('email', isset($personal) ? $personal->email : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Dirección de correo electrónico')); ?>
+        </div>
 		<div class="form-group">
 			<?php echo Form::label('Cargo / Función', 'cargofuncion', array('class'=>'control-label')); ?>
 			<?php echo Form::input('cargofuncion', Input::post('cargofuncion', isset($personal) ? $personal->cargofuncion : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Cargo o función que desempeña el trabajador en la empresa cliente')); ?>

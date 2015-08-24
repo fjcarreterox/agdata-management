@@ -10,6 +10,12 @@
 	<strong>DNI:</strong>
 	<?php echo $personal->dni; ?></p>
 <p>
+    <strong>Teléfono:</strong>
+    <?php echo $personal->tlfno; ?></p>
+<p>
+    <strong>Correo electrónico:</strong>
+    <?php echo $personal->email; ?></p>
+<p>
 	<strong>Cargo/función:</strong>
 	<?php echo $personal->cargofuncion; ?></p>
 <p>
