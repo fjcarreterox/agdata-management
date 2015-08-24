@@ -45,7 +45,6 @@ class Controller_Ficha extends Controller_Template
 					'fecha_bienvenida' => Input::post('fecha_bienvenida'),
 					'fecha_auditoria' => Input::post('fecha_auditoria'),
 					'iban' => Input::post('iban'),
-					'fecha_firma' => Input::post('fecha_firma'),
 				));
 
 				if ($ficha and $ficha->save())
@@ -92,7 +91,6 @@ class Controller_Ficha extends Controller_Template
 			$ficha->fecha_bienvenida = Input::post('fecha_bienvenida');
 			$ficha->fecha_auditoria = Input::post('fecha_auditoria');
 			$ficha->iban = Input::post('iban');
-			$ficha->fecha_firma = Input::post('fecha_firma');
 
 			if ($ficha->save()){
 				Session::set_flash('success', 'Ficha de cliente actualizada.');
@@ -116,7 +114,6 @@ class Controller_Ficha extends Controller_Template
 				$ficha->fecha_bienvenida = $val->validated('fecha_bienvenida');
 				$ficha->fecha_auditoria = $val->validated('fecha_auditoria');
 				$ficha->iban = $val->validated('iban');
-				$ficha->fecha_firma = $val->validated('fecha_firma');
 				Session::set_flash('error', $val->error());
 			}
 			$this->template->set_global('ficha', $ficha, false);
@@ -131,20 +128,13 @@ class Controller_Ficha extends Controller_Template
 	{
 		is_null($id) and Response::redirect('ficha');
 
-		if ($ficha = Model_Ficha::find($id))
-		{
+		if ($ficha = Model_Ficha::find($id)){
 			$ficha->delete();
-
 			Session::set_flash('success', 'Deleted ficha #'.$id);
-		}
-
-		else
-		{
+		}else{
 			Session::set_flash('error', 'Could not delete ficha #'.$id);
 		}
-
 		Response::redirect('ficha');
-
 	}
 
 }

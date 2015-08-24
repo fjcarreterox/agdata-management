@@ -34,7 +34,7 @@ class Controller_Presupuesto extends Controller_Template
 					'num_p' => Input::post('num_p'),
 					'idcliente' => Input::post('idcliente'),
 					'fecha_entrega' => Input::post('fecha_entrega'),
-					'servicio' => Input::post('servicios'),
+					'servicios' => Input::post('servicios'),
 					'importe' => Input::post('importe'),
 					'idestado' => Input::post('idestado'),
 					'observaciones' => Input::post('observaciones'),

@@ -62,14 +62,12 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             <tr>
                 <td><?php echo Form::label('Fecha de envío del correo de bienvenida', 'fecha_bienvenida', array('class'=>'control-label')); ?></td>
                 <td><?php echo Form::label('Fecha de auditoría', 'fecha_auditoria', array('class'=>'control-label')); ?></td>
-                <td><?php echo Form::label('Fecha de firma del contrato', 'fecha_firma', array('class'=>'control-label')); ?></td>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td><?php echo Form::input('fecha_bienvenida', Input::post('fecha_bienvenida', isset($ficha) ? $ficha->fecha_bienvenida : ''), array('class' => 'col-md-4 form-control', 'type'=>'date')); ?></td>
-                <td><?php echo Form::input('fecha_auditoria', Input::post('fecha_auditoria', isset($ficha) ? $ficha->fecha_auditoria : ''), array('class' => 'col-md-4 form-control', 'type'=>'date')); ?></td>
-                <td><?php echo Form::input('fecha_firma', Input::post('fecha_firma', isset($ficha) ? $ficha->fecha_firma : ''), array('class' => 'col-md-4 form-control', 'type'=>'date')); ?></td>
+                <td><?php echo Form::input('fecha_bienvenida', Input::post('fecha_bienvenida', isset($ficha) ? $ficha->fecha_bienvenida : ''), array('class' => 'col-md-6 form-control', 'type'=>'date')); ?></td>
+                <td><?php echo Form::input('fecha_auditoria', Input::post('fecha_auditoria', isset($ficha) ? $ficha->fecha_auditoria : ''), array('class' => 'col-md-6 form-control', 'type'=>'date')); ?></td>
             </tr>
             </tbody>
         </table>

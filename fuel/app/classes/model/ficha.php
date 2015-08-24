@@ -17,7 +17,6 @@ class Model_Ficha extends Model
 		'fecha_bienvenida',
 		'fecha_auditoria',
 		'iban',
-		'fecha_firma',
 		'created_at',
 		'updated_at',
 	);

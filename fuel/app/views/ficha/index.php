@@ -16,7 +16,6 @@
 			<th>Fecha bienvenida</th>
 			<th>Fecha auditoria</th>
 			<th>Iban</th>
-			<th>Fecha firma</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
@@ -35,7 +34,6 @@
 			<td><?php echo $item->fecha_bienvenida; ?></td>
 			<td><?php echo $item->fecha_auditoria; ?></td>
 			<td><?php echo $item->iban; ?></td>
-			<td><?php echo $item->fecha_firma; ?></td>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">

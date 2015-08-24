@@ -92,10 +92,6 @@ datos específicos requeridos para gestionar adecuadamente los servicios contrat
                     <td><strong>Fecha de auditoría</strong></td>
                     <td><?php echo date_conv($ficha->fecha_auditoria); ?></td>
                 </tr>
-                <tr>
-                    <td><strong>Fecha de firma del contrato</strong></td>
-                    <td><?php echo date_conv($ficha->fecha_firma); ?></td>
-                </tr>
 
             </tbody>
         </table>

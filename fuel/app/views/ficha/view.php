@@ -1,4 +1,4 @@
-<h2>Viewing <span class='muted'>#<?php echo $ficha->id; ?></span></h2>
+<h2>Mostrando <span class='muted'>datos específicos</span> del cliente seleccionado:</h2>
 
 <p>
 	<strong>Idcliente:</strong>
@@ -36,9 +36,6 @@
 <p>
 	<strong>Iban:</strong>
 	<?php echo $ficha->iban; ?></p>
-<p>
-	<strong>Fecha firma:</strong>
-	<?php echo $ficha->fecha_firma; ?></p>
 
-<?php echo Html::anchor('ficha/edit/'.$ficha->id, 'Edit'); ?> |
-<?php echo Html::anchor('ficha', 'Back'); ?>
+<?php echo Html::anchor('ficha/edit/'.$ficha->id, 'Editar'); ?> |
+<?php echo Html::anchor('ficha', 'Volver'); ?>
