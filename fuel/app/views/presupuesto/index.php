@@ -6,8 +6,8 @@
 		<tr>
 			<th>Núm. presupuesto</th>
 			<th>Cliente</th>
-			<th>Fecha</th>
-			<th>Fecha de entrega</th>
+			<th>Fecha de creación</th>
+			<th>Servicios ofertados</th>
 			<th>Estado</th>
 			<th>&nbsp;</th>
 		</tr>
@@ -15,10 +15,10 @@
 	<tbody>
 <?php foreach ($presupuestos as $item): ?>
         <tr>
-			<td><?php echo $item->num_p; ?></td>
+			<td><?php echo str_pad($item->num_p,5,0, STR_PAD_LEFT); ?></td>
 			<td><?php echo Model_Cliente::find($item->idcliente)->get('nombre'); ?></td>
-			<td><?php echo date_conv($item->fecha); ?></td>
-			<td><?php echo date_conv($item->fecha_entrega); ?></td>
+			<td><?php echo date('H:i:s d/m/Y',$item->created_at); ?></td>
+			<td><?php echo $item->servicios; ?></td>
 			<td><?php echo Model_Estados_Presupuesto::find($item->idestado)->get('nombre'); ?></td>
 			<td>
 				<div class="btn-toolbar">

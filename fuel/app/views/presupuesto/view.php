@@ -7,11 +7,14 @@
 	<strong>Cliente:</strong>
 	<?php echo Model_Cliente::find($presupuesto->idcliente)->get('nombre'); ?></p>
 <p>
-	<strong>Fecha:</strong>
-	<?php echo date_conv($presupuesto->fecha); ?></p>
+    <strong>Fecha de creación:</strong>
+    <?php echo date('H:i:s d/m/Y',$presupuesto->created_at); ?></p>
 <p>
 	<strong>Fecha de entrega:</strong>
 	<?php echo date_conv($presupuesto->fecha_entrega); ?></p>
+<p>
+    <strong>Servicios ofertados:</strong>
+    <?php echo date_conv($presupuesto->servicios); ?></p>
 <p>
     <strong>Importe total:</strong>
     <?php echo $presupuesto->importe; ?> &euro;</p>

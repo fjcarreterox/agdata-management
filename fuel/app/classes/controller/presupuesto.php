@@ -33,8 +33,8 @@ class Controller_Presupuesto extends Controller_Template
 				$presupuesto = Model_Presupuesto::forge(array(
 					'num_p' => Input::post('num_p'),
 					'idcliente' => Input::post('idcliente'),
-					'fecha' => Input::post('fecha'),
 					'fecha_entrega' => Input::post('fecha_entrega'),
+					'servicio' => Input::post('servicios'),
 					'importe' => Input::post('importe'),
 					'idestado' => Input::post('idestado'),
 					'observaciones' => Input::post('observaciones'),
@@ -53,6 +53,7 @@ class Controller_Presupuesto extends Controller_Template
 			}
 		}
 
+        $data["servicios"] = Model_Servicio::find('all',array('order_by'=>'id'));
         $data["estados"] = Model_Estados_Presupuesto::find('all',array('order_by'=>'id'));
         $data["clientes"] = Model_Cliente::find('all',array('order_by'=>'id'));
         $data["num_presupuesto"] = Model_Presupuesto::max('num_p');
@@ -76,8 +77,8 @@ class Controller_Presupuesto extends Controller_Template
 		{
 			$presupuesto->num_p = Input::post('num_p');
 			$presupuesto->idcliente = Input::post('idcliente');
-			$presupuesto->fecha = Input::post('fecha');
 			$presupuesto->fecha_entrega = Input::post('fecha_entrega');
+			$presupuesto->servicios = Input::post('servicios');
 			$presupuesto->importe = Input::post('importe');
 			$presupuesto->idestado = Input::post('idestado');
 			$presupuesto->observaciones = Input::post('observaciones');
@@ -95,8 +96,8 @@ class Controller_Presupuesto extends Controller_Template
 			{
 				$presupuesto->num_p = $val->validated('num_p');
 				$presupuesto->idcliente = $val->validated('idcliente');
-				$presupuesto->fecha = $val->validated('fecha');
 				$presupuesto->fecha_entrega = $val->validated('fecha_entrega');
+				$presupuesto->servicios = $val->validated('servicios');
 				$presupuesto->importe = $val->validated('importe');
 				$presupuesto->idestado = $val->validated('idestado');
 				$presupuesto->observaciones = $val->validated('observaciones');
