@@ -4,6 +4,9 @@
 	<meta charset="utf-8">
 	<title><?php echo $title; ?></title>
 	<?php echo Asset::css('bootstrap.css'); ?>
+    <?php echo Asset::js('jquery.js'); ?>
+    <?php echo Asset::js('iban.js'); ?>
+    <?php echo Asset::js('main.js'); ?>
     <?php echo Asset::css('main.css'); ?>
 </head>
 <body>
