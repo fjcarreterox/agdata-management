@@ -105,6 +105,7 @@ class Controller_Presupuesto extends Controller_Template
 			}
 			$this->template->set_global('presupuesto', $presupuesto, false);
 		}
+        $data["servicios"] = Model_Servicio::find('all',array('order_by'=>'id'));
         $data["clientes"][0] = Model_Cliente::find('first',array('where'=>array('id'=>$presupuesto->idcliente)));
         $data["estados"] = Model_Estados_Presupuesto::find('all',array('order_by'=>'id'));
 

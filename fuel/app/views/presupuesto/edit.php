@@ -1,6 +1,7 @@
 <h2>Editando detalles del <span class='muted'>presupuesto</span> seleccionado</h2>
 <br/>
 <?php
+$data['servicios'] = $servicios;
 $data['estados'] = $estados;
 $data['clientes'] = $clientes;
 echo render('presupuesto/_form',$data); ?>

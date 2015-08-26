@@ -53,7 +53,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             <?php /*echo Form::input('fecha_firma', Input::post('fecha_firma', isset($ficha) ? $ficha->fecha_firma : ''), array('class' => 'col-md-4 form-control', 'type'=>'date'));*/ ?>
         </div>-->
         <div class="form-group">
-            <?php echo Form::label('Código IBAN', 'iban', array('class'=>'control-label')); ?>
+            <?php echo Form::label('Código IBAN (admite espacios y guiones entre números. Debe empezar por ES)', 'iban', array('class'=>'control-label')); ?>
             <?php echo Form::input('iban', Input::post('iban', isset($ficha) ? $ficha->iban : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'IBAN para las transferencias y pagos')); ?>
         </div>
         <p>Datos requeridos de tipo fecha:</p>
