@@ -60,8 +60,10 @@
 			<div class="col-md-4">
 				<h2>Gestión de clientes</h2>
                 <ul>
-                    <li><a href="clientes/activos">Clientes en activo</a></li>
-                    <li><a href="personal">Personal de cliente y relación con AGDATA</a></li>
+                    <li><a href="clientes/activos">Clientes activos</a></li>
+                    <li><a href="personal">Personas de contacto / Empleados</a></li>
+                    <li><a href="correos">Mailing</a></li>
+                    <li><a href="correos">Relación de AA.FF.</a></li>
                     <li><a href="clientes">Listado completo de clientes</a></li>
                 </ul>
 
@@ -78,10 +80,11 @@
 		</div>
         <div class="row">
             <div class="col-md-4">
-                <h2>Captación</h2>
+                <h2>Menú Comercial</h2>
                 <ul>
                     <li><a href="clientes/potenciales">Clientes potenciales</a></li>
                     <li><a href="presupuesto">Presupuestos</a></li>
+                    <li><a href="contrato">Contratos</a></li>
                     <li><a href="agenda">Agenda</a></li>
                 </ul>
             </div>
