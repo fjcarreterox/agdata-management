@@ -26,4 +26,8 @@
     <?php echo $presupuesto->observaciones; ?></p>
 <br/>
 <?php echo Html::anchor('presupuesto/edit/'.$presupuesto->id, 'Editar',array('class'=>'btn btn-success')); ?>&nbsp;&nbsp;
+<?php
+    if($presupuesto->idestado == 5) {
+        echo Html::anchor('contrato/create/' . $presupuesto->id, 'Crear contrato', array('class' => 'btn btn-info'))."&nbsp;&nbsp;";
+    }?>
 <?php echo Html::anchor('presupuesto', 'Volver al listado',array('class'=>'btn btn-danger')); ?>

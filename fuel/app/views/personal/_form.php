@@ -16,7 +16,7 @@ if(isset($relaciones)) {
     }
 }
 echo Form::open(array("class"=>"form-horizontal")); ?>
-<p>Los campos <strong>DNI</strong> y <strong>cargo / función</strong> pueden dejarse vacíos si no se conocen en el momento de dar de alta a una persona en el sistema.</p>
+<p>Los campos <strong>DNI</strong>, <strong>cargo / función</strong>, <strong>teléfono</strong> y <strong>e-mail</strong> pueden dejarse vacíos si no se conocen en el momento de dar de alta a una persona en el sistema.</p>
 	<fieldset>
 		<div class="form-group">
             <?php echo Form::label('Cliente', 'idcliente', array('class'=>'control-label')); ?>

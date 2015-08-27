@@ -4,7 +4,8 @@
 
 $( document ).ready(function() {
     $("input#form_ficha_submit").click(function( event ) {
-        if(!IBAN.isValid($("input#form_iban").val())) {
+        var iban = $("input#form_iban").val();
+        if(iban != '' && !IBAN.isValid(iban)) {
             alert("Por favor, revisa el código IBAN del cliente que no parece ser válido.");
             return false;
         }

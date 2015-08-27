@@ -8,6 +8,13 @@ class Controller_Personal extends Controller_Template
 		$this->template->content = View::forge('personal/index', $data);
 	}
 
+    public function action_aaff()
+    {
+        $data['personals'] = Model_Personal::find('all',array('where' => array('relacion' => 5)));
+        $this->template->title = "Personal del cliente";
+        $this->template->content = View::forge('personal/index', $data);
+    }
+
     public function action_list($idcliente = null)
     {
         is_null($idcliente) and Response::redirect('personal/index');

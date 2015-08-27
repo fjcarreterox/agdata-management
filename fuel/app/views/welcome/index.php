@@ -63,7 +63,7 @@
                     <li><a href="clientes/activos">Clientes activos</a></li>
                     <li><a href="personal">Personas de contacto / Empleados</a></li>
                     <li><a href="correos">Mailing</a></li>
-                    <li><a href="correos">Relación de AA.FF.</a></li>
+                    <li><a href="personal/aaff">Relación de AA.FF.</a></li>
                     <li><a href="clientes">Listado completo de clientes</a></li>
                 </ul>
 
