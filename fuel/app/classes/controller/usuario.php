@@ -16,13 +16,12 @@ class Controller_Usuario extends Controller_Template
 
 		if ( ! $data['usuario'] = Model_Usuario::find($id))
 		{
-			Session::set_flash('error', 'Could not find usuario #'.$id);
+			Session::set_flash('error', 'No se ha podido encontrar al usuario especificado.');
 			Response::redirect('usuario');
 		}
 
-		$this->template->title = "Usuario";
+		$this->template->title = "Ver datos de usuario";
 		$this->template->content = View::forge('usuario/view', $data);
-
 	}
 
 	public function action_create()
@@ -31,36 +30,30 @@ class Controller_Usuario extends Controller_Template
 		{
 			$val = Model_Usuario::validate('create');
 
-			if ($val->run())
-			{
+			if ($val->run()){
 				$usuario = Model_Usuario::forge(array(
 					'nombre' => Input::post('nombre'),
 					'password' => Input::post('password'),
+					'user' => Input::post('user'),
 					'email' => Input::post('email'),
 					'role' => Input::post('role'),
 				));
 
 				if ($usuario and $usuario->save())
 				{
-					Session::set_flash('success', 'Added usuario #'.$usuario->id.'.');
-
+					Session::set_flash('success', 'Añadido nuevo usuario al sistema.');
 					Response::redirect('usuario');
-				}
-
-				else
-				{
-					Session::set_flash('error', 'Could not save usuario.');
+				}else{
+					Session::set_flash('error', 'No se ha podido crear el nuevo usuario.');
 				}
 			}
-			else
-			{
+			else{
 				Session::set_flash('error', $val->error());
 			}
 		}
 
 		$this->template->title = "Usuarios";
 		$this->template->content = View::forge('usuario/create');
-
 	}
 
 	public function action_edit($id = null)
@@ -69,70 +62,56 @@ class Controller_Usuario extends Controller_Template
 
 		if ( ! $usuario = Model_Usuario::find($id))
 		{
-			Session::set_flash('error', 'Could not find usuario #'.$id);
+			Session::set_flash('error', 'No se ha podido localizar el usuario especificado.');
 			Response::redirect('usuario');
 		}
 
 		$val = Model_Usuario::validate('edit');
 
-		if ($val->run())
-		{
+		if ($val->run()){
 			$usuario->nombre = Input::post('nombre');
 			$usuario->password = Input::post('password');
+			$usuario->user = Input::post('user');
 			$usuario->email = Input::post('email');
 			$usuario->role = Input::post('role');
 
-			if ($usuario->save())
-			{
-				Session::set_flash('success', 'Updated usuario #' . $id);
-
+			if ($usuario->save()){
+				Session::set_flash('success', 'Datos de usuario actualizados.');
 				Response::redirect('usuario');
 			}
-
-			else
-			{
-				Session::set_flash('error', 'Could not update usuario #' . $id);
+			else{
+				Session::set_flash('error', 'No se pudo actualizar el usuario especificado.');
 			}
 		}
-
-		else
-		{
+		else{
 			if (Input::method() == 'POST')
 			{
 				$usuario->nombre = $val->validated('nombre');
 				$usuario->password = $val->validated('password');
+				$usuario->user = $val->validated('user');
 				$usuario->email = $val->validated('email');
 				$usuario->role = $val->validated('role');
 
 				Session::set_flash('error', $val->error());
 			}
-
 			$this->template->set_global('usuario', $usuario, false);
 		}
 
 		$this->template->title = "Usuarios";
 		$this->template->content = View::forge('usuario/edit');
-
 	}
 
 	public function action_delete($id = null)
 	{
 		is_null($id) and Response::redirect('usuario');
 
-		if ($usuario = Model_Usuario::find($id))
-		{
+		if ($usuario = Model_Usuario::find($id)){
 			$usuario->delete();
-
-			Session::set_flash('success', 'Deleted usuario #'.$id);
+			Session::set_flash('success', 'Usuario borrado del sistema.');
 		}
-
-		else
-		{
-			Session::set_flash('error', 'Could not delete usuario #'.$id);
+		else{
+			Session::set_flash('error', 'No se ha podido borrar el usuario especificado.');
 		}
-
 		Response::redirect('usuario');
-
 	}
-
 }
