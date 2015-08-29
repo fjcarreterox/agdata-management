@@ -8,6 +8,22 @@ class Controller_Presupuesto extends Controller_Template
 		$this->template->content = View::forge('presupuesto/index', $data);
 	}
 
+    public function action_doc($id = null)
+    {
+        is_null($id) and Response::redirect('presupuesto');
+
+        if ( ! $data['presupuesto'] = Model_Presupuesto::find($id))
+        {
+            Session::set_flash('error', 'No se ha podido localizar el presupuesto solicitado.');
+            Response::redirect('presupuesto');
+        }
+
+
+
+        $this->template->title = "Generación de nuevo presupuesto";
+        $this->template->content = View::forge('presupuesto/doc', $data);
+    }
+
 	public function action_view($id = null)
 	{
 		is_null($id) and Response::redirect('presupuesto');

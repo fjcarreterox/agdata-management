@@ -2,7 +2,7 @@
 <br/>
 <p>
 	<strong>Núm. presupuesto:</strong>
-	<?php echo $presupuesto->num_p; ?></p>
+	<?php echo str_pad($presupuesto->num_p,5,0, STR_PAD_LEFT); ?></p>
 <p>
 	<strong>Cliente:</strong>
 	<?php echo Model_Cliente::find($presupuesto->idcliente)->get('nombre'); ?></p>
