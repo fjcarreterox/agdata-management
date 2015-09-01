@@ -85,7 +85,7 @@
                     <li><a href="clientes/potenciales">Clientes potenciales</a></li>
                     <li><a href="presupuesto">Presupuestos</a></li>
                     <li><a href="contrato">Contratos</a></li>
-                    <li><a href="agenda">Agenda</a></li>
+                    <li><a href="agenda">Gestion de visitas y llamadas</a></li>
                 </ul>
             </div>
             <div class="col-md-4">

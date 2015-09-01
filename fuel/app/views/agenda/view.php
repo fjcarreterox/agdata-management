@@ -1,31 +1,40 @@
 <h2>Detalle de agenda para el <span class='muted'>cliente</span> seleccionado</h2>
-
+<br/>
 <p>
 	<strong>Cliente:</strong>
 	<?php echo Model_Cliente::find($agenda->idcliente)->get('nombre'); ?></p>
 <p>
-	<strong>Última llamada:</strong>
-	<?php echo $agenda->last_call; ?></p>
+    <strong>Información comercial enviada:</strong>
+    <?php
+    if($agenda->send_info) {
+        echo "SÍ";
+    }else{
+        echo "NO";
+    }?></p>
 <p>
-	<strong>Próxima llamada:</strong>
-	<?php echo $agenda->next_call; ?></p>
-<p>
-	<strong>Última visita:</strong>
-	<?php echo $agenda->last_visit; ?></p>
-<p>
-	<strong>Próxima visita:</strong>
-	<?php echo $agenda->next_visit; ?></p>
-<p>
-	<strong>Información comercial enviada:</strong>
-	<?php
-        if($agenda->send_info) {
-            echo "SÍ";
-        }else{
-            echo "NO";
-        }?></p>
-<p>
-	<strong>Observaciones:</strong>
-	<?php echo $agenda->observaciones; ?></p>
+    <strong>Observaciones:</strong>
+    <?php echo $agenda->observaciones; ?></p>
 
-<?php echo Html::anchor('agenda/edit/'.$agenda->id, 'Editar'); ?> |
-<?php echo Html::anchor('agenda', 'Volver'); ?>
+<table class="table table-responsive table-striped table-bordered">
+    <thead>
+        <tr>
+            <td>&nbsp;</td>
+            <td><strong>Última</strong></td>
+            <td><strong>Próxima</strong></td>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><strong>Llamada</strong></td>
+        <td><?php echo date_conv($agenda->last_call); ?></td>
+        <td><?php echo date_conv($agenda->next_call); ?></td>
+    </tr>
+    <tr>
+        <td><strong>Visita</strong></td>
+        <td><?php echo date_conv($agenda->last_visit); ?></td>
+        <td><?php echo date_conv($agenda->next_visit); ?></td>
+    </tr>
+    </tbody>
+</table>
+<?php echo Html::anchor('agenda/edit/'.$agenda->id, 'Editar datos',array('class'=>'btn btn-success')); ?>&nbsp;&nbsp;
+<?php echo Html::anchor('agenda', 'Volver al listado',array('class'=>'btn btn-danger')); ?>

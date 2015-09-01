@@ -1,28 +1,24 @@
 <?php
 class Controller_Agenda extends Controller_Template
 {
-
 	public function action_index()
 	{
-		$data['agendas'] = Model_Agenda::find('all');
+		$data['agendas'] = Model_Agenda::find('all',array('order_by'=>array('next_call'=>'desc')));
 		$this->template->title = "Agendas";
 		$this->template->content = View::forge('agenda/index', $data);
-
 	}
 
 	public function action_view($id = null)
 	{
 		is_null($id) and Response::redirect('agenda');
 
-		if ( ! $data['agenda'] = Model_Agenda::find($id))
-		{
-			Session::set_flash('error', 'Could not find agenda #'.$id);
+		if ( ! $data['agenda'] = Model_Agenda::find($id)){
+			Session::set_flash('error', 'No se ha encontrado el registro buscado en la Agenda');
 			Response::redirect('agenda');
 		}
 
-		$this->template->title = "Agenda";
+		$this->template->title = "Ver registro en Agenda";
 		$this->template->content = View::forge('agenda/view', $data);
-
 	}
 
 	public function action_create()
@@ -43,27 +39,20 @@ class Controller_Agenda extends Controller_Template
 					'observaciones' => Input::post('observaciones'),
 				));
 
-				if ($agenda and $agenda->save())
-				{
-					Session::set_flash('success', 'Added agenda #'.$agenda->id.'.');
-
+				if ($agenda and $agenda->save()){
+					Session::set_flash('success', 'Añadadido nuevo registro en la Agenda del sistema.');
 					Response::redirect('agenda');
 				}
-
-				else
-				{
-					Session::set_flash('error', 'Could not save agenda.');
+				else{
+					Session::set_flash('error', 'No se ha podido crear el registro para la Agenda.');
 				}
-			}
-			else
-			{
+			}else{
 				Session::set_flash('error', $val->error());
 			}
 		}
 
-		$this->template->title = "Agendas";
+		$this->template->title = "Crear nuevo registro en la Agenda";
 		$this->template->content = View::forge('agenda/create');
-
 	}
 
 	public function action_edit($id = null)
@@ -72,7 +61,7 @@ class Controller_Agenda extends Controller_Template
 
 		if ( ! $agenda = Model_Agenda::find($id))
 		{
-			Session::set_flash('error', 'Could not find agenda #'.$id);
+			Session::set_flash('error', 'No se ha podido crear el registro para la Agenda.');
 			Response::redirect('agenda');
 		}
 
@@ -88,21 +77,16 @@ class Controller_Agenda extends Controller_Template
 			$agenda->send_info = Input::post('send_info');
 			$agenda->observaciones = Input::post('observaciones');
 
-			if ($agenda->save())
-			{
-				Session::set_flash('success', 'Updated agenda #' . $id);
-
+			if ($agenda->save()){
+				Session::set_flash('success', 'Registro actualizado en la Agenda');
 				Response::redirect('agenda');
 			}
-
-			else
-			{
-				Session::set_flash('error', 'Could not update agenda #' . $id);
+			else{
+				Session::set_flash('error', 'No se ha podido actualizar el registro solicitado en la Agenda del sistema.');
 			}
 		}
 
-		else
-		{
+		else{
 			if (Input::method() == 'POST')
 			{
 				$agenda->idcliente = $val->validated('idcliente');
@@ -119,29 +103,20 @@ class Controller_Agenda extends Controller_Template
 			$this->template->set_global('agenda', $agenda, false);
 		}
 
-		$this->template->title = "Agendas";
+		$this->template->title = "Editando registro de la Agenda";
 		$this->template->content = View::forge('agenda/edit');
-
 	}
 
-	public function action_delete($id = null)
-	{
+	public function action_delete($id = null){
 		is_null($id) and Response::redirect('agenda');
 
-		if ($agenda = Model_Agenda::find($id))
-		{
+		if ($agenda = Model_Agenda::find($id)){
 			$agenda->delete();
-
-			Session::set_flash('success', 'Deleted agenda #'.$id);
+			Session::set_flash('success', 'Se ha borrado el registro solicitado de la Agenda');
 		}
-
-		else
-		{
-			Session::set_flash('error', 'Could not delete agenda #'.$id);
+		else{
+			Session::set_flash('error', 'No se ha podido borrar el registro solicitado.');
 		}
-
 		Response::redirect('agenda');
-
 	}
-
 }
