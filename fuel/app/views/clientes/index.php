@@ -1,4 +1,4 @@
-<h2><span class='muted'>Clientes</span> existentes en el sistema:</h2>
+<h2><span class='muted'>Clientes</span> existentes en el sistema</h2>
 <br>
 <?php if ($clientes): ?>
 <table class="table table-striped">
@@ -20,8 +20,8 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach ($clientes as $item): ?>		<tr>
-
+<?php foreach ($clientes as $item): ?>
+        <tr>
 			<td><?php echo $item->nombre; ?></td>
 			<td><?php echo Model_Tipo_Cliente::find($item->tipo)->get('tipo'); ?></td>
 			<td><?php echo $item->cif_nif; ?></td>
@@ -37,9 +37,9 @@
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
-						<?php echo Html::anchor('clientes/view/'.$item->id, '<i class="icon-eye-open"></i> Ver ficha completa', array('class' => 'btn btn-default btn-sm')); ?>
-                        <?php echo Html::anchor('clientes/edit/'.$item->id, '<i class="icon-wrench"></i> Editar', array('class' => 'btn btn-default btn-sm')); ?>
-                        <?php echo Html::anchor('clientes/delete/'.$item->id, '<i class="icon-trash icon-white"></i> Borrar', array('class' => 'btn btn-sm btn-danger', 'onclick' => "return confirm('¿Estás seguro de esto?')")); ?>
+						<?php echo Html::anchor('clientes/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Ver ficha completa', array('class' => 'btn btn-default')); ?>
+                        <?php echo Html::anchor('clientes/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar', array('class' => 'btn btn-success')); ?>
+                        <?php echo Html::anchor('clientes/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de esto?')")); ?>
                     </div>
 				</div>
 
@@ -52,6 +52,5 @@
 <?php else: ?>
 <p>No se han encontrado clientes aún.</p>
 
-<?php endif; ?><p>
-	<?php echo Html::anchor('clientes/create', 'Añadir un nuevo cliente', array('class' => 'btn btn-success')); ?>
-</p>
+<?php endif; ?>
+<p><?php echo Html::anchor('clientes/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo cliente', array('class' => 'btn btn-success')); ?></p>

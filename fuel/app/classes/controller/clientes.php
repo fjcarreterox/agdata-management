@@ -37,7 +37,8 @@ class Controller_Clientes extends Controller_Template
         }
 
 		$this->template->title = "Ficha de cliente";
-		$this->template->content = View::forge('clientes/view', $data);
+		//$this->template->content = View::forge('clientes/view', $data);
+		$this->template->content = View::forge('clientes/view_panel', $data);
 	}
 
 	public function action_create()
