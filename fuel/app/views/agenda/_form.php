@@ -38,19 +38,19 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             <tr>
                 <td><strong>Llamada</strong></td>
                 <td><?php echo Form::input('last_call', Input::post('last_call', isset($agenda) ? $agenda->last_call : ''), array('type'=>'date','class' => 'col-md-4 form-control', 'placeholder'=>'Fecha de la última llamada realizada al cliente')); ?></td>
-                <td><?php echo Form::input('next_call', Input::post('next_call', isset($agenda) ? $agenda->next_call : ''), array('type'=>'date','class' => 'col-md-4 form-control', 'placeholder'=>'Next call')); ?></td>
+                <td><?php echo Form::input('next_call', Input::post('next_call', isset($agenda) ? $agenda->next_call : ''), array('type'=>'date','class' => 'col-md-4 form-control', 'placeholder'=>'Próxima llamada en el futuro')); ?></td>
             </tr>
             <tr>
                 <td><strong>Visita</strong></td>
-                <td><?php echo Form::input('last_visit', Input::post('last_visit', isset($agenda) ? $agenda->last_visit : ''), array('type'=>'date','class' => 'col-md-4 form-control', 'placeholder'=>'Last visit')); ?></td>
-                <td><?php echo Form::input('next_visit', Input::post('next_visit', isset($agenda) ? $agenda->next_visit : ''), array('type'=>'date','class' => 'col-md-4 form-control', 'placeholder'=>'Next visit')); ?></td>
+                <td><?php echo Form::input('last_visit', Input::post('last_visit', isset($agenda) ? $agenda->last_visit : ''), array('type'=>'date','class' => 'col-md-4 form-control', 'placeholder'=>'Última visita realizada al cliente')); ?></td>
+                <td><?php echo Form::input('next_visit', Input::post('next_visit', isset($agenda) ? $agenda->next_visit : ''), array('type'=>'date','class' => 'col-md-4 form-control', 'placeholder'=>'Próxima visita programada')); ?></td>
             </tr>
             </tbody>
         </table>
 
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
-			<?php echo Form::submit('submit', 'Crear/Actualizar registro', array('class' => 'btn btn-success')); ?>
+			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-ok"></span> Crear / Actualizar registro', array('class' => 'btn btn-success','type'=>'submit')); ?>
         </div>
 	</fieldset>
 <?php echo Form::close(); ?>

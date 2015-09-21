@@ -36,5 +36,5 @@
     </tr>
     </tbody>
 </table>
-<?php echo Html::anchor('agenda/edit/'.$agenda->id, 'Editar datos',array('class'=>'btn btn-success')); ?>&nbsp;&nbsp;
-<?php echo Html::anchor('agenda', 'Volver al listado',array('class'=>'btn btn-danger')); ?>
+<?php echo Html::anchor('agenda/edit/'.$agenda->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos',array('class'=>'btn btn-success')); ?>&nbsp;
+<?php echo Html::anchor('agenda', '<span class="glyphicon glyphicon-backward"></span> Volver al listado',array('class'=>'btn btn-danger')); ?>
