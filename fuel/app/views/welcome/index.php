@@ -82,6 +82,7 @@
             <div class="col-md-4">
                 <h2>Menú Comercial</h2>
                 <ul>
+                    <li><a href="clientes/create">Nuevo cliente</a></li>
                     <li><a href="clientes/potenciales">Clientes potenciales</a></li>
                     <li><a href="presupuesto">Presupuestos</a></li>
                     <li><a href="contrato">Contratos</a></li>

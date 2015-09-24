@@ -1,11 +1,10 @@
-<h2><span class='muted'>Clientes</span> existentes en el sistema</h2>
+<h2>Comunidades de propietarios gestionadas por <span class='muted'><?php echo $nombre; ?></span></h2>
 <br>
 <?php if ($clientes): ?>
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Nombre/Razón social</th>
-			<th>Tipo</th>
 			<th>CIF/NIF</th>
 			<!--<th>Dirección</th>
 			<th>Código postal</th>
@@ -23,7 +22,6 @@
 <?php foreach ($clientes as $item): ?>
         <tr>
 			<td><?php echo $item->nombre; ?></td>
-			<td><?php echo Model_Tipo_Cliente::find($item->tipo)->get('tipo'); ?></td>
 			<td><?php echo $item->cif_nif; ?></td>
 			<!--<td><?php /*echo $item->direccion;*/ ?></td>
 			<td><?php /*echo $item->cpostal;*/ ?></td>

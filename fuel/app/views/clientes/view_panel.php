@@ -5,37 +5,38 @@
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">
-                    Datos de contacto
+                    Contacto
                 </a></span>
             </h3>
         </div>
         <div id="collapseOne" class="panel-collapse collapse in">
             <div class="panel-body">
                 <p>En la siguiente tabla mostramos los datos comúnes a todo tipo de clientes: <strong>estado, DNI/NIF, tipo de cliente,
-                        dirección completa, teléfono, página web, actividad a la que se dedica y las observaciones</strong> que estimemos oportunas.</p>
+                        dirección completa, teléfono, página web, e-mail de contacto, actividad a la que se dedica y las observaciones</strong> que estimemos oportunas.</p>
                 <br/>
                 <table class="table table-striped table-bordered table-hover">
                     <thead></thead>
                     <tbody>
                     <tr class="text-center">
                         <td><?php echo Model_Estados_Cliente::find($cliente->estado)->get('nombre'); ?></td>
-                        <td><?php echo $cliente->cif_nif; ?></td>
-                        <td><?php echo Model_Tipo_Cliente::find($cliente->tipo)->get('tipo'); ?></td>
+                        <td><?php if($cliente->cif_nif!=''){echo $cliente->cif_nif;}else{echo '<span class="red">-- FALTA NIF/CIF --</span>';} ?></td>
+                        <td colspan="2"><?php echo Model_Tipo_Cliente::find($cliente->tipo)->get('tipo'); ?></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><?php echo $cliente->direccion; ?>, <?php echo $cliente->cpostal; ?>, <?php echo $cliente->loc; ?>. <?php echo $cliente->prov; ?></td>
+                        <td colspan="4"><?php echo $cliente->direccion; ?>, <?php echo $cliente->cpostal; ?>, <?php echo $cliente->loc; ?>. <?php echo $cliente->prov; ?></td>
                     </tr>
                     <tr class="text-center">
                         <td><?php echo $cliente->tel; ?></td>
-                        <td><?php echo $cliente->pweb; ?></td>
+                        <td><?php if($cliente->pweb!=''){echo $cliente->pweb;}else{echo '<span class="red">-- FALTA PAG. WEB --</span>';} ?></td>
+                        <td><?php if($cliente->email!=''){echo $cliente->email;}else{echo '<span class="red">-- FALTA E-MAIL --</span>';} ?></td>
                         <td><?php echo $cliente->actividad; ?></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><?php echo $cliente->observ; ?></td>
+                        <td colspan="4"><?php if($cliente->observ!=''){echo $cliente->observ;}else{echo '<span>Sin observaciones aún.</span>';} ?></td>
                     </tr>
                     </tbody>
                 </table>
-                <p>Hasta que el cliente no alcance el estado de <strong>activo</strong> en el sistema no será necesario recoger más información que la aquí mostrada.</p>
+                <br/>
                 <?php echo Html::anchor('clientes/edit/'.$cliente->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos básicos',array('class'=>'btn btn-success')); ?> &nbsp;
                 <?php echo Html::anchor('clientes', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de clientes',array('class'=>'btn btn-danger')); ?>
                 <br/><br/>
@@ -72,21 +73,19 @@
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo" class="collapsed">
-                    Datos para presupuesto y contrato
+                    Presupuestos y contratos
                 </a></span>
             </h3>
         </div>
         <div id="collapseTwo" class="panel-collapse collapse">
             <div class="panel-body">
-                <?php if(($cliente->estado == 4)):?>
                     <?php if(empty($ficha)):?>
-                        <p>Se ha detectado que este cliente se ha pasado al estado <strong>ACTIVO</strong> pero aún no tiene creada su ficha completa de cliente con los
-                            datos específicos requeridos para gestionar adecuadamente los servicios contratados.</p>
-                        <p>Cree dicha ficha pulsando en el siguiente botón: </p>
-                        <?php echo Html::anchor('ficha/create/'.$cliente->id, 'Crear ficha completa de cliente',array('class'=>'btn btn-success')); ?>
+                        <p>Se ha detectado que este cliente aún no tiene creada su ficha completa con los
+                            datos específicos requeridos para gestionar adecuadamente sus presupuestos y contratos.</p>
+                        <?php echo Html::anchor('ficha/create/'.$cliente->id, '<span class="glyphicon glyphicon-list"></span> Crear ficha completa de cliente',array('class'=>'btn btn-success')); ?>
                     <?php else: ?>
 
-                        <p>Los clientes <strong>activos</strong> deben tener cumplimentados ciertos campos adicionales que nos ayuden a gestionar los servicios
+                        <p>Los clientes deben tener cumplimentados los siguientes campos adicionales que nos ayuden a gestionar los servicios
                             contratados.</p>
                         <p>Son los siguientes:</p>
                         <table class="table table-striped table-bordered table-hover table-responsive">
@@ -145,9 +144,6 @@
                         <?php echo Html::anchor('ficha/edit/'.$cliente->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos específicos',array('class'=>'btn btn-success')); ?> &nbsp;
                         <?php echo Html::anchor('clientes', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de clientes',array('class'=>'btn btn-danger')); ?>
                     <?php endif; ?>
-                <?php else: ?>
-                    <p>Aún no se ha recogido datos del cliente para poder presupuestarle algún servicio.</p>
-                <?php endif;?>
             </div>
         </div>
     </div>
@@ -155,7 +151,7 @@
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseThree" href="#collapseThree" class="collapsed">
-                    Datos de auditoría
+                    Auditoría
                 </a></span>
             </h3>
         </div>

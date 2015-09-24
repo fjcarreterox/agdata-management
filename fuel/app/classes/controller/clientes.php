@@ -16,6 +16,15 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/index', $data);
     }
 
+    public function action_comunidades_aaff($idaaff)
+    {
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>4)));
+        $nombre = Model_Personal::find($idaaff)->get('nombre');
+        $data['nombre'] = $nombre;
+        $this->template->title = "Comunidades gestionadas por $nombre";
+        $this->template->content = View::forge('clientes/comunidades', $data);
+    }
+
     public function action_potenciales()
     {
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array(array('estado','<',4))));
@@ -37,7 +46,6 @@ class Controller_Clientes extends Controller_Template
         }
 
 		$this->template->title = "Ficha de cliente";
-		//$this->template->content = View::forge('clientes/view', $data);
 		$this->template->content = View::forge('clientes/view_panel', $data);
 	}
 
@@ -59,13 +67,13 @@ class Controller_Clientes extends Controller_Template
 					'prov' => Input::post('prov'),
 					'tel' => Input::post('tel'),
 					'pweb' => Input::post('pweb'),
+					'email' => Input::post('email'),
 					'actividad' => Input::post('actividad'),
 					'observ' => Input::post('observ'),
 					'estado' => Input::post('estado'),
 				));
 
-				if ($cliente and $cliente->save())
-				{
+				if ($cliente and $cliente->save()){
 					Session::set_flash('success', 'Nuevo cliente añadido al sistema.');
 					Response::redirect('clientes');
 				}
@@ -73,8 +81,7 @@ class Controller_Clientes extends Controller_Template
 					Session::set_flash('error', 'No se ha podido crear el cliente. Inténtelo más tarde.');
 				}
 			}
-			else
-			{
+			else{
 				Session::set_flash('error', $val->error());
 			}
 		}
@@ -107,12 +114,12 @@ class Controller_Clientes extends Controller_Template
 			$cliente->prov = Input::post('prov');
 			$cliente->tel = Input::post('tel');
 			$cliente->pweb = Input::post('pweb');
+			$cliente->email = Input::post('email');
 			$cliente->actividad = Input::post('actividad');
 			$cliente->observ = Input::post('observ');
 			$cliente->estado = Input::post('estado');
 
-			if ($cliente->save())
-			{
+			if ($cliente->save()){
 				Session::set_flash('success', 'Datos de cliente actualizados.');
 				Response::redirect('clientes');
 			}
@@ -133,6 +140,7 @@ class Controller_Clientes extends Controller_Template
 				$cliente->prov = $val->validated('prov');
 				$cliente->tel = $val->validated('tel');
 				$cliente->pweb = $val->validated('pweb');
+				$cliente->email = $val->validated('email');
 				$cliente->actividad = $val->validated('actividad');
 				$cliente->observ = $val->validated('observ');
 				$cliente->estado = $val->validated('estado');
@@ -150,10 +158,8 @@ class Controller_Clientes extends Controller_Template
 	{
 		is_null($id) and Response::redirect('clientes');
 
-		if ($cliente = Model_Cliente::find($id))
-		{
+		if ($cliente = Model_Cliente::find($id)){
 			$cliente->delete();
-
 			Session::set_flash('success', 'Cliente borrado del sistema.');
 		}
 		else{

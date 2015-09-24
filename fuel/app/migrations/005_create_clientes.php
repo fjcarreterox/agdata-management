@@ -17,6 +17,7 @@ class Create_clientes
 			'prov' => array('constraint' => 255, 'type' => 'varchar'),
 			'tel' => array('constraint' => 11, 'type' => 'int'),
 			'pweb' => array('constraint' => 255, 'type' => 'varchar'),
+			'email' => array('constraint' => 255, 'type' => 'varchar'),
 			'actividad' => array('constraint' => 255, 'type' => 'varchar'),
 			'observ' => array('constraint' => 255, 'type' => 'varchar'),
 			'estado' => array('constraint' => 255, 'type' => 'int'),
