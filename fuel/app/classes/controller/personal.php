@@ -90,6 +90,19 @@ class Controller_Personal extends Controller_Template
 		$this->template->content = View::forge('personal/create',$data);
 	}
 
+    public function action_associate($idcliente){
+        if (Input::method() == 'POST'){
+         //TODO: create new relation
+        }
+        else {
+            $data['personal'] = Model_Personal::find('all');
+            $data['idcliente'] = $idcliente;
+            $data['nombre'] = Model_Cliente::find($idcliente)->get('nombre');
+        }
+        $this->template->title = "Asociar persona al cliente";
+        $this->template->content = View::forge('personal/associate', $data);
+    }
+
     public function action_create_in_costumer($idcliente)
     {
         if (Input::method() == 'POST')

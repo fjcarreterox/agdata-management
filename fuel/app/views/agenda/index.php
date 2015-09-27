@@ -35,7 +35,7 @@
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
-						<?php echo Html::anchor('agenda/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Ver registro completo', array('class' => 'btn btn-default')); ?>
+						<?php echo Html::anchor('agenda/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Registro completo', array('class' => 'btn btn-default')); ?>
                         <?php echo Html::anchor('agenda/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar', array('class' => 'btn btn-success')); ?>
                         <?php echo Html::anchor('agenda/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar entrada', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de esto?')")); ?>
                     </div>

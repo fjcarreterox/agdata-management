@@ -73,7 +73,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
         </table>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
-			<?php echo Form::submit('ficha_submit', 'Guardar cambios', array('class' => 'btn btn-primary')); ?>
+			<?php echo Form::button('ficha_submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar cambios', array('class' => 'btn btn-primary','type'=>'submit')); ?>
         </div>
 	</fieldset>
 <?php echo Form::close(); ?>

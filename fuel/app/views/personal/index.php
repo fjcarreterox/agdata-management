@@ -21,13 +21,13 @@
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
-						<?php echo Html::anchor('personal/view/'.$item->id, '<i class="icon-eye-open"></i> Ver detalle', array('class' => 'btn btn-default btn-sm')); ?>
-                        <?php echo Html::anchor('personal/edit/'.$item->id, '<i class="icon-wrench"></i> Editar', array('class' => 'btn btn-success btn-sm')); ?>
+						<?php echo Html::anchor('personal/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle', array('class' => 'btn btn-default')); ?>
+                        <?php echo Html::anchor('personal/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span>  Editar', array('class' => 'btn btn-success')); ?>
                         <?php
-                            if($item->relacion == 5) {
-                                echo Html::anchor('cliente/comunidades_aaff/' . $item->id, '<i class="icon-wrench"></i> Ver comunidades', array('class' => 'btn btn-info btn-sm'));
+                            if($item->relacion == 5) { //If aaff
+                                echo Html::anchor('clientes/comunidades_aaff/' . $item->id, '<span class="glyphicon glyphicon-home"></span> Ver comunidades', array('class' => 'btn btn-info'));
                             }?>
-                        <?php echo Html::anchor('personal/delete/'.$item->id, '<i class="icon-trash icon-white"></i> Borrar', array('class' => 'btn btn-sm btn-danger', 'onclick' => "return confirm('Are you sure?')")); ?>
+                        <?php echo Html::anchor('personal/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar', array('class' => 'btn btn-danger', 'onclick' => "return confirm('Are you sure?')")); ?>
                     </div>
 				</div>
 			</td>

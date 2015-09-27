@@ -65,7 +65,7 @@
                         </tbody>
                     </table>
                 <?php endif; ?>
-                <?php echo Html::anchor('personal/create_in_costumer/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir personal',array('class'=>'btn btn-success')); ?>
+                <?php echo Html::anchor('personal/associate/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir personal',array('class'=>'btn btn-success')); ?>
             </div>
         </div>
     </div>
@@ -84,31 +84,29 @@
                             datos específicos requeridos para gestionar adecuadamente sus presupuestos y contratos.</p>
                         <?php echo Html::anchor('ficha/create/'.$cliente->id, '<span class="glyphicon glyphicon-list"></span> Crear ficha completa de cliente',array('class'=>'btn btn-success')); ?>
                     <?php else: ?>
-
                         <p>Los clientes deben tener cumplimentados los siguientes campos adicionales que nos ayuden a gestionar los servicios
                             contratados.</p>
-                        <p>Son los siguientes:</p>
                         <table class="table table-striped table-bordered table-hover table-responsive">
                             <tbody>
                             <tr>
                                 <td><strong>Móvil de contacto</strong></td>
-                                <td><?php echo $ficha->movil_contacto; ?></td>
+                                <td><?php if($ficha->movil_contacto!=0){echo $ficha->movil_contacto;}else{echo '<span class="red">-- FALTA MÓVIL DE CONTACTO --</span>';} ?></td>
                             </tr>
                             <tr>
                                 <td><strong>E-mail de contacto</strong></td>
-                                <td><?php echo $ficha->email_contacto; ?></td>
+                                <td><?php if($ficha->email_contacto!=''){echo $ficha->email_contacto;}else{echo '<span class="red">-- FALTA EMAIL DE CONTACTO --</span>';} ?></td>
                             </tr>
                             <tr>
                                 <td><strong>Código CNAE</strong></td>
-                                <td><?php echo $ficha->cnae; ?></td>
+                                <td><?php if($ficha->cnae!=0){echo $ficha->cnae;}else{echo '<span class="red">-- FALTA CÓDIGO CNAE --</span>';} ?></td>
                             </tr>
                             <tr>
                                 <td><strong>Convenio colectivo</strong></td>
-                                <td><?php echo $ficha->convenio; ?></td>
+                                <td><?php if($ficha->convenio!=''){echo $ficha->convenio;}else{echo '<span class="red">-- FALTA CONVENIO COLECTIVO --</span>';} ?></td>
                             </tr>
                             <tr>
                                 <td><strong>Ubicación de otras sedes</strong></td>
-                                <td><?php echo $ficha->otras_sedes; ?></td>
+                                <td><?php if($ficha->otras_sedes!=''){echo $ficha->otras_sedes;}else{echo '<span>No especificadas.</span>';} ?></td>
                             </tr>
                             <tr>
                                 <td><strong>Núm. aproximado de trabajadores</strong></td>
@@ -128,7 +126,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Código IBAN</strong></td>
-                                <td><?php echo $ficha->iban; ?></td>
+                                <td><?php if($ficha->iban!=''){echo $ficha->iban;}else{echo '<span class="red">-- FALTA CÓDIGO IBAN --</span>';} ?></td>
                             </tr>
                             <tr>
                                 <td><strong>Fecha envío correo de bienvenida</strong></td>
