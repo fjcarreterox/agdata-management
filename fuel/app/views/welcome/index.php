@@ -66,7 +66,7 @@
                 <ul>
                     <li><a href="clientes/create">Nuevo contacto</a></li>
                     <li><a href="clientes/potenciales">Clientes potenciales</a></li>
-                    <li><a href="agenda">Gestión de visitas y llamadas</a></li>
+                    <li><a href="agenda/visitasllamadas">Gestión de visitas y llamadas</a></li>
                     <li><a href="clientes/presupuestados">Clientes presupuestados</a></li>
                     <li><a href="agenda">Agenda de visitas</a></li>
 

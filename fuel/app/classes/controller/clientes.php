@@ -16,6 +16,13 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/index', $data);
     }
 
+    public function action_presupuestados()
+    {
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>3)));
+        $this->template->title = "Clientes activos";
+        $this->template->content = View::forge('clientes/presupuestados', $data);
+    }
+
     public function action_comunidades_aaff($idaaff)
     {
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>4)));

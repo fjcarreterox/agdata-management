@@ -8,6 +8,20 @@ class Controller_Agenda extends Controller_Template
 		$this->template->content = View::forge('agenda/index', $data);
 	}
 
+    public function action_visitasllamadas()
+    {
+        $agenda = array();
+        $entradas = Model_Agenda::find('all');
+        foreach($entradas as $e){
+            if(Model_Cliente::find($e->idcliente)->get('estado')<3){
+                $agenda[] = $e;
+            }
+        }
+        $data['agendas'] = $agenda;
+        $this->template->title = "Gestión de visitas y llamadas";
+        $this->template->content = View::forge('agenda/index', $data);
+    }
+
 	public function action_view($id = null)
 	{
 		is_null($id) and Response::redirect('agenda');
