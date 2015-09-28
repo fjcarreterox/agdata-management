@@ -7,12 +7,9 @@
 			<th>Idcliente</th>
 			<th>Movil contacto</th>
 			<th>Email contacto</th>
-			<th>Cnae</th>
-			<th>Convenio</th>
 			<th>Otras sedes</th>
 			<th>Num trabajadores</th>
 			<th>Num equipos</th>
-			<th>Representacion legal</th>
 			<th>Fecha bienvenida</th>
 			<th>Fecha auditoria</th>
 			<th>Iban</th>
@@ -25,12 +22,9 @@
 			<td><?php echo $item->idcliente; ?></td>
 			<td><?php echo $item->movil_contacto; ?></td>
 			<td><?php echo $item->email_contacto; ?></td>
-			<td><?php echo $item->cnae; ?></td>
-			<td><?php echo $item->convenio; ?></td>
 			<td><?php echo $item->otras_sedes; ?></td>
 			<td><?php echo $item->num_trabajadores; ?></td>
 			<td><?php echo $item->num_equipos; ?></td>
-			<td><?php echo $item->representacion_legal; ?></td>
 			<td><?php echo $item->fecha_bienvenida; ?></td>
 			<td><?php echo $item->fecha_auditoria; ?></td>
 			<td><?php echo $item->iban; ?></td>
@@ -44,11 +38,8 @@
 		</tr>
 <?php endforeach; ?>	</tbody>
 </table>
-
 <?php else: ?>
 <p>No Fichas.</p>
-
 <?php endif; ?><p>
 	<?php echo Html::anchor('ficha/create', 'Add new Ficha', array('class' => 'btn btn-success')); ?>
-
 </p>

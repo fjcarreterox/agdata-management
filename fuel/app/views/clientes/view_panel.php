@@ -5,7 +5,7 @@
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">
-                    Contacto
+                    Datos identificativos
                 </a></span>
             </h3>
         </div>
@@ -73,7 +73,7 @@
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo" class="collapsed">
-                    Presupuestos y contratos
+                    Datos para presupuestación
                 </a></span>
             </h3>
         </div>
@@ -97,14 +97,6 @@
                                 <td><?php if($ficha->email_contacto!=''){echo $ficha->email_contacto;}else{echo '<span class="red">-- FALTA EMAIL DE CONTACTO --</span>';} ?></td>
                             </tr>
                             <tr>
-                                <td><strong>Código CNAE</strong></td>
-                                <td><?php if($ficha->cnae!=0){echo $ficha->cnae;}else{echo '<span class="red">-- FALTA CÓDIGO CNAE --</span>';} ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Convenio colectivo</strong></td>
-                                <td><?php if($ficha->convenio!=''){echo $ficha->convenio;}else{echo '<span class="red">-- FALTA CONVENIO COLECTIVO --</span>';} ?></td>
-                            </tr>
-                            <tr>
                                 <td><strong>Ubicación de otras sedes</strong></td>
                                 <td><?php if($ficha->otras_sedes!=''){echo $ficha->otras_sedes;}else{echo '<span>No especificadas.</span>';} ?></td>
                             </tr>
@@ -115,14 +107,6 @@
                             <tr>
                                 <td><strong>Núm. aproximado de equipos informáticos</strong></td>
                                 <td><?php echo $ficha->num_equipos; ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Representacion legal</strong></td>
-                                <td><?php
-                                    if($ficha->representacion_legal)
-                                        echo "SÍ";
-                                    else
-                                        echo "NO";?></td>
                             </tr>
                             <tr>
                                 <td><strong>Código IBAN</strong></td>
@@ -149,14 +133,42 @@
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseThree" href="#collapseThree" class="collapsed">
-                    Auditoría
+                    Servicios contratados
                 </a></span>
             </h3>
         </div>
         <div id="collapseThree" class="panel-collapse collapse">
             <div class="panel-body">
+                <p>Servicios con los precios y su periodicidad de pago.</p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default" id="panel4">
+        <div class="panel-heading">
+            <h3 class="panel-title datos_cliente"><span class="muted">
+                <a data-toggle="collapse" data-target="#collapseFour" href="#collapseFour" class="collapsed">
+                    Auditoría de adaptación
+                </a></span>
+            </h3>
+        </div>
+        <div id="collapseFour" class="panel-collapse collapse">
+            <div class="panel-body">
                 <p>Pendiente de rellenar</p>
                </div>
+        </div>
+    </div>
+    <div class="panel panel-default" id="panel5">
+        <div class="panel-heading">
+            <h3 class="panel-title datos_cliente"><span class="muted">
+                <a data-toggle="collapse" data-target="#collapseFive" href="#collapseFive" class="collapsed">
+                    Auditoría de mantenimiento
+                </a></span>
+            </h3>
+        </div>
+        <div id="collapseFive" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p>Pendiente de rellenar</p>
+            </div>
         </div>
     </div>
 </div>

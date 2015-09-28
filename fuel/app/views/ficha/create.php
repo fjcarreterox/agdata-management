@@ -1,4 +1,4 @@
-<h2>Datos requeridos para presupuestos y contratos: <span class='muted'>
+<h2>Datos requeridos para presupuestación: <span class='muted'>
         <?php echo Model_Cliente::find($idcliente)->get('nombre');?></span></h2>
 <br/>
 <?php

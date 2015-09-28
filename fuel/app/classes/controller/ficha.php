@@ -5,9 +5,6 @@ class Controller_Ficha extends Controller_Template
 	public function action_index()
 	{
         \Fuel\Core\Response::redirect('clientes');
-		//$data['fichas'] = Model_Ficha::find('all');
-		//$this->template->title = "Fichas";
-		//$this->template->content = View::forge('ficha/index', $data);
 	}
 
 	public function action_view($idcliente = null)
@@ -21,7 +18,6 @@ class Controller_Ficha extends Controller_Template
 
 		$this->template->title = "Ficha de cliente";
 		$this->template->content = View::forge('ficha/view', $data);
-
 	}
 
 	public function action_create($idcliente)
@@ -36,19 +32,15 @@ class Controller_Ficha extends Controller_Template
 					'idcliente' => Input::post('idcliente'),
 					'movil_contacto' => Input::post('movil_contacto'),
 					'email_contacto' => Input::post('email_contacto'),
-					'cnae' => Input::post('cnae'),
-					'convenio' => Input::post('convenio'),
 					'otras_sedes' => Input::post('otras_sedes'),
 					'num_trabajadores' => Input::post('num_trabajadores'),
 					'num_equipos' => Input::post('num_equipos'),
-					'representacion_legal' => Input::post('representacion_legal'),
 					'fecha_bienvenida' => Input::post('fecha_bienvenida'),
 					'fecha_auditoria' => Input::post('fecha_auditoria'),
 					'iban' => Input::post('iban'),
 				));
 
-				if ($ficha and $ficha->save())
-				{
+				if ($ficha and $ficha->save()){
 					Session::set_flash('success', 'Nueva ficha de cliente añadida al sistema.');
 					Response::redirect('clientes/view/'.$idcliente);
 				}else{
@@ -82,12 +74,9 @@ class Controller_Ficha extends Controller_Template
 			$ficha->idcliente = Input::post('idcliente');
 			$ficha->movil_contacto = Input::post('movil_contacto');
 			$ficha->email_contacto = Input::post('email_contacto');
-			$ficha->cnae = Input::post('cnae');
-			$ficha->convenio = Input::post('convenio');
 			$ficha->otras_sedes = Input::post('otras_sedes');
 			$ficha->num_trabajadores = Input::post('num_trabajadores');
 			$ficha->num_equipos = Input::post('num_equipos');
-			$ficha->representacion_legal = Input::post('representacion_legal');
 			$ficha->fecha_bienvenida = Input::post('fecha_bienvenida');
 			$ficha->fecha_auditoria = Input::post('fecha_auditoria');
 			$ficha->iban = Input::post('iban');
@@ -100,17 +89,13 @@ class Controller_Ficha extends Controller_Template
 			}
 		}
 		else{
-			if (Input::method() == 'POST')
-			{
+			if (Input::method() == 'POST'){
 				$ficha->idcliente = $val->validated('idcliente');
 				$ficha->movil_contacto = $val->validated('movil_contacto');
 				$ficha->email_contacto = $val->validated('email_contacto');
-				$ficha->cnae = $val->validated('cnae');
-				$ficha->convenio = $val->validated('convenio');
 				$ficha->otras_sedes = $val->validated('otras_sedes');
 				$ficha->num_trabajadores = $val->validated('num_trabajadores');
 				$ficha->num_equipos = $val->validated('num_equipos');
-				$ficha->representacion_legal = $val->validated('representacion_legal');
 				$ficha->fecha_bienvenida = $val->validated('fecha_bienvenida');
 				$ficha->fecha_auditoria = $val->validated('fecha_auditoria');
 				$ficha->iban = $val->validated('iban');
@@ -121,11 +106,9 @@ class Controller_Ficha extends Controller_Template
 
 		$this->template->title = "Datos específicos de la ficha de cliente";
 		$this->template->content = View::forge('ficha/edit');
-
 	}
 
-	public function action_delete($id = null)
-	{
+	public function action_delete($id = null){
 		is_null($id) and Response::redirect('ficha');
 
 		if ($ficha = Model_Ficha::find($id)){
@@ -136,5 +119,4 @@ class Controller_Ficha extends Controller_Template
 		}
 		Response::redirect('ficha');
 	}
-
 }
