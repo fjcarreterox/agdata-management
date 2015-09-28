@@ -23,8 +23,12 @@
             padding-top: 5px;
             padding-bottom: 10px;
         }
+        .jumbotron h1{
+            color: #0050b9 !important;
+            font-weight: bolder;
+        }
 		a{
-			color:#445588;
+			color:#0050b9;
 		}
 		a:hover{
 			color: #336699;
@@ -58,7 +62,7 @@
 		<div class="jumbotron">
 			<h1>Bienvenido a A.G.DATA</h1>
 			<p>Gestión de clientes y documentación.</p>
-			<p><a class="btn btn-primary btn-lg" href="http://docs.fuelphp.com">Acceder</a></p>
+			<p><a class="btn btn-danger" href="welcome/logout">Salir del sistema <span class="glyphicon glyphicon-log-out"></span></a></p>
 		</div>
 		<div class="row">
             <div class="col-md-4">
@@ -111,6 +115,7 @@
                     <li><a href="usuario">Gestión de usuarios</a></li>
                     <li><a href="roles">Gestión de roles</a></li>
                     <li><a href="tipo/clientes">Tipología de clientes</a></li>
+                    <li><a href="tipo/ficheros">Tipología de ficheros</a></li>
                     <li><a href="servicios">Gestión de servicios ofrecidos</a></li>
                     <li><a href="estados/cliente">Estados del cliente</a></li>
                     <li><a href="estados/presupuesto">Estados de los presupuestos</a></li>

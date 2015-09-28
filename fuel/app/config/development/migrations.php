@@ -19,6 +19,7 @@ return array (
         10 => '011_create_estados_presupuestos',
         11 => '012_create_presupuestos',
         12 => '013_create_contratos',
+        13 => '014_create_tipo_ficheros',
       ),
     ),
     'module' => 
