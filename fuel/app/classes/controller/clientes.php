@@ -49,6 +49,7 @@ class Controller_Clientes extends Controller_Template
 			Response::redirect('clientes');
 		}else{
             $data['ficha'] = Model_Ficha::find('first',array('where'=>array('idcliente'=>$id)));
+            $data['ficheros'] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$id)));
             $data['contactos'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$id)));
         }
 

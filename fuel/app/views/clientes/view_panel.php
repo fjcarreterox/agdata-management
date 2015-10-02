@@ -153,7 +153,33 @@
         </div>
         <div id="collapseFour" class="panel-collapse collapse">
             <div class="panel-body">
-                <p>Pendiente de rellenar</p>
+                <?php if(empty($ficheros)):?>
+                    <p>Aún no se han registrado ficheros de datos para este cliente en el sistema. Utiliza el botón siguiente para crearlos.</p>
+                <?php else: ?>
+                <table class="table table-striped table-bordered table-hover table-responsive">
+                    <thead>
+                    <tr class="text-center">
+                        <td><strong>Tipo</strong></td>
+                        <td><strong>Ubicación</strong></td>
+                        <td><strong>Registrado en AEPD</strong></td>
+                        <td><strong>Cesión de datos</strong></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($ficheros as $f): ?>
+                        <tr>
+                            <td><?php echo Model_Tipo_Fichero::find($f->idtipo)->get('tipo'); ?></td>
+                            <td><?php echo $f->ubicacion; ?></td>
+                            <td><?php if($f->inscrito){echo "SÍ";}else{echo "NO";}; ?></td>
+                            <td><?php if($f->cesion){echo "SÍ";}else{echo "NO";}; ?></td>
+                            <td><?php echo Html::anchor('ficheros/view/'.$f->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank')); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php endif; ?>
+                <p><?php echo Html::anchor('ficheros/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo fichero', array('class' => 'btn btn-success')); ?></p>
                </div>
         </div>
     </div>
