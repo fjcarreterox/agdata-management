@@ -1,4 +1,4 @@
-<h2>Registrar un nuevo <span class='muted'>fichero de datos</span> para <?php echo $nombre;?></h2>
+<h2>Registrar un nuevo <span class='muted'>fichero de datos</span> de <?php echo $nombre;?></h2>
 <br/>
 <?php
 $data['tipos'] = $tipos;

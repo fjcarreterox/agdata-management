@@ -20,6 +20,11 @@ return array (
         11 => '012_create_presupuestos',
         12 => '013_create_contratos',
         13 => '014_create_tipo_ficheros',
+        14 => '015_create_ficheros',
+        15 => '016_create_adaptacions',
+        16 => '017_create_cesiones',
+        17 => '018_create_tipo_cesionaria',
+        18 => '019_create_tipo_cesionarias',
       ),
     ),
     'module' => 

@@ -225,7 +225,8 @@
                             <td><?php echo $f->ubicacion; ?></td>
                             <td><?php if($f->inscrito){echo "SÍ";}else{echo "NO";}; ?></td>
                             <td><?php if($f->cesion){echo "SÍ";}else{echo "NO";}; ?></td>
-                            <td><?php echo Html::anchor('ficheros/view/'.$f->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank')); ?></td>
+                            <td><?php echo Html::anchor('ficheros/view/'.$f->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank')); ?>
+                                <?php echo Html::anchor('ficheros/delete/'.$f->id, '<span class="glyphicon glyphicon-trash"></span> Borrar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarlo del sistema?')")); ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -237,8 +238,31 @@
                 <?php if(empty($cesiones)):?>
                     <p>Aún no se han registrado cesiones de ficheros de datos en el sistema para este cliente.</p>
                 <?php else: ?>
-                    <p>Listado de cesiones.</p>
+                    <table class="table table-striped table-bordered table-hover table-responsive">
+                        <thead>
+                        <tr class="text-center">
+                            <td><strong>Empresa</strong></td>
+                            <td><strong>Tipo</strong></td>
+                            <td><strong>Fichero cesionado</strong></td>
+                            <td><strong>Fecha de firma del contrato</strong></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($cesiones as $c): ?>
+                            <tr>
+                                <td><?php echo $c->nombre; ?></td>
+                                <td><?php echo Model_Tipo_Cesionaria::find($c->idtipo_empresa)->get('nombre'); ?></td>
+                                <td><?php echo Model_Tipo_Fichero::find($f->idtipo)->get('tipo'); ?></td>
+                                <td><?php echo date_conv($c->fecha_contrato); ?></td>
+                                <td><?php echo Html::anchor('cesiones/view/'.$f->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank')); ?>
+                                    <?php echo Html::anchor('cesiones/delete/'.$f->id, '<span class="glyphicon glyphicon-trash"></span> Borrar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarla del sistema?')")); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 <?php endif; ?>
+                <p><?php echo Html::anchor('cesiones/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Registrar nueva cesión', array('class' => 'btn btn-success')); ?></p>
                </div>
         </div>
     </div>

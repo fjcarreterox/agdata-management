@@ -11,6 +11,7 @@ class Model_Presupuesto extends Model
         'servicios',
         'importe',
 		'idestado',
+		'iduser',
 		'observaciones',
 		'created_at',
 		'updated_at',
@@ -36,6 +37,7 @@ class Model_Presupuesto extends Model
 		$val->add_field('servicios', 'Servicios ofertados', 'required');
 		$val->add_field('importe', 'Importe', 'required');
 		$val->add_field('idestado', 'Estado', 'required|valid_string[numeric]');
+		$val->add_field('iduser', 'Usuario del sistema', 'required|valid_string[numeric]');
 		//$val->add_field('observaciones', 'Observaciones', 'required');
 
 		return $val;

@@ -39,7 +39,6 @@ class Controller_Ficheros extends Controller_Template
 
 				if ($fichero and $fichero->save()){
 					Session::set_flash('success', 'Nuevo fichero de datos añadido al sistema.');
-					//Response::redirect('ficheros');
 					Response::redirect('clientes/view/'.$idcliente);
 				}
 				else{
@@ -82,7 +81,7 @@ class Controller_Ficheros extends Controller_Template
 
 			if ($fichero->save()){
 				Session::set_flash('success', 'Fichero de datos actualizado.');
-				Response::redirect('ficheros');
+				Response::redirect('clientes/view/'.$fichero->idcliente);
 			}
 			else{
 				Session::set_flash('error', 'No ha sido posible actualizar el fichero de datos.');
@@ -104,8 +103,11 @@ class Controller_Ficheros extends Controller_Template
 			$this->template->set_global('fichero', $fichero, false);
 		}
 
+        $data['tipos'] = Model_Tipo_Fichero::find('all');
+        $data['idcliente'] = $fichero->idcliente;
+
 		$this->template->title = "Editar datos de fichero de datos";
-		$this->template->content = View::forge('ficheros/edit');
+		$this->template->content = View::forge('ficheros/edit',$data);
 	}
 
 	public function action_delete($id = null){

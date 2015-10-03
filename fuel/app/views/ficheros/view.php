@@ -4,7 +4,7 @@
 	<strong>Tipo de fichero:</strong>
 	<?php echo Model_Tipo_Fichero::find($fichero->idtipo)->get('tipo'); ?></p>
 <p>
-	<strong>Ubicación del ficheros:</strong>
+	<strong>Ubicación del fichero:</strong>
 	<?php echo $fichero->ubicacion; ?></p>
 <p>
     <strong>Finalidad del fichero:</strong>
@@ -23,4 +23,4 @@
 	<?php if($fichero->cesion){echo "SÍ";}else{echo "NO";}; ?></p>
 <br/>
 <?php echo Html::anchor('ficheros/edit/'.$fichero->id, '<span class="glyphicon glyphicon-pencil"></span> Editar', array('class'=>'btn btn-success')); ?>&nbsp;
-<?php echo Html::anchor('ficheros', '<span class="glyphicon glyphicon-backward"></span> Volver al listado completo de ficheros', array('class'=>'btn btn-danger')); ?>
+<?php echo Html::anchor('clientes/view/'.$fichero->idcliente, '<span class="glyphicon glyphicon-backward"></span> Volver a la ficha del cliente', array('class'=>'btn btn-danger')); ?>
