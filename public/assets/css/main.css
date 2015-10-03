@@ -64,3 +64,8 @@ h3.datos_cliente a:hover{
 .panel-heading a.collapsed:after {
     content:"\e080";
 }
+
+.panel-body h4{
+    font-weight: bolder;
+    color: #0050b9;
+}

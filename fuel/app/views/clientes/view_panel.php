@@ -153,9 +153,61 @@
         </div>
         <div id="collapseFour" class="panel-collapse collapse">
             <div class="panel-body">
+                <p>En esta sección mostramos, por orden, los datos recogidos en el <b>cuestionario de la auditoría</b>, los <b>ficheros de datos identificados</b> y
+                    por último las <b>cesiones de datos</b>.</p>
+                <br/>
+                <?php if(empty($adaptacion)):?>
+                    <p>No se ha realizado el cuestionario básico de adaptación al cliente. Procede desde el siguiente botón:</p>
+                    <p><?php echo Html::anchor('adaptacion/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Cuestionario básico de adaptación', array('class' => 'btn btn-success')); ?></p>
+                <?php else: ?>
+                    <h4>Datos obtenidos del cuestionario básico de adptación</h4>
+                    <table class="table table-striped table-bordered table-hover table-responsive">
+                        <tbody>
+                        <tr class="text-left">
+                            <td>Núm. de servidores de datos</td>
+                            <td><?php echo $adaptacion->num_serv; ?></td>
+                        </tr>
+                        <tr class="text-left">
+                            <td>Núm. de equipos de sobremesa</td>
+                            <td><?php echo $adaptacion->num_pc; ?></td>
+                        </tr>
+                        <tr class="text-left">
+                            <td>Núm. de equipos de sobremesa conectados a un servidor</td>
+                            <td><?php echo $adaptacion->num_pc_online; ?></td>
+                        </tr>
+                        <tr class="text-left">
+                            <td>'Núm. de equipos portátiles</td>
+                            <td><?php echo $adaptacion->num_laptop; ?></td>
+                        </tr>
+                        <tr class="text-left">
+                            <td>Núm. de equipos portátiles conectados a un servidor</td>
+                            <td><?php echo $adaptacion->num_laptop_online; ?></td>
+                        </tr>
+                        <tr class="text-left">
+                            <td>Frecuencia de cambio de constraseñas en los equipos</td>
+                            <td><?php echo $adaptacion->pass_freq; ?></td>
+                        </tr>
+                        <tr class="text-left">
+                            <td>Frecuencia de realización de copias de seguridad</td>
+                            <td><?php echo $adaptacion->backup_freq; ?></td>
+                        </tr>
+                        <tr class="text-left">
+                            <td>Software de gestión para almacenar datos de carárter personal</td>
+                            <td><?php if($adaptacion->management_sw!=''){echo $adaptacion->management_sw;}else{echo '<span class="red">-- NO ESPECIFICADO --</span>';} ?></td>
+                        </tr>
+                        <tr class="text-left">
+                            <td>Tipo de control de acceso a los ficheros de datos</td>
+                            <td><?php if($adaptacion->access_control!=''){echo $adaptacion->access_control;}else{echo '<span class="red">-- NO ESPECIFICADO --</span>';} ?></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p><?php echo Html::anchor('adaptacion/edit/'.$adaptacion->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos del cuestionario', array('class' => 'btn btn-success')); ?></p>
+                <?php endif; ?>
+                <br/>
                 <?php if(empty($ficheros)):?>
                     <p>Aún no se han registrado ficheros de datos para este cliente en el sistema. Utiliza el botón siguiente para crearlos.</p>
                 <?php else: ?>
+                    <h4>Ficheros de datos identificados</h4>
                 <table class="table table-striped table-bordered table-hover table-responsive">
                     <thead>
                     <tr class="text-center">
@@ -180,6 +232,13 @@
                 </table>
                 <?php endif; ?>
                 <p><?php echo Html::anchor('ficheros/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo fichero', array('class' => 'btn btn-success')); ?></p>
+                <br/>
+                <h4>Cesiones de datos</h4>
+                <?php if(empty($cesiones)):?>
+                    <p>Aún no se han registrado cesiones de ficheros de datos en el sistema para este cliente.</p>
+                <?php else: ?>
+                    <p>Listado de cesiones.</p>
+                <?php endif; ?>
                </div>
         </div>
     </div>
