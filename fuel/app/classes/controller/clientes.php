@@ -2,17 +2,41 @@
 class Controller_Clientes extends Controller_Template
 {
 
-	public function action_index()
-	{
+	public function action_index(){
 		$data['clientes'] = Model_Cliente::find('all');
-		$this->template->title = "Clientes";
+        $data['intro'] = "todos";
+		$this->template->title = "Todos los clientes del sistema";
 		$this->template->content = View::forge('clientes/index', $data);
 	}
 
     public function action_activos()
     {
-        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>4)));
+        $clientes = Model_Cliente::find('all', array(
+            'where' => array(
+                array('estado', 5),
+                'or' => array(
+                    array('estado', 6),
+                ),
+            ),
+        ));
+
+        $data['intro'] = "en activo";
+        $data['clientes'] = $clientes;
         $this->template->title = "Clientes activos";
+        $this->template->content = View::forge('clientes/index', $data);
+    }
+
+    public function action_adaptacion(){
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>5)));
+        $data['intro'] = "en proceso de adaptación a la LOPD";
+        $this->template->title = "Clientes en proceso de adaptación a la LOPD";
+        $this->template->content = View::forge('clientes/index', $data);
+    }
+
+    public function action_mantenimiento(){
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>6)));
+        $data['intro'] = "en régimen de mantenimiento de la LOPD";
+        $this->template->title = "Clientes en régimen de mantenimiento de la LOPD";
         $this->template->content = View::forge('clientes/index', $data);
     }
 
@@ -95,10 +119,8 @@ class Controller_Clientes extends Controller_Template
 				Session::set_flash('error', $val->error());
 			}
 		}
-
 		$this->template->title = "Clientes";
 		$this->template->content = View::forge('clientes/create');
-
 	}
 
 	public function action_edit($id = null)

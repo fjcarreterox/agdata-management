@@ -1,5 +1,5 @@
-<h2><span class='muted'>Clientes</span> existentes en el sistema</h2>
-<br>
+<h2><span class="muted">Clientes</span> en el sistema: <u><?php echo $intro; ?></u></h2>
+<br/>
 <?php if ($clientes): ?>
 <table class="table table-striped">
 	<thead>
@@ -7,14 +7,7 @@
 			<th>Nombre/Razón social</th>
 			<th>Tipo</th>
 			<th>CIF/NIF</th>
-			<!--<th>Dirección</th>
-			<th>Código postal</th>
-			<th>Localidad</th>
-			<th>Provincia</th>-->
 			<th>Teléfono</th>
-			<!--<th>Página web</th>
-			<th>Actividad</th>
-			<th>Observaciones</th>-->
 			<th>Estado</th>
 			<th>&nbsp;</th>
 		</tr>
@@ -25,14 +18,7 @@
 			<td><?php echo $item->nombre; ?></td>
 			<td><?php echo Model_Tipo_Cliente::find($item->tipo)->get('tipo'); ?></td>
 			<td><?php echo $item->cif_nif; ?></td>
-			<!--<td><?php /*echo $item->direccion;*/ ?></td>
-			<td><?php /*echo $item->cpostal;*/ ?></td>
-			<td><?php /*echo $item->loc;*/ ?></td>
-			<td><?php /*echo $item->prov;*/ ?></td>-->
 			<td><?php echo $item->tel; ?></td>
-			<!--<td><?php /*echo $item->pweb;*/ ?></td>
-			<td><?php /*echo $item->actividad;*/ ?></td>
-			<td><?php /*echo $item->observ;*/ ?></td>-->
 			<td><?php echo Model_Estados_Cliente::find($item->estado)->get('nombre'); ?></td>
 			<td>
 				<div class="btn-toolbar">
@@ -50,7 +36,7 @@
 </table>
 
 <?php else: ?>
-<p>No se han encontrado clientes aún.</p>
-
+<p>No se han encontrado clientes que cumplan los criterios de búsqueda establecidos.</p>
 <?php endif; ?>
-<p><?php echo Html::anchor('clientes/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo cliente', array('class' => 'btn btn-success')); ?></p>
+<br/>
+<p><?php echo Html::anchor('clientes/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo cliente', array('class' => 'btn btn-success')); ?>&nbsp;<?php echo Html::anchor('clientes/index', '<span class="glyphicon glyphicon-eye-open"></span> Ver listado completo de clientes', array('class' => 'btn btn-default')); ?></p>
