@@ -1,7 +1,4 @@
-<h2>New <span class='muted'>Role</span></h2>
-<br>
-
+<h2>Crear un nuevo <span class='muted'>rol</span> en el sistema</h2>
+<br/>
 <?php echo render('roles/_form'); ?>
-
-
-<p><?php echo Html::anchor('roles', 'Back'); ?></p>
+<p><?php echo Html::anchor('roles', '<span class="glyphicon glyphicon-backward"></span> Volver al listado',array('class'=>'btn btn-danger')); ?></p>

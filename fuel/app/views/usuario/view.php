@@ -13,5 +13,5 @@
 	<strong>Rol asociado:</strong>
 	<?php echo Model_Role::find($usuario->role)->get('rol'); ?></p>
 <br/>
-<?php echo Html::anchor('usuario/edit/'.$usuario->id, 'Editar datos',array('class'=>'btn btn-success')); ?>&nbsp;&nbsp;
-<?php echo Html::anchor('usuario', 'Volver al listado',array('class'=>'btn btn-danger')); ?>
+<?php echo Html::anchor('usuario/edit/'.$usuario->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos',array('class'=>'btn btn-success')); ?>&nbsp;
+<?php echo Html::anchor('usuario', '<span class="glyphicon glyphicon-backward"></span> Volver al listado',array('class'=>'btn btn-danger')); ?>

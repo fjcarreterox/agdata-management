@@ -29,7 +29,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 		</div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
-			<?php echo Form::submit('submit', 'Guardar Cambios', array('class' => 'btn btn-primary')); ?>
+			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar Cambios', array('class' => 'btn btn-primary','type'=>'submit')); ?>
         </div>
 	</fieldset>
 <?php echo Form::close(); ?>
