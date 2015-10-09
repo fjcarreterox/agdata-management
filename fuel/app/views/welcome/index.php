@@ -121,6 +121,7 @@
                     <li><a href="estados/presupuesto">Estados de los presupuestos</a></li>
                     <li><a href="relacion">Tipos de relaciones de personal con AGDATA</a></li>
                     <li><a href="tipo/cesionaria">Tipos de empresas cesionarias</a></li>
+                    <li><a href="tipo/plantilla">Tipos de plantillas para mailings</a></li>
                 </ul>
             </div>
         </div>
