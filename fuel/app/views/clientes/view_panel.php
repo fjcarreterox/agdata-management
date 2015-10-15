@@ -133,13 +133,47 @@
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseThree" href="#collapseThree" class="collapsed">
-                    Servicios contratados
+                    Servicios contratados y forma de pago
                 </a></span>
             </h3>
         </div>
         <div id="collapseThree" class="panel-collapse collapse">
             <div class="panel-body">
-                <p>Servicios con los precios y su periodicidad de pago.</p>
+                <br/>
+                <?php if(empty($servicios)):?>
+                    <p>Aún no se ha asociado ningún servicio a contratar por este cliente. Accede desde el siguiente botón:</p>
+                <?php else: ?>
+                    <h4>Servicios contratados por el cliente</h4>
+                    <table class="table table-striped table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr class="text-center">
+                                <td><strong>Tipo servicio</strong></td>
+                                <td><strong>Importe sin IVA</strong></td>
+                                <td><strong>Año</strong></td>
+                                <td><strong>Mes de facturación</strong></td>
+                                <td><strong>Periodicidad</strong></td>
+                                <td><strong>Cuota</strong></td>
+                                <td><strong>Forma de pago</strong></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    <?php foreach($servicios as $s): ?>
+                        <tr class="text-center">
+                            <td><?php echo Model_Servicio::find($s->idtipo_servicio)->get('nombre'); ?></td>
+                            <td><?php echo $s->importe; ?> &euro;</td>
+                            <td><?php echo $s->year; ?></td>
+                            <td><?php echo $s->mes_factura; ?></td>
+                            <td><?php echo $s->periodicidad; ?></td>
+                            <td><?php echo $s->cuota; ?> &euro;</td>
+                            <td><?php echo $s->forma_pago; ?></td>
+                            <td><?php echo Html::anchor('servicios/contratados/edit/'.$s->id, '<span class="glyphicon glyphicon-pencil"></span> Editar',array('class'=>'btn btn-success')); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                        </tbody>
+                        </table>
+                <?php endif; ?>
+                <p><?php echo Html::anchor('servicios/contratados/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir nueva contratación de servicio', array('class' => 'btn btn-success')); ?></p>
             </div>
         </div>
     </div>

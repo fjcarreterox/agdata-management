@@ -59,6 +59,7 @@ class Controller_Clientes extends Controller_Template
     public function action_potenciales()
     {
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array(array('estado','<',4))));
+        $data['intro'] = "potenciales";
         $this->template->title = "Clientes potenciales";
         $this->template->content = View::forge('clientes/index', $data);
     }
@@ -75,6 +76,7 @@ class Controller_Clientes extends Controller_Template
             $data['ficha'] = Model_Ficha::find('first',array('where'=>array('idcliente'=>$id)));
             $data['adaptacion'] = Model_Adaptacion::find('first',array('where'=>array('idcliente'=>$id)));
             $data['ficheros'] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$id)));
+            $data['servicios'] = Model_Servicios_Contratado::find('all',array('where'=>array('idcliente'=>$id)));
             $data['cesiones'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$id)));
             $data['contactos'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$id)));
         }
