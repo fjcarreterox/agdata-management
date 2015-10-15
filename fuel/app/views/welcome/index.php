@@ -81,8 +81,8 @@
                 <ul>
                     <li><a href="clientes/activos">Clientes LOPD</a></li>
                     <li><a href="clientes/adaptacion">Clientes en adaptación</a></li>
+                    <li><a href="clientes/gestionLOPD">Gestión de tareas LOPD</a></li>
                     <li><a href="clientes/mantenimiento">Clientes en mantenimiento</a></li>
-                    <li><a href="clientes/gestionLOPD">Gestión del mantenimiento LOPD</a></li>
                 </ul>
 			</div>
 			<div class="col-md-4">
@@ -122,6 +122,7 @@
                     <li><a href="relacion">Tipos de relaciones de personal con AGDATA</a></li>
                     <li><a href="tipo/cesionaria">Tipos de empresas cesionarias</a></li>
                     <li><a href="tipo/plantilla">Tipos de plantillas para mailings</a></li>
+                    <li><a href="tipo/situacion">Tipos de situaciones de clientes en adaptación</a></li>
                 </ul>
             </div>
         </div>

@@ -26,6 +26,7 @@ return array (
         17 => '018_create_tipo_cesionaria',
         18 => '019_create_tipo_cesionarias',
         19 => '019_create_tipo_plantillas',
+        20 => '020_create_tipo_situacions',
       ),
     ),
     'module' => 
