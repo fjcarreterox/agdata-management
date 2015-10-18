@@ -23,10 +23,6 @@
 					<div class="btn-group">
 						<?php echo Html::anchor('personal/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle', array('class' => 'btn btn-default')); ?>
                         <?php echo Html::anchor('personal/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span>  Editar', array('class' => 'btn btn-success')); ?>
-                        <?php
-                            if($item->relacion == 5) { //If aaff
-                                echo Html::anchor('clientes/comunidades_aaff/' . $item->id, '<span class="glyphicon glyphicon-home"></span> Ver comunidades', array('class' => 'btn btn-info'));
-                            }?>
                         <?php echo Html::anchor('personal/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar', array('class' => 'btn btn-danger', 'onclick' => "return confirm('Are you sure?')")); ?>
                     </div>
 				</div>

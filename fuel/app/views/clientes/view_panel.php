@@ -11,6 +11,7 @@
         </div>
         <div id="collapseOne" class="panel-collapse collapse in">
             <div class="panel-body">
+                <h4>Datos básicos de contacto</h4>
                 <p>En la siguiente tabla mostramos los datos comúnes a todo tipo de clientes: <strong>estado, DNI/NIF, tipo de cliente,
                         dirección completa, teléfono, página web, e-mail de contacto, actividad a la que se dedica y las observaciones</strong> que estimemos oportunas.</p>
                 <br/>
@@ -40,6 +41,7 @@
                 <?php echo Html::anchor('clientes/edit/'.$cliente->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos básicos',array('class'=>'btn btn-success')); ?> &nbsp;
                 <?php echo Html::anchor('clientes', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de clientes',array('class'=>'btn btn-danger')); ?>
                 <br/><br/>
+                <h4>Personal de contacto</h4>
                 <?php if(empty($contactos)): ?>
                     <p>No se ha encontrado aún personal de este cliente registrado en nuestro sistema.</p>
                 <?php else: ?>
@@ -66,6 +68,24 @@
                     </table>
                 <?php endif; ?>
                 <?php echo Html::anchor('personal/associate/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir personal',array('class'=>'btn btn-success')); ?>
+                <br/><br/>
+                <!--Tipo Comunidad -->
+                <?php if($cliente->tipo==6): ?>
+                    <h4>Administrador de fincas asociado</h4>
+                    <?php if(empty($aaff)): ?>
+                        <p>No se ha encontrado aún un administrador de fincas que gestione esta comunidad. Selecciona una empresa gestora que la represente.</p>
+                        <?php echo Html::anchor('rel/comaaff/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir adminitrador de fincas',array('class'=>'btn btn-success')); ?>
+                    <?php else: ?>
+                        <table class="table table-striped table-bordered table-hover table-responsive">
+                        <?php
+                        foreach($aaff as $af){
+                            echo "<tr><td>".Model_Cliente::find($af->idaaff)->get('nombre')."</td>";
+                            echo "<td>".Html::anchor('rel/comaaff/edit/'.$af->id, '<span class="glyphicon glyphicon-pencil"></span> Editar asociación',array('class'=>'btn btn-success'))."&nbsp;";
+                            echo Html::anchor('rel/comaaff/delete/'.$af->id, '<span class="glyphicon glyphicon-trash"></span> Borrar asociación',array('class'=>'btn btn-danger'))."</td></tr>";
+                        }?>
+                        </table>
+                    <?php endif; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

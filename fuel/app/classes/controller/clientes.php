@@ -47,13 +47,11 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/presupuestados', $data);
     }
 
-    public function action_comunidades_aaff($idaaff)
-    {
-        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>4)));
-        $nombre = Model_Personal::find($idaaff)->get('nombre');
-        $data['nombre'] = $nombre;
-        $this->template->title = "Comunidades gestionadas por $nombre";
-        $this->template->content = View::forge('clientes/comunidades', $data);
+    public function action_aaff(){
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('tipo'=>1)));
+        $data['intro'] = "Administradores de fincas";
+        $this->template->title = "Clientes activos";
+        $this->template->content = View::forge('clientes/aaff', $data);
     }
 
     public function action_potenciales()
@@ -73,6 +71,10 @@ class Controller_Clientes extends Controller_Template
 			Session::set_flash('error', 'No se ha podido localizar al cliente solicitado.');
 			Response::redirect('clientes');
 		}else{
+            //Tipo comunidad
+            if(Model_Cliente::find($id)->get('tipo')==6){
+                $data['aaff'] = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$id)));
+            }
             $data['ficha'] = Model_Ficha::find('first',array('where'=>array('idcliente'=>$id)));
             $data['adaptacion'] = Model_Adaptacion::find('first',array('where'=>array('idcliente'=>$id)));
             $data['ficheros'] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$id)));
