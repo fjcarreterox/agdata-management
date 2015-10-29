@@ -11,6 +11,15 @@
     <?php echo Asset::css('main.css'); ?>
 </head>
 <body>
+<?php
+if(Session::get('user')==""){
+    return \Fuel\Core\Response::redirect('/');
+}
+else{
+    $vars=Session::get();
+}
+echo "SESS:";print_r($vars);
+?>
     <header></header>
 	<div class="container">
         <div class="col-md-12 cabecera">
@@ -42,7 +51,7 @@
 <?php echo $content; ?>
 		</div>
 		<footer>
-			<p class="pull-right">Sesión iniciada como USER (ROL).</p>
+			<p class="pull-right">Sesión iniciada como <b><?php echo Session::get('user');?></b> <i>(<?php echo Session::get('rol');?>)</i></p>
 			<!--<p>
 				<a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license.<br>
 				<small>Version: <?php /*echo e(Fuel::VERSION);*/ ?></small>

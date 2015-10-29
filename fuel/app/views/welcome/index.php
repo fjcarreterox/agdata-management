@@ -60,8 +60,8 @@
 	</header>
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Bienvenido a A.G.DATA</h1>
-			<p>Gestión de clientes y documentación.</p>
+			<h1>A.G.DATA</h1>
+            <p>Bienvenido al área de gestión de clientes y documentación, <b><?php echo Model_Usuario::find(Session::get('iduser'))->get('nombre');?></b>.</p>
 			<p><a class="btn btn-danger" href="welcome/logout">Salir del sistema <span class="glyphicon glyphicon-log-out"></span></a></p>
 		</div>
 		<div class="row">
@@ -93,7 +93,7 @@
                     <li><a href="factura">Facturas</a></li>
 					<li><a href="doclopd">Documentación LOPD</a></li>
 					<li><a href="doccomercial">Documentación comercial</a></li>
-                    <li><a href="correos">Mailing</a></li>
+                    <li><a href="mailing/init">Mailing</a></li>
                     <li><a href="procedimiento">Procedimientos</a></li>
                     <li><a href="report">Informes</a></li>
 				</ul>
@@ -109,6 +109,7 @@
                     <li><a href="agenda/visitas">Gestión de visitas (sin llamadas)</a></li>
                 </ul>
             </div>
+         <?php if(Session::get('idrol')==1):?>
             <div class="col-md-4">
                 <h2>Gestión de la aplicación</h2>
                 <ul>
@@ -125,11 +126,11 @@
                     <li><a href="tipo/situacion">Tipos de situaciones de clientes en adaptación</a></li>
                 </ul>
             </div>
+         <?php endif; ?>
         </div>
 		<hr/>
 		<footer>
-			<p class="pull-right">Page rendered in {exec_time}s using {mem_usage}mb of memory.</p>
-			<p>¿Has olvidado tu contraseña?</p>
+			<p class="pull-right">Sesión iniciada como <b><?php echo Session::get('user');?></b> <i>(<?php echo Session::get('rol');?>)</i></p>
 		</footer>
 	</div>
 </body>

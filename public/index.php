@@ -84,12 +84,12 @@ $routerequest = function($route = null, $e = false)
 	return $response;
 };
 
-// Generate the request, execute it and send the output.
-try
-{
-	// Boot the app...
-	require APPPATH.'bootstrap.php';
+require APPPATH.'bootstrap.php';
+Router::add('logout', 'welcome/logout');
+Router::add('welcome/index', '_root_');
 
+// Generate the request, execute it and send the output.
+try{
 	// ... and execute the main request
 	$response = $routerequest();
 }
