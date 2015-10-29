@@ -5,6 +5,7 @@
 	<thead>
 		<tr>
 			<th>Nombre del servicio ofrecido</th>
+			<th>Precio base</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
@@ -12,11 +13,12 @@
 <?php foreach ($servicios as $item): ?>
         <tr>
 			<td><?php echo $item->nombre; ?></td>
+			<td><?php echo $item->precio_base; ?> &euro;</td>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
-						<?php echo Html::anchor('servicios/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar nombre', array('class' => 'btn btn-success')); ?>
-                        <?php echo Html::anchor('servicios/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar servicio', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro?')")); ?>
+						<?php echo Html::anchor('servicios/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos del servicio', array('class' => 'btn btn-success')); ?>
+                        <?php /*echo Html::anchor('servicios/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar servicio', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro?')"));*/ ?>
                     </div>
 				</div>
 			</td>
