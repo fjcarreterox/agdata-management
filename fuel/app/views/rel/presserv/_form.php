@@ -13,7 +13,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::select('idserv', Input::post('idserv', isset($rel_presserv) ? $rel_presserv->idserv : ''),$servicios_ops, array('class' => 'col-md-4 form-control')); ?>
 		</div>
 		<div class="form-group">
-			<?php echo Form::label('Precio del servicio', 'precio', array('class'=>'control-label')); ?>
+			<?php echo Form::label('Precio del servicio (sólo la cifra, no incluir &euro;)', 'precio', array('class'=>'control-label')); ?>
 			<?php echo Form::input('precio', Input::post('precio', isset($rel_presserv) ? $rel_presserv->precio : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Precio a establecer para este cliente (no incluir símbolo &euro;)')); ?>
 		</div>
 		<div class="form-group">

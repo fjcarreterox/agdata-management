@@ -57,54 +57,43 @@ class Controller_Rel_Presserv extends Controller_Template
 
 	}
 
-	public function action_edit($id = null)
-	{
+	public function action_edit($id = null){
 		is_null($id) and Response::redirect('rel/presserv');
 
-		if ( ! $rel_presserv = Model_Rel_Presserv::find($id))
-		{
-			Session::set_flash('error', 'Could not find rel_presserv #'.$id);
-			Response::redirect('rel/presserv');
+		if ( ! $rel_presserv = Model_Rel_Presserv::find($id)){
+			Session::set_flash('error', 'No ha sido posible encontrar la relación de servicio.');
+			Response::redirect('presupuesto');
 		}
 
 		$val = Model_Rel_Presserv::validate('edit');
 
-		if ($val->run())
-		{
+		if ($val->run()){
 			$rel_presserv->idpres = Input::post('idpres');
 			$rel_presserv->idserv = Input::post('idserv');
 			$rel_presserv->precio = Input::post('precio');
 
-			if ($rel_presserv->save())
-			{
-				Session::set_flash('success', 'Updated rel_presserv #' . $id);
-
-				Response::redirect('rel/presserv');
+			if ($rel_presserv->save()){
+				Session::set_flash('success', 'Actualizado el precio del servicio.');
+				Response::redirect('presupuesto/view/'.$rel_presserv->idpres);
 			}
-
-			else
-			{
-				Session::set_flash('error', 'Could not update rel_presserv #' . $id);
+			else{
+				Session::set_flash('error', 'No se ha podido actualizar el servicio seleccionado.');
 			}
 		}
-
-		else
-		{
-			if (Input::method() == 'POST')
-			{
+		else{
+			if (Input::method() == 'POST'){
 				$rel_presserv->idpres = $val->validated('idpres');
 				$rel_presserv->idserv = $val->validated('idserv');
 				$rel_presserv->precio = $val->validated('precio');
-
 				Session::set_flash('error', $val->error());
 			}
-
 			$this->template->set_global('rel_presserv', $rel_presserv, false);
 		}
+        $data["servicios"] = Model_Servicio::find('all',array('order_by'=>'id'));
+        $data['idpres'] = $rel_presserv->idpres;
 
 		$this->template->title = "Rel_presservs";
-		$this->template->content = View::forge('rel/presserv/edit');
-
+		$this->template->content = View::forge('rel/presserv/edit',$data);
 	}
 
 	public function action_delete($id = null){

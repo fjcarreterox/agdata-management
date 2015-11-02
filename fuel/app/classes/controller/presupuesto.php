@@ -17,6 +17,7 @@ class Controller_Presupuesto extends Controller_Template
             Session::set_flash('error', 'No se ha podido localizar el presupuesto solicitado.');
             Response::redirect('presupuesto');
         }
+        $data['rel_servicios'] = Model_Rel_Presserv::find('all',array('where'=>array('idpres'=>$id)));
 
         $this->template->title = "Generación de nuevo presupuesto";
         $this->template->content = View::forge('presupuesto/doc', $data);
