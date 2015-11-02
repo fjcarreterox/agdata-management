@@ -25,7 +25,8 @@
         }
         .jumbotron h1{
             color: #0050b9 !important;
-            font-weight: bolder;
+            font-family: 'Armata', sans-serif;
+            font-size: 70px;
         }
 		a{
 			color:#0050b9;
@@ -60,7 +61,7 @@
 	</header>
 	<div class="container">
 		<div class="jumbotron">
-			<h1>A.G.DATA</h1>
+			<h1>AGDATA S.L.</h1>
             <p>Bienvenido al área de gestión de clientes y documentación, <b><?php echo Model_Usuario::find(Session::get('iduser'))->get('nombre');?></b>.</p>
 			<p><a class="btn btn-danger" href="welcome/logout">Salir del sistema <span class="glyphicon glyphicon-log-out"></span></a></p>
 		</div>

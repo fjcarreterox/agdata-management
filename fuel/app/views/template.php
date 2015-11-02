@@ -9,6 +9,7 @@
     <?php echo Asset::js('iban.js'); ?>
     <?php echo Asset::js('main.js'); ?>
     <?php echo Asset::css('main.css'); ?>
+    <link href='https://fonts.googleapis.com/css?family=Armata' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <?php

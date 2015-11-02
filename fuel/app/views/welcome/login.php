@@ -16,7 +16,7 @@
 </header>
 <div class="container">
     <div class="jumbotron">
-        <h1>AGDATA S.L.</h1>
+        <h1 class="login">AGDATA S.L.</h1>
         <p>Identifícate para acceder al Área de gestión.</p>
         <?php echo render('welcome/_form_login'); ?>
         <small>¿Has olvidado tu contraseña?</small>
