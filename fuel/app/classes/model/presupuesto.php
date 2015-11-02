@@ -8,8 +8,6 @@ class Model_Presupuesto extends Model
 		'num_p',
 		'idcliente',
 		'fecha_entrega',
-        'servicios',
-        'importe',
 		'idestado',
 		'iduser',
 		'observaciones',
@@ -34,13 +32,9 @@ class Model_Presupuesto extends Model
 		$val->add_field('num_p', 'Num Presupuesto', 'required|valid_string[numeric]');
 		$val->add_field('idcliente', 'Cliente', 'required|valid_string[numeric]');
 		//$val->add_field('fecha_entrega', 'Fecha Entrega', 'required');
-		$val->add_field('servicios', 'Servicios ofertados', 'required');
-		$val->add_field('importe', 'Importe', 'required');
 		$val->add_field('idestado', 'Estado', 'required|valid_string[numeric]');
-		$val->add_field('iduser', 'Usuario del sistema', 'required|valid_string[numeric]');
+		//$val->add_field('iduser', 'Usuario del sistema', 'required|valid_string[numeric]');
 		//$val->add_field('observaciones', 'Observaciones', 'required');
-
 		return $val;
 	}
-
 }

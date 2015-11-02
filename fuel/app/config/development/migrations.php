@@ -28,7 +28,10 @@ return array (
         19 => '019_create_tipo_plantillas',
         20 => '020_create_tipo_situacions',
         21 => '021_create_servicios_contratados',
-        22 => '023_create_rel_comaaffs',
+        22 => '022_create_rel_com_aaffs',
+        23 => '023_create_rel_comaaffs',
+        24 => '024_create_mailings',
+        25 => '025_create_rel_presservs',
       ),
     ),
     'module' => 

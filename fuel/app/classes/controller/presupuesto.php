@@ -18,8 +18,6 @@ class Controller_Presupuesto extends Controller_Template
             Response::redirect('presupuesto');
         }
 
-
-
         $this->template->title = "Generación de nuevo presupuesto";
         $this->template->content = View::forge('presupuesto/doc', $data);
     }
@@ -33,6 +31,7 @@ class Controller_Presupuesto extends Controller_Template
 			Session::set_flash('error', 'No se ha podido localizar el presupuesto solicitado.');
 			Response::redirect('presupuesto');
 		}
+        $data['rel_servicios'] = Model_Rel_Presserv::find('all',array('where'=>array('idpres'=>$id)));
 
 		$this->template->title = "Ver detalle del presupuesto";
 		$this->template->content = View::forge('presupuesto/view', $data);
@@ -50,16 +49,15 @@ class Controller_Presupuesto extends Controller_Template
 					'num_p' => Input::post('num_p'),
 					'idcliente' => Input::post('idcliente'),
 					'fecha_entrega' => Input::post('fecha_entrega'),
-					'servicios' => Input::post('servicios'),
-					'importe' => Input::post('importe'),
 					'idestado' => Input::post('idestado'),
+					'iduser' => Session::get('iduser'),
 					'observaciones' => Input::post('observaciones'),
 				));
 
 				if ($presupuesto and $presupuesto->save())
 				{
 					Session::set_flash('success', 'Presupuesto creado en el sistema.');
-					Response::redirect('presupuesto');
+					Response::redirect('rel/presserv/create/'.$presupuesto->id);
     			}else{
 					Session::set_flash('error', 'No se ha podido generar el presupuesto.');
 				}
@@ -94,14 +92,12 @@ class Controller_Presupuesto extends Controller_Template
 			$presupuesto->num_p = Input::post('num_p');
 			$presupuesto->idcliente = Input::post('idcliente');
 			$presupuesto->fecha_entrega = Input::post('fecha_entrega');
-			$presupuesto->servicios = Input::post('servicios');
-			$presupuesto->importe = Input::post('importe');
 			$presupuesto->idestado = Input::post('idestado');
 			$presupuesto->observaciones = Input::post('observaciones');
 
 			if ($presupuesto->save()){
 				Session::set_flash('success', 'Presupuesto Núm. ' . $presupuesto->num_p .' actualizado.');
-				Response::redirect('presupuesto');
+				Response::redirect('presupuesto/view/'.$presupuesto->id);
 			}
 			else{
 				Session::set_flash('error', 'No se ha podido actualizar el presupuesto Núm: ' . $presupuesto->num_p);
@@ -113,8 +109,6 @@ class Controller_Presupuesto extends Controller_Template
 				$presupuesto->num_p = $val->validated('num_p');
 				$presupuesto->idcliente = $val->validated('idcliente');
 				$presupuesto->fecha_entrega = $val->validated('fecha_entrega');
-				$presupuesto->servicios = $val->validated('servicios');
-				$presupuesto->importe = $val->validated('importe');
 				$presupuesto->idestado = $val->validated('idestado');
 				$presupuesto->observaciones = $val->validated('observaciones');
 				Session::set_flash('error', $val->error());
@@ -130,19 +124,16 @@ class Controller_Presupuesto extends Controller_Template
 
 	}
 
-	public function action_delete($id = null)
-	{
+	public function action_delete($id = null)	{
 		is_null($id) and Response::redirect('presupuesto');
 
-		if ($presupuesto = Model_Presupuesto::find($id))
-		{
+		if ($presupuesto = Model_Presupuesto::find($id)){
 			$presupuesto->delete();
-			Session::set_flash('success', 'Presupuesto borrado satisfactoriamente.');
+			Session::set_flash('success', 'Presupuesto borrado satisfactoriamente del sistema.');
 		}
 		else{
 			Session::set_flash('error', 'No se ha podido borrar el presupuesto solicitado.');
 		}
 		Response::redirect('presupuesto');
 	}
-
 }
