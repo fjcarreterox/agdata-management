@@ -1,6 +1,8 @@
 <h2>Listado de <span class='muted'>servicios</span> que ofrecemos actualmente</h2>
 <br/>
 <?php if ($servicios): ?>
+    <p>Dado que todo el sistema está basado en los servicios actualmente prestados, si en el futuro se necesita añadir o
+    quitar algún servicio, deberá ser notificado al administrador de la aplicación.</p>
 <table class="table table-striped">
 	<thead>
 		<tr>

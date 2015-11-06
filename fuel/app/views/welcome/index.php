@@ -71,7 +71,7 @@
                 <ul>
                     <li><a href="clientes/create">Nuevo contacto</a></li>
                     <li><a href="clientes/potenciales">Clientes potenciales</a></li>
-                    <li><a href="agenda/visitasllamadas">Gestión de visitas y llamadas</a></li>
+                    <li><a href="agenda/visitasllamadas">Gestión de llamadas</a></li>
                     <li><a href="clientes/presupuestados">Clientes presupuestados</a></li>
                     <li><a href="agenda">Agenda de visitas</a></li>
 
@@ -107,7 +107,7 @@
                     <li><a href="clientes">Listado completo de clientes</a></li>
                     <li><a href="clientes/aaff">Relación de AA.FF.</a></li>
                     <li><a href="personal">Personas de contacto / Empleados</a></li>
-                    <li><a href="agenda/visitas">Gestión de visitas (sin llamadas)</a></li>
+                    <li><a href="agenda/visitas">Histórico de contactos</a></li>
                 </ul>
             </div>
          <?php if(Session::get('idrol')==1):?>

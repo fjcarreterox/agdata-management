@@ -1,4 +1,4 @@
-<h2><span class='muted'>Agenda</span> de llamadas y visitas</h2>
+<h2>Gestión de <span class='muted'>llamadas y visitas</span></h2>
 <br/>
 <?php if ($agendas): ?>
     <p>El siguiente listado se encuentra ordenado por la <strong>fecha de la próxima llamada</strong> para poder gestionar cómodamente

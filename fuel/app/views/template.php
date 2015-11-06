@@ -19,7 +19,7 @@ if(Session::get('user')==""){
 else{
     $vars=Session::get();
 }
-echo "SESS:";print_r($vars);
+//echo "SESS:";print_r($vars);
 ?>
     <header></header>
 	<div class="container">
