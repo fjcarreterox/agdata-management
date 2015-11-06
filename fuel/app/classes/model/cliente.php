@@ -43,7 +43,7 @@ class Model_Cliente extends Model
 		//$val->add_field('cpostal', 'Cpostal', 'required|valid_string[numeric]');
 		//$val->add_field('loc', 'Loc', 'required|max_length[255]');
 		$val->add_field('prov', 'Provincia', 'required|max_length[255]');
-		$val->add_field('tel', 'Teléfono', 'required|valid_string[numeric]');
+		//$val->add_field('tel', 'Teléfono', 'required|valid_string[numeric]');
 		//$val->add_field('pweb', 'Pweb', 'required|max_length[255]');
 		//$val->add_field('email', 'Email', 'required|max_length[255]');
 		$val->add_field('actividad', 'Actividad', 'required|max_length[255]');

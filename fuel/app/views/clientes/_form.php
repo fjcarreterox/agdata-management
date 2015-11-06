@@ -26,12 +26,12 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             <?php echo Form::input('prov', Input::post('prov', isset($cliente) ? $cliente->prov : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Provincia')); ?>
         </div>
         <div class="form-group">
-            <?php echo Form::label('Teléfono', 'tel', array('class'=>'control-label')); ?><span class="red"> *</span>
-            <?php echo Form::input('tel', Input::post('tel', isset($cliente) ? $cliente->tel : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Teléfono de contacto')); ?>
-        </div>
-        <div class="form-group">
             <?php echo Form::label('Actividad', 'actividad', array('class'=>'control-label')); ?><span class="red"> *</span>
             <?php echo Form::input('actividad', Input::post('actividad', isset($cliente) ? $cliente->actividad : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Actividad profesional')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo Form::label('Teléfono', 'tel', array('class'=>'control-label')); ?>
+            <?php echo Form::input('tel', Input::post('tel', isset($cliente) ? $cliente->tel : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Teléfono de contacto')); ?>
         </div>
 		<div class="form-group">
 			<?php echo Form::label('CIF/NIF', 'cif_nif', array('class'=>'control-label')); ?>
