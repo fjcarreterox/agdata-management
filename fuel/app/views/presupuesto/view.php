@@ -7,7 +7,10 @@
     <strong>Fecha de creación:</strong>
     <?php echo date('\a\ \l\a\s H:i \d\e\l d-m-Y',$presupuesto->created_at); ?></p>
 <p>
-    <strong>Creado por:</strong>
+    <strong>Fecha de última modificación:</strong>
+    <?php echo date('\a\ \l\a\s H:i \d\e\l d-m-Y',$presupuesto->updated_at); ?></p>
+<p>
+    <strong>Último en editarlo:</strong>
     <?php echo Model_Usuario::find($presupuesto->iduser)->get('nombre'); ?></p>
 <br/>
 <p>
