@@ -6,6 +6,7 @@ class Model_Personal extends Model
 	protected static $_properties = array(
 		'id',
 		'idcliente',
+		'tratamiento',
 		'nombre',
 		'dni',
         'tlfno',

@@ -1,12 +1,33 @@
 <?php
 class Controller_Personal extends Controller_Template
 {
-	public function action_index()
+	/*public function action_index()
 	{
 		$data['personals'] = Model_Personal::find('all');
 		$this->template->title = "Personal del cliente";
 		$this->template->content = View::forge('personal/index', $data);
-	}
+	}*/
+
+    public function action_index($idcliente)
+    {
+        if(is_null($idcliente)){
+            $idcliente = $_POST['idcliente'];
+        }
+
+        $contactos = Model_Personal::find('all',array("where"=>array("idcliente"=>$idcliente)));
+
+        if (count($contactos)>0){
+            $data["idcliente"] = $idcliente;
+            $data["contactos"] = $contactos;
+            $data["message"] = "TODO OK.";
+        }
+        else{
+            $data["idcliente"] = $idcliente;
+            $data["message"] = "ERROR.";
+        }
+        $content_type = array('Content-type'=>'application/json');
+        return new \Response(json_encode($data),200,$content_type);
+    }
 
     public function action_aaff()
     {
@@ -35,6 +56,13 @@ class Controller_Personal extends Controller_Template
         }
     }
 
+    public function action_listall(){
+        $data['personal'] = Model_Personal::find('all',array('order_by'=>'id'));
+
+        $this->template->title = "Listado de personal de todos los clientes";
+        $this->template->content = View::forge('personal/list', $data);
+    }
+
 	public function action_view($id = null)
 	{
 		is_null($id) and Response::redirect('personal/list');
@@ -60,6 +88,7 @@ class Controller_Personal extends Controller_Template
 			{
 				$personal = Model_Personal::forge(array(
 					'idcliente' => Input::post('idcliente'),
+					'tratamiento' => Input::post('tratamiento'),
 					'nombre' => Input::post('nombre'),
 					'dni' => Input::post('dni'),
 					'tlfno' => Input::post('tlfno'),
@@ -68,13 +97,11 @@ class Controller_Personal extends Controller_Template
 					'relacion' => Input::post('relacion'),
 				));
 
-				if ($personal and $personal->save())
-				{
+				if ($personal and $personal->save()){
 					Session::set_flash('success', 'Añadido nuevo trabajador al sistema.');
-					Response::redirect('personal/list');
+					Response::redirect('personal/listall');
 				}
-				else
-				{
+				else{
 					Session::set_flash('error', 'No se pudo almacenar los datos del trabajador.');
 				}
 			}
@@ -113,6 +140,7 @@ class Controller_Personal extends Controller_Template
             {
                 $personal = Model_Personal::forge(array(
                     'idcliente' => Input::post('idcliente'),
+                    'tratamiento' => Input::post('tratamiento'),
                     'nombre' => Input::post('nombre'),
                     'dni' => Input::post('dni'),
                     'tlfno' => Input::post('tlfno'),
@@ -158,6 +186,7 @@ class Controller_Personal extends Controller_Template
 		if ($val->run())
 		{
 			$personal->idcliente = Input::post('idcliente');
+			$personal->tratamiento = Input::post('tratamiento');
 			$personal->nombre = Input::post('nombre');
 			$personal->dni = Input::post('dni');
 			$personal->tlfno = Input::post('tlfno');
@@ -167,7 +196,7 @@ class Controller_Personal extends Controller_Template
 
 			if ($personal->save()){
 				Session::set_flash('success', 'Datos del trabajador actualizados');
-				Response::redirect('personal/list');
+				Response::redirect('personal/listall');
 			}
 			else{
 				Session::set_flash('error', 'No se han podido actualizar los datos del trabajador.');
@@ -177,6 +206,7 @@ class Controller_Personal extends Controller_Template
 			if (Input::method() == 'POST')
 			{
 				$personal->idcliente = $val->validated('idcliente');
+				$personal->tratamiento = $val->validated('tratamiento');
 				$personal->nombre = $val->validated('nombre');
 				$personal->dni = $val->validated('dni');
 				$personal->tlfno = $val->validated('tlfno');
@@ -208,4 +238,23 @@ class Controller_Personal extends Controller_Template
 		Response::redirect('personal/list');
 	}
 
+    public function action_contactos($idcliente){
+        if(is_null($idcliente)){
+            $idcliente = $_POST['idcliente'];
+        }
+
+        $contactos = Model_Personal::find('all',array("where"=>array("idcliente"=>$idcliente)));
+
+        if (count($contactos)>0){
+            $data["idcliente"] = $idcliente;
+            $data["contactos"] = $contactos;
+            $data["message"] = "TODO OK.";
+        }
+        else{
+            $data["idcliente"] = $idcliente;
+            $data["message"] = "ERROR.";
+        }
+        $content_type = array('Content-type'=>'application/json');
+        return new \Response(json_encode($data),200,$content_type);
+    }
 }
