@@ -39,8 +39,7 @@ class Controller_Usuario extends Controller_Template
 					'role' => Input::post('role'),
 				));
 
-				if ($usuario and $usuario->save())
-				{
+				if ($usuario and $usuario->save()){
 					Session::set_flash('success', 'Añadido nuevo usuario al sistema.');
 					Response::redirect('usuario');
 				}else{
@@ -56,12 +55,42 @@ class Controller_Usuario extends Controller_Template
 		$this->template->content = View::forge('usuario/create');
 	}
 
+    public function action_new_pass($id = null){
+
+        is_null($id) and Response::redirect('usuario');
+        if ( ! $user = Model_Usuario::find($id)){
+            Session::set_flash('error', 'No se ha podido encontrar el usuario especificado.');
+            Response::redirect('usuario');
+        }
+        $val = Model_Usuario::validate_new_pass('edit');
+        if ($val->run()){
+            $user->password = md5(Input::post('pass'));
+            if ($user->save()){
+                Session::set_flash('success', 'La nueva contraseña ha sido actualizada correctamente');
+                Response::redirect('usuario');
+            }
+            else{
+                Session::set_flash('error', 'Ocurrió un error al actualizar la contraseña');
+            }
+        }
+        else{
+            if (Input::method() == 'POST'){
+                $user->password = $val->validated('pass');
+                Session::set_flash('error', $val->error());
+            }
+            $this->template->set_global('user', $user, false);
+        }
+        $data["username"] = $user->nombre;
+
+        $this->template->title = "Cambiar contraseña de usuario";
+        $this->template->content = View::forge('usuario/_form_pass',$data);
+    }
+
 	public function action_edit($id = null)
 	{
 		is_null($id) and Response::redirect('usuario');
 
-		if ( ! $usuario = Model_Usuario::find($id))
-		{
+		if ( ! $usuario = Model_Usuario::find($id)){
 			Session::set_flash('error', 'No se ha podido localizar el usuario especificado.');
 			Response::redirect('usuario');
 		}

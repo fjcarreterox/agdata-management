@@ -21,8 +21,7 @@
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
-						<?php echo Html::anchor('usuario/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle', array('class' => 'btn btn-default')); ?>
-                        <?php echo Html::anchor('usuario/view/'.$item->id, '<span class="glyphicon glyphicon-lock"></span> Cambiar contraseña', array('class' => 'btn btn-info')); ?>
+                        <?php echo Html::anchor('usuario/new_pass/'.$item->id, '<span class="glyphicon glyphicon-lock"></span> Cambiar contraseña', array('class' => 'btn btn-info right-separator')); ?>
                         <?php echo Html::anchor('usuario/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar', array('class' => 'btn btn-success')); ?>
                         <?php echo Html::anchor('usuario/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de esto?')")); ?>
                     </div>
