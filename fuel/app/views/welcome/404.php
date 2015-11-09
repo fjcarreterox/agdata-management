@@ -62,7 +62,7 @@
 <div class="container">
     <div class="jumbotron">
         <h1>AGDATA S.L.</h1>
-        <p><a class="btn btn-danger" href="../welcome">Volver al menú principal <span class="glyphicon glyphicon-home"></span></a></p>
+        <p><a class="btn btn-danger" href="http://localhost/agdata-gestion/public/">Volver al menú principal <span class="glyphicon glyphicon-home"></span></a></p>
     </div>
     <div class="row">
         <div class="col-md-8">

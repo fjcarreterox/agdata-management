@@ -106,7 +106,7 @@
                 <ul>
                     <li><a href="clientes">Listado completo de clientes</a></li>
                     <li><a href="clientes/aaff">Relación de AA.FF.</a></li>
-                    <li><a href="personal">Personas de contacto / Empleados</a></li>
+                    <li><a href="personal/listall">Personas de contacto / Empleados</a></li>
                     <li><a href="agenda/visitas">Histórico de contactos</a></li>
                 </ul>
             </div>
