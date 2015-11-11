@@ -1,19 +1,27 @@
 <?php
 class Controller_Rel_Comaaff extends Controller_Template
 {
+    /* Private helpers */
+    public function is_associated($idcom){
+        $res = false;
+        if(Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idcom)))){
+            $res = true;
+        }
+        return $res;
+    }
 
 	public function action_index(){
 		$data['rel_comaaffs'] = Model_Rel_Comaaff::find('all');
 		$this->template->title = "Rel_comaaffs";
 		$this->template->content = View::forge('rel/comaaff/index', $data);
-
 	}
 
-    public function action_comunidades($idaaff)
-    {
+    public function action_comunidades($idaaff){
         $data['comunidades'] = Model_Rel_Comaaff::find('all',array('where'=>array('idaaff'=>$idaaff)));
         $nombre = Model_Cliente::find($idaaff)->get('nombre');
         $data['nombre'] = $nombre;
+        $data['idaaff'] = $idaaff;
+
         $this->template->title = "Comunidades gestionadas por $nombre";
         $this->template->content = View::forge('clientes/comunidades', $data);
     }
@@ -68,6 +76,45 @@ class Controller_Rel_Comaaff extends Controller_Template
 
 	}
 
+    public function action_addcom($idaaff){
+
+        is_null($idaaff) and Response::redirect('welcome/index');
+
+        if (Input::method() == 'POST'){
+            $val = Model_Rel_Comaaff::validate('create');
+
+            if ($val->run()){
+                $rel_comaaff = Model_Rel_Comaaff::forge(array(
+                    'idcom' => Input::post('idcom'),
+                    'idaaff' => Input::post('idaaff'),
+                ));
+
+                if(!$this->is_associated($rel_comaaff->idcom)) {
+                    if ($rel_comaaff and $rel_comaaff->save()) {
+                        Session::set_flash('success', 'Añadida nueva relación entre comunidad y adminitrador de fincas.');
+                        Response::redirect('clientes/view/' . $idaaff);
+                    } else {
+                        Session::set_flash('error', 'No se ha podido crear la relación entre comunidad y administrador de fincas.');
+                    }
+                }
+                else{
+                    Session::set_flash('error', 'La comunidad elegida ya se encuentra asociada a otro administrador. Por favor, elige otra comunidad de propietarios.');
+                }
+            }
+            else{
+                Session::set_flash('error', $val->error());
+            }
+        }
+        $nombre = Model_Cliente::find($idaaff)->get('nombre');
+
+        $data['nombre'] = $nombre;
+        $data['idaaff'] = $idaaff;
+
+        $this->template->title = "Gestión de comunidades: asociar comunidad";
+        $this->template->content = View::forge('rel/comaaff/addcom',$data);
+
+    }
+
 	public function action_edit($id = null)
 	{
 		is_null($id) and Response::redirect('rel/comaaff');
@@ -111,17 +158,19 @@ class Controller_Rel_Comaaff extends Controller_Template
 
 	}
 
-	public function action_delete($id = null)
+	public function action_delete($idcom,$idaaff)
 	{
-		is_null($id) and Response::redirect('rel/comaaff');
+	    if(is_null($idcom) || is_null($idaaff)){
+            Session::set_flash('error', 'No se ha podido eliminar la asociación con el administrador de fincas.');
+        }
+        else{
+            $rels = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idcom,'idaaff'=>$idaaff)));
 
-		if ($rel_comaaff = Model_Rel_Comaaff::find($id)){
-			$rel_comaaff->delete();
-			Session::set_flash('success', 'Borrada la asociación con el administrador de fincas.');
+            foreach($rels as $rel){
+                $rel->delete();
+            }
+            Session::set_flash('success', 'Borrada la asociación con el administrador de fincas.');
 		}
-		else{
-			Session::set_flash('error', 'No se ha podido eliminar la asociación con el administrador de fincas.');
-		}
-		Response::redirect('clientes/view/'.$rel_comaaff->idcom);
+		Response::redirect('clientes/aaff/');
 	}
 }
