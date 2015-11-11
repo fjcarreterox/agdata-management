@@ -23,8 +23,7 @@
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<?php echo Html::anchor('clientes/view/'.$com->id, '<span class="glyphicon glyphicon-eye-open"></span> Ficha completa', array('class' => 'btn btn-default')); ?>
-                        <?php echo Html::anchor('clientes/edit/'.$com->id, '<span class="glyphicon glyphicon-pencil"></span> Editar', array('class' => 'btn btn-success')); ?>
-                        <?php echo Html::anchor('clientes/delete/'.$com->id, '<span class="glyphicon glyphicon-trash"></span> Borrar', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de esto?')")); ?>
+                        <?php echo Html::anchor('rel/comaaff/delete/'.$com->id.'/'.$idaaff, '<span class="glyphicon glyphicon-trash"></span> Desasociar de este administrador', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de esto?')")); ?>
                     </div>
 				</div>
 
@@ -37,3 +36,6 @@
 <?php else: ?>
     <p>No se han encontrado aún comunidades asociadas a este administrador de fincas.</p>
 <?php endif; ?>
+<br/>
+<p><?php echo Html::anchor('rel/comaaff/addcom/'.$idaaff, '<span class="glyphicon glyphicon-plus"></span> Asociar una nueva comunidad a este administrador', array('class' => 'btn btn-success')); ?>&nbsp;
+    <?php echo Html::anchor('clientes/aaff', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de AAFF', array('class' => 'btn btn-danger')); ?></p>

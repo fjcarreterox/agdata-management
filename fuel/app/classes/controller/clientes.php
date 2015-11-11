@@ -30,7 +30,7 @@ class Controller_Clientes extends Controller_Template
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>5)));
         $data['intro'] = "en proceso de adaptación a la LOPD";
         $this->template->title = "Clientes en proceso de adaptación a la LOPD";
-        $this->template->content = View::forge('clientes/index', $data);
+        $this->template->content = View::forge('clientes/adaptacion', $data);
     }
 
     public function action_mantenimiento(){
