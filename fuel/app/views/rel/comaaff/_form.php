@@ -15,6 +15,16 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 		</div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
-			<?php echo Form::button('submit', 'Guardar asociación', array('class' => 'btn btn-primary','type'=>'submit')); ?>		</div>
+			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar asociación', array('class' => 'btn btn-primary','type'=>'submit','onclick' => "return validateForm($('form'))")); ?>
+        </div>
 	</fieldset>
 <?php echo Form::close(); ?>
+<script>
+    function validateForm(form) {
+        var res = true;
+        if ($("#form_idaaff")[0].value == "0") {
+            alert("Por favor, selecciona a un administrador de fincas.");
+            return false;
+        }
+    }
+</script>

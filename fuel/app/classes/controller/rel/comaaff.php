@@ -55,7 +55,7 @@ class Controller_Rel_Comaaff extends Controller_Template
 				));
 
 				if ($rel_comaaff and $rel_comaaff->save()){
-					Session::set_flash('success', 'Añadida nueva relación entre comunidad y adminitrador de fincas.');
+					Session::set_flash('success', 'Añadida nueva relación entre comunidad y administrador de fincas.');
 					Response::redirect('clientes/view/'.$idcom);
 				}
 				else{
@@ -92,13 +92,13 @@ class Controller_Rel_Comaaff extends Controller_Template
                 if(!$this->is_associated($rel_comaaff->idcom)) {
                     if ($rel_comaaff and $rel_comaaff->save()) {
                         Session::set_flash('success', 'Añadida nueva relación entre comunidad y adminitrador de fincas.');
-                        Response::redirect('clientes/view/' . $idaaff);
+                        Response::redirect('rel/comaaff/comunidades/' . $idaaff);
                     } else {
                         Session::set_flash('error', 'No se ha podido crear la relación entre comunidad y administrador de fincas.');
                     }
                 }
                 else{
-                    Session::set_flash('error', 'La comunidad elegida ya se encuentra asociada a otro administrador. Por favor, elige otra comunidad de propietarios.');
+                    Session::set_flash('error', 'La comunidad elegida ya se encuentra asociada a éste o a otro administrador. Por favor, elige otra comunidad de propietarios.');
                 }
             }
             else{

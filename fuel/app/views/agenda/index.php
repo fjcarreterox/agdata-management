@@ -19,7 +19,7 @@
 	<tbody>
 <?php foreach ($agendas as $item): ?>
     <tr>
-			<td><?php echo Model_Cliente::find($item->idcliente)->get('nombre'); ?></td>
+			<td><?php echo Html::anchor('clientes/view/'.$item->idcliente,Model_Cliente::find($item->idcliente)->get('nombre'),array('target'=>'_blank','title'=>'Ir a la ficha del cliente (se abre en ventana nueva)')); ?></td>
 			<td><?php echo date_conv($item->last_call); ?></td>
 			<td><?php $dist = abs(strtotime($item->next_call) - strtotime(date('Y-m-d'))) / (60*60*24);
                 if($item->next_call < date('Y-m-d')){
