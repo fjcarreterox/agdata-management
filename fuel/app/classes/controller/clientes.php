@@ -1,7 +1,6 @@
 <?php
 class Controller_Clientes extends Controller_Template
 {
-
 	public function action_index(){
 		$data['clientes'] = Model_Cliente::find('all');
         $data['intro'] = "todos";
@@ -9,8 +8,7 @@ class Controller_Clientes extends Controller_Template
 		$this->template->content = View::forge('clientes/index', $data);
 	}
 
-    public function action_activos()
-    {
+    public function action_activos(){
         $clientes = Model_Cliente::find('all', array(
             'where' => array(
                 array('estado', 5),
@@ -40,10 +38,9 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/index', $data);
     }
 
-    public function action_presupuestados()
-    {
+    public function action_presupuestados(){
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>3)));
-        $this->template->title = "Clientes activos";
+        $this->template->title = "Clientes presupuestados";
         $this->template->content = View::forge('clientes/presupuestados', $data);
     }
 
@@ -75,6 +72,7 @@ class Controller_Clientes extends Controller_Template
             if(Model_Cliente::find($id)->get('tipo')==6){
                 $data['aaff'] = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$id)));
             }
+            $data['presupuestos'] = Model_Presupuesto::find('all',array('where'=>array('idcliente'=>$id)));
             $data['ficha'] = Model_Ficha::find('first',array('where'=>array('idcliente'=>$id)));
             $data['adaptacion'] = Model_Adaptacion::find('first',array('where'=>array('idcliente'=>$id)));
             $data['ficheros'] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$id)));

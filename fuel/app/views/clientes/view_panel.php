@@ -1,6 +1,9 @@
 <h2>Ficha completa del cliente: <span class='muted'><?php echo $cliente->nombre; ?></span> </h2>
 <br/>
+
 <div class="panel-group" id="accordion">
+
+    <!-- FIRST PANEL -->
     <div class="panel panel-default" id="panel1">
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
@@ -89,16 +92,19 @@
             </div>
         </div>
     </div>
+
+    <!-- SECOND PANEL -->
     <div class="panel panel-default" id="panel2">
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo" class="collapsed">
-                    Datos para presupuestación
+                    Datos adicionales para presupuestación
                 </a></span>
             </h3>
         </div>
         <div id="collapseTwo" class="panel-collapse collapse">
             <div class="panel-body">
+                <h4>Datos para presupuestación</h4>
                     <?php if(empty($ficha)):?>
                         <p>Se ha detectado que este cliente aún no tiene creada su ficha completa con los
                             datos específicos requeridos para gestionar adecuadamente sus presupuestos y contratos.</p>
@@ -133,8 +139,8 @@
                                 <td><?php if($ficha->iban!=''){echo $ficha->iban;}else{echo '<span class="red">-- FALTA CÓDIGO IBAN --</span>';} ?></td>
                             </tr>
                             <tr>
-                                <td><strong>Fecha envío correo de bienvenida</strong></td>
-                                <td><?php echo date_conv($ficha->fecha_bienvenida); ?></td>
+                                <td><strong>Fecha de entrega de documentación</strong></td>
+                                <td><?php echo date_conv($ficha->fecha_entrega); ?></td>
                             </tr>
                             <tr>
                                 <td><strong>Fecha de auditoría</strong></td>
@@ -146,9 +152,24 @@
                         <?php echo Html::anchor('ficha/edit/'.$cliente->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos específicos',array('class'=>'btn btn-success')); ?> &nbsp;
                         <?php echo Html::anchor('clientes', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de clientes',array('class'=>'btn btn-danger')); ?>
                     <?php endif; ?>
+                <br/><br/>
+                <h4>Presupuesto asociado</h4>
+                <?php if(empty($presupuestos)):?>
+                    <p>Aún no existe un presupuesto en el sistema asociado a este cliente. Puedes crearlo desde aquí pulsando en el siguiente botón:</p>
+                    <p><?php echo Html::anchor('presupuesto/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Crear nuevo presupuesto', array('class' => 'btn btn-success')); ?></p>
+                <?php else: ?>
+                    <p>Se han encontrado los siguientes presupuestos:</p>
+                    <?php
+                        foreach($presupuestos as $p) {
+                            echo Html::anchor('presupuesto/view/' . $p->id, 'Presupuesto nº' . $p->num_p, array('target'=>'_blank','title'=>'Se abre en ventana nueva'));
+                        }
+                    ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
+
+    <!-- THIRD PANEL -->
     <div class="panel panel-default" id="panel3">
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
@@ -197,6 +218,8 @@
             </div>
         </div>
     </div>
+
+    <!-- FOURTH PANEL -->
     <div class="panel panel-default" id="panel4">
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
@@ -320,6 +343,8 @@
                </div>
         </div>
     </div>
+
+    <!-- FIFTH PANEL -->
     <div class="panel panel-default" id="panel5">
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">

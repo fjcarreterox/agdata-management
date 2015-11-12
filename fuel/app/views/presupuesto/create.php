@@ -7,5 +7,9 @@ $data['estados'] = $estados;
 $data['clientes'] = $clientes;
 $data['num_p'] = $num_presupuesto + 1;
 
+if(isset($idcliente)){
+    $data['idcliente'] = $idcliente;
+}
+
 echo render('presupuesto/_form',$data); ?>
 <p><?php echo Html::anchor('presupuesto', '<span class="glyphicon glyphicon-backward"></span> Volver al listado',array('class'=>'btn btn-danger')); ?></p>

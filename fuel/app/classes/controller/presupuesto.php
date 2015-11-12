@@ -38,10 +38,8 @@ class Controller_Presupuesto extends Controller_Template
 		$this->template->content = View::forge('presupuesto/view', $data);
 	}
 
-	public function action_create()
-	{
-		if (Input::method() == 'POST')
-		{
+	public function action_create($idcliente = null){
+		if (Input::method() == 'POST'){
 			$val = Model_Presupuesto::validate('create');
 
 			if ($val->run())
@@ -71,6 +69,9 @@ class Controller_Presupuesto extends Controller_Template
         $data["servicios"] = Model_Servicio::find('all',array('order_by'=>'id'));
         $data["estados"] = Model_Estados_Presupuesto::find('all',array('order_by'=>'id'));
         $data["clientes"] = Model_Cliente::find('all',array('order_by'=>'id'));
+        if($idcliente!=null){
+            $data["idcliente"] = $idcliente;
+        }
         $data["num_presupuesto"] = Model_Presupuesto::max('num_p');
 
 		$this->template->title = "Presupuestos";

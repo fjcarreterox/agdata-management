@@ -15,6 +15,9 @@ foreach($servicios as $s){
     $servicios_ops[$s->id] = $s->nombre;
 }
 
+$idc='';
+if(isset($idcliente)){$idc=$idcliente;}
+
 echo Form::open(array("class"=>"form-horizontal")); ?>
 	<fieldset>
 		<div class="form-group">
@@ -23,7 +26,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 		</div>
 		<div class="form-group">
 			<?php echo Form::label('Cliente', 'idcliente', array('class'=>'control-label')); ?>
-			<?php echo Form::select('idcliente', Input::post('idcliente', isset($presupuesto) ? $presupuesto->idcliente : ''),$clientes_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Cliente al que se le quiere realizar el presupuesto (debe existir previamente en el sistema)')); ?>
+			<?php echo Form::select('idcliente', Input::post('idcliente', isset($presupuesto) ? $presupuesto->idcliente : $idc),$clientes_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Cliente al que se le quiere realizar el presupuesto (debe existir previamente en el sistema)')); ?>
 		</div>
 		<div class="form-group">
 			<?php echo Form::label('Fecha de entrega al cliente', 'fecha_entrega', array('class'=>'control-label')); ?>
@@ -39,7 +42,16 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
         </div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
-			<?php echo Form::button('submit', 'Asociar servicios <span class="glyphicon glyphicon-arrow-right"></span>', array('class' => 'btn btn-primary')); ?>
+			<?php echo Form::button('submit', 'Asociar servicios <span class="glyphicon glyphicon-arrow-right"></span>', array('class' => 'btn btn-primary','onclick' => "return validateForm($('form'))")); ?>
         </div>
 	</fieldset>
 <?php echo Form::close(); ?>
+<script>
+    function validateForm(form) {
+        var res = true;
+        if ($("#form_idcliente")[0].value == "0") {
+            alert("Por favor, selecciona a un cliente para asociarle este presupuesto.");
+            return false;
+        }
+    }
+</script>
