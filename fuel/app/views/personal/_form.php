@@ -40,7 +40,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
         </div>
         <div class="form-group">
             <?php echo Form::label('E-mail ', 'email', array('class'=>'control-label')); ?>
-            <?php echo Form::input('email', Input::post('email', isset($personal) ? $personal->email : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Dirección de correo electrónico')); ?>
+            <?php echo Form::input('email', Input::post('email', isset($personal) ? $personal->email : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Dirección de correo electrónico',"type"=>"email")); ?>
         </div>
 		<div class="form-group">
 			<?php echo Form::label('Cargo / Función', 'cargofuncion', array('class'=>'control-label')); ?>
@@ -52,7 +52,42 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 		</div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
-			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar', array('class' => 'btn btn-primary','type'=>'submit')); ?>
+			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar', array('class' => 'btn btn-primary','type'=>'submit','onclick' => "return validateForm($('form'))")); ?>
         </div>
 	</fieldset>
+<script>
+    function validateForm(form){
+        var res = true;
+        if($("#form_idcliente")[0].value=="0"){
+            alert("Por favor, selecciona al cliente donde trabaja la persona que quieres dar de alta.");
+            return false;
+        }
+
+        if($("#form_relacion")[0].value=="0"){
+            alert("Por favor, selecciona un tipo de relación de esta persona con AGDATA.");
+            return false;
+        }
+
+        form.validate({ // initialize the Plugin
+            rules: {
+                dni: {
+                    nifES: true
+                },
+                email:{
+                    email: true
+                }
+            },
+            messages: {
+                dni: {
+                    nifES: "[Este DNI no es correcto, por favor, revísalo]"
+                },
+                email: {
+                    email: "[Esta dirección de correo no tiene un formato adecuado]"
+                }
+            }
+        });
+
+        return res;
+    }
+</script>
 <?php echo Form::close(); ?>

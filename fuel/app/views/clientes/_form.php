@@ -67,7 +67,27 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 		</div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
-			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar', array('class' => 'btn btn-primary','type'=>'submit')); ?>
+			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar', array('class' => 'btn btn-primary','type'=>'submit','onclick' => "return validateForm($('form'))")); ?>
         </div>
 	</fieldset>
 <?php echo Form::close(); ?>
+<script>
+    function validateForm(form){
+        var res = true;
+
+        form.validate({ // initialize the Plugin
+            rules: {
+                cif_nif: {
+                    cifES: true
+                }
+            },
+            messages: {
+                cif_nif: {
+                    cifES: "[Este CIF/NIF no es correcto, por favor, revísalo]"
+                }
+            }
+        });
+
+        return res;
+    }
+</script>

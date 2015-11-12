@@ -55,6 +55,11 @@ h3.datos_cliente a:hover{
     font-weight: bolder;
 }
 
+.error{
+    color:#c9302c;
+    font-size: 0.8em;
+}
+
 .orange{
     color:#d58512;
     font-weight: bolder;
