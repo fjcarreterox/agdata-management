@@ -5,7 +5,7 @@ foreach($servicios as $s){
     $servicios_ops[$s->get('id')] = $s->get('nombre');
 }
 
-$year_ops = array(2016=>"2016",2017=>"2017",2018=>"2018",2019=>"2019",2020=>"2020",2021=>"2021",2022=>"2022",2023=>"2023",2024=>"2024",2025=>"2025");
+$year_ops = array(2013=>"2013",2014=>"2014",2015=>"2015",2016=>"2016",2017=>"2017",2018=>"2018",2019=>"2019",2020=>"2020",2021=>"2021",2022=>"2022",2023=>"2023",2024=>"2024",2025=>"2025");
 $months = array("Enero"=>"Enero","Febrero"=>"Febrero","Marzo"=>"Marzo","Abril"=>"Abril","Mayo"=>"Mayo","Junio"=>"Junio","Julio"=>"Julio","Agosto"=>"Agosto","Septiembre"=>"Septiembre","Octubre"=>"Octubre","Noviembre"=>"Noviembre","Diciembre"=>"Diciembre");
 $periodo_ops = array(12=>'Mensual',4=>'Trimestral',2=>'Semestral',2=>'Anual',0=>'Bienal');
 $forma_ops = array("Transferencia bancaria"=>"Transferencia bancaria","Recibo domiciliado"=>"Recibo domiciliado","Cheque/Pagaré"=>"Cheque/Pagaré","Metálico/Caja"=>"Metálico/Caja");

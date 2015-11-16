@@ -28,7 +28,7 @@
 <?php echo Html::anchor('presupuesto/edit/'.$presupuesto->id, '<span class="glyphicon glyphicon-pencil"></span> Editar presupuesto',array('class'=>'btn btn-success')); ?>&nbsp;
 <?php
     if($presupuesto->idestado == 5) {
-        echo Html::anchor('contrato/create/' . $presupuesto->id, 'Crear contrato', array('class' => 'btn btn-info'))."&nbsp;&nbsp;";
+        echo Html::anchor('contrato/view/' . Model_Contrato::find('first',array('where'=>array('idpres'=>$presupuesto->id)))->get('id'), '<span class="glyphicon glyphicon-inbox"></span> Ver contrato', array('class' => 'btn btn-warning'))."&nbsp;&nbsp;";
     }?>
 <?php echo Html::anchor('presupuesto/doc/'.$presupuesto->id, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info')); ?>&nbsp;
 <?php echo Html::anchor('presupuesto', '<span class="glyphicon glyphicon-backward"></span> Volver al listado',array('class'=>'btn btn-danger')); ?>
