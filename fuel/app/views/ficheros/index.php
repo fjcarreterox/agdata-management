@@ -8,6 +8,7 @@
 			<th>Ubicación</th>
             <th>Finalidad</th>
 			<th>Soporte</th>
+			<th>Nivel de Seguridad</th>
 			<th>Inscrito en la AEPD</th>
 			<th>Fecha de inscripción</th>
 			<th>Cesión a terceros</th>
@@ -21,6 +22,14 @@
             <td><?php echo $item->ubicacion; ?></td>
             <td><?php echo Model_Tipo_Fichero::find($item->idtipo)->get('finalidad'); ?></td>
 			<td><?php echo $item->soporte; ?></td>
+			<td><?php
+                switch($item->nivel) {
+                    case 1: echo "Básico";break;
+                    case 2: echo "Medio";break;
+                    case 3: echo "Alto";break;
+                    default: echo "-- NO ESPECIFICADO --";
+                }
+                ?></td>
 			<td><?php if($item->inscrito){echo "SÍ";}else{echo "NO";}; ?></td>
 			<td><?php echo date_conv($item->fecha); ?></td>
 			<td><?php if($item->cesion){echo "SÍ";}else{echo "NO";}; ?></td>

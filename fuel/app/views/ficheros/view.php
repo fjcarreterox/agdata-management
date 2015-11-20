@@ -1,17 +1,38 @@
 <h2>Mostrando detalle del <span class='muted'>fichero de datos</span> seleccionado</h2>
 <br/>
 <p>
+    <strong>Cliente al que pertenece:</strong>
+    <?php echo Model_Cliente::find($fichero->idcliente)->get('nombre'); ?></p>
+<br/>
+<p>
 	<strong>Tipo de fichero:</strong>
 	<?php echo Model_Tipo_Fichero::find($fichero->idtipo)->get('tipo'); ?></p>
 <p>
 	<strong>Ubicación del fichero:</strong>
-	<?php echo $fichero->ubicacion; ?></p>
+	<?php
+        switch($fichero->ubicacion){
+            case "no": echo "No conectado";break;
+            case "sobremesa": echo "En un equipo de sobremesa";break;
+            case "laptop": "En un equipo portátil";break;
+            case "servidor": "En un servidor";break;
+        }
+    ?></p>
 <p>
     <strong>Finalidad del fichero:</strong>
     <?php echo Model_Tipo_Fichero::find($fichero->idtipo)->get('finalidad'); ?></p>
 <p>
 	<strong>Soporte en el que se almacena:</strong>
 	<?php echo $fichero->soporte; ?></p>
+<p>
+    <strong>Nivel de seguridad:</strong>
+    <?php
+        switch($fichero->nivel) {
+            case 1: echo "Básico";break;
+            case 2: echo "Medio";break;
+            case 3: echo "Alto";break;
+            default: echo "-- NO ESPECIFICADO --";
+        }
+    ?></p>
 <p>
 	<strong>Inscrito en la AEPD:</strong>
 	<?php if($fichero->inscrito){echo "SÍ";}else{echo "NO";}; ?></p>

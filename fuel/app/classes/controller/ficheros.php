@@ -32,6 +32,7 @@ class Controller_Ficheros extends Controller_Template
 					'idcliente' => Input::post('idcliente'),
 					'ubicacion' => Input::post('ubicacion'),
 					'soporte' => Input::post('soporte'),
+					'nivel' => Input::post('nivel'),
 					'inscrito' => Input::post('inscrito'),
 					'fecha' => Input::post('fecha'),
 					'cesion' => Input::post('cesion'),
@@ -75,13 +76,14 @@ class Controller_Ficheros extends Controller_Template
 			$fichero->idcliente = Input::post('idcliente');
 			$fichero->ubicacion = Input::post('ubicacion');
 			$fichero->soporte = Input::post('soporte');
+			$fichero->nivel = Input::post('nivel');
 			$fichero->inscrito = Input::post('inscrito');
 			$fichero->fecha = Input::post('fecha');
 			$fichero->cesion = Input::post('cesion');
 
 			if ($fichero->save()){
 				Session::set_flash('success', 'Fichero de datos actualizado.');
-				Response::redirect('clientes/view/'.$fichero->idcliente);
+				Response::redirect('ficheros/view/'.$fichero->id);
 			}
 			else{
 				Session::set_flash('error', 'No ha sido posible actualizar el fichero de datos.');
@@ -94,6 +96,7 @@ class Controller_Ficheros extends Controller_Template
 				$fichero->idcliente = $val->validated('idcliente');
 				$fichero->ubicacion = $val->validated('ubicacion');
 				$fichero->soporte = $val->validated('soporte');
+				$fichero->nivel = $val->validated('nivel');
 				$fichero->inscrito = $val->validated('inscrito');
 				$fichero->fecha = $val->validated('fecha');
 				$fichero->cesion = $val->validated('cesion');

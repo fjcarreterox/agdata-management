@@ -16,6 +16,8 @@
                     );
     $boolean_ops = array( "0"=>"NO","1"=>"SÍ");
 
+    $niveles_ops = array("NO ESPECIFICADO","Básico","Medio","Alto");
+
 echo Form::open(array("class"=>"form-horizontal")); ?>
 
 	<fieldset>
@@ -33,15 +35,19 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::select('soporte', Input::post('soporte', isset($fichero) ? $fichero->soporte : ''),$soporte_ops, array('class' => 'col-md-4 form-control')); ?>
 		</div>
         <div class="form-group">
+            <?php echo Form::label('Nivel de seguridad', 'nivel', array('class'=>'control-label')); ?>
+            <?php echo Form::select('nivel', Input::post('nivel', isset($fichero) ? $fichero->nivel : ''),$niveles_ops, array('class' => 'col-md-4 form-control')); ?>
+        </div>
+        <div class="form-group">
 			<?php echo Form::label('Inscrito en la AEPD', 'inscrito', array('class'=>'control-label')); ?>
 			<?php echo Form::select('inscrito', Input::post('inscrito', isset($fichero) ? $fichero->inscrito : ''),$boolean_ops, array('class' => 'col-md-4 form-control')); ?>
 		</div>
 		<div class="form-group">
 			<?php echo Form::label('Fecha de inscripción', 'fecha', array('class'=>'control-label')); ?>
-			<?php echo Form::input('fecha', Input::post('fecha', isset($fichero) ? $fichero->fecha : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Fecha')); ?>
+			<?php echo Form::input('fecha', Input::post('fecha', isset($fichero) ? $fichero->fecha : ''), array('class' => 'col-md-4 form-control', 'type'=>'date')); ?>
 		</div>
 		<div class="form-group">
-			<?php echo Form::label('Cesión del fichero a terceras entidades', 'cesion', array('class'=>'control-label')); ?>
+			<?php echo Form::label('Cesión del fichero a terceros', 'cesion', array('class'=>'control-label')); ?>
 			<?php echo Form::select('cesion', Input::post('cesion', isset($fichero) ? $fichero->cesion : ''),$boolean_ops, array('class' => 'col-md-4 form-control')); ?>
 		</div>
 		<div class="form-group">
