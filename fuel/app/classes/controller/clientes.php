@@ -85,6 +85,25 @@ class Controller_Clientes extends Controller_Template
 		$this->template->content = View::forge('clientes/view_panel', $data);
 	}
 
+    public function action_doc_cesion($idcliente = null)
+    {
+        is_null($idcliente) and Response::redirect('clientes');
+
+        if ( ! $data['cliente'] = Model_Cliente::find($idcliente))
+        {
+            Session::set_flash('error', 'No se han podido localizar los datos del cliente solicitado.');
+            Response::redirect('clientes');
+        }else{
+            //Tipo comunidad
+            if(Model_Cliente::find($idcliente)->get('tipo')==6){
+                $data['rel_aaff'] = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
+            }
+        }
+
+        $this->template->title = "Contrato de cesión de datos";
+        $this->template->content = View::forge('clientes/doc_cesion', $data);
+    }
+
 	public function action_create()
 	{
 		if (Input::method() == 'POST')
