@@ -58,9 +58,8 @@ class Controller_Personal extends Controller_Template
 
     public function action_listall(){
         $data['personal'] = Model_Personal::find('all',array('order_by'=>'id'));
-
         $this->template->title = "Listado de personal de todos los clientes";
-        $this->template->content = View::forge('personal/list', $data);
+        $this->template->content = View::forge('personal/listall', $data);
     }
 
 	public function action_view($id = null)

@@ -49,7 +49,7 @@
 <?php
 //only the important data
 $cliente_data = array(
-    "nombre" => $cliente->nombre,
+    "nombre" => urlencode($cliente->nombre),
     "cif_nif" => $cliente->cif_nif,
     "dir" => urlencode($cliente->direccion),
     "cp" => $cliente->cpostal,
