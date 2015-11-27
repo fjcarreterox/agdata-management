@@ -24,6 +24,32 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/index', $data);
     }
 
+    public function action_doclopd(){
+
+        if (Input::method() == 'POST'){
+            $data['idcliente'] = Input::post('idcliente');
+
+            $this->template->title = "Documentación LOPD";
+            $this->template->content = View::forge('clientes/doclopd', $data);
+        }
+        else{
+            $clientes = Model_Cliente::find('all', array(
+                'where' => array(
+                    array('estado', 5),
+                    'or' => array(
+                        array('estado', 6),
+                    ),
+                ),
+                'order_by' => array('nombre' => 'asc')
+            ));
+
+            $data['clientes'] = $clientes;
+
+            $this->template->title = "Documentación LOPD";
+            $this->template->content = View::forge('clientes/doclopd', $data);
+        }
+    }
+
     public function action_adaptacion(){
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>5)));
         $data['intro'] = "en proceso de adaptación a la LOPD";
