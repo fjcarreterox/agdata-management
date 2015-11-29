@@ -41,7 +41,6 @@ class Controller_Contrato extends Controller_Template
 					'idpres' => Input::post('idpres'),
 					'idpersonal' => Input::post('idpersonal'),
 					'fecha_firma' => Input::post('fecha_firma'),
-					'periodicidad' => Input::post('periodicidad'),
 				));
 
 				if ($contrato and $contrato->save()){
@@ -56,9 +55,10 @@ class Controller_Contrato extends Controller_Template
 				Session::set_flash('error', $val->error());
 			}
 		}
+        $data['clientes'] = Model_Cliente::find('all',array('order_by'=>'nombre'));
 
 		$this->template->title = "Crear nuevo contratos";
-		$this->template->content = View::forge('contrato/create');
+		$this->template->content = View::forge('contrato/create',$data);
 	}
 
 	public function action_edit($id = null)
@@ -78,7 +78,6 @@ class Controller_Contrato extends Controller_Template
 			$contrato->idpres = Input::post('idpres');
 			$contrato->idpersonal = Input::post('idpersonal');
 			$contrato->fecha_firma = Input::post('fecha_firma');
-			$contrato->periodicidad = Input::post('periodicidad');
 
 			if ($contrato->save()){
 				Session::set_flash('success', 'Contrato actualizado correctamente');
@@ -95,7 +94,6 @@ class Controller_Contrato extends Controller_Template
 				$contrato->idpres = $val->validated('idpres');
 				$contrato->idpersonal = $val->validated('idpersonal');
 				$contrato->fecha_firma = $val->validated('fecha_firma');
-				$contrato->periodicidad = $val->validated('periodicidad');
 				Session::set_flash('error', $val->error());
 			}
 			$this->template->set_global('contrato', $contrato, false);

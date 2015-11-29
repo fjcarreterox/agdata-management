@@ -2,7 +2,7 @@
 class Controller_Clientes extends Controller_Template
 {
 	public function action_index(){
-		$data['clientes'] = Model_Cliente::find('all');
+		$data['clientes'] = Model_Cliente::find('all',array('order_by'=>'nombre'));
         $data['intro'] = "todos";
 		$this->template->title = "Todos los clientes del sistema";
 		$this->template->content = View::forge('clientes/index', $data);

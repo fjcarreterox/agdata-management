@@ -15,7 +15,14 @@
 <?php foreach ($contratos as $item): ?>
         <tr>
 			<td><?php echo Model_Cliente::find($item->idcliente)->get('nombre'); ?></td>
-			<td><?php echo Html::anchor('presupuesto/view/'.$item->idpres,'Núm. '.Model_Presupuesto::find($item->idpres)->get('num_p'), array('target'=>'_blank','title'=>'Se abrirá en ventana nueva')); ?></td>
+			<td><?php
+                if($item->idpres != 0) {
+                    echo Html::anchor('presupuesto/view/' . $item->idpres, 'Núm. ' . Model_Presupuesto::find($item->idpres)->get('num_p'), array('target' => '_blank', 'title' => 'Se abrirá en ventana nueva'));
+                }
+                else{
+                    echo "<strong>NO APLICA</strong>";
+                }?></td>
+
 			<td><?php
                 if($item->idpersonal != null) {
                     echo Model_Personal::find($item->idpersonal)->get('nombre');

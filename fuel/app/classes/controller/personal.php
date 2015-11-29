@@ -256,4 +256,33 @@ class Controller_Personal extends Controller_Template
         $content_type = array('Content-type'=>'application/json');
         return new \Response(json_encode($data),200,$content_type);
     }
+
+    public function action_getRepLegal($idcliente = null)
+    {
+        if(is_null($idcliente)) $idcliente = $_POST['idcliente'];
+        $tipo_cliente = Model_Cliente::find($idcliente)->get('tipo');
+
+        //communities are diferent on this
+        if($tipo_cliente==6){
+            //Look for its aaff
+            $rel_aaff = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
+            $rep_legal = Model_Personal::find('first',array('where'=>array('idcliente'=>$rel_aaff->idaaff,'relacion'=>1)));
+        }
+        else{
+            $rep_legal = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>1)));
+        }
+
+        if ($rep_legal != null){
+            $data["id"] = $rep_legal->id;
+            $data["nombre"] = $rep_legal->nombre;
+            $data["cargo"] = $rep_legal->cargofuncion;
+            $data["message"] = "TODO OK.";
+        }
+        else{
+            $data["idcliente"] = $idcliente;
+            $data["message"] = "ERROR.";
+        }
+        $content_type = array('Content-type'=>'application/json');
+        return new \Response(json_encode($data),200,$content_type);
+    }
 }

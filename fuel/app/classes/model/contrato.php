@@ -9,7 +9,6 @@ class Model_Contrato extends Model
 		'idpres',
 		'idpersonal',
 		'fecha_firma',
-        'periodicidad',
 		'created_at',
 		'updated_at',
 	);
@@ -25,16 +24,12 @@ class Model_Contrato extends Model
 		),
 	);
 
-	public static function validate($factory)
-	{
+	public static function validate($factory){
 		$val = Validation::forge($factory);
 		$val->add_field('idcliente', 'Idcliente', 'required|valid_string[numeric]');
 		$val->add_field('idpres', 'Idpres', 'required|valid_string[numeric]');
 		$val->add_field('idpersonal', 'Idpersonal', 'required|valid_string[numeric]');
-		$val->add_field('fecha_firma', 'Fecha Firma', 'required');
-		$val->add_field('periodicidad', 'Periodo facturación', 'required');
-
+		//$val->add_field('fecha_firma', 'Fecha Firma', 'required');
 		return $val;
 	}
-
 }
