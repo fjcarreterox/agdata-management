@@ -30,7 +30,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 		</div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
-			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar cambios', array('class' => 'btn btn-primary','type'=>'submit')); ?>
+			<?php echo Form::button('submit', 'Añadir Servicios Contratados <span class="glyphicon glyphicon-arrow-right"></span>', array('class' => 'btn btn-primary','type'=>'submit','id'=>'end')); ?>
         </div>
 	</fieldset>
 <?php echo Form::close(); ?>
@@ -59,5 +59,13 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             alert("ERROR al intentar buscar al Representante Legal de este cliente. Por favor, revise si ya está " +
             "definido en el sistema.");
         });
+    });
+
+    $("button#end").click(function( event ) {
+        if($("#form_idcliente")[0].value=="0") {
+            alert("Por favor, selecciona el cliente que deseas incluir en el contrato.");
+            return false;
+        }
+        return true;
     });
 </script>

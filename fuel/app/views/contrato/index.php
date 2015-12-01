@@ -38,7 +38,7 @@
 						<?php echo Html::anchor('contrato/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Ver detalle', array('class' => 'btn btn-default')); ?>
                         <?php echo Html::anchor('contrato/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos', array('class' => 'btn btn-success')); ?>
                         <?php echo Html::anchor('contrato/doc/'.$item->id, '<span class="glyphicon glyphicon-file"></span> Vista previa', array('class' => 'btn btn-info')); ?>
-                        <?php /*echo Html::anchor('contrato/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar contrato', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de querer eliminar el contrato?')"));*/ ?>
+                        <?php echo Html::anchor('contrato/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar contrato', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de querer eliminar el contrato?')")); ?>
                     </div>
 				</div>
 			</td>

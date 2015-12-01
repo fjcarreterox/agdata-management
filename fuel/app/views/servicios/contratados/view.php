@@ -1,29 +1,29 @@
-<h2>Viewing <span class='muted'>#<?php echo $servicios_contratado->id; ?></span></h2>
-
+<h2>Mostrando detalle del <span class='muted'>servicio contratado</span> seleccionado</h2>
+<br/>
 <p>
-	<strong>Idcliente:</strong>
-	<?php echo $servicios_contratado->idcliente; ?></p>
+	<strong>Identificador del contrato asociado:</strong>
+	<?php echo Html::anchor('contrato/view/'.$servicios_contratado->idcontrato, 'Contrato nº'.$servicios_contratado->idcontrato );?></p>
 <p>
-	<strong>Idtipo servicio:</strong>
-	<?php echo $servicios_contratado->idtipo_servicio; ?></p>
+	<strong>Tipo de servicio:</strong>
+	<?php echo Model_Servicio::find($servicios_contratado->idtipo_servicio)->get('nombre'); ?></p>
 <p>
 	<strong>Importe:</strong>
-	<?php echo $servicios_contratado->importe; ?></p>
+	<?php echo $servicios_contratado->importe; ?> &euro;</p>
 <p>
-	<strong>Year:</strong>
+	<strong>Año de contratación:</strong>
 	<?php echo $servicios_contratado->year; ?></p>
 <p>
-	<strong>Mes factura:</strong>
+	<strong>Mes de comienzo de factura:</strong>
 	<?php echo $servicios_contratado->mes_factura; ?></p>
 <p>
-	<strong>Periodicidad:</strong>
+	<strong>Periodicidad de pago:</strong>
 	<?php echo $servicios_contratado->periodicidad; ?></p>
 <p>
-	<strong>Cuota:</strong>
-	<?php echo $servicios_contratado->cuota; ?></p>
+	<strong>Cuota a pagar:</strong>
+	<?php echo $servicios_contratado->cuota; ?> &euro;</p>
 <p>
 	<strong>Forma pago:</strong>
 	<?php echo $servicios_contratado->forma_pago; ?></p>
-
-<?php echo Html::anchor('servicios/contratados/edit/'.$servicios_contratado->id, 'Edit'); ?> |
-<?php echo Html::anchor('servicios/contratados', 'Back'); ?>
+<br/>
+<?php echo Html::anchor('servicios/contratados/edit/'.$servicios_contratado->id, '<span class="glyphicon glyphicon-pencil"></span> Editar servicio',array('class'=>'btn btn-success')); ?>&nbsp;&nbsp;
+<?php echo Html::anchor('contrato/view/'.$servicios_contratado->idcontrato, '<span class="glyphicon glyphicon-backward"></span> Volver al contrato',array('class'=>'btn btn-danger')); ?>

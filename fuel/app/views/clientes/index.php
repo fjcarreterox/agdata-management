@@ -66,7 +66,7 @@
                                     $ficheros_data[] = array(
                                         "idtipo" => $f->idtipo,
                                         "nombre" => Model_Tipo_Fichero::find($f->idtipo)->get('tipo'),
-                                        "nivel" => $niveles[$f->nivel],
+                                        "nivel" => urlencode($niveles[$f->nivel]),
                                         "soporte" => $f->soporte
                                     );
                                 }

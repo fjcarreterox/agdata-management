@@ -21,9 +21,22 @@ class Controller_Servicios_Contratados extends Controller_Template
 		$this->template->content = View::forge('servicios/contratados/view', $data);
 	}
 
-	public function action_create($idcliente)
+    public function action_doc($idcontrato = null){
+        is_null($idcontrato) and Response::redirect('servicios/contratados');
+
+        if ( ! $data['servicios_contratados'] = Model_Servicios_Contratado::find('all',array('where'=>array('idcontrato'=>$idcontrato))))
+        {
+            Session::set_flash('error', 'No se han podido localizar los servicios contratados por el cliente.');
+            Response::redirect('servicios/contratados');
+        }
+
+        $this->template->title = "Servicios contratados: vista previa del documento";
+        $this->template->content = View::forge('servicios/contratados/doc', $data);
+    }
+
+	public function action_create($idcontrato)
 	{
-        is_null($idcliente) and Response::redirect('servicios/contratados');
+        is_null($idcontrato) and Response::redirect('servicios/contratados');
 
 		if (Input::method() == 'POST')
 		{
@@ -32,7 +45,7 @@ class Controller_Servicios_Contratados extends Controller_Template
 			if ($val->run())
 			{
 				$servicios_contratado = Model_Servicios_Contratado::forge(array(
-					'idcliente' => Input::post('idcliente'),
+					'idcontrato' => Input::post('idcontrato'),
 					'idtipo_servicio' => Input::post('idtipo_servicio'),
 					'importe' => Input::post('importe'),
 					'year' => Input::post('year'),
@@ -44,7 +57,7 @@ class Controller_Servicios_Contratados extends Controller_Template
 
 				if ($servicios_contratado and $servicios_contratado->save()){
 					Session::set_flash('success', 'Se ha añadido un nuevo servicio al cliente.');
-					Response::redirect('cliente/view/'.$idcliente);
+					Response::redirect('contrato/view/'.$idcontrato);
 				}
 				else{
 					Session::set_flash('error', 'No se ha podido crear el servicio contratado deseado.');
@@ -54,9 +67,9 @@ class Controller_Servicios_Contratados extends Controller_Template
 				Session::set_flash('error', $val->error());
 			}
 		}
-
-        $data['nombre'] = Model_Cliente::find($idcliente)->get('nombre');
-        $data['idcliente'] = $idcliente;
+        $contrato = Model_Contrato::find($idcontrato);
+        $data['nombre'] = Model_Cliente::find($contrato->idcliente)->get('nombre');
+        $data['idcontrato'] = $idcontrato;
 
 		$this->template->title = "Servicios_Contratados";
 		$this->template->content = View::forge('servicios/contratados/create',$data);
@@ -77,7 +90,7 @@ class Controller_Servicios_Contratados extends Controller_Template
 
 		if ($val->run())
 		{
-			$servicios_contratado->idcliente = Input::post('idcliente');
+			$servicios_contratado->idcontrato = Input::post('idcontrato');
 			$servicios_contratado->idtipo_servicio = Input::post('idtipo_servicio');
 			$servicios_contratado->importe = Input::post('importe');
 			$servicios_contratado->year = Input::post('year');
@@ -88,7 +101,7 @@ class Controller_Servicios_Contratados extends Controller_Template
 
 			if ($servicios_contratado->save()){
 				Session::set_flash('success', 'Servicio contratado actualizado.');
-				Response::redirect('clientes/view/'.$servicios_contratado->idcliente);
+				Response::redirect('contrato/view/'.$servicios_contratado->idcontrato);
 			}
 			else{
 				Session::set_flash('error', 'No se ha podido actualizar el servicio contratado seleccionado.');
@@ -99,7 +112,7 @@ class Controller_Servicios_Contratados extends Controller_Template
 		{
 			if (Input::method() == 'POST')
 			{
-				$servicios_contratado->idcliente = $val->validated('idcliente');
+				$servicios_contratado->idcontrato = $val->validated('idcontrato');
 				$servicios_contratado->idtipo_servicio = $val->validated('idtipo_servicio');
 				$servicios_contratado->importe = $val->validated('importe');
 				$servicios_contratado->year = $val->validated('year');
@@ -113,9 +126,9 @@ class Controller_Servicios_Contratados extends Controller_Template
 
 			$this->template->set_global('servicios_contratado', $servicios_contratado, false);
 		}
-
-        $data['nombre'] = Model_Cliente::find($servicios_contratado->idcliente)->get('nombre');
-        $data['idcliente'] = $servicios_contratado->idcliente;
+        $contrato = Model_Contrato::find($servicios_contratado->idcontrato);
+        $data['nombre'] = Model_Cliente::find($contrato->idcliente)->get('nombre');
+        $data['idcontrato'] = $servicios_contratado->idcontrato;
 
 		$this->template->title = "Servicios contratados";
 		$this->template->content = View::forge('servicios/contratados/edit',$data);

@@ -26,9 +26,9 @@ class Model_Contrato extends Model
 
 	public static function validate($factory){
 		$val = Validation::forge($factory);
-		$val->add_field('idcliente', 'Idcliente', 'required|valid_string[numeric]');
-		$val->add_field('idpres', 'Idpres', 'required|valid_string[numeric]');
-		$val->add_field('idpersonal', 'Idpersonal', 'required|valid_string[numeric]');
+		$val->add_field('idcliente', 'Identificador del cliente', 'required|valid_string[numeric]');
+		$val->add_field('idpres', 'Identificador del presupuesto', 'required|valid_string[numeric]');
+		$val->add_field('idpersonal', 'Identificador del Responsable Legal', 'required|valid_string[numeric]');
 		//$val->add_field('fecha_firma', 'Fecha Firma', 'required');
 		return $val;
 	}

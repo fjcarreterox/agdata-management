@@ -23,6 +23,7 @@ class Controller_Contrato extends Controller_Template
 			Session::set_flash('error', 'No se ha podido localizar el contrato deseado');
 			Response::redirect('contrato');
 		}
+        $data['servicios'] = Model_Servicios_Contratado::find('all',array('where'=>array('idcontrato'=>$id)));
 
 		$this->template->title = "Detalle de contrato";
 		$this->template->content = View::forge('contrato/view', $data);
@@ -45,7 +46,7 @@ class Controller_Contrato extends Controller_Template
 
 				if ($contrato and $contrato->save()){
 					Session::set_flash('success', 'Contrato añadido al sistema.');
-					Response::redirect('contrato');
+					Response::redirect('servicios/contratados/create/'.$contrato->id);
 				}
 				else{
 					Session::set_flash('error', 'No se ha podido crear un nuevo contrato en el sistema.');
