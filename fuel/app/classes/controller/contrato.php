@@ -148,13 +148,16 @@ class Controller_Contrato extends Controller_Template
 	{
 		is_null($id) and Response::redirect('contrato');
 
-		if ($contrato = Model_Contrato::find($id))
-		{
+		if ($contrato = Model_Contrato::find($id)){
+            $servicios_contratados = Model_Servicios_Contratado::find('all',array('where'=>array('idcontrato'=>$id)));
+            foreach($servicios_contratados as $sc){
+                $sc->delete();
+            }
 			$contrato->delete();
-			Session::set_flash('success', 'Contrato borrado del sistema.');
+			Session::set_flash('success', 'Contrato borrado del sistema (incluyendo sus servicios contratados incluidos).');
 		}
 		else{
-			Session::set_flash('error', 'No se ha podido eliminar el contrato');
+			Session::set_flash('error', 'No se ha podido eliminar el contrato deseado');
 		}
 
 		Response::redirect('contrato');
