@@ -8,10 +8,51 @@ class Controller_Contrato extends Controller_Template
 		$this->template->content = View::forge('contrato/index', $data);
 	}
 
-    public function action_doc()
-    {
-        $this->template->title = "Generar Contrato";
-        $this->template->content = View::forge('contrato/doc');
+    public function action_doc($idcontrato){
+        $contrato = Model_Contrato::find($idcontrato);
+
+        $c = Model_Cliente::find($contrato->idcliente);
+        $iban="NO DISPONIBLE";
+        $f = Model_Ficha::find('first',array('where'=>array('idcliente'=>$contrato->idcliente)));
+        if($f != null && $f->iban != ""){
+            $iban = $f->iban;
+        }
+        $cliente = array(
+            "nombre"=> $c->nombre,
+            "tipo"=> $c->tipo,
+            "cif"=> $c->cif_nif,
+            "iban"=> $iban
+        );
+
+        //only for communities
+        if($c->tipo == 6){
+            $rel_aaff = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$c->id)));
+            $aaff = Model_Cliente::find($rel_aaff->idaaff);
+
+            $aaff_data = array(
+                "nombre"=>$aaff->nombre,
+                "cif"=>$aaff->cif_nif,
+                "dir"=>$aaff->direccion,
+                "cp"=>$aaff->cpostal,
+                "loc"=>$aaff->loc,
+                "prov"=>$aaff->prov
+            );
+
+            $data['aaff'] = $aaff_data;
+        }
+
+        $rep =  Model_Personal::find('first',array('where'=>array('idcliente'=>$aaff->id,'relacion'=>1)));
+        $rep_legal = array(
+            "nombre" => $rep->nombre,
+            "nif" => $rep->dni
+        );
+
+        $data['servicios'] = Model_Servicios_Contratado::find('all',array('where'=>array('idcontrato'=>$idcontrato)));
+        $data['cliente'] = $cliente;
+        $data['rep_legal'] = $rep_legal;
+
+        $this->template->title = "Vista previa para generar Contrato";
+        $this->template->content = View::forge('contrato/doc',$data);
     }
 
 	public function action_view($id = null)
