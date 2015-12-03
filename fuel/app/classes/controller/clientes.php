@@ -20,6 +20,7 @@ class Controller_Clientes extends Controller_Template
 
         $data['intro'] = "en activo";
         $data['clientes'] = $clientes;
+
         $this->template->title = "Clientes activos";
         $this->template->content = View::forge('clientes/index', $data);
     }
@@ -102,6 +103,7 @@ class Controller_Clientes extends Controller_Template
             $data['ficha'] = Model_Ficha::find('first',array('where'=>array('idcliente'=>$id)));
             $data['adaptacion'] = Model_Adaptacion::find('first',array('where'=>array('idcliente'=>$id)));
             $data['ficheros'] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$id)));
+            $data['contrato'] = Model_Contrato::find('first',array('where'=>array('idcliente'=>$id)));
             //$data['servicios'] = Model_Servicios_Contratado::find('all',array('where'=>array('idcliente'=>$id)));
             $data['cesiones'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$id)));
             $data['contactos'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$id)));
@@ -128,6 +130,27 @@ class Controller_Clientes extends Controller_Template
 
         $this->template->title = "Contrato de cesión de datos";
         $this->template->content = View::forge('clientes/doc_cesion', $data);
+    }
+
+    public function action_doc_seguridad($idcliente = null){
+
+        is_null($idcliente) and Response::redirect('clientes');
+
+        if ( ! $data['cliente'] = Model_Cliente::find($idcliente))
+        {
+            Session::set_flash('error', 'No se han podido localizar los datos del cliente solicitado.');
+            Response::redirect('clientes');
+        }else{
+            //Tipo comunidad
+            if(Model_Cliente::find($idcliente)->get('tipo')==6){
+                $data['rel_aaff'] = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
+                $data['pres'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>6)));
+            }
+        }
+        $data["ficheros"] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$idcliente)));
+
+        $this->template->title = "Contrato de cesión de datos";
+        $this->template->content = View::forge('clientes/doc_seguridad', $data);
     }
 
 	public function action_create()
