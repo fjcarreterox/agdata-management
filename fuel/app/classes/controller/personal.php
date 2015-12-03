@@ -1,12 +1,6 @@
 <?php
 class Controller_Personal extends Controller_Template
 {
-	/*public function action_index()
-	{
-		$data['personals'] = Model_Personal::find('all');
-		$this->template->title = "Personal del cliente";
-		$this->template->content = View::forge('personal/index', $data);
-	}*/
 
     public function action_index($idcliente)
     {
@@ -43,7 +37,7 @@ class Controller_Personal extends Controller_Template
         if (!Model_Cliente::find($idcliente))
         {
             Session::set_flash('error', 'No se ha podido encontrar al cliente buscado.');
-            Response::redirect('personal/index');
+            Response::redirect('personal/listall');
         }
         else {
             $nombre_cliente = Model_Cliente::find($idcliente)->get('nombre');
@@ -52,7 +46,7 @@ class Controller_Personal extends Controller_Template
             $data['nombre_cliente'] = $nombre_cliente;
 
             $this->template->title = "Listado de personal del cliente $nombre_cliente";
-            $this->template->content = View::forge('personal/list', $data);
+            $this->template->content = View::forge('personal/listall', $data);
         }
     }
 
@@ -64,12 +58,12 @@ class Controller_Personal extends Controller_Template
 
 	public function action_view($id = null)
 	{
-		is_null($id) and Response::redirect('personal/list');
+		is_null($id) and Response::redirect('personal/listall');
 
 		if ( ! $data['personal'] = Model_Personal::find($id))
 		{
 			Session::set_flash('error', 'No se ha podido encontrar al trabajador especificado.');
-			Response::redirect('personal/list');
+			Response::redirect('personal/listall');
 		}
 
 		$this->template->title = "Personal";
@@ -151,7 +145,7 @@ class Controller_Personal extends Controller_Template
                 if ($personal and $personal->save())
                 {
                     Session::set_flash('success', 'Añadido nuevo trabajador al sistema.');
-                    Response::redirect('personal/list');
+                    Response::redirect('personal/listall');
                 }
                 else
                 {
@@ -172,12 +166,12 @@ class Controller_Personal extends Controller_Template
 
 	public function action_edit($id = null)
 	{
-		is_null($id) and Response::redirect('personal/list');
+		is_null($id) and Response::redirect('personal/listall');
 
 		if ( ! $personal = Model_Personal::find($id))
 		{
 			Session::set_flash('error', 'No se ha podido encontrar al trabajador especificado');
-			Response::redirect('personal/list');
+			Response::redirect('personal/listall');
 		}
 
 		$val = Model_Personal::validate('edit');
@@ -225,7 +219,7 @@ class Controller_Personal extends Controller_Template
 
 	public function action_delete($id = null)
 	{
-		is_null($id) and Response::redirect('personal/list');
+		is_null($id) and Response::redirect('personal/listall');
 
 		if ($personal = Model_Personal::find($id)){
 			$personal->delete();
@@ -234,7 +228,7 @@ class Controller_Personal extends Controller_Template
 		else{
 			Session::set_flash('error', 'No se ha podido borrar al trabajado especificado.');
 		}
-		Response::redirect('personal/list');
+		Response::redirect('personal/listall');
 	}
 
     public function action_contactos($idcliente){

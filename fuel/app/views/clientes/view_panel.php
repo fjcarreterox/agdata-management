@@ -180,41 +180,17 @@
         </div>
         <div id="collapseThree" class="panel-collapse collapse">
             <div class="panel-body">
-                <br/>
-                <?php if(empty($servicios)):?>
-                    <p>Aún no se ha asociado ningún servicio a contratar por este cliente. Accede desde el siguiente botón:</p>
+                <h4>Contrato vigente</h4>
+                <?php if(empty($contrato)):?>
+                    <p>Aún no se ha creado ningún contrato para este cliente. Puedes crearlo directamente el siguiente botón:</p>
+                    <p><?php echo Html::anchor('contrato/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Crear contrato', array('class' => 'btn btn-primary')); ?></p>
                 <?php else: ?>
-                    <h4>Servicios contratados por el cliente</h4>
-                    <table class="table table-striped table-bordered table-hover table-responsive">
-                        <thead>
-                            <tr class="text-center">
-                                <td><strong>Tipo servicio</strong></td>
-                                <td><strong>Importe sin IVA</strong></td>
-                                <td><strong>Año</strong></td>
-                                <td><strong>Mes de facturación</strong></td>
-                                <td><strong>Periodicidad</strong></td>
-                                <td><strong>Cuota</strong></td>
-                                <td><strong>Forma de pago</strong></td>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    <?php foreach($servicios as $s): ?>
-                        <tr class="text-center">
-                            <td><?php echo Model_Servicio::find($s->idtipo_servicio)->get('nombre'); ?></td>
-                            <td><?php echo $s->importe; ?> &euro;</td>
-                            <td><?php echo $s->year; ?></td>
-                            <td><?php echo $s->mes_factura; ?></td>
-                            <td><?php echo $s->periodicidad; ?></td>
-                            <td><?php echo $s->cuota; ?> &euro;</td>
-                            <td><?php echo $s->forma_pago; ?></td>
-                            <td><?php echo Html::anchor('servicios/contratados/edit/'.$s->id, '<span class="glyphicon glyphicon-pencil"></span> Editar',array('class'=>'btn btn-success')); ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                        </tbody>
-                        </table>
+                    <p>A continuación puedes ver el contrato al detalle, incluidos los <strong>servicios contratados</strong> que están
+                    contenidos en dicho contrato.</p>
+                    <p><?php echo Html::anchor('contrato/view/'.$contrato->id, '<span class="glyphicon glyphicon-eye-open"></span> Ver detalle', array('class' => 'btn btn-default')); ?>&nbsp;&nbsp;
+                    <?php echo Html::anchor('contrato/doc/'.$cliente->id, '<span class="glyphicon glyphicon-file"></span> Vista previa del contrato', array('class' => 'btn btn-info')); ?></p>
                 <?php endif; ?>
-                <p><?php echo Html::anchor('servicios/contratados/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir nueva contratación de servicio', array('class' => 'btn btn-success')); ?></p>
+                <br/>
             </div>
         </div>
     </div>
@@ -321,7 +297,7 @@
                             <td><strong>Empresa</strong></td>
                             <td><strong>Tipo</strong></td>
                             <td><strong>Fichero cesionado</strong></td>
-                            <td><strong>Fecha de firma del contrato</strong></td>
+                            <!--<td><strong>Fecha de firma del contrato</strong></td>-->
                             <td>&nbsp;</td>
                         </tr>
                         </thead>
@@ -330,10 +306,11 @@
                             <tr>
                                 <td><?php echo $c->nombre; ?></td>
                                 <td><?php echo Model_Tipo_Cesionaria::find($c->idtipo_empresa)->get('nombre'); ?></td>
-                                <td><?php echo Model_Tipo_Fichero::find($f->idtipo)->get('tipo'); ?></td>
-                                <td><?php echo date_conv($c->fecha_contrato); ?></td>
-                                <td><?php echo Html::anchor('cesiones/view/'.$f->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank')); ?>
-                                    <?php echo Html::anchor('cesiones/delete/'.$f->id, '<span class="glyphicon glyphicon-trash"></span> Borrar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarla del sistema?')")); ?></td>
+                                <td><?php echo Model_Tipo_Fichero::find($c->idfichero)->get('tipo'); ?></td>
+                                <!--<td><?php /*echo date_conv($c->fecha_contrato);*/ ?></td>-->
+                                <td><?php echo Html::anchor('cesiones/view/'.$c->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank')); ?>
+                                    <?php echo Html::anchor('cesiones/doc/'.$c->id, '<span class="glyphicon glyphicon-file"></span> Vista previa contrato',array('class'=>'btn btn-info','target'=>'_blank')); ?>
+                                    <?php echo Html::anchor('cesiones/delete/'.$c->id, '<span class="glyphicon glyphicon-trash"></span> Borrar cesión',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarla del sistema?')")); ?></td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>

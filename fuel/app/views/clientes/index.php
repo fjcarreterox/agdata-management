@@ -7,7 +7,7 @@
 			<th>Nombre/Razón social</th>
 			<th>Tipo</th>
 			<th>CIF/NIF</th>
-			<th>Teléfono</th>
+			<th>Dirección</th>
 			<th>Estado</th>
 			<th>&nbsp;</th>
 		</tr>

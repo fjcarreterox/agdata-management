@@ -94,17 +94,16 @@ class Controller_Clientes extends Controller_Template
 		{
 			Session::set_flash('error', 'No se ha podido localizar al cliente solicitado.');
 			Response::redirect('clientes');
-		}else{
+		}else {
             //Tipo comunidad
-            if(Model_Cliente::find($id)->get('tipo')==6){
-                $data['aaff'] = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$id)));
+            if (Model_Cliente::find($id)->get('tipo') == 6) {
+                $data['aaff'] = Model_Rel_Comaaff::find('all', array('where' => array('idcom' => $id)));
             }
-            $data['presupuestos'] = Model_Presupuesto::find('all',array('where'=>array('idcliente'=>$id)));
-            $data['ficha'] = Model_Ficha::find('first',array('where'=>array('idcliente'=>$id)));
-            $data['adaptacion'] = Model_Adaptacion::find('first',array('where'=>array('idcliente'=>$id)));
-            $data['ficheros'] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$id)));
-            $data['contrato'] = Model_Contrato::find('first',array('where'=>array('idcliente'=>$id)));
-            //$data['servicios'] = Model_Servicios_Contratado::find('all',array('where'=>array('idcliente'=>$id)));
+            $data['presupuestos'] = Model_Presupuesto::find('all', array('where' => array('idcliente' => $id)));
+            $data['ficha'] = Model_Ficha::find('first', array('where' => array('idcliente' => $id)));
+            $data['adaptacion'] = Model_Adaptacion::find('first', array('where' => array('idcliente' => $id)));
+            $data['ficheros'] = Model_Fichero::find('all', array('where' => array('idcliente' => $id)));
+            $data['contrato'] = Model_Contrato::find('first', array('where' => array('idcliente' => $id)));
             $data['cesiones'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$id)));
             $data['contactos'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$id)));
         }
