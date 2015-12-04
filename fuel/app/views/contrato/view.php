@@ -35,37 +35,42 @@
 <br/><br/>
 
 <h3>Servicios contratados incluidos</h3>
-<p>A continuación listamos los servicios contratados por el cliente que van a aparecer en el presente contrato:</p>
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Tipo servicio</th>
-        <th>Importe neto</th>
-        <th>Cuota</th>
-        <th>Año facturación</th>
-        <th>Mes facturación</th>
-        <th>&nbsp;</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($servicios as $item): ?>
+<?php if(count($servicios) == 0): ?>
+    <p>Por ahora no se han definido servicios para el presente contrato. Agrega los servicios que desees en el siguiente botón.</p>
+<?php else: ?>
+    <p>A continuación listamos los servicios contratados por el cliente que van a aparecer en el presente contrato:</p>
+    <table class="table table-striped">
+        <thead>
         <tr>
-            <td><?php echo Model_Servicio::find($item->idtipo_servicio)->get('nombre');?></td>
-            <td><?php echo $item->importe; ?> &euro;</td>
-            <td><?php echo $item->cuota; ?> &euro;</td>
-            <td><?php echo $item->year; ?></td>
-            <td><?php echo $item->mes_factura; ?></td>
-            <td>
-                <div class="btn-toolbar">
-                    <div class="btn-group">
-                        <?php echo Html::anchor('servicios/contratados/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Ver detalle', array('class' => 'btn btn-default')); ?>
-                        <?php echo Html::anchor('servicios/contratados/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar servicio', array('class' => 'btn btn-success')); ?>
-                        <?php echo Html::anchor('servicios/contratados/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar servicio', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de querer eliminar el contrato?')")); ?>
-                    </div>
-                </div>
-            </td>
+            <th>Tipo servicio</th>
+            <th>Importe neto</th>
+            <th>Cuota</th>
+            <th>Año facturación</th>
+            <th>Mes facturación</th>
+            <th>&nbsp;</th>
         </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
-<?php echo Html::anchor('servicios/contratados/create/'.$contrato->id, '<span class="glyphicon glyphicon-plus"></span> Añadir otro servicio',array('class'=>'btn btn-primary')); ?>&nbsp;&nbsp;
+        </thead>
+        <tbody>
+        <?php foreach ($servicios as $item): ?>
+            <tr>
+                <td><?php echo Model_Servicio::find($item->idtipo_servicio)->get('nombre');?></td>
+                <td><?php echo $item->importe; ?> &euro;</td>
+                <td><?php echo $item->cuota; ?> &euro;</td>
+                <td><?php echo $item->year; ?></td>
+                <td><?php echo $item->mes_factura; ?></td>
+                <td>
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <?php echo Html::anchor('servicios/contratados/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Ver detalle', array('class' => 'btn btn-default')); ?>
+                            <?php echo Html::anchor('servicios/contratados/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar servicio', array('class' => 'btn btn-success')); ?>
+                            <?php echo Html::anchor('servicios/contratados/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar servicio', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de querer eliminar el contrato?')")); ?>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
+<br/>
+<?php echo Html::anchor('servicios/contratados/create/'.$contrato->id, '<span class="glyphicon glyphicon-plus"></span> Añadir servicio',array('class'=>'btn btn-primary')); ?>&nbsp;&nbsp;

@@ -49,6 +49,6 @@ completado, por favor, complétalo antes y regresa a esta pantalla para generar 
         "pago"=> $s->forma_pago
     );
 endforeach;
-$params=base64_encode("cliente_data=".json_encode($cliente)."&rep_data=".urlencode(json_encode($rep_legal))."&aaff_data=".urlencode(json_encode($aaff))."&serv=".json_encode($servicios_data));
+$params=base64_encode("cliente_data=".json_encode($cliente)."&rep_data=".urlencode(json_encode($rep_legal))."&aaff_data=".urlencode(json_encode($aaff))."&serv=".urlencode(json_encode($servicios_data)));
 echo Html::anchor('http://localhost/docpdf/contrato_prestacion_servicios.php?q='.$params, '<span class="glyphicon glyphicon-file"></span> Generar contrato', array('class' => 'btn btn-info','target'=>'_blank'));
 ?>

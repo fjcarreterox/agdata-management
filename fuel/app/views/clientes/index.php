@@ -1,6 +1,7 @@
 <h2><span class="muted">Clientes</span> en el sistema: <u><?php echo $intro; ?></u></h2>
 <br/>
 <?php if ($clientes): ?>
+    <p>Nº total de clientes en el sistema: <strong><?php echo count($clientes); ?></strong></p>
 <table class="table table-striped">
 	<thead>
 		<tr>

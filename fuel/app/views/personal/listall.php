@@ -12,6 +12,7 @@ if(isset($nombre_cliente)){
 <p><?php echo Html::anchor('personal/create', '<span class="glyphicon glyphicon-plus"></span> '.$button_text, array('class' => 'btn btn-success')); ?></p>
 <br/>
 <?php if ($personal): ?>
+    <p>Nº total de personas en el sistema: <strong><?php echo count($personal); ?></strong></p>
 <table class="table table-striped">
 	<thead>
 		<tr>

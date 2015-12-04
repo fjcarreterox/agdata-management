@@ -140,6 +140,7 @@ class Controller_Servicios_Contratados extends Controller_Template
 		is_null($id) and Response::redirect('servicios/contratados');
 
 		if ($servicios_contratado = Model_Servicios_Contratado::find($id)){
+            $idcontrato = $servicios_contratado->idcontrato;
 			$servicios_contratado->delete();
 			Session::set_flash('success', 'Borrado el servicio contratado por el cliente.');
 		}
@@ -147,6 +148,6 @@ class Controller_Servicios_Contratados extends Controller_Template
 			Session::set_flash('error', 'No se ha podido eliminar el servicio contratado seleccionado.');
 		}
 
-		Response::redirect('servicios/contratados');
+		Response::redirect('contrato/view/'.$idcontrato);
 	}
 }
