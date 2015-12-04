@@ -78,12 +78,12 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
         form.validate({ // initialize the Plugin
             rules: {
                 cif_nif: {
-                    cifES: true
+                    checkAll: true
                 }
             },
             messages: {
                 cif_nif: {
-                    cifES: "[Este CIF/NIF no es correcto, por favor, revísalo]"
+                    checkAll: "[Este CIF / NIF no es correcto, por favor, revísalo]"
                 }
             }
         });
