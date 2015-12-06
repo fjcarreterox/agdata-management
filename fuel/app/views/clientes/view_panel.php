@@ -77,7 +77,6 @@
                     <h4>Administrador de fincas asociado</h4>
                     <?php if(empty($aaff)): ?>
                         <p>No se ha encontrado aún un administrador de fincas que gestione esta comunidad. Selecciona una empresa gestora que la represente.</p>
-                        <?php echo Html::anchor('rel/comaaff/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir adminitrador de fincas',array('class'=>'btn btn-success')); ?>
                     <?php else: ?>
                         <table class="table table-striped table-bordered table-hover table-responsive">
                         <?php
@@ -88,6 +87,7 @@
                         }?>
                         </table>
                     <?php endif; ?>
+                    <?php echo Html::anchor('rel/comaaff/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Asociar administrador de fincas',array('class'=>'btn btn-primary')); ?>
                 <?php endif; ?>
             </div>
         </div>
