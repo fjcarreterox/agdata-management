@@ -104,6 +104,11 @@ jQuery.validator.addMethod( "checkAll", function ( value, element ) {
         num = [],
         controlDigit;
 
+    //don't validate if empty
+    if(value == ""){
+        return true;
+    }
+
     value = value.toUpperCase();
 
     // Basic format test
