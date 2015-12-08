@@ -11,7 +11,7 @@ class Model_Ficha extends Model
 		'otras_sedes',
 		'num_trabajadores',
 		'num_equipos',
-		'fecha_bienvenida',
+		'fecha_entrega',
 		'fecha_auditoria',
 		'iban',
 		'created_at',

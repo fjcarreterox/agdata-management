@@ -1,5 +1,5 @@
 <?php
-$tratamiento_ops = array("Sr.","Sra.","D.","Dª");
+$tratamiento_ops = array("D.","Dª");
 
 if(isset($clientes)) {
     $clientes_opts = array();
