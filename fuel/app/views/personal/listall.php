@@ -1,5 +1,5 @@
 <?php
-$tratamiento_ops = array("Sr.","Sra.","D.","Dª");
+$tratamiento_ops = array("D.","Dª");
 $title="";
 $button_text="Añadir nuevo trabajador en el sistema";
 if(isset($nombre_cliente)){

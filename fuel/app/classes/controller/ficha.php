@@ -35,7 +35,7 @@ class Controller_Ficha extends Controller_Template
 					'otras_sedes' => Input::post('otras_sedes'),
 					'num_trabajadores' => Input::post('num_trabajadores'),
 					'num_equipos' => Input::post('num_equipos'),
-					'fecha_bienvenida' => Input::post('fecha_bienvenida'),
+					'fecha_entrega' => Input::post('fecha_entrega'),
 					'fecha_auditoria' => Input::post('fecha_auditoria'),
 					'iban' => Input::post('iban'),
 				));
@@ -77,7 +77,7 @@ class Controller_Ficha extends Controller_Template
 			$ficha->otras_sedes = Input::post('otras_sedes');
 			$ficha->num_trabajadores = Input::post('num_trabajadores');
 			$ficha->num_equipos = Input::post('num_equipos');
-			$ficha->fecha_bienvenida = Input::post('fecha_bienvenida');
+			$ficha->fecha_entrega = Input::post('fecha_entrega');
 			$ficha->fecha_auditoria = Input::post('fecha_auditoria');
 			$ficha->iban = Input::post('iban');
 
@@ -96,7 +96,7 @@ class Controller_Ficha extends Controller_Template
 				$ficha->otras_sedes = $val->validated('otras_sedes');
 				$ficha->num_trabajadores = $val->validated('num_trabajadores');
 				$ficha->num_equipos = $val->validated('num_equipos');
-				$ficha->fecha_bienvenida = $val->validated('fecha_bienvenida');
+				$ficha->fecha_entrega = $val->validated('fecha_entrega');
 				$ficha->fecha_auditoria = $val->validated('fecha_auditoria');
 				$ficha->iban = $val->validated('iban');
 				Session::set_flash('error', $val->error());

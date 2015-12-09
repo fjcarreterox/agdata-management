@@ -123,7 +123,7 @@ class Controller_Clientes extends Controller_Template
         }else{
             //Tipo comunidad
             if(Model_Cliente::find($idcliente)->get('tipo')==6){
-                $data['rel_aaff'] = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
+                $data['rel_aaffs'] = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idcliente)));
             }
         }
 
@@ -142,7 +142,7 @@ class Controller_Clientes extends Controller_Template
         }else{
             //Tipo comunidad
             if(Model_Cliente::find($idcliente)->get('tipo')==6){
-                $data['rel_aaff'] = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
+                $data['rels_aaff'] = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idcliente)));
                 $data['pres'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>6)));
             }
         }

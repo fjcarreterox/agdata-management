@@ -1,6 +1,11 @@
 jQuery.validator.addMethod( "nifES", function ( value, element ) {
     "use strict";
 
+    //don't validate if empty
+    if(value == ""){
+        return true;
+    }
+
     value = value.toUpperCase();
 
     // Basic format test
