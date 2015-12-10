@@ -17,28 +17,16 @@ $tipo = Model_Tipo_Cliente::find($cliente->tipo)->get('tipo');
 $cliente_data = array(
     "nombre" => $cliente->nombre,
     "tipo" => $tipo,
-    "dir" =>urlencode($cliente->direccion),
+    "dir" =>$cliente->direccion,
     "cp" => $cliente->cpostal,
     "loc" => $cliente->loc,
     "prov" => $cliente->prov
 );
 
 //Only for communities
-$rep_data = array();
+$reps_data = array();
 $pres_name = "NO DISPONIBLE";
 if($cliente->tipo==6){
-    $rel_aaff = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$cliente->id)));
-    if($rel_aaff != null) {
-        $aaff = Model_Cliente::find($rel_aaff->idaaff);
-        $rep = Model_Personal::find('first', array('where' => array('idcliente' => $aaff->id, 'relacion' => 1)));
-        if ($rep != null) {
-            $rep_data["nombre"] = $rep->get('nombre');
-            $rep_data["dir"] = $aaff->direccion;
-            $rep_data["cp"] = $aaff->cpostal;
-            $rep_data["loc"] = $aaff->loc;
-            $rep_data["prov"] = $aaff->prov;
-        }
-    }
 
     if($pres != null){
         $pres_name = $pres->nombre;
@@ -46,32 +34,50 @@ if($cliente->tipo==6){
     echo "<h3>Presidente</h3>";
     echo "<ul><li>Nombre: <strong>$pres_name</strong></li></ul>";
 
-    echo "<h3>Representante legal</h3>";
-    echo "<ul><li>Nombre: <strong>".$rep->get('nombre')."</strong></li></ul>";
+    echo "<h3>Representante(s) legal(es)</h3>";
 
-    echo "<h3>Empresa representada</h3>";
-    echo "<ul>
-            <li>Dirección: <strong>".$aaff->direccion."</strong></li>
-            <li>Código postal: <strong>".$aaff->cpostal."</strong></li>
-            <li>Localidad: <strong>".$aaff->loc."</strong></li>
-            <li>Provincia: <strong>".$aaff->prov."</strong></li>
-         </ul>";
+    foreach($rels_aaff as $rel_aaff) {
+        $aaff = Model_Cliente::find($rel_aaff->idaaff);
+        $rep = Model_Personal::find('first', array('where' => array('idcliente' => $aaff->id, 'relacion' => 1)));
+        if ($rep != null) {
+            $reps_data[] = array(
+                "nombre" => $rep->get('nombre'),
+                "dir" => $aaff->direccion,
+                "cp" => $aaff->cpostal,
+                "loc" => $aaff->loc,
+                "prov" => $aaff->prov
+        );
+
+            echo "<ul><li>Nombre: <strong>".$rep->get('nombre')."</strong></li>";
+            echo "<li><h4><i>En representación de la empresa:</i></h4></li>";
+            echo "
+                <li>Nombre o razón social: <strong>".$aaff->nombre."</strong></li>
+                <li>Dirección: <strong>".$aaff->direccion."</strong></li>
+                <li>Código postal: <strong>".$aaff->cpostal."</strong></li>
+                <li>Localidad: <strong>".$aaff->loc."</strong></li>
+                <li>Provincia: <strong>".$aaff->prov."</strong></li>
+            </ul><br/>";
+        }
+    }
 }
 ?>
 
 <h3>Datos de los ficheros declarados</h3>
 <?php
 $ficheros_data = array();
-$niveles = array("1"=>"Básico","2"=>"Medio","3"=>"Alto");
+$niveles = array("No especificado","Básico","Medio","Alto");
+$max_nivel = 0;
 
 if($ficheros != null){
     foreach($ficheros as $f){
         $ficheros_data[] = array(
             "idtipo" => $f->idtipo,
             "nombre" => Model_Tipo_Fichero::find($f->idtipo)->get('tipo'),
-            "nivel" => urlencode($niveles[$f->nivel]),
+            "nombre_nivel" => $niveles[$f->nivel],
+            "nivel" => $f->nivel,
             "soporte" => $f->soporte
         );
+        if($f->nivel > $max_nivel){$max_nivel=$f->nivel;}
 ?>
         <ul>
             <li>Tipo de fichero: <strong><?php echo Model_Tipo_Fichero::find($f->idtipo)->get('tipo');?></strong></li>
@@ -82,6 +88,6 @@ if($ficheros != null){
     }
 }
     echo "<br/>";
-    $params=base64_encode("nombre=".$cliente->nombre."&tipo=".$tipo."&cliente_data=".json_encode($cliente_data)."&rep_data=".json_encode($rep_data)."&pres_name=".$pres_name."&f_data=".json_encode($ficheros_data));
-    echo Html::anchor('http://localhost/docpdf/doc_seguridad_ccpp.php?q='.$params, '<span class="glyphicon glyphicon-file"></span> Doc. seguridad', array('class' => 'btn btn-info','target'=>'_blank'));
+    $params=base64_encode("nombre=".urlencode($cliente->nombre)."&tipo=".$tipo."&cliente_data=".urlencode(json_encode($cliente_data))."&reps_data=".json_encode($reps_data)."&pres_name=".urlencode($pres_name)."&f_data=".urlencode(json_encode($ficheros_data))."&max_nivel=".$max_nivel);
+    echo Html::anchor('http://localhost/docpdf/doc_seguridad_ccpp.php?q='.$params, '<span class="glyphicon glyphicon-file"></span> Generar PDF del Documento de seguridad', array('class' => 'btn btn-info','target'=>'_blank'));
 ?>

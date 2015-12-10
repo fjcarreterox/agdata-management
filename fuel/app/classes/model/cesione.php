@@ -46,11 +46,11 @@ class Model_Cesione extends Model
 		$val->add_field('rep_legal_name', 'Nombre del Representante Legal', 'required|max_length[255]');
 		$val->add_field('rep_legal_dni', 'DNI del Representante Legal', 'required|max_length[255]');
 		$val->add_field('rep_legal_cargo', 'Cargo del Representante Legal', 'required|max_length[255]');
-		$val->add_field('tel', 'Teléfono', 'required|valid_string[numeric]');
+		//$val->add_field('tel', 'Teléfono', 'required|valid_string[numeric]');
 		$val->add_field('domicilio', 'Domicilio', 'required|max_length[255]');
 		$val->add_field('localidad', 'Localidad', 'required|max_length[255]');
 		$val->add_field('cp', 'Código Postal', 'required|valid_string[numeric]');
-		$val->add_field('fecha_contrato', 'Fecha de firma del Contrato', 'required');
+		//$val->add_field('fecha_contrato', 'Fecha de firma del Contrato', 'required');
 
 		return $val;
 	}

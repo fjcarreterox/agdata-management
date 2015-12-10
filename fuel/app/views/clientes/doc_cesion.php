@@ -88,5 +88,5 @@ foreach($rel_aaffs as $rel_aaff): ?>
 <br/>
 <p><?php
     $params=base64_encode("cliente_data=".urlencode(json_encode($cliente_data))."&pres=".urlencode($presidente)."&reps_data=".urlencode(json_encode($reps_data)));
-    echo Html::anchor('http://localhost/docpdf/contrato_cesion_com.php?q='.$params, '<span class="glyphicon glyphicon-file"></span> Generar PDF del contrato', array('class' => 'btn btn-info','target'=>'_blank')); ?>
+    echo Html::anchor('http://localhost/docpdf/contrato_cesion_com.php?q='.$params, '<span class="glyphicon glyphicon-file"></span> Generar PDF del contrato de cesión', array('class' => 'btn btn-info','target'=>'_blank')); ?>
 </p>

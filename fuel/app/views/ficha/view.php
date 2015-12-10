@@ -19,8 +19,8 @@
 	<strong>Num equipos:</strong>
 	<?php echo $ficha->num_equipos; ?></p>
 <p>
-	<strong>Fecha bienvenida:</strong>
-	<?php echo $ficha->fecha_bienvenida; ?></p>
+	<strong>Fecha entrega de documentación:</strong>
+	<?php echo $ficha->fecha_entrega; ?></p>
 <p>
 	<strong>Fecha auditoria:</strong>
 	<?php echo $ficha->fecha_auditoria; ?></p>

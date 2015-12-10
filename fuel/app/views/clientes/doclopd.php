@@ -34,7 +34,7 @@ else{
     <p>Haciendo clic en cada uno de los siguientes botones, se mostrará la <strong>vista previa</strong> de los datos del sistema que se van a volcar
         en el documento PDF correspondiente que se desea generar.</p>
     <ul>
-        <li><?php echo Html::anchor('http://localhost/docpdf/portada.php?q='.base64_encode($nombre), '<span class="glyphicon glyphicon-file"></span> Portada de la documentación', array('class' => 'btn btn-info btn-sm','target'=>'_blank'));?></li><br/>
+        <li><?php echo Html::anchor('http://localhost/docpdf/portada.php?q='.base64_encode(urlencode($nombre)), '<span class="glyphicon glyphicon-file"></span> Portada de la documentación', array('class' => 'btn btn-info btn-sm','target'=>'_blank'));?></li><br/>
         <li><?php echo Html::anchor('clientes/doc_cesion/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Contrato de cesión de datos', array('class' => 'btn btn-info btn-sm'));?></li><br/>
         <li><?php echo Html::anchor('clientes/doc_seguridad/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Documento de seguridad', array('class' => 'btn btn-info btn-sm'));?></li>
     </ul>

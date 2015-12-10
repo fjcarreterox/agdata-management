@@ -10,7 +10,7 @@
 			<th>Otras sedes</th>
 			<th>Num trabajadores</th>
 			<th>Num equipos</th>
-			<th>Fecha bienvenida</th>
+			<th>Fecha entrega</th>
 			<th>Fecha auditoria</th>
 			<th>Iban</th>
 			<th>&nbsp;</th>
@@ -25,7 +25,7 @@
 			<td><?php echo $item->otras_sedes; ?></td>
 			<td><?php echo $item->num_trabajadores; ?></td>
 			<td><?php echo $item->num_equipos; ?></td>
-			<td><?php echo $item->fecha_bienvenida; ?></td>
+			<td><?php echo $item->fecha_entrega; ?></td>
 			<td><?php echo $item->fecha_auditoria; ?></td>
 			<td><?php echo $item->iban; ?></td>
 			<td>
