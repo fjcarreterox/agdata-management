@@ -97,7 +97,12 @@ class Controller_Contrato extends Controller_Template
 				Session::set_flash('error', $val->error());
 			}
 		}
-        $data['clientes'] = Model_Cliente::find('all',array('order_by'=>'nombre'));
+        if($idcliente != null){
+            $data['idcliente'] = $idcliente;
+        }
+        else {
+            $data['clientes'] = Model_Cliente::find('all', array('order_by' => 'nombre'));
+        }
 
 		$this->template->title = "Crear nuevo contratos";
 		$this->template->content = View::forge('contrato/create',$data);
@@ -140,8 +145,10 @@ class Controller_Contrato extends Controller_Template
 			}
 			$this->template->set_global('contrato', $contrato, false);
 		}
+        $data['clientes'] = Model_Cliente::find('all', array('order_by' => 'nombre'));
+
 		$this->template->title = "Editando detalle de contrato";
-		$this->template->content = View::forge('contrato/edit');
+		$this->template->content = View::forge('contrato/edit',$data);
 	}
 
 	public function action_delete($id = null)

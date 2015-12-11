@@ -1,5 +1,9 @@
 <h2>Listado de <span class='muted'>contratos</span> registrados en el sistema</h2>
-<br>
+<p>A continuación se muestran los datos básicos de los contratos existentes en el sistema. Para modificar algún servicio
+    contratado concreto asociado a un contrato, accede primero a la <strong>Vista Detalle</strong> del contrato y desde ahí podrás <i>añadir,
+        editar o eliminar</i> servicios contratados.</p>
+
+<br/>
 <?php if ($contratos): ?>
 <table class="table table-striped">
 	<thead>
@@ -24,7 +28,7 @@
                 }?></td>
 
 			<td><?php
-                if($item->idpersonal != null) {
+                if($item->idpersonal != 0) {
                     echo Model_Personal::find($item->idpersonal)->get('nombre');
                 }
                 else{
@@ -52,5 +56,5 @@
 
 <?php endif; ?>
 <p>
-	<?php echo Html::anchor('contrato/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo contrato', array('class' => 'btn btn-success')); ?>
+	<?php echo Html::anchor('contrato/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo contrato', array('class' => 'btn btn-primary')); ?>
 </p>

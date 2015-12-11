@@ -17,7 +17,7 @@
 <p>
 	<strong>Representante legal:</strong>
 	<?php
-        if($contrato->idpersonal != null) {
+        if($contrato->idpersonal != 0) {
             echo Model_Personal::find($contrato->idpersonal)->get('nombre');
         }
         else{
