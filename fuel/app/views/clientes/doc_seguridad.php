@@ -42,6 +42,7 @@ if($cliente->tipo==6){
         if ($rep != null) {
             $reps_data[] = array(
                 "nombre" => $rep->get('nombre'),
+                "nombre_aaff" => $aaff->nombre,
                 "dir" => $aaff->direccion,
                 "cp" => $aaff->cpostal,
                 "loc" => $aaff->loc,
@@ -88,6 +89,6 @@ if($ficheros != null){
     }
 }
     echo "<br/>";
-    $params=base64_encode("nombre=".urlencode($cliente->nombre)."&tipo=".$tipo."&cliente_data=".urlencode(json_encode($cliente_data))."&reps_data=".json_encode($reps_data)."&pres_name=".urlencode($pres_name)."&f_data=".urlencode(json_encode($ficheros_data))."&max_nivel=".$max_nivel);
+    $params=base64_encode("nombre=".urlencode($cliente->nombre)."&tipo=".$tipo."&cliente_data=".urlencode(json_encode($cliente_data))."&reps_data=".urlencode(json_encode($reps_data))."&pres_name=".urlencode($pres_name)."&f_data=".urlencode(json_encode($ficheros_data))."&max_nivel=".$max_nivel);
     echo Html::anchor('http://localhost/docpdf/doc_seguridad_ccpp.php?q='.$params, '<span class="glyphicon glyphicon-file"></span> Generar PDF del Documento de seguridad', array('class' => 'btn btn-info','target'=>'_blank'));
 ?>
