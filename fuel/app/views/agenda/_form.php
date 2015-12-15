@@ -1,8 +1,6 @@
 <?php
-
-$send_info = array();
-$send_info[0] = "NO";
-$send_info[1] = "SÍ";
+$tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada");
+$send_info = array("NO","SÍ");
 
 $clientes_sel = array();
 $clientes = Model_Cliente::find('all',array('order_by'=>'nombre'));
@@ -17,7 +15,19 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::label('Cliente', 'idcliente', array('class'=>'control-label')); ?>
 			<?php echo Form::select('idcliente', Input::post('idcliente', isset($agenda) ? $agenda->idcliente : ''),$clientes_sel, array('class' => 'col-md-4 form-control', 'placeholder'=>'Cliente al que llamar/visitar')); ?>
 		</div>
-		<div class="form-group">
+        <div class="form-group">
+            <?php echo Form::label('Tipo de evento', 'tipo', array('class'=>'control-label')); ?>
+            <?php echo Form::select('tipo', Input::post('tipo', isset($agenda) ? $agenda->tipo : ''),$tipo_ops, array('class' => 'col-md-4 form-control')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo Form::label('Fecha del evento', 'fecha', array('class'=>'control-label')); ?>
+            <?php echo Form::input('fecha', Input::post('fecha', isset($agenda) ? $agenda->fecha : ''), array('type'=>'date','class' => 'col-md-4 form-control')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo Form::label('Hora del evento', 'hora', array('class'=>'control-label')); ?>
+            <?php echo Form::input('hora', Input::post('hora', isset($agenda) ? $agenda->hora : ''), array('type'=>'time','class' => 'col-md-4 form-control')); ?>
+        </div>
+        <div class="form-group">
 			<?php echo Form::label('Envío de información comercial por e-mail', 'send_info', array('class'=>'control-label')); ?>
 			<?php echo Form::select('send_info', Input::post('send_info', isset($agenda) ? $agenda->send_info : ''),$send_info, array('class' => 'col-md-4 form-control', 'placeholder'=>'Send info')); ?>
 		</div>
@@ -26,31 +36,9 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
     		<?php echo Form::input('observaciones', Input::post('observaciones', isset($agenda) ? $agenda->observaciones : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Observaciones acerca del cliente')); ?>
 		</div>
         <br/>
-        <table class="table table-responsive table-striped table-bordered">
-            <thead>
-            <tr>
-                <td>&nbsp;</td>
-                <td><strong>Última</strong></td>
-                <td><strong>Próxima</strong></td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><strong>Llamada</strong></td>
-                <td><?php echo Form::input('last_call', Input::post('last_call', isset($agenda) ? $agenda->last_call : ''), array('type'=>'date','class' => 'col-md-4 form-control', 'placeholder'=>'Fecha de la última llamada realizada al cliente')); ?></td>
-                <td><?php echo Form::input('next_call', Input::post('next_call', isset($agenda) ? $agenda->next_call : ''), array('type'=>'date','class' => 'col-md-4 form-control', 'placeholder'=>'Próxima llamada en el futuro')); ?></td>
-            </tr>
-            <tr>
-                <td><strong>Visita</strong></td>
-                <td><?php echo Form::input('last_visit', Input::post('last_visit', isset($agenda) ? $agenda->last_visit : ''), array('type'=>'date','class' => 'col-md-4 form-control', 'placeholder'=>'Última visita realizada al cliente')); ?></td>
-                <td><?php echo Form::input('next_visit', Input::post('next_visit', isset($agenda) ? $agenda->next_visit : ''), array('type'=>'date','class' => 'col-md-4 form-control', 'placeholder'=>'Próxima visita programada')); ?></td>
-            </tr>
-            </tbody>
-        </table>
-
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
-			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-ok"></span> Crear / Actualizar registro', array('class' => 'btn btn-success','type'=>'submit')); ?>
+			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-ok"></span> Crear / Actualizar evento', array('class' => 'btn btn-success','type'=>'submit')); ?>
         </div>
 	</fieldset>
 <?php echo Form::close(); ?>

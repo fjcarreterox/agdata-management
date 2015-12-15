@@ -1,4 +1,4 @@
-<h2>Editando el registro de <span class='muted'>agenda</span> para el cliente seleccionado</h2>
+<h2>Editando el <span class='muted'>evento</span> seleccionado de la Agenda</h2>
 <br/>
 <?php echo render('agenda/_form'); ?>
 <p><?php echo Html::anchor('agenda/view/'.$agenda->id, '<span class="glyphicon glyphicon-eye-open"></span> Ver registro',array('class'=>'btn btn-default')); ?>

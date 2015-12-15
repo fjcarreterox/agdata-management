@@ -1,8 +1,17 @@
-<h2>Detalle de agenda para el <span class='muted'>cliente</span> seleccionado</h2>
+<h2>Detalle del <span class='muted'>evento</span> seleccionado de la Agenda</h2>
 <br/>
 <p>
 	<strong>Cliente:</strong>
 	<?php echo Model_Cliente::find($agenda->idcliente)->get('nombre'); ?></p>
+<p>
+    <strong>Tipo de evento:</strong>
+    <?php
+        $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada");
+        echo $tipo_ops[$agenda->tipo];
+    ?></p>
+<p>
+    <strong>Fecha y hora del evento:</strong>
+    <?php echo date_conv($agenda->fecha)." a las ".$agenda->hora; ?></p>
 <p>
     <strong>Información comercial enviada:</strong>
     <?php
@@ -14,27 +23,6 @@
 <p>
     <strong>Observaciones:</strong>
     <?php echo $agenda->observaciones; ?></p>
-
-<table class="table table-responsive table-striped table-bordered">
-    <thead>
-        <tr>
-            <td>&nbsp;</td>
-            <td><strong>Última</strong></td>
-            <td><strong>Próxima</strong></td>
-        </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><strong>Llamada</strong></td>
-        <td><?php echo date_conv($agenda->last_call); ?></td>
-        <td><?php echo date_conv($agenda->next_call); ?></td>
-    </tr>
-    <tr>
-        <td><strong>Visita</strong></td>
-        <td><?php echo date_conv($agenda->last_visit); ?></td>
-        <td><?php echo date_conv($agenda->next_visit); ?></td>
-    </tr>
-    </tbody>
-</table>
-<?php echo Html::anchor('agenda/edit/'.$agenda->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos',array('class'=>'btn btn-success')); ?>&nbsp;
-<?php echo Html::anchor('agenda', '<span class="glyphicon glyphicon-backward"></span> Volver al listado',array('class'=>'btn btn-danger')); ?>
+<br/>
+<?php echo Html::anchor('agenda/edit/'.$agenda->id, '<span class="glyphicon glyphicon-pencil"></span> Editar evento',array('class'=>'btn btn-success')); ?>&nbsp;
+<?php echo Html::anchor('agenda', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de visitas',array('class'=>'btn btn-danger')); ?>

@@ -6,10 +6,9 @@ class Model_Agenda extends Model
 	protected static $_properties = array(
 		'id',
 		'idcliente',
-		'last_call',
-		'next_call',
-		'last_visit',
-		'next_visit',
+		'tipo',
+		'fecha',
+        'hora',
 		'send_info',
 		'observaciones',
 		'created_at',
@@ -31,14 +30,8 @@ class Model_Agenda extends Model
 	{
 		$val = Validation::forge($factory);
 		$val->add_field('idcliente', 'Cliente', 'required|valid_string[numeric]');
-		$val->add_field('last_call', 'última llamada', 'required');
-		//$val->add_field('next_call', 'próxima llamada', 'required');
-		$val->add_field('last_visit', 'última visita', 'required');
-		//$val->add_field('next_visit', 'próxima visita', 'required');
-		$val->add_field('send_info', 'Información enviada', 'required');
+		//$val->add_field('send_info', 'Información enviada', 'required');
 		//$val->add_field('observaciones', 'observaciones', 'required|max_length[255]');
-
 		return $val;
 	}
-
 }
