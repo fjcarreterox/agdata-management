@@ -70,7 +70,7 @@
                         </tbody>
                     </table>
                 <?php endif; ?>
-                <?php echo Html::anchor('personal/associate/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir personal',array('class'=>'btn btn-success')); ?>
+                <?php echo Html::anchor('personal/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir personal',array('class'=>'btn btn-success')); ?>
                 <br/><br/>
                 <!--Tipo Comunidad -->
                 <?php if($cliente->tipo==6): ?>

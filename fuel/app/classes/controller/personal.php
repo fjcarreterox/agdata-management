@@ -71,8 +71,8 @@ class Controller_Personal extends Controller_Template
 
 	}
 
-	public function action_create()
-	{
+	public function action_create($idcliente = null){
+
 		if (Input::method() == 'POST')
 		{
 			$val = Model_Personal::validate('create');
@@ -103,66 +103,21 @@ class Controller_Personal extends Controller_Template
 				Session::set_flash('error', $val->error());
 			}
 		}
-        $data["clientes"] = Model_Cliente::find('all',array('order_by'=>'nombre'));
+        if($idcliente == null) {
+            $data["clientes"] = Model_Cliente::find('all', array('order_by' => 'nombre'));
+            $data["title"] = "de cliente ";
+        }
+        else{
+            $data["clientes"] = Model_Cliente::find('all', array('where'=>array('id'=>$idcliente),'order_by' => 'nombre'));
+            $data["title"] = "para el cliente ".Model_Cliente::find($idcliente)->get('nombre');
+        }
+
         $data["relaciones"] = Model_Relacion::find('all',array('order_by'=>'nombre'));
 
-		$this->template->title = "Alta de Personal";
+
+		$this->template->title = "Alta de nuevo Personal en el sistema";
 		$this->template->content = View::forge('personal/create',$data);
 	}
-
-    public function action_associate($idcliente){
-        if (Input::method() == 'POST'){
-         //TODO: create new relation
-        }
-        else {
-            $data['personal'] = Model_Personal::find('all');
-            $data['idcliente'] = $idcliente;
-            $data['nombre'] = Model_Cliente::find($idcliente)->get('nombre');
-        }
-        $this->template->title = "Asociar persona al cliente";
-        $this->template->content = View::forge('personal/associate', $data);
-    }
-
-    public function action_create_in_costumer($idcliente)
-    {
-        if (Input::method() == 'POST')
-        {
-            $val = Model_Personal::validate('create');
-
-            if ($val->run())
-            {
-                $personal = Model_Personal::forge(array(
-                    'idcliente' => Input::post('idcliente'),
-                    'tratamiento' => Input::post('tratamiento'),
-                    'nombre' => Input::post('nombre'),
-                    'dni' => Input::post('dni'),
-                    'tlfno' => Input::post('tlfno'),
-                    'email' => Input::post('email'),
-                    'cargofuncion' => Input::post('cargofuncion'),
-                    'relacion' => Input::post('relacion'),
-                ));
-
-                if ($personal and $personal->save())
-                {
-                    Session::set_flash('success', 'Añadido nuevo trabajador al sistema.');
-                    Response::redirect('personal/listall');
-                }
-                else
-                {
-                    Session::set_flash('error', 'No se pudo almacenar los datos del trabajador.');
-                }
-            }
-            else
-            {
-                Session::set_flash('error', $val->error());
-            }
-        }
-        $data["clientes"][0] = Model_Cliente::find($idcliente);
-        $data["relaciones"] = Model_Relacion::find('all',array('order_by'=>'nombre'));
-
-        $this->template->title = "Alta de Personal";
-        $this->template->content = View::forge('personal/create_in_costumer',$data);
-    }
 
 	public function action_edit($id = null)
 	{
