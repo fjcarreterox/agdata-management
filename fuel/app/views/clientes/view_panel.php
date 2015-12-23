@@ -188,7 +188,7 @@
                     <p>A continuación puedes ver el contrato al detalle, incluidos los <strong>servicios contratados</strong> que están
                     contenidos en dicho contrato.</p>
                     <p><?php echo Html::anchor('contrato/view/'.$contrato->id, '<span class="glyphicon glyphicon-eye-open"></span> Ver detalle', array('class' => 'btn btn-default')); ?>&nbsp;&nbsp;
-                    <?php echo Html::anchor('contrato/doc/'.$cliente->id, '<span class="glyphicon glyphicon-file"></span> Vista previa del contrato', array('class' => 'btn btn-info')); ?></p>
+                    <?php echo Html::anchor('contrato/doc/'.$contrato->id, '<span class="glyphicon glyphicon-file"></span> Vista previa del contrato', array('class' => 'btn btn-info')); ?></p>
                 <?php endif; ?>
                 <br/>
             </div>

@@ -34,9 +34,11 @@ echo Asset::css('fullcalendar.print.css', array('media' => 'print'), null, false
                 eventLimit: true, // allow "more" link when too many events
                 events: [
 <?php
+                if(isset($eventos)){
                     foreach($eventos as $id => $e){
                         echo "{id:$id, title:'Visita a ".html_entity_decode($e["cliente"])."', start:'".$e["fecha"]."T".$e["hora"]."', url:'../clientes/view/".$e["idcliente"]."', description:'".$e["obs"]."'},";
                     }
+                }
 ?>
                 ],
                 eventRender: function (event, element) {

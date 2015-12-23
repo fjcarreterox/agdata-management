@@ -71,10 +71,9 @@
                 <ul>
                     <li><a href="clientes/create">Nuevo contacto</a></li>
                     <li><a href="clientes/potenciales">Clientes potenciales</a></li>
-                    <li><a href="agenda/llamadas">Gestión de llamadas</a></li>
                     <li><a href="clientes/presupuestados">Clientes presupuestados</a></li>
+                    <li><a href="agenda/llamadas">Gestión de llamadas</a></li>
                     <li><a href="agenda">Agenda de visitas</a></li>
-
                 </ul>
             </div>
 			<div class="col-md-4">
