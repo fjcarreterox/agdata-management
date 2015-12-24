@@ -17,7 +17,10 @@
 	<?php echo $servicios_contratado->mes_factura; ?></p>
 <p>
 	<strong>Periodicidad de pago:</strong>
-	<?php echo $servicios_contratado->periodicidad; ?></p>
+	<?php
+    $periodo_ops = array(-1=>'-- N/D --',12=>'Mensual',4=>'Trimestral',2=>'Semestral',1=>'Anual',0=>'Pago único');
+    echo $periodo_ops[$servicios_contratado->periodicidad];
+    ?></p>
 <p>
 	<strong>Cuota a pagar:</strong>
 	<?php echo $servicios_contratado->cuota; ?> &euro;</p>
