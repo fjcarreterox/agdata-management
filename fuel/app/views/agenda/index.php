@@ -1,7 +1,7 @@
 <h2><?php echo $title; ?></h2>
 <br/>
 <?php if ($agendas):
-    $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada");
+    $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría");
     ?>
     <p>El siguiente listado se encuentra ordenado por la <strong>fecha y hora</strong> para poder gestionar
         cómodamente la agenda diaria y los eventos (llamadas, visitas) que están pendientes de producirse.</p>

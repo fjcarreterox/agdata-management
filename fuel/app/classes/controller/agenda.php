@@ -1,8 +1,11 @@
 <?php
 class Controller_Agenda extends Controller_Template
 {
-	public function action_index(){ //only visits
-		$data['agendas'] = Model_Agenda::find('all',array('where'=>array('tipo'=>1),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
+	public function action_index(){ //only visits and audits
+		//$data['agendas'] = Model_Agenda::find('all',array('where'=>array('tipo'=>1),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
+		$data['agendas'] = Model_Agenda::find('all',array('where'=>array(array('tipo' => '1'), // <-- note the array
+            'or' => array('tipo' => '3')),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
+
         $data['title'] = "Listado de visitas de todos los clientes";
         $data['calendar'] = 1;
         $data['void'] = Model_Agenda::find('all',array('where'=>array('tipo'=>0),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
@@ -12,11 +15,12 @@ class Controller_Agenda extends Controller_Template
 	}
 
     public function action_calendar(){
-        $eventos = Model_Agenda::find('all',array('where'=>array('tipo'=>1)));
+        $eventos = Model_Agenda::find('all',array('where'=>array(array('tipo'=>1),'or'=>array('tipo' => '3'))));
         foreach($eventos as $e){
             $data['eventos'][$e->id] = array(
                 "fecha" => $e->fecha,
                 "hora" => $e->hora,
+                "tipo" => $e->tipo,
                 "idcliente" => $e->idcliente,
                 "cliente" => Model_Cliente::find($e->idcliente)->get('nombre'),
                 "obs" => $e->observaciones

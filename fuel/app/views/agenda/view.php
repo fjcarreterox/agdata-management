@@ -6,7 +6,7 @@
 <p>
     <strong>Tipo de evento:</strong>
     <?php
-        $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada");
+        $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría");
         echo $tipo_ops[$agenda->tipo];
     ?></p>
 <p>

@@ -35,8 +35,11 @@ echo Asset::css('fullcalendar.print.css', array('media' => 'print'), null, false
                 events: [
 <?php
                 if(isset($eventos)){
+                    $title = "Visita a ";
+                    $fondo = "";
                     foreach($eventos as $id => $e){
-                        echo "{id:$id, title:'Visita a ".html_entity_decode($e["cliente"])."', start:'".$e["fecha"]."T".$e["hora"]."', url:'../clientes/view/".$e["idcliente"]."', description:'".$e["obs"]."'},";
+                        if($e['tipo']== 3){$title = "Auditoría a "; $fondo = ", backgroundColor: '#a00', borderColor: '#a00' ";}
+                        echo "{id:$id, title:'".$title.html_entity_decode($e["cliente"])."', data_type:'".$e["tipo"]."', start:'".$e["fecha"]."T".$e["hora"]."', url:'../clientes/view/".$e["idcliente"]."', description:'".$e["obs"]."'".$fondo."},";
                     }
                 }
 ?>
