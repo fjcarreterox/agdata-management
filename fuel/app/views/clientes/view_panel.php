@@ -36,7 +36,7 @@
                         <td><?php echo $cliente->actividad; ?></td>
                     </tr>
                     <tr>
-                        <td colspan="4"><?php if($cliente->observ!=''){echo $cliente->observ;}else{echo '<span>Sin observaciones aún.</span>';} ?></td>
+                        <td colspan="4"><i>Observaciones: </i><strong><?php if($cliente->observ!=''){echo $cliente->observ;}else{echo '<span>Sin observaciones aún.</span>';} ?></strong></td>
                     </tr>
                     </tbody>
                 </table>
