@@ -1,4 +1,4 @@
-<h2>Dar de alta en el sistema a un nuevo <span class='muted'>trabajador</span> <?php echo $title;?></h2>
+<h2>Dar de alta en el sistema nuevo <span class='muted'>personal</span> <?php echo $title;?></h2>
 <br/>
 <?php
 $data["clientes"] = $clientes;
