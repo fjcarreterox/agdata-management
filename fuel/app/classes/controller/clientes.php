@@ -222,7 +222,7 @@ class Controller_Clientes extends Controller_Template
 
 			if ($cliente->save()){
 				Session::set_flash('success', 'Datos de cliente actualizados.');
-				Response::redirect('clientes');
+				Response::redirect('clientes/view/'.$id);
 			}
 			else{
 				Session::set_flash('error', 'No se han podido actualizar los datos del cliente.');
