@@ -3,12 +3,7 @@
     foreach($tipos as $t){
         $tipos_array[$t->get('id')] = $t->get('tipo')." (".$t->get('finalidad').")";
     }
-    $ubicacion_ops = array(
-                        "no"=>"No conectado",
-                        "sobremesa"=>"En un equipo de sobremesa",
-                        "laptop"=>"En un equipo portátil",
-                        "servidor"=>"En un servidor"
-                        );
+
     $soporte_ops = array(
                         "digital"=>"En formato digital",
                         "papel"=>"En papel",
@@ -26,10 +21,6 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::select('idtipo', Input::post('idtipo', isset($fichero) ? $fichero->idtipo : ''),$tipos_array, array('class' => 'col-md-4 form-control')); ?>
 		</div>
         <?php echo Form::input('idcliente', Input::post('idcliente', isset($fichero) ? $fichero->idcliente : $idcliente), array('class' => 'col-md-4 form-control', 'type'=>'hidden')); ?>
-		<div class="form-group">
-			<?php echo Form::label('Ubicación del fichero', 'ubicacion', array('class'=>'control-label')); ?>
-			<?php echo Form::select('ubicacion', Input::post('ubicacion', isset($fichero) ? $fichero->ubicacion : ''),$ubicacion_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Ubicacion')); ?>
-		</div>
 		<div class="form-group">
 			<?php echo Form::label('Soporte en el que se almacena', 'soporte', array('class'=>'control-label')); ?>
 			<?php echo Form::select('soporte', Input::post('soporte', isset($fichero) ? $fichero->soporte : ''),$soporte_ops, array('class' => 'col-md-4 form-control')); ?>

@@ -5,7 +5,6 @@
 	<thead>
 		<tr>
 			<th>Tipo de fichero</th>
-			<th>Ubicación</th>
             <th>Finalidad</th>
 			<th>Soporte</th>
 			<th>Nivel de Seguridad</th>
@@ -19,7 +18,6 @@
 <?php foreach ($ficheros as $item): ?>
         <tr>
             <td><?php echo Model_Tipo_Fichero::find($item->idtipo)->get('tipo'); ?></td>
-            <td><?php echo $item->ubicacion; ?></td>
             <td><?php echo Model_Tipo_Fichero::find($item->idtipo)->get('finalidad'); ?></td>
 			<td><?php echo $item->soporte; ?></td>
 			<td><?php
@@ -49,4 +47,3 @@
 <?php else: ?>
     <p>No se han encontrado aún ficheros registrados en el sistema.</p>
 <?php endif; ?>
-    <p><?php echo Html::anchor('ficheros/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo fichero', array('class' => 'btn btn-success')); ?></p>

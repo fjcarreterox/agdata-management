@@ -8,16 +8,6 @@
 	<strong>Tipo de fichero:</strong>
 	<?php echo Model_Tipo_Fichero::find($fichero->idtipo)->get('tipo'); ?></p>
 <p>
-	<strong>Ubicación del fichero:</strong>
-	<?php
-        switch($fichero->ubicacion){
-            case "no": echo "No conectado";break;
-            case "sobremesa": echo "En un equipo de sobremesa";break;
-            case "laptop": "En un equipo portátil";break;
-            case "servidor": "En un servidor";break;
-        }
-    ?></p>
-<p>
     <strong>Finalidad del fichero:</strong>
     <?php echo Model_Tipo_Fichero::find($fichero->idtipo)->get('finalidad'); ?></p>
 <p>

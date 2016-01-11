@@ -30,7 +30,6 @@ class Controller_Ficheros extends Controller_Template
 				$fichero = Model_Fichero::forge(array(
 					'idtipo' => Input::post('idtipo'),
 					'idcliente' => Input::post('idcliente'),
-					'ubicacion' => Input::post('ubicacion'),
 					'soporte' => Input::post('soporte'),
 					'nivel' => Input::post('nivel'),
 					'inscrito' => Input::post('inscrito'),
@@ -74,7 +73,6 @@ class Controller_Ficheros extends Controller_Template
 		if ($val->run()){
 			$fichero->idtipo = Input::post('idtipo');
 			$fichero->idcliente = Input::post('idcliente');
-			$fichero->ubicacion = Input::post('ubicacion');
 			$fichero->soporte = Input::post('soporte');
 			$fichero->nivel = Input::post('nivel');
 			$fichero->inscrito = Input::post('inscrito');
@@ -94,7 +92,6 @@ class Controller_Ficheros extends Controller_Template
 			{
 				$fichero->idtipo = $val->validated('idtipo');
 				$fichero->idcliente = $val->validated('idcliente');
-				$fichero->ubicacion = $val->validated('ubicacion');
 				$fichero->soporte = $val->validated('soporte');
 				$fichero->nivel = $val->validated('nivel');
 				$fichero->inscrito = $val->validated('inscrito');
