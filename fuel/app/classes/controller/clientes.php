@@ -83,7 +83,7 @@ class Controller_Clientes extends Controller_Template
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array(array('estado','<',4))));
         $data['intro'] = "potenciales";
         $this->template->title = "Clientes potenciales";
-        $this->template->content = View::forge('clientes/index', $data);
+        $this->template->content = View::forge('clientes/potenciales', $data);
     }
 
 	public function action_view($id = null)

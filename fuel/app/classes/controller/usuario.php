@@ -1,21 +1,16 @@
 <?php
 class Controller_Usuario extends Controller_Template
 {
-
-	public function action_index()
-	{
+	public function action_index(){
 		$data['usuarios'] = Model_Usuario::find('all');
-		$this->template->title = "Usuarios";
+		$this->template->title = "Usuarios del sistema";
 		$this->template->content = View::forge('usuario/index', $data);
-
 	}
 
-	public function action_view($id = null)
-	{
+	public function action_view($id = null){
 		is_null($id) and Response::redirect('usuario');
 
-		if ( ! $data['usuario'] = Model_Usuario::find($id))
-		{
+		if ( ! $data['usuario'] = Model_Usuario::find($id)){
 			Session::set_flash('error', 'No se ha podido encontrar al usuario especificado.');
 			Response::redirect('usuario');
 		}
@@ -99,7 +94,6 @@ class Controller_Usuario extends Controller_Template
 
 		if ($val->run()){
 			$usuario->nombre = Input::post('nombre');
-			$usuario->password = Input::post('password');
 			$usuario->user = Input::post('user');
 			$usuario->email = Input::post('email');
 			$usuario->role = Input::post('role');
@@ -113,14 +107,11 @@ class Controller_Usuario extends Controller_Template
 			}
 		}
 		else{
-			if (Input::method() == 'POST')
-			{
+			if (Input::method() == 'POST'){
 				$usuario->nombre = $val->validated('nombre');
-				$usuario->password = $val->validated('password');
 				$usuario->user = $val->validated('user');
 				$usuario->email = $val->validated('email');
 				$usuario->role = $val->validated('role');
-
 				Session::set_flash('error', $val->error());
 			}
 			$this->template->set_global('usuario', $usuario, false);

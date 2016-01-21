@@ -16,10 +16,6 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::input('nombre', Input::post('nombre', isset($usuario) ? $usuario->nombre : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Nombre completo del usuario')); ?>
 		</div>
 		<div class="form-group">
-			<?php echo Form::label('Password', 'password', array('class'=>'control-label')); ?>
-			<?php echo Form::input('password', Input::post('password', isset($usuario) ? $usuario->password : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Password')); ?>
-		</div>
-		<div class="form-group">
 			<?php echo Form::label('Email', 'email', array('class'=>'control-label')); ?>
 			<?php echo Form::input('email', Input::post('email', isset($usuario) ? $usuario->email : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Dirección de E-mail (para notificaciones)')); ?>
 		</div>
