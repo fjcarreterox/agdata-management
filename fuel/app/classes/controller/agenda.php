@@ -8,6 +8,7 @@ class Controller_Agenda extends Controller_Template
 
         $data['title'] = "Listado de visitas de todos los clientes";
         $data['calendar'] = 1;
+        $data['intro'] = "Gestión y control de visitas, tanto para clientes como para posibles clientes.";
         $data['void'] = Model_Agenda::find('all',array('where'=>array('tipo'=>0),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
 
 		$this->template->title = "Agenda de visitas";
@@ -43,6 +44,7 @@ class Controller_Agenda extends Controller_Template
         }
         $data['agendas'] = $agenda;*/
         $data['title'] = "Listado de llamadas de todos los clientes";
+        $data['intro'] = "Creación y seguimiento diario de las llamadas comerciales realizadas a posibles clientes.";
         $data['calendar'] = 0;
         $data['void'] = Model_Agenda::find('all',array('where'=>array('tipo'=>0),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
 

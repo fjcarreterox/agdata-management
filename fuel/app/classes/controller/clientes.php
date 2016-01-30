@@ -1,12 +1,12 @@
 <?php
 class Controller_Clientes extends Controller_Template
 {
-	public function action_index(){
-		$data['clientes'] = Model_Cliente::find('all',array('order_by'=>'nombre'));
+    public function action_index(){
+        $data['clientes'] = Model_Cliente::find('all',array('order_by'=>'nombre'));
         $data['intro'] = "todos";
-		$this->template->title = "Todos los clientes del sistema";
-		$this->template->content = View::forge('clientes/index', $data);
-	}
+        $this->template->title = "Todos los clientes del sistema";
+        $this->template->content = View::forge('clientes/index', $data);
+    }
 
     public function action_activos(){
         $clientes = Model_Cliente::find('all', array(
@@ -80,9 +80,9 @@ class Controller_Clientes extends Controller_Template
 
     public function action_potenciales()
     {
-        $data['clientes'] = Model_Cliente::find('all',array('where'=>array(array('estado','<',4))));
-        $data['intro'] = "potenciales";
-        $this->template->title = "Clientes potenciales";
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array(array('estado','<',3))));
+        $data['intro'] = "posibles clientes";
+        $this->template->title = "Posibles Clientes";
         $this->template->content = View::forge('clientes/potenciales', $data);
     }
 

@@ -63,8 +63,8 @@ echo Asset::css('fullcalendar.print.css', array('media' => 'print'), null, false
         });
     </script>
 
-<h2>Calendario de <span class='muted'>visitas</span> registradas en el sistema</h2>
-<p>En el siguiente caledario no se pueden borrar los eventos que aparecen. Para ello deberás volver al listado de
+<h2>Calendario de <span class='muted'>visitas y auditorías</span> registradas en el sistema</h2>
+<p>En el siguiente calendario no se pueden borrar los eventos que aparecen. Para ello deberás volver al listado de
     <u>eventos</u> y eliminar o editar datos de los eventos que desees.</p>
 <br/>
 <div id="calendar"></div>

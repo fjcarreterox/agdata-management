@@ -3,16 +3,24 @@
 <?php if ($agendas):
     $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría");
     ?>
-    <p>El siguiente listado se encuentra ordenado por la <strong>fecha y hora</strong> para poder gestionar
-        cómodamente la agenda diaria y los eventos (llamadas, visitas) que están pendientes de producirse.</p>
-    <!--<p>Se mostrarán en <span class="red">color rojo</span> aquellas llamadas cuya fecha de próxima llamada ya <u>ha pasado</u> y en <span class="orange">naranja</span> las que estén a <u>menos de una semana</u> de producirse.</p>-->
+    <p><?php echo $intro;?></p>
 <br/>
+    <p><?php
+    if($calendar) {
+        echo Html::anchor('agenda/calendar', '<span class="glyphicon glyphicon-calendar"></span> Ver calendario de visitas', array('class' => 'btn btn-info'));
+    }?>&nbsp;
+        <?php echo Html::anchor('agenda/create', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?></p>
+    <br/>
     <table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Cliente</th>
             <th>Tipo</th>
             <th>Fecha y hora</th>
+            <?php if($calendar){
+                echo "<th>Estado cliente</th>";
+            }
+            ?>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
@@ -32,10 +40,13 @@
                  ?></td>-->
             <td><?php echo $tipo_ops[$item->tipo]; ?></td>
             <td><?php echo date_conv($item->fecha)." a las ".$item->hora; ?></td>
+            <?php if($calendar) {
+                echo "<td>".Model_Estados_Cliente::find(Model_Cliente::find($item->idcliente)->get('estado'))->get('nombre')."</td>";
+            }?>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
-						<?php echo Html::anchor('agenda/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle', array('class' => 'btn btn-default')); ?>
+						<?php echo Html::anchor('clientes/view/'.$item->idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Ficha Cliente', array('class' => 'btn btn-default')); ?>
                         <?php echo Html::anchor('agenda/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar evento', array('class' => 'btn btn-success')); ?>
                         <?php echo Html::anchor('agenda/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar evento', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de esto?')")); ?>
                     </div>

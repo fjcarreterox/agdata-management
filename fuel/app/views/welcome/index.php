@@ -69,11 +69,11 @@
             <div class="col-md-4">
                 <h2>Menú Comercial</h2>
                 <ul>
-                    <li><a href="clientes/create">Nuevo contacto</a></li>
-                    <li><a href="clientes/potenciales">Clientes potenciales</a></li>
+                    <li><a href="clientes/create">Añadir Nuevo Contacto o Cliente</a></li>
+                    <li><a href="clientes/potenciales">Posibles Clientes</a></li>
+                    <li><a href="agenda/llamadas">Gestión de llamadas comerciales</a></li>
+                    <li><a href="agenda">Calendario de visitas y calendario</a></li>
                     <li><a href="clientes/presupuestados">Clientes presupuestados</a></li>
-                    <li><a href="agenda/llamadas">Gestión de llamadas</a></li>
-                    <li><a href="agenda">Agenda de visitas</a></li>
                 </ul>
             </div>
 			<div class="col-md-4">
@@ -124,6 +124,7 @@
                     <li><a href="tipo/cesionaria">Tipos de empresas cesionarias</a></li>
                     <li><a href="tipo/plantilla">Tipos de plantillas para mailings</a></li>
                     <li><a href="tipo/situacion">Tipos de situaciones de clientes en adaptación</a></li>
+                    <li><a href="tipo/tarea">Tipos de tareas a completar</a></li>
                 </ul>
             </div>
          <?php endif; ?>

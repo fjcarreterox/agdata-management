@@ -1,6 +1,6 @@
-<h2><span class="muted">Clientes</span> en el sistema: <u><?php echo $intro; ?></u></h2>
-<p>Listado de posibles clientes: contactados, no contactados y presupuestados.</p>
-<br/>
+<h2><span class="muted">Posibles clientes</span> en el sistema</h2>
+<p>Listado de posibles clientes: <strong>no contactados</strong> (pendientes de llamar) y los
+    <strong>ya contactados</strong> (llamados y/o visitados).</p>
 <?php if ($clientes): ?>
     <p>Nº total de clientes en el sistema: <strong><?php echo count($clientes); ?></strong></p>
 <table class="table table-striped">
