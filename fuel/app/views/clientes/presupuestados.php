@@ -26,7 +26,7 @@
         $btn=Html::anchor('presupuesto/view_all/'.$item->id, '<span class="glyphicon glyphicon-file"></span> Ver presupuestos', array('class' => 'btn btn-info'));
     }
     else{
-        $state = "NO CREADO AÚN";
+        $state = 0;
         $btn=Html::anchor('presupuesto/create/', '<span class="glyphicon glyphicon-plus"></span> Crear presupuesto', array('class' => 'btn btn-info'));
     }
     ?>
@@ -35,7 +35,10 @@
 			<td><?php echo Model_Tipo_Cliente::find($item->tipo)->get('tipo'); ?></td>
             <!--<td></td>-->
             <td><?php echo $item->tel; ?></td>
-            <td><?php echo Model_Estados_Presupuesto::find($state)->get('nombre'); ?></td>
+            <td><?php
+                    if($state > 0){ echo Model_Estados_Presupuesto::find($state)->get('nombre');}
+                    else{ echo "<span class='red'>NO CREADO AÚN</span>";}
+                ?></td>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
