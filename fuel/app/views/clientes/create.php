@@ -1,6 +1,5 @@
-<h2>Añadir un nuevo <span class='muted'>cliente</span> en el sistema</h2>
+<h2>Añada un nuevo <span class='muted'>contacto</span> en el sistema</h2>
 <br/>
-<p>Añada un nuevo contacto en el sistema.</p>
 <ul>
 <li>Si es un <strong>posible cliente</strong>, su estado inicial será <strong>NO CONTACTADO</strong>.</li>
 <li>Si ya es cliente, deberá indicarse su estado actual (en <strong>ADAPTACIÓN</strong> o en <strong>MANTENIMIENTO</strong>).</li>
