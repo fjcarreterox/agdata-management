@@ -15,7 +15,7 @@
 	<thead>
 		<tr>
 			<th>Cliente</th>
-            <th>Tipo</th>
+            <th>Teléfono</th>
             <th>Fecha y hora</th>
             <?php if($calendar){
                 echo "<th>Estado cliente</th>";
@@ -28,18 +28,16 @@
 <?php foreach ($agendas as $item): ?>
     <tr>
 			<td><?php echo Html::anchor('agenda/view_events/'.$item->idcliente,Model_Cliente::find($item->idcliente)->get('nombre'),array('title'=>'Ver eventos sólo de este cliente')); ?></td>
-			<!--<td><?php /*echo date_conv($item->last_call);*/ ?></td>-->
-			<!--<td><?php /*$dist = abs(strtotime($item->next_call) - strtotime(date('Y-m-d'))) / (60*60*24);
-                if($item->next_call < date('Y-m-d')){
-                    echo "<span class='red'>".date_conv($item->next_call)."</span>";
-                }else if( ($item->next_call >= date('Y-m-d')) && $dist<8){
-                    echo "<span class='orange'>".date_conv($item->next_call)."</span>";
+			<td><?php echo Model_Cliente::find($item->idcliente)->get('tel'); ?></td>
+			<td><?php $dist = abs(strtotime($item->fecha) - strtotime(date('Y-m-d'))) / (60*60*24);
+                if($item->fecha < date('Y-m-d')){
+                    echo "<span class='red'>".date_conv($item->fecha)." a las ".$item->hora."</span>";
+                }else if( ($item->fecha >= date('Y-m-d')) && $dist<8){
+                    echo "<span class='orange'>".date_conv($item->fecha)." a las ".$item->hora."</span>";
                 }else{
-                    echo date_conv($item->next_call);
-                }*/
-                 ?></td>-->
-            <td><?php echo $tipo_ops[$item->tipo]; ?></td>
-            <td><?php echo date_conv($item->fecha)." a las ".$item->hora; ?></td>
+                    echo date_conv($item->fecha)." a las ".$item->hora;
+                }
+                 ?></td>
             <?php if($calendar) {
                 echo "<td>".Model_Estados_Cliente::find(Model_Cliente::find($item->idcliente)->get('estado'))->get('nombre')."</td>";
             }?>
