@@ -1,7 +1,7 @@
 <h2>Registrar una nueva <span class='muted'>cesión de datos</span> en el sistema</h2>
 <br/>
 <?php
-$data['tipos_empresas'] = $tipos_empresas;
+$data['cesionarias'] = $cesionarias;
 $data['idcliente'] = $idcliente;
 $data['ficheros'] = $ficheros;
 

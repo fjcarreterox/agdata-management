@@ -7,21 +7,25 @@ class Controller_Cesiones extends Controller_Template
 		$this->template->content = View::forge('cesiones/index', $data);
 	}
 
-	public function action_view($id = null)
-	{
+    public function action_doc($idcesion){
+        $data['cesion'] = Model_Cesione::find($idcesion);
+        $this->template->title = "Contrato de cesión de datos";
+        $this->template->content = View::forge('cesiones/doc', $data);
+    }
+
+	public function action_view($id = null){
 		is_null($id) and Response::redirect('cesiones');
 
 		if ( ! $data['cesione'] = Model_Cesione::find($id)){
-			Session::set_flash('error', 'Could not find cesione #'.$id);
+			Session::set_flash('error', 'No se ha podido encontrar la cesión de datos buscada.');
 			Response::redirect('cesiones');
 		}
 
-		$this->template->title = "Cesione";
+		$this->template->title = "Cesiones de datos";
 		$this->template->content = View::forge('cesiones/view', $data);
 	}
 
-	public function action_create($idcliente)
-	{
+	public function action_create($idcliente){
 		if (Input::method() == 'POST'){
 			$val = Model_Cesione::validate('create');
 
@@ -29,17 +33,8 @@ class Controller_Cesiones extends Controller_Template
 				$cesion = Model_Cesione::forge(array(
 					'idcliente' => Input::post('idcliente'),
 					'idfichero' => Input::post('idfichero'),
-					'idtipo_empresa' => Input::post('idtipo_empresa'),
-					'nombre' => Input::post('nombre'),
-					'cifnif' => Input::post('cifnif'),
-					'servicio' => Input::post('servicio'),
-					'rep_legal_name' => Input::post('rep_legal_name'),
-					'rep_legal_dni' => Input::post('rep_legal_dni'),
-					'rep_legal_cargo' => Input::post('rep_legal_cargo'),
-					'tel' => Input::post('tel'),
-					'domicilio' => Input::post('domicilio'),
-					'localidad' => Input::post('localidad'),
-					'cp' => Input::post('cp'),
+					'idcesionaria' => Input::post('idcesionaria'),
+					'idrep' => Input::post('idrep'),
 					'fecha_contrato' => Input::post('fecha_contrato'),
 				));
 
@@ -56,7 +51,8 @@ class Controller_Cesiones extends Controller_Template
 			}
 		}
         $data['idcliente'] = $idcliente;
-        $data['tipos_empresas'] = Model_Tipo_Cesionaria::find('all');
+        //only 'cesionaria' state
+        $data['cesionarias'] = Model_Cliente::find('all', array('where'=>array('estado'=>8)));
         $data['ficheros'] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$idcliente)));
 
 		$this->template->title = "Crear nueva cesión de datos";
@@ -68,90 +64,58 @@ class Controller_Cesiones extends Controller_Template
 	{
 		is_null($id) and Response::redirect('cesiones');
 
-		if ( ! $cesione = Model_Cesione::find($id))
-		{
-			Session::set_flash('error', 'Could not find cesione #'.$id);
+		if ( ! $cesione = Model_Cesione::find($id)){
+			Session::set_flash('error', 'No se ha podido encontrar la cesión de datos solicitada.');
 			Response::redirect('cesiones');
 		}
 
 		$val = Model_Cesione::validate('edit');
 
-		if ($val->run())
-		{
+		if ($val->run()){
 			$cesione->idcliente = Input::post('idcliente');
-			$cesione->idtipo_empresa = Input::post('idtipo_empresa');
-			$cesione->nombre = Input::post('nombre');
-			$cesione->cifnif = Input::post('cifnif');
-			$cesione->servicio = Input::post('servicio');
-			$cesione->rep_legal_name = Input::post('rep_legal_name');
-			$cesione->rep_legal_dni = Input::post('rep_legal_dni');
-			$cesione->rep_legal_cargo = Input::post('rep_legal_cargo');
-			$cesione->tel = Input::post('tel');
-			$cesione->domicilio = Input::post('domicilio');
-			$cesione->localidad = Input::post('localidad');
-			$cesione->cp = Input::post('cp');
+			$cesione->idcesionaria = Input::post('idcesionaria');
+			$cesione->idrep = Input::post('idrep');
 			$cesione->fecha_contrato = Input::post('fecha_contrato');
 
-			if ($cesione->save())
-			{
-				Session::set_flash('success', 'Updated cesione #' . $id);
-
-				Response::redirect('cesiones');
+			if ($cesione->save()){
+				Session::set_flash('success', 'Cesión de datos actualizada.');
+				Response::redirect('clientes/view/'.$cesione->idcliente);
 			}
-
-			else
-			{
-				Session::set_flash('error', 'Could not update cesione #' . $id);
+			else{
+				Session::set_flash('error', 'No se ha podido actualizar la cesión de datos solicitada.');
 			}
 		}
-
-		else
-		{
-			if (Input::method() == 'POST')
-			{
+		else{
+			if (Input::method() == 'POST'){
 				$cesione->idcliente = $val->validated('idcliente');
-				$cesione->idtipo_empresa = $val->validated('idtipo_empresa');
-				$cesione->nombre = $val->validated('nombre');
-				$cesione->cifnif = $val->validated('cifnif');
-				$cesione->servicio = $val->validated('servicio');
-				$cesione->rep_legal_name = $val->validated('rep_legal_name');
-				$cesione->rep_legal_dni = $val->validated('rep_legal_dni');
-				$cesione->rep_legal_cargo = $val->validated('rep_legal_cargo');
-				$cesione->tel = $val->validated('tel');
-				$cesione->domicilio = $val->validated('domicilio');
-				$cesione->localidad = $val->validated('localidad');
-				$cesione->cp = $val->validated('cp');
+				$cesione->idcesionaria = $val->validated('idcesionaria');
+				$cesione->idrep = $val->validated('idrep');
 				$cesione->fecha_contrato = $val->validated('fecha_contrato');
 
 				Session::set_flash('error', $val->error());
 			}
-
 			$this->template->set_global('cesione', $cesione, false);
 		}
 
-		$this->template->title = "Cesiones";
-		$this->template->content = View::forge('cesiones/edit');
+        $data['cesionarias'] = Model_Cliente::find('all', array('where'=>array('estado'=>8)));
+        $data['idcliente'] = $cesione->idcliente;
+        $data['ficheros'] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$cesione->idcliente)));
 
+		$this->template->title = "Cesiones";
+		$this->template->content = View::forge('cesiones/edit',$data);
 	}
 
-	public function action_delete($id = null)
-	{
+	public function action_delete($id = null){
 		is_null($id) and Response::redirect('cesiones');
 
-		if ($cesione = Model_Cesione::find($id))
-		{
+		if ($cesione = Model_Cesione::find($id)){
 			$cesione->delete();
-
-			Session::set_flash('success', 'Deleted cesione #'.$id);
+			Session::set_flash('success', 'Cesión de datos eliminada del sistema (el fichero de datos, no).');
+            Response::redirect('clientes/view/'.$cesione->idcliente);
 		}
-
-		else
-		{
-			Session::set_flash('error', 'Could not delete cesione #'.$id);
+		else{
+			Session::set_flash('error', 'No se ha podido eliminar del sistema la cesión de datos solicitada.');
+            Response::redirect('cesiones');
 		}
-
-		Response::redirect('cesiones');
-
 	}
-
 }

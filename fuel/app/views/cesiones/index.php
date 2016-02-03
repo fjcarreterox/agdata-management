@@ -1,56 +1,45 @@
-<h2>Listing <span class='muted'>Cesiones</span></h2>
+<h2>Listado de todas las <span class='muted'>Cesiones de ficheros de datos</span> registradas en el sistema</h2>
 <br>
 <?php if ($cesiones): ?>
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>Idcliente</th>
-			<th>Idtipo empresa</th>
-			<th>Nombre</th>
-			<th>Cifnif</th>
-			<th>Servicio</th>
-			<th>Rep legal name</th>
-			<th>Rep legal dni</th>
-			<th>Rep legal cargo</th>
-			<th>Tel</th>
-			<th>Domicilio</th>
-			<th>Localidad</th>
-			<th>Cp</th>
-			<th>Fecha contrato</th>
+			<th>Cliente</th>
+			<th>Empresa cesionaria</th>
+			<th>Representante legal</th>
+			<th>Fecha firma contrato</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
 <?php foreach ($cesiones as $item): ?>		<tr>
 
-			<td><?php echo $item->idcliente; ?></td>
-			<td><?php echo $item->idtipo_empresa; ?></td>
-			<td><?php echo $item->nombre; ?></td>
-			<td><?php echo $item->cifnif; ?></td>
-			<td><?php echo $item->servicio; ?></td>
-			<td><?php echo $item->rep_legal_name; ?></td>
-			<td><?php echo $item->rep_legal_dni; ?></td>
-			<td><?php echo $item->rep_legal_cargo; ?></td>
-			<td><?php echo $item->tel; ?></td>
-			<td><?php echo $item->domicilio; ?></td>
-			<td><?php echo $item->localidad; ?></td>
-			<td><?php echo $item->cp; ?></td>
-			<td><?php echo $item->fecha_contrato; ?></td>
+			<td><?php echo Model_Cliente::find($item->idcliente)->get('nombre'); ?></td>
+			<td><?php
+                $c = Model_Cliente::find($item->idcesionaria);
+                if($c != NULL){echo $c->get('nombre');}
+                    else{echo "NO DISPONIBLE";}
+                ?></td>
+			<td><?php
+                $r = Model_Personal::find($item->idrep);
+                if($r != NULL){echo $r->get('nombre');}
+                else{echo "NO DISPONIBLE";}
+                ?></td>
+			<td><?php echo date_conv($item->fecha_contrato); ?></td>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
-						<?php echo Html::anchor('cesiones/view/'.$item->id, '<i class="icon-eye-open"></i> View', array('class' => 'btn btn-default btn-sm')); ?>						<?php echo Html::anchor('cesiones/edit/'.$item->id, '<i class="icon-wrench"></i> Edit', array('class' => 'btn btn-default btn-sm')); ?>						<?php echo Html::anchor('cesiones/delete/'.$item->id, '<i class="icon-trash icon-white"></i> Delete', array('class' => 'btn btn-sm btn-danger', 'onclick' => "return confirm('Are you sure?')")); ?>					</div>
+						<?php echo Html::anchor('cesiones/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle', array('class' => 'btn btn-default')); ?>
+                        <?php echo Html::anchor('cesiones/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar', array('class' => 'btn btn-success')); ?>
+                        <?php echo Html::anchor('cesiones/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar cesión', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de esto?')")); ?>
+                    </div>
 				</div>
 
 			</td>
 		</tr>
-<?php endforeach; ?>	</tbody>
+    <?php endforeach; ?>
+    </tbody>
 </table>
-
 <?php else: ?>
-<p>No Cesiones.</p>
-
-<?php endif; ?><p>
-	<?php echo Html::anchor('cesiones/create', 'Add new Cesione', array('class' => 'btn btn-success')); ?>
-
-</p>
+    <p>No se han registrado Cesiones de ficheros aún.</p>
+<?php endif; ?>

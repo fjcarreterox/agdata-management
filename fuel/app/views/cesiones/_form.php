@@ -4,10 +4,16 @@ foreach($ficheros as $f){
     $ficheros_ops[$f->id] = Model_Tipo_Fichero::find($f->idtipo)->get('tipo');
 }
 
-$tipos_ops = array();
-foreach($tipos_empresas as $t){
-    $tipos_ops[$t->id] = $t->nombre;
+$cesionarias_ops = array();
+$cesionarias_ops[0] = "-- NO DEFINIDA --";
+foreach($cesionarias as $c){
+    $cesionarias_ops[$c->id] = Model_Cliente::find($c->id)->get('nombre');
 }
+
+$reps_ops = array();
+/*foreach($reps as $r){
+    $reps_ops[$r->id] = Model_Cliente::find($r->id)->get('nombre');
+}*/
 
 echo Form::open(array("class"=>"form-horizontal")); ?>
 	<fieldset>
@@ -17,48 +23,12 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             <?php echo Form::select('idfichero', Input::post('idfichero', isset($cesione) ? $cesione->idfichero : ''),$ficheros_ops, array('class' => 'col-md-4 form-control')); ?>
         </div>
 		<div class="form-group">
-			<?php echo Form::label('Tipo de empresa cesionaria', 'idtipo_empresa', array('class'=>'control-label')); ?>
-			<?php echo Form::select('idtipo_empresa', Input::post('idtipo_empresa', isset($cesione) ? $cesione->idtipo_empresa : ''),$tipos_ops, array('class' => 'col-md-4 form-control')); ?>
+			<?php echo Form::label('Empresa cesionaria', 'idcesionaria', array('class'=>'control-label')); ?>
+			<?php echo Form::select('idcesionaria', Input::post('idcesionaria', isset($cesione) ? $cesione->idcesionaria : ''),$cesionarias_ops, array('class' => 'col-md-4 form-control')); ?>
     	</div>
 		<div class="form-group">
-			<?php echo Form::label('Nombre de la empresa cesionaria', 'nombre', array('class'=>'control-label')); ?>
-			<?php echo Form::input('nombre', Input::post('nombre', isset($cesione) ? $cesione->nombre : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Nombre o razón social')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('CIF/NIF', 'cifnif', array('class'=>'control-label')); ?>
-			<?php echo Form::input('cifnif', Input::post('cifnif', isset($cesione) ? $cesione->cifnif : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'CIF ó NIF de la empresa cesionaria')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Servicio', 'servicio', array('class'=>'control-label')); ?>
-			<?php echo Form::input('servicio', Input::post('servicio', isset($cesione) ? $cesione->servicio : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Servicio que realiza dicha empresa')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Nombre del Representante legal', 'rep_legal_name', array('class'=>'control-label')); ?>
-			<?php echo Form::input('rep_legal_name', Input::post('rep_legal_name', isset($cesione) ? $cesione->rep_legal_name : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Nombre completo del representante legal')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('DNI del Representante legal', 'rep_legal_dni', array('class'=>'control-label')); ?>
-			<?php echo Form::input('rep_legal_dni', Input::post('rep_legal_dni', isset($cesione) ? $cesione->rep_legal_dni : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'DNI del representante legal')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Cargo del Representante legal', 'rep_legal_cargo', array('class'=>'control-label')); ?>
-			<?php echo Form::input('rep_legal_cargo', Input::post('rep_legal_cargo', isset($cesione) ? $cesione->rep_legal_cargo : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Cargo que ocupa el representante legal en la empresa cesionaria')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Teléfono', 'tel', array('class'=>'control-label')); ?>
-			<?php echo Form::input('tel', Input::post('tel', isset($cesione) ? $cesione->tel : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Teléfono de contacto')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Domicilio', 'domicilio', array('class'=>'control-label')); ?>
-			<?php echo Form::input('domicilio', Input::post('domicilio', isset($cesione) ? $cesione->domicilio : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Domicilio de la empresa cesionaria')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Localidad', 'localidad', array('class'=>'control-label')); ?>
-			<?php echo Form::input('localidad', Input::post('localidad', isset($cesione) ? $cesione->localidad : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Localidad de la empresa cesionaria')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Código postal', 'cp', array('class'=>'control-label')); ?>
-			<?php echo Form::input('cp', Input::post('cp', isset($cesione) ? $cesione->cp : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Código postal de la empresa cesionaria')); ?>
+			<?php echo Form::label('Representante legal', 'idrep', array('class'=>'control-label')); ?>
+			<?php echo Form::select('idrep', Input::post('idrep', isset($cesione) ? $cesione->idrep : ''),$reps_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Representante legal')); ?>
 		</div>
 		<div class="form-group">
 			<?php echo Form::label('Fecha de firma del contrato de cesión', 'fecha_contrato', array('class'=>'control-label')); ?>
@@ -70,3 +40,66 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
         </div>
 	</fieldset>
 <?php echo Form::close(); ?>
+<script type="application/javascript">
+    $("select#form_idcesionaria").change(function(){
+        var idc = $(this.selectedOptions).attr('value');
+        var values = {"idcliente":idc};
+        var rep_legal = "-- NO DEFINIDO --";
+        $.ajax({
+            type: "POST",
+            url: "../../personal/getRepLegal",
+            data: values,
+            dataType: "json",
+            cache: false
+        }).done(function(data) {
+            $('select#form_idrep').find('option').remove().end();
+            if(data.id != undefined) {
+                rep_legal = data.nombre + " (" + data.cargo + ")";
+                //$("select#form_idpersonal option[value=0]").remove();
+                $('select#form_idrep').append("<option value='"+data.id+"'>"+rep_legal+"</option>");
+            }
+            else{
+                $('select#form_idrep').append("<option value='0'>-- NO DEFINIDO --</option>");
+            }
+        }).fail(function(data) {
+            $('select#form_idrep').find('option').remove().end();
+            $('select#form_idrep').append("<option value='0'>-- NO DEFINIDO --</option>");
+            alert("ERROR al intentar buscar al Representante Legal de esta empresa cesionaria. Por favor, revisa si ya está " +
+            "creado como persona de contacto de dicha empresa.");
+        });
+    });
+
+    $( document ).ready(function() {
+        var idc = $("select#form_idcesionaria option:selected").val();
+        var values = {"idcliente":idc};
+        var rep_legal = "-- NO DEFINIDO --";
+        $.ajax({
+            type: "POST",
+            url: "../../personal/getRepLegal",
+            data: values,
+            dataType: "json",
+            cache: false
+        }).done(function(data) {
+            $('select#form_idrep').find('option').remove().end();
+            if(data.id != undefined) {
+                rep_legal = data.nombre + " (" + data.cargo + ")";
+                $('select#form_idrep').append("<option value='"+data.id+"'>"+rep_legal+"</option>");
+            }
+            else{
+                $('select#form_idrep').append("<option value='0'>-- NO DEFINIDO --</option>");
+            }
+        }).fail(function(data) {
+            $('select#form_idrep').append("<option value='0'>-- NO DEFINIDO --</option>");
+            alert("ERROR al intentar buscar al Representante Legal de esta empresa cesionaria. Por favor, revisa si ya está " +
+            "creado como persona de contacto de dicha empresa.");
+        });
+    });
+
+    /*$("button#end").click(function( event ) {
+        if($("#form_idcliente")[0].value=="0") {
+            alert("Por favor, selecciona el cliente que deseas incluir en el contrato.");
+            return false;
+        }
+        return true;
+    });*/
+</script>
