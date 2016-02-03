@@ -269,3 +269,78 @@ class Controller_Clientes extends Controller_Template
 		Response::redirect('clientes');
 	}
 }
+    public function action_edit($id = null)
+    {
+        is_null($id) and Response::redirect('clientes');
+
+        if ( ! $cliente = Model_Cliente::find($id))
+        {
+            Session::set_flash('error', 'No se ha podido encontrar el cliente deseado.');
+            Response::redirect('clientes');
+        }
+
+        $val = Model_Cliente::validate('edit');
+
+        if ($val->run())
+        {
+            $cliente->nombre = Input::post('nombre');
+            $cliente->tipo = Input::post('tipo');
+            $cliente->cif_nif = Input::post('cif_nif');
+            $cliente->direccion = Input::post('direccion');
+            $cliente->cpostal = Input::post('cpostal');
+            $cliente->loc = Input::post('loc');
+            $cliente->prov = Input::post('prov');
+            $cliente->tel = Input::post('tel');
+            $cliente->pweb = Input::post('pweb');
+            $cliente->email = Input::post('email');
+            $cliente->actividad = Input::post('actividad');
+            $cliente->observ = Input::post('observ');
+            $cliente->estado = Input::post('estado');
+
+            if ($cliente->save()){
+                $t = Model_Tarea::forge();
+                if($cliente->estado == 5){ //creating adaptation tasks
+                    if(!$t->existsAdapTasks($id)){
+                        \Fuel\Core\Log::error("---CREATING ADAPT TASKS!!");
+                        $t->createAdapTasks($id);
+                    }
+                }
+                elseif($cliente->estado == 6){ //creating support tasks
+                    if(!$t->existsSuppTasks($id)){
+                        \Fuel\Core\Log::error("---CREATING SUPP TASKS!!");
+                        $t->createSuppTasks($id);
+                    }
+                }
+                Session::set_flash('success', 'Datos de cliente actualizados.');
+                Response::redirect('clientes/view/'.$id);
+            }
+            else{
+                Session::set_flash('error', 'No se han podido actualizar los datos del cliente.');
+            }
+        }
+        else
+        {
+            if (Input::method() == 'POST')
+            {
+                $cliente->nombre = $val->validated('nombre');
+                $cliente->tipo = $val->validated('tipo');
+                $cliente->cif_nif = $val->validated('cif_nif');
+                $cliente->direccion = $val->validated('direccion');
+                $cliente->cpostal = $val->validated('cpostal');
+                $cliente->loc = $val->validated('loc');
+                $cliente->prov = $val->validated('prov');
+                $cliente->tel = $val->validated('tel');
+                $cliente->pweb = $val->validated('pweb');
+                $cliente->email = $val->validated('email');
+                $cliente->actividad = $val->validated('actividad');
+                $cliente->observ = $val->validated('observ');
+                $cliente->estado = $val->validated('estado');
+
+                Session::set_flash('error', $val->error());
+            }
+
+            $this->template->set_global('cliente', $cliente, false);
+        }
+        $this->template->title = "Clientes";
+        $this->template->content = View::forge('clientes/edit');
+    }
