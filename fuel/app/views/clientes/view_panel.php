@@ -265,9 +265,10 @@
                     <thead>
                     <tr class="text-center">
                         <td><strong>Tipo</strong></td>
-                        <td><strong>Ubicación</strong></td>
-                        <td><strong>Registrado en AEPD</strong></td>
+                        <td><strong>Nivel</strong></td>
+                        <td><strong>Soporte</strong></td>
                         <td><strong>Cesión de datos</strong></td>
+                        <td><strong>Inscrito en la Agencia</strong></td>
                         <td>&nbsp;</td>
                     </tr>
                     </thead>
@@ -275,9 +276,24 @@
                     <?php foreach($ficheros as $f): ?>
                         <tr>
                             <td><?php echo Model_Tipo_Fichero::find($f->idtipo)->get('tipo'); ?></td>
-                            <td><?php echo $f->ubicacion; ?></td>
-                            <td><?php if($f->inscrito){echo "SÍ";}else{echo "NO";}; ?></td>
+                            <td><?php
+                                switch ($f->nivel) {
+                                    case 1:
+                                        echo "Básico";
+                                        break;
+                                    case 2:
+                                        echo "Medio";
+                                        break;
+                                    case 3:
+                                        echo "Alto";
+                                        break;
+                                    default:
+                                        echo "-- NO ESPECIFICADO --";
+                                }
+                                ?></td>
+                            <td><?php echo $f->soporte; ?></td>
                             <td><?php if($f->cesion){echo "SÍ";}else{echo "NO";}; ?></td>
+                            <td><?php if($f->inscrito){echo "SÍ (".date_conv($f->fecha).")";}else{echo "NO";}; ?></td>
                             <td><?php echo Html::anchor('ficheros/view/'.$f->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank')); ?>
                                 <?php echo Html::anchor('ficheros/delete/'.$f->id, '<span class="glyphicon glyphicon-trash"></span> Borrar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarlo del sistema?')")); ?></td>
                         </tr>
@@ -295,28 +311,27 @@
                         <thead>
                         <tr class="text-center">
                             <td><strong>Empresa</strong></td>
-                            <td><strong>Tipo</strong></td>
                             <td><strong>Fichero cesionado</strong></td>
-                            <!--<td><strong>Fecha de firma del contrato</strong></td>-->
+                            <td><strong>Fecha de firma</strong></td>
                             <td>&nbsp;</td>
                         </tr>
                         </thead>
                         <tbody>
                         <?php foreach($cesiones as $c): ?>
                             <tr>
-                                <td><?php echo $c->nombre; ?></td>
-                                <td><?php echo Model_Tipo_Cesionaria::find($c->idtipo_empresa)->get('nombre'); ?></td>
-                                <td><?php echo Model_Tipo_Fichero::find($c->idfichero)->get('tipo'); ?></td>
-                                <!--<td><?php /*echo date_conv($c->fecha_contrato);*/ ?></td>-->
-                                <td><?php echo Html::anchor('cesiones/view/'.$c->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank')); ?>
-                                    <?php echo Html::anchor('cesiones/doc/'.$c->id, '<span class="glyphicon glyphicon-file"></span> Vista previa contrato',array('class'=>'btn btn-info','target'=>'_blank')); ?>
+                                <td><?php echo Model_Cliente::find($c->idcesionaria)->get('nombre'); ?></td>
+                                <td><?php echo Model_Tipo_Fichero::find(Model_Fichero::find($c->idfichero)->get('idtipo'))->get('tipo'); ?></td>
+                                <td><?php echo date_conv($c->fecha_contrato); ?></td>
+                                <td><?php echo Html::anchor('cesiones/view/'.$c->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank','title'=>'Se abre en ventana nueva...')); ?>
+                                    <?php echo Html::anchor('cesiones/edit/'.$c->id, '<span class="glyphicon glyphicon-pencil"></span> Editar',array('class'=>'btn btn-success')); ?>
                                     <?php echo Html::anchor('cesiones/delete/'.$c->id, '<span class="glyphicon glyphicon-trash"></span> Borrar cesión',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarla del sistema?')")); ?></td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
                     </table>
+                    <p><?php echo Html::anchor('clientes/doc_cesion/'.$cliente->id, '<span class="glyphicon glyphicon-file"></span> Vista previa del contrato', array('class' => 'btn btn-info')); ?></p>
                 <?php endif; ?>
-                <p><?php echo Html::anchor('cesiones/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Registrar nueva cesión', array('class' => 'btn btn-success')); ?></p>
+                <p><?php echo Html::anchor('cesiones/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Registrar una nueva cesión', array('class' => 'btn btn-primary')); ?></p>
                </div>
         </div>
     </div>

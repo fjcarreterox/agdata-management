@@ -32,6 +32,8 @@ return array (
         23 => '023_create_rel_comaaffs',
         24 => '024_create_mailings',
         25 => '025_create_rel_presservs',
+        26 => '026_create_tipo_tareas',
+        27 => '027_create_tareas',
       ),
     ),
     'module' => 

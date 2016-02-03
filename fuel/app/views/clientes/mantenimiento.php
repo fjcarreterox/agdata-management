@@ -1,13 +1,13 @@
 <h2><span class="muted">Clientes</span> en el sistema: <u><?php echo $intro; ?></u></h2>
+<br/>
 <?php if ($clientes): ?>
+    <p>Nº total de clientes en mantenimiento: <strong><?php echo count($clientes); ?></strong></p>
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Nombre/Razón social</th>
 			<th>Tipo</th>
-            <!--<th>Fecha de entrega</th>
-			<th>Tipo de entrega</th>
-			<th>Situación</th>-->
+			<th>CIF/NIF</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
@@ -15,18 +15,20 @@
 <?php foreach ($clientes as $item): ?>
         <tr>
 			<td><?php echo $item->nombre; ?></td>
-			<td><?php echo Model_Tipo_Cliente::find($item->tipo)->get('tipo'); ?></td>
-			<td><?php /*echo Model_Ficha::find($item->id)->get('fecha_entrega');*/ ?></td>
-			<td><?php /*echo Model_Tipo_Situacion::find(Model_Ficha::find($item->id)->get('idsituacion'))->get('tipo');*/ ?></td>
+			<td><?php echo $tipo=Model_Tipo_Cliente::find($item->tipo)->get('tipo'); ?></td>
+			<td><?php echo $item->cif_nif; ?></td>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<?php echo Html::anchor('clientes/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Ficha completa', array('class' => 'btn btn-default')); ?>
-						<?php echo Html::anchor('clientes/doc_cesion/'.$item->id, '<span class="glyphicon glyphicon-file"></span> Vista previa cesión', array('class' => 'btn btn-info')); ?>
-						<?php echo Html::anchor('tareas/list/'.$item->id.'/1', '<span class="glyphicon glyphicon-check"></span> Ver tareas', array('class' => 'btn btn-warning')); ?>
+						<?php echo Html::anchor('clientes/tareas_mantenimiento/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Ficha mantenimiento', array('class' => 'btn btn-info')); ?>
+                        <?php echo Html::anchor('clientes/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar', array('class' => 'btn btn-success'));
+                        if(\Fuel\Core\Session::get('idrol')==1){
+                            echo Html::anchor('clientes/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de querer borrar este cliente? Esto conlleva que se borrarán todos sus datos asociados: presupuestos, contratos, servicios contratados, etc.')"));
+                        }
+                        ?>
                     </div>
 				</div>
-
 			</td>
 		</tr>
 <?php endforeach; ?>
