@@ -71,7 +71,7 @@
                 <ul>
                     <li><a href="clientes/create">Añadir Nuevo Contacto o Cliente</a></li>
                     <li><a href="clientes/potenciales">Posibles Clientes</a></li>
-                    <li><a href="agenda/llamadas">Gestión de llamadas comerciales</a></li>
+                    <li><a href="agenda/llamadas_comerciales">Gestión de llamadas comerciales</a></li>
                     <li><a href="agenda">Gestión de visitas y calendario</a></li>
                     <li><a href="clientes/presupuestados">Clientes presupuestados</a></li>
                 </ul>
@@ -83,6 +83,7 @@
                     <li><a href="clientes/adaptacion">Clientes en adaptación</a></li>
                     <li><a href="clientes/gestionLOPD">Gestión de tareas LOPD</a></li>
                     <li><a href="clientes/mantenimiento">Clientes en mantenimiento</a></li>
+                    <li><a href="clientes/com_mantenimiento">CC.PP. en mantenimiento</a></li>
                 </ul>
 			</div>
 			<div class="col-md-4">

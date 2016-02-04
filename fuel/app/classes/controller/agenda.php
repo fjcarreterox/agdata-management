@@ -32,17 +32,17 @@ class Controller_Agenda extends Controller_Template
         $this->template->content = View::forge('agenda/calendar', $data);
     }
 
-    public function action_llamadas() //only calls
+    public function action_llamadas_comerciales() //only calls
     {
-        $data['agendas'] = Model_Agenda::find('all',array('where'=>array('tipo'=>2),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
+        $data['agendas'] = Model_Agenda::find('all',array('where'=>array('tipo'=>2),'order_by'=>array('fecha'=>'asc','hora'=>'asc')));
         $agenda = array();
         $entradas = Model_Agenda::find('all');
-        /*foreach($entradas as $e){
+        foreach($entradas as $e){
             if(Model_Cliente::find($e->idcliente)->get('estado')<3){
                 $agenda[] = $e;
             }
         }
-        $data['agendas'] = $agenda;*/
+        $data['agendas'] = $agenda;
         $data['title'] = "Gestión de llamadas comerciales";
         $data['intro'] = "Creación y seguimiento diario de las llamadas comerciales realizadas a posibles clientes.";
         $data['calendar'] = 0;
@@ -81,29 +81,29 @@ class Controller_Agenda extends Controller_Template
         $this->template->content = View::forge('agenda/index', $data);
     }
 
-	public function action_create()
+	public function action_create($idcliente = null)
 	{
-		if (Input::method() == 'POST')
-		{
+		if (Input::method() == 'POST'){
 			$val = Model_Agenda::validate('create');
 
-			if ($val->run())
-			{
+			if ($val->run()){
+				if($idcliente != null){$id=$idcliente;}
+				else{$id=Input::post('idcliente');}
 				$agenda = Model_Agenda::forge(array(
-					'idcliente' => Input::post('idcliente'),
-					'tipo' => Input::post('tipo'),
-					'fecha' => Input::post('fecha'),
-					'hora' => Input::post('hora'),
-					'send_info' => Input::post('send_info'),
-					'observaciones' => Input::post('observaciones'),
+						'idcliente' => $id,
+						'tipo' => Input::post('tipo'),
+						'fecha' => Input::post('fecha'),
+						'hora' => Input::post('hora'),
+						'send_info' => Input::post('send_info'),
+						'observaciones' => Input::post('observaciones'),
 				));
 
 				if ($agenda and $agenda->save()){
 					Session::set_flash('success', 'Añadadido nuevo evento a la Agenda.');
-                    if($agenda->tipo == 1)
-					    Response::redirect('agenda');
-                    else
-                        Response::redirect('agenda/llamadas');
+					if($agenda->tipo == 1)
+						Response::redirect('agenda');
+					else
+						Response::redirect('agenda/llamadas');
 				}
 				else{
 					Session::set_flash('error', 'No se ha podido crear el evento en la Agenda.');
@@ -112,9 +112,15 @@ class Controller_Agenda extends Controller_Template
 				Session::set_flash('error', $val->error());
 			}
 		}
+		if($idcliente != null){
+			$data["clientes"][] = Model_Cliente::find($idcliente);
+		}
+		else{
+			$data["clientes"] = Model_Cliente::find('all',array('where'=>array(array('estado','<',3)),'order_by'=>'nombre'));
+		}
 
 		$this->template->title = "Crear nuevo evento en la Agenda";
-		$this->template->content = View::forge('agenda/create');
+		$this->template->content = View::forge('agenda/create',$data);
 	}
 
 	public function action_edit($id = null)

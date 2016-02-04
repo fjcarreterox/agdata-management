@@ -18,13 +18,18 @@ completado, por favor, complétalo antes y regresa a esta pantalla para generar 
     <li>DNI: <strong><?php echo $rep_legal["nif"];?></strong></li>
 </ul>
 
-
+<?php
+if($cliente["tipo"] == 6){
+    ?>
 <h3>Empresa representada por el Representante Legal</h3>
 <ul>
     <li>Nombre: <strong><?php echo $aaff["nombre"];?></strong></li>
     <li>CIF: <strong><?php echo $aaff["cif"];?></strong></li>
     <li>Domicilio: <strong><?php echo $aaff["dir"].", ".$aaff["cp"].", ".$aaff["loc"].", ".$aaff["prov"];?></strong></li>
 </ul>
+    <?php
+}
+?>
 
 <h3>Servicios contratados</h3>
 <?php
@@ -49,6 +54,10 @@ completado, por favor, complétalo antes y regresa a esta pantalla para generar 
         "pago"=> $s->forma_pago
     );
 endforeach;
-$params=base64_encode("cliente_data=".json_encode($cliente)."&rep_data=".urlencode(json_encode($rep_legal))."&aaff_data=".urlencode(json_encode($aaff))."&serv=".urlencode(json_encode($servicios_data)));
+if($cliente["tipo"] == 6) {
+    $params = base64_encode("cliente_data=" . json_encode($cliente) . "&rep_data=" . urlencode(json_encode($rep_legal)) . "&aaff_data=" . urlencode(json_encode($aaff)) . "&serv=" . urlencode(json_encode($servicios_data)));
+}else{
+    $params=base64_encode("cliente_data=".json_encode($cliente)."&rep_data=".urlencode(json_encode($rep_legal))."&serv=".urlencode(json_encode($servicios_data)));
+}
 echo Html::anchor('http://localhost/docpdf/contrato_prestacion_servicios.php?q='.$params, '<span class="glyphicon glyphicon-file"></span> Generar contrato', array('class' => 'btn btn-info','target'=>'_blank'));
 ?>

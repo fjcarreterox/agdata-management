@@ -6,7 +6,7 @@ foreach($servicios as $s){
 }
 
 $year_ops = array(2013=>"2013",2014=>"2014",2015=>"2015",2016=>"2016",2017=>"2017",2018=>"2018",2019=>"2019",2020=>"2020",2021=>"2021",2022=>"2022",2023=>"2023",2024=>"2024",2025=>"2025");
-$months = array("Enero"=>"Enero","Febrero"=>"Febrero","Marzo"=>"Marzo","Abril"=>"Abril","Mayo"=>"Mayo","Junio"=>"Junio","Julio"=>"Julio","Agosto"=>"Agosto","Septiembre"=>"Septiembre","Octubre"=>"Octubre","Noviembre"=>"Noviembre","Diciembre"=>"Diciembre");
+$months = array("1"=>"Enero","2"=>"Febrero","3"=>"Marzo","4"=>"Abril","5"=>"Mayo","6"=>"Junio","7"=>"Julio","8"=>"Agosto","9"=>"Septiembre","10"=>"Octubre","11"=>"Noviembre","12   "=>"Diciembre");
 $periodo_ops = array(-1=>'-- N/D --',12=>'Mensual',4=>'Trimestral',2=>'Semestral',1=>'Anual',0=>'Pago único');
 $forma_ops = array("transferencia bancaria"=>"transferencia bancaria","recibo domiciliado"=>"recibo domiciliado","cheque/pagaré"=>"cheque/pagaré","en metálico/caja"=>"en metálico/caja");
 
@@ -22,13 +22,13 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::label('Importe sin IVA (&euro;)', 'importe', array('class'=>'control-label')); ?>
 			<?php echo Form::input('importe', Input::post('importe', isset($servicios_contratado) ? $servicios_contratado->importe : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Importe en &euro; del coste del servicio')); ?>
 		</div>
+        <div class="form-group">
+            <?php echo Form::label('Mes de comienzo de facturación', 'mes_factura', array('class'=>'control-label')); ?>
+            <?php echo Form::select('mes_factura', Input::post('mes_factura', isset($servicios_contratado) ? $servicios_contratado->mes_factura : ''), $months ,array('class' => 'col-md-4 form-control', 'placeholder'=>'Mes en el que se comenzará a prestar el servicio.')); ?>
+        </div>
 		<div class="form-group">
-			<?php echo Form::label('Año de contratación', 'year', array('class'=>'control-label')); ?>
+			<?php echo Form::label('Año de facturación', 'year', array('class'=>'control-label')); ?>
 			<?php echo Form::select('year', Input::post('year', isset($servicios_contratado) ? $servicios_contratado->year : ''),$year_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Año en el que el cliente contrata el servicio')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Mes de comienzo de facturación', 'mes_factura', array('class'=>'control-label')); ?>
-			<?php echo Form::select('mes_factura', Input::post('mes_factura', isset($servicios_contratado) ? $servicios_contratado->mes_factura : ''), $months ,array('class' => 'col-md-4 form-control', 'placeholder'=>'Mes en el que se comenzará a prestar el servicio.')); ?>
 		</div>
 		<div class="form-group">
 			<?php echo Form::label('Periodicidad de facturación', 'periodicidad', array('class'=>'control-label')); ?>

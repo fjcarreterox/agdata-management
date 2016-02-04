@@ -42,7 +42,8 @@
                 </table>
                 <br/>
                 <?php echo Html::anchor('clientes/edit/'.$cliente->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos básicos',array('class'=>'btn btn-success')); ?> &nbsp;
-                <?php echo Html::anchor('clientes', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de clientes',array('class'=>'btn btn-danger')); ?>
+                <?php echo Html::anchor('clientes', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de clientes',array('class'=>'btn btn-danger')); ?>&nbsp;
+                <?php echo Html::anchor('agenda/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento',array('class'=>'btn btn-primary')); ?>
                 <br/><br/>
                 <h4>Personal de contacto</h4>
                 <?php if(empty($contactos)): ?>

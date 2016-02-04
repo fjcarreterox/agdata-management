@@ -28,7 +28,9 @@ if(isset($nombre_cliente)){
                 if($item->tratamiento!=null){$t = $tratamiento_ops[$item->tratamiento];}?>
     <tr>
 			<td><?php echo $t." ".$item->nombre; ?></td>
-			<td><?php echo Model_Cliente::find($item->idcliente)->get('nombre'); ?></td>
+			<td><?php
+				if(Model_Cliente::find($item->idcliente) != null){echo Model_Cliente::find($item->idcliente)->get('nombre');}
+				else{echo "NO DIPONIBLE";} ?></td>
 			<td><?php echo Model_Relacion::find($item->relacion)->get('nombre'); ?></td>
 			<td>
 				<div class="btn-toolbar">

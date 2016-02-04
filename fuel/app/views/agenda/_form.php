@@ -3,7 +3,6 @@ $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría");
 $send_info = array("NO","SÍ");
 
 $clientes_sel = array();
-$clientes = Model_Cliente::find('all',array('order_by'=>'nombre'));
 $clientes_sel[0] = "-- SELECCIONE UN CLIENTE --";
 foreach($clientes as $c){
     $clientes_sel[$c->get('id')] = $c->get('nombre');

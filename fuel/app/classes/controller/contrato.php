@@ -39,7 +39,11 @@ class Controller_Contrato extends Controller_Template
             );
 
             $data['aaff'] = $aaff_data;
+			$rep =  Model_Personal::find('first',array('where'=>array('idcliente'=>$aaff->id,'relacion'=>1)));
         }
+		else{
+			$rep =  Model_Personal::find('first',array('where'=>array('idcliente'=>$contrato->idcliente,'relacion'=>1)));
+		}
 
         $rep =  Model_Personal::find('first',array('where'=>array('idcliente'=>$aaff->id,'relacion'=>1)));
         $rep_legal = array(

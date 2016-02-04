@@ -25,17 +25,19 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach ($agendas as $item): ?>
+<?php foreach ($agendas as $item):
+    $hora=explode(":",$item->hora);
+    ?>
     <tr>
 			<td><?php echo Html::anchor('agenda/view_events/'.$item->idcliente,Model_Cliente::find($item->idcliente)->get('nombre'),array('title'=>'Ver eventos sólo de este cliente')); ?></td>
 			<td><?php echo Model_Cliente::find($item->idcliente)->get('tel'); ?></td>
 			<td><?php $dist = abs(strtotime($item->fecha) - strtotime(date('Y-m-d'))) / (60*60*24);
                 if($item->fecha < date('Y-m-d')){
-                    echo "<span class='red'>".date_conv($item->fecha)." a las ".$item->hora."</span>";
-                }else if( ($item->fecha >= date('Y-m-d')) && $dist<8){
-                    echo "<span class='orange'>".date_conv($item->fecha)." a las ".$item->hora."</span>";
+                    echo "<span class='red'>".date_conv($item->fecha)." a las $hora[0]:$hora[1]</span>";
+                }else if( ($item->fecha >= date('Y-m-d')) && $dist<1){
+                    echo "<span class='orange'>".date_conv($item->fecha)." a las $hora[0]:$hora[1]</span>";
                 }else{
-                    echo date_conv($item->fecha)." a las ".$item->hora;
+                    echo date_conv($item->fecha)." a las $hora[0]:$hora[1]";
                 }
                  ?></td>
             <?php if($calendar) {
