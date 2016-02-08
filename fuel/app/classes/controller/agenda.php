@@ -167,8 +167,9 @@ class Controller_Agenda extends Controller_Template
 			}
 			$this->template->set_global('agenda', $agenda, false);
 		}
+        $data["clientes"][] = Model_Cliente::find($agenda->idcliente);
 		$this->template->title = "Editando evento de la Agenda";
-		$this->template->content = View::forge('agenda/edit');
+		$this->template->content = View::forge('agenda/edit',$data);
 	}
 
 	public function action_delete($id = null){
