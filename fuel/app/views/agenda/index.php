@@ -65,7 +65,7 @@
 <p><?php echo Html::anchor('agenda/create', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?>&nbsp;&nbsp;
     <?php if($calendar){
         echo Html::anchor('agenda/calendar', '<span class="glyphicon glyphicon-calendar"></span> Ver calendario de visitas', array('class' => 'btn btn-info'))."&nbsp;&nbsp;";
-        echo Html::anchor('agenda/llamadas', '<span class="glyphicon glyphicon-eye-open"></span> Ver listado de llamadas', array('class' => 'btn btn-default'));
+        echo Html::anchor('agenda/llamadas_comerciales', '<span class="glyphicon glyphicon-eye-open"></span> Ver listado de llamadas', array('class' => 'btn btn-default'));
     }
     else{
         echo Html::anchor('agenda', '<span class="glyphicon glyphicon-eye-open"></span> Ver listado de visitas', array('class' => 'btn btn-default'));

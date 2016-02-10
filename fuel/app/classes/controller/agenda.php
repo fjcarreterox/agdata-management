@@ -4,12 +4,12 @@ class Controller_Agenda extends Controller_Template
 	public function action_index(){ //only visits and audits
 		//$data['agendas'] = Model_Agenda::find('all',array('where'=>array('tipo'=>1),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
 		$data['agendas'] = Model_Agenda::find('all',array('where'=>array(array('tipo' => '1'), // <-- note the array
-            'or' => array('tipo' => '3')),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
+            'or' => array('tipo' => '3')),'order_by'=>array('fecha'=>'asc','hora'=>'asc')));
 
         $data['title'] = "Gestión de visitas y calendario";
         $data['calendar'] = 1;
         $data['intro'] = "Gestión y control de visitas, tanto para clientes como para posibles clientes.";
-        $data['void'] = Model_Agenda::find('all',array('where'=>array('tipo'=>0),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
+        $data['void'] = Model_Agenda::find('all',array('where'=>array('tipo'=>0),'order_by'=>array('fecha'=>'asc','hora'=>'asc')));
 
 		$this->template->title = "Agenda de visitas";
 		$this->template->content = View::forge('agenda/index', $data);
@@ -103,7 +103,7 @@ class Controller_Agenda extends Controller_Template
 					if($agenda->tipo == 1)
 						Response::redirect('agenda');
 					else
-						Response::redirect('agenda/llamadas');
+						Response::redirect('agenda/llamadas_comerciales');
 				}
 				else{
 					Session::set_flash('error', 'No se ha podido crear el evento en la Agenda.');
@@ -147,7 +147,7 @@ class Controller_Agenda extends Controller_Template
                 if($agenda->tipo == 1)
                     Response::redirect('agenda');
                 else
-                    Response::redirect('agenda/llamadas');
+                    Response::redirect('agenda/llamadas_comerciales');
 			}
 			else{
 				Session::set_flash('error', 'No se ha podido actualizar el evento solicitado en la Agenda.');
@@ -174,14 +174,18 @@ class Controller_Agenda extends Controller_Template
 
 	public function action_delete($id = null){
 		is_null($id) and Response::redirect('agenda');
-
-		if ($agenda = Model_Agenda::find($id)){
+        $agenda = Model_Agenda::find($id);
+        $tipo = $agenda->tipo;
+		if ($agenda){
 			$agenda->delete();
 			Session::set_flash('success', 'Se ha borrado el evento solicitado de la Agenda');
 		}
 		else{
 			Session::set_flash('error', 'No se ha podido borrar el evento solicitado.');
 		}
-		Response::redirect('agenda');
+        if($tipo == 1 || $tipo == 3) //visits or audits
+            Response::redirect('agenda');
+        else
+            Response::redirect('agenda/llamadas_comerciales');
 	}
 }
