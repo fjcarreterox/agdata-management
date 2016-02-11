@@ -45,7 +45,6 @@ class Controller_Contrato extends Controller_Template
 			$rep =  Model_Personal::find('first',array('where'=>array('idcliente'=>$contrato->idcliente,'relacion'=>1)));
 		}
 
-        $rep =  Model_Personal::find('first',array('where'=>array('idcliente'=>$aaff->id,'relacion'=>1)));
         $rep_legal = array(
             "nombre" => $rep->nombre,
             "nif" => $rep->dni
@@ -149,7 +148,7 @@ class Controller_Contrato extends Controller_Template
 			}
 			$this->template->set_global('contrato', $contrato, false);
 		}
-        $data['clientes'] = Model_Cliente::find('all', array('order_by' => 'nombre'));
+        $data['clientes'][] = Model_Cliente::find($contrato->idcliente);
 
 		$this->template->title = "Editando detalle de contrato";
 		$this->template->content = View::forge('contrato/edit',$data);

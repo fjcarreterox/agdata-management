@@ -51,13 +51,16 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($servicios as $item): ?>
+        <?php foreach ($servicios as $item):
+            //needed to display correctly the name of the months
+            setlocale(LC_TIME,'');
+            ?>
             <tr>
                 <td><?php echo Model_Servicio::find($item->idtipo_servicio)->get('nombre');?></td>
                 <td><?php echo $item->importe; ?> &euro;</td>
                 <td><?php echo $item->cuota; ?> &euro;</td>
                 <td><?php echo $item->year; ?></td>
-                <td><?php echo $item->mes_factura; ?></td>
+                <td><?php echo getMes($item->mes_factura);  ?></td>
                 <td>
                     <div class="btn-toolbar">
                         <div class="btn-group">
