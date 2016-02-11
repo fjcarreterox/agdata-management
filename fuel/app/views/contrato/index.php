@@ -4,6 +4,7 @@
         editar o eliminar</i> servicios contratados.</p>
 
 <br/>
+<p><?php echo Html::anchor('contrato/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo contrato', array('class' => 'btn btn-primary')); ?></p>
 <?php if ($contratos): ?>
 <table class="table table-striped">
 	<thead>
@@ -55,6 +56,4 @@
 <p>No hay contratos aún registrados en el sistema.</p>
 
 <?php endif; ?>
-<p>
-	<?php echo Html::anchor('contrato/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo contrato', array('class' => 'btn btn-primary')); ?>
-</p>
+<p><?php echo Html::anchor('contrato/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo contrato', array('class' => 'btn btn-primary')); ?></p>
