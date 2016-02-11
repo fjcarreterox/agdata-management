@@ -20,7 +20,6 @@
 			<td><?php echo $item->nombre; ?></td>
 			<td><?php echo $tipo=Model_Tipo_Cliente::find($item->tipo)->get('tipo'); ?></td>
 			<td><?php echo $item->tel; ?></td>
-			<td><?php echo $item->direccion; ?></td>
 			<td><?php echo Model_Estados_Cliente::find($item->estado)->get('nombre'); ?></td>
 			<td>
 				<div class="btn-toolbar">

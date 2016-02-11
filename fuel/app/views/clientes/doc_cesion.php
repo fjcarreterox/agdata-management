@@ -53,12 +53,12 @@ if($isCPP){ ?>
             $rep_trat = "N/D";
             $rep_dni = '<span class="red">-- NO ESPECIFICADO --</span>';
             $rep_name = '<span class="red">-- NO ESPECIFICADO --</span>';
-            $rep = $rep_trat.' '.$rep_name;
-            if($rep = Model_Personal::find('first',array('where'=>array('idcliente'=>$cliente->id,'relacion'=>1)))){
-                $rep_trat = $rep->tratamiento;
-                $rep_name = $rep->nombre;
+            $rep_legal = $rep_trat.' '.$rep_name;
+            if($rep_legal = Model_Personal::find('first',array('where'=>array('idcliente'=>$cliente->id,'relacion'=>1)))){
+                $rep_trat = $rep_legal->tratamiento;
+                $rep_name = $rep_legal->nombre;
+                if($rep_legal->dni != ''){$rep_dni = $rep_legal->dni;}
                 $rep_legal = $tratamiento_ops[$rep_trat].' '.$rep_name;
-                if($rep->dni != ''){$rep_dni = $rep->dni;}
             }
             echo "<strong>".$rep_legal."</strong>";
             $cliente_data["rep_nombre"] = $rep_legal;
@@ -165,8 +165,32 @@ if($isCPP) { ?>
 
 }else{
     echo "<h3>Empresa cesionaria</h3>";
-
-}   ?>
+    ?>
+        <ul>
+            <li>Nombre de la empresa cesionaria: <strong><?php echo urldecode($cesionaria->nombre); ?></strong></li>
+            <li>CIF: <strong><?php echo $cesionaria->cif_nif; ?></strong></li>
+            <li>Dirección: <strong><?php echo $cesionaria->direccion; ?></strong></li>
+            <li>Código postal: <strong><?php echo $cesionaria->cpostal; ?></strong></li>
+            <li>Localidad: <strong><?php echo $cesionaria->loc; ?></strong></li>
+            <li>Provincia: <strong><?php echo $cesionaria->prov; ?></strong></li>
+            <br/>
+            <?php
+            $rep_legal_ces = Model_Personal::find('first', array('where' => array('idcliente' => $cesionaria->id, 'relacion' => 1)));
+            $ces_data[] = array(
+                "nombre" => $rep_legal_ces->nombre,
+                "dni" => $rep_legal_ces->dni,
+                "nombre_aaff" => $cesionaria->nombre,
+                "cif_nif" => $cesionaria->cif_nif,
+                "dir" => $cesionaria->direccion,
+                "cp" => $cesionaria->cpostal,
+                "loc" => $cesionaria->loc,
+                "prov" => $cesionaria->prov
+            );
+            ?>
+            <li>Nombre del Rep. legal: <strong><?php echo $rep_legal_ces->nombre; ?></strong></li>
+            <li>DNI del Rep. legal: <strong><?php echo $rep_legal_ces->dni; ?></strong></li>
+        </ul>
+<?php }   ?>
 
 <br/>
 <p><?php
@@ -175,7 +199,7 @@ if($isCPP) { ?>
         $script = 'contrato_cesion_com.php?q=';
     }
     else{
-        $params=base64_encode("cliente_data=".urlencode(json_encode($cliente_data))."&ficheros=".json_encode($ficheros)."&reps_data=".urlencode(json_encode($cesiones_data)));
+        $params=base64_encode("cliente_data=".urlencode(json_encode($cliente_data))."&ficheros=".json_encode($ficheros)."&reps_data=".urlencode(json_encode($ces_data)));
         $script = 'contrato_cesion.php?q=';
     }
     echo Html::anchor('http://localhost/docpdf/'.$script.$params, '<span class="glyphicon glyphicon-file"></span> Generar PDF del contrato de cesión', array('class' => 'btn btn-info','target'=>'_blank'));

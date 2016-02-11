@@ -74,7 +74,7 @@ class Controller_Contrato extends Controller_Template
 		$this->template->content = View::forge('contrato/view', $data);
 	}
 
-	public function action_create()
+	public function action_create($idcliente = null)
 	{
 		if (Input::method() == 'POST')
 		{
@@ -102,10 +102,10 @@ class Controller_Contrato extends Controller_Template
 			}
 		}
         if($idcliente != null){
-            $data['idcliente'] = $idcliente;
+            $data['clientes'][] = Model_Cliente::find($idcliente);
         }
         else {
-            $data['clientes'] = Model_Cliente::find('all', array('order_by' => 'nombre'));
+            $data['clientes'] = Model_Cliente::find('all', array('where'=>array(array('estado','>',4),array('estado','<',7)),'order_by' => 'nombre'));
         }
 
 		$this->template->title = "Crear nuevo contratos";

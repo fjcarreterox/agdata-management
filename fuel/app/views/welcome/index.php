@@ -104,10 +104,10 @@
             <div class="col-md-4">
                 <h2>Clientes</h2>
                 <ul>
-                    <li><a href="clientes">Listado completo de clientes</a></li>
                     <li><a href="clientes/aaff">Relación de AA.FF.</a></li>
-                    <li><a href="personal/listall">Personas de contacto / Empleados</a></li>
+                    <li><a href="personal/listall">Personas de contacto y Empleados</a></li>
                     <li><a href="agenda/visitas">Histórico de contactos</a></li>
+                    <li><a href="clientes">Listado completo de clientes</a></li>
                 </ul>
             </div>
          <?php if(Session::get('idrol')==1):?>

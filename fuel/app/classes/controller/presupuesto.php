@@ -68,7 +68,7 @@ class Controller_Presupuesto extends Controller_Template
 
         $data["servicios"] = Model_Servicio::find('all',array('order_by'=>'id'));
         $data["estados"] = Model_Estados_Presupuesto::find('all',array('order_by'=>'id'));
-        $data["clientes"] = Model_Cliente::find('all',array('order_by'=>'id'));
+        $data["clientes"] = Model_Cliente::find('all',array('where'=>array('estado'=>3),'order_by'=>'id'));
         if($idcliente!=null){
             $data["idcliente"] = $idcliente;
         }

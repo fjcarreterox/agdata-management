@@ -119,7 +119,7 @@ class Controller_Clientes extends Controller_Template
 		$this->template->content = View::forge('clientes/view_panel', $data);
 	}
 
-    public function action_doc_cesion($idcliente = null)
+    public function action_doc_cesion($idcliente = null,$idcesionaria = null)
     {
         is_null($idcliente) and Response::redirect('clientes');
 
@@ -132,7 +132,11 @@ class Controller_Clientes extends Controller_Template
             if(Model_Cliente::find($idcliente)->get('tipo')==6){
                 $data['rel_aaffs'] = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idcliente)));
             }
+            else{
+                $data['cesionaria'] = Model_Cliente::find($idcesionaria);
+            }
         }
+        $data['cesiones'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$idcliente,'idcesionaria'=>$idcesionaria)));
 
         $this->template->title = "Contrato de cesión de datos";
         $this->template->content = View::forge('clientes/doc_cesion', $data);
@@ -195,7 +199,7 @@ class Controller_Clientes extends Controller_Template
 				Session::set_flash('error', $val->error());
 			}
 		}
-		$this->template->title = "Clientes";
+		$this->template->title = "Nuevo cliente";
 		$this->template->content = View::forge('clientes/create');
 	}
 
