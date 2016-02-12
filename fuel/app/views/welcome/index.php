@@ -69,11 +69,12 @@
             <div class="col-md-4">
                 <h2>Menú Comercial</h2>
                 <ul>
-                    <li><a href="clientes/create">Añadir Nuevo Contacto o Cliente</a></li>
+                    <li><a href="clientes/create">Añadir Nuevo Contacto</a></li>
                     <li><a href="clientes/potenciales">Posibles Clientes</a></li>
                     <li><a href="agenda/llamadas_comerciales">Gestión de llamadas comerciales</a></li>
                     <li><a href="agenda">Gestión de visitas y calendario</a></li>
                     <li><a href="clientes/presupuestados">Clientes presupuestados</a></li>
+                    <li><a href="clientes/nointeresados">No interesados</a></li>
                 </ul>
             </div>
 			<div class="col-md-4">
@@ -104,9 +105,9 @@
             <div class="col-md-4">
                 <h2>Clientes</h2>
                 <ul>
+                    <li><a href="clientes/create">Añadir Nuevo Cliente</a></li>
                     <li><a href="clientes/aaff">Relación de AA.FF.</a></li>
                     <li><a href="personal/listall">Personas de contacto y Empleados</a></li>
-                    <li><a href="agenda/visitas">Histórico de contactos</a></li>
                     <li><a href="clientes">Listado completo de clientes</a></li>
                 </ul>
             </div>
@@ -122,7 +123,6 @@
                     <li><a href="estados/cliente">Estados del cliente</a></li>
                     <li><a href="estados/presupuesto">Estados de los presupuestos</a></li>
                     <li><a href="relacion">Tipos de relaciones de personal con AGDATA</a></li>
-                    <li><a href="tipo/cesionaria">Tipos de empresas cesionarias</a></li>
                     <li><a href="tipo/plantilla">Tipos de plantillas para mailings</a></li>
                     <li><a href="tipo/situacion">Tipos de situaciones de clientes en adaptación</a></li>
                     <li><a href="tipo/tarea">Tipos de tareas a completar</a></li>

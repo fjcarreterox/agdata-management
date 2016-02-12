@@ -58,6 +58,13 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/adaptacion', $data);
     }
 
+    public function action_nointeresados(){
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>4)));
+        $data['intro'] = "No Interesados";
+        $this->template->title = "Contactos aún no interesados";
+        $this->template->content = View::forge('clientes/index', $data);
+    }
+
     public function action_mantenimiento(){
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>6,array('tipo','<>',6))));
         $data['intro'] = "en régimen de mantenimiento de la LOPD";

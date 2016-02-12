@@ -325,14 +325,15 @@
                                 <td><?php echo date_conv($c->fecha_contrato); ?></td>
                                 <td><?php echo Html::anchor('cesiones/view/'.$c->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank','title'=>'Se abre en ventana nueva...')); ?>
                                     <?php echo Html::anchor('cesiones/edit/'.$c->id, '<span class="glyphicon glyphicon-pencil"></span> Editar',array('class'=>'btn btn-success')); ?>
+                                    <?php echo Html::anchor('clientes/doc_cesion/'.$cliente->id.'/'.$c->idcesionaria, '<span class="glyphicon glyphicon-file"></span> Vista previa del contrato', array('class' => 'btn btn-info','target'=>'_blank')); ?>
                                     <?php echo Html::anchor('cesiones/delete/'.$c->id, '<span class="glyphicon glyphicon-trash"></span> Borrar cesión',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarla del sistema?')")); ?></td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
                     </table>
-                    <p><?php echo Html::anchor('clientes/doc_cesion/'.$cliente->id, '<span class="glyphicon glyphicon-file"></span> Vista previa del contrato', array('class' => 'btn btn-info')); ?></p>
                 <?php endif; ?>
-                <p><?php echo Html::anchor('cesiones/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Registrar una nueva cesión', array('class' => 'btn btn-primary')); ?></p>
+                <p><?php echo Html::anchor('cesiones/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Registrar una nueva cesión', array('class' => 'btn btn-primary')); ?>&nbsp;
+                <?php echo Html::anchor('clientes/create/', '<span class="glyphicon glyphicon-plus"></span> Añadir nueva empresa cesionaria', array('target'=>'_blank','title'=>'Se abre en ventana nueva...','class' => 'btn btn-primary')); ?></p>
                </div>
         </div>
     </div>
