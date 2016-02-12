@@ -26,8 +26,7 @@ class Controller_Tareas extends Controller_Template
         $this->template->content = View::forge('tareas/list', $data);
     }
 
-	public function action_view($id = null)
-	{
+	public function action_view($id = null){
 		is_null($id) and Response::redirect('tareas');
 
 		if ( ! $data['tarea'] = Model_Tarea::find($id))
@@ -36,9 +35,8 @@ class Controller_Tareas extends Controller_Template
 			Response::redirect('tareas');
 		}
 
-		$this->template->title = "Tarea";
+		$this->template->title = "Detalle de la tarea";
 		$this->template->content = View::forge('tareas/view', $data);
-
 	}
 
 	public function action_create()
@@ -80,7 +78,7 @@ class Controller_Tareas extends Controller_Template
 		is_null($id) and Response::redirect('tareas');
 
 		if ( ! $tarea = Model_Tarea::find($id)){
-			Session::set_flash('error', 'Could not find tarea #'.$id);
+			Session::set_flash('error', 'No se ha podido encontrar la tarea deseada.');
 			Response::redirect('tareas');
 		}
 
@@ -93,11 +91,12 @@ class Controller_Tareas extends Controller_Template
 			$tarea->fecha_respuesta = Input::post('fecha_respuesta');
 
 			if ($tarea->save()){
-				Session::set_flash('success', 'Updated tarea #' . $id);
-				Response::redirect('tareas');
+				$serv=Model_Tipo_Tarea::find($tarea->idtipotarea)->get('tipo');
+				Session::set_flash('success', 'Fecha actualizada para la tarea');
+				Response::redirect('tareas/list/'.$tarea->idcliente.'/'.$serv);
 			}
 			else{
-				Session::set_flash('error', 'Could not update tarea #' . $id);
+				Session::set_flash('error', 'No se ha podido actualizar la tarea deseada.');
 			}
 		}
 		else{
