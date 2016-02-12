@@ -9,7 +9,6 @@
 			<th>Nombre/Razón social</th>
 			<th>Tipo</th>
 			<th>Teléfono</th>
-			<th>Dirección</th>
 			<th>Estado</th>
 			<th>&nbsp;</th>
 		</tr>
