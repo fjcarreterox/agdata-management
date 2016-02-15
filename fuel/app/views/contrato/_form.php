@@ -47,10 +47,12 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             cache: false
         }).done(function(data) {
             $('select#form_idpersonal').find('option').remove().end();
-            if(data.id != undefined) {
-                rep_legal = data.nombre + " (" + data.cargo + ")";
-                //$("select#form_idpersonal option[value=0]").remove();
-                $('select#form_idpersonal').append("<option value='"+data.id+"'>"+rep_legal+"</option>");
+            if(data[0].id != undefined) {
+                var index;
+                for (index = 0; index < Object.keys(data).length-1; ++index) {
+                    rep_legal = data[index].nombre + " (" + data[index].cargo + ")";
+                    $('select#form_idpersonal').append("<option value='" + data[index].id + "'>" + rep_legal + "</option>");
+                }
             }
             else{
                 $('select#form_idpersonal').append("<option value='0'>NO DEFINIDO</option>");

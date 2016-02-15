@@ -215,16 +215,19 @@ class Controller_Personal extends Controller_Template
         if($tipo_cliente==6){
             //Look for its aaff
             $rel_aaff = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
-            $rep_legal = Model_Personal::find('first',array('where'=>array('idcliente'=>$rel_aaff->idaaff,'relacion'=>1)));
+            $rep_legal[] = Model_Personal::find('first',array('where'=>array('idcliente'=>$rel_aaff->idaaff,'relacion'=>1)));
+            $rep_legal[] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>1)));
         }
         else{
-            $rep_legal = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>1)));
+            $rep_legal[] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>1)));
         }
 
-        if ($rep_legal != null){
-            $data["id"] = $rep_legal->id;
-            $data["nombre"] = $rep_legal->nombre;
-            $data["cargo"] = $rep_legal->cargofuncion;
+        if (count($rep_legal)>0){
+            foreach($rep_legal as $i => $rep) {
+                $data[$i]["id"] = $rep->id;
+                $data[$i]["nombre"] = $rep->nombre;
+                $data[$i]["cargo"] = $rep->cargofuncion;
+            }
             $data["message"] = "TODO OK.";
         }
         else{
