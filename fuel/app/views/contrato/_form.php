@@ -47,9 +47,9 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             cache: false
         }).done(function(data) {
             $('select#form_idpersonal').find('option').remove().end();
-            if(data[0].id != undefined) {
+            if(Object.keys(data).length > 0) {
                 var index;
-                for (index = 0; index < Object.keys(data).length-1; ++index) {
+                for (index = 1; index < Object.keys(data).length; ++index) {
                     rep_legal = data[index].nombre + " (" + data[index].cargo + ")";
                     $('select#form_idpersonal').append("<option value='" + data[index].id + "'>" + rep_legal + "</option>");
                 }

@@ -20,14 +20,18 @@ completado, por favor, complétalo antes y regresa a esta pantalla para generar 
 
 <?php
 if($cliente["tipo"] == 6){
-    ?>
-<h3>Empresa representada por el Representante Legal</h3>
-<ul>
-    <li>Nombre: <strong><?php echo $aaff["nombre"];?></strong></li>
-    <li>CIF: <strong><?php echo $aaff["cif"];?></strong></li>
-    <li>Domicilio: <strong><?php echo $aaff["dir"].", ".$aaff["cp"].", ".$aaff["loc"].", ".$aaff["prov"];?></strong></li>
-</ul>
+    if(count($aaff)>0) {
+        ?>
+        <h3>Empresa representada por el Representante Legal</h3>
+        <ul>
+            <li>Nombre: <strong><?php echo $aaff["nombre"];?></strong></li>
+            <li>CIF: <strong><?php echo $aaff["cif"];?></strong></li>
+            <li>Domicilio:
+                <strong><?php echo $aaff["dir"] . ", " . $aaff["cp"] . ", " . $aaff["loc"] . ", " . $aaff["prov"];?></strong>
+            </li>
+        </ul>
     <?php
+    }
 }
 ?>
 

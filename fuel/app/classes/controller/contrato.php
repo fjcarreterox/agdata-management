@@ -26,29 +26,29 @@ class Controller_Contrato extends Controller_Template
 
         //only for communities
         if($c->tipo == 6){
-            $rel_aaff = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$c->id)));
-            $aaff = Model_Cliente::find($rel_aaff->idaaff);
-
-            $aaff_data = array(
-                "nombre"=>$aaff->nombre,
-                "cif"=>$aaff->cif_nif,
-                "dir"=>$aaff->direccion,
-                "cp"=>$aaff->cpostal,
-                "loc"=>$aaff->loc,
-                "prov"=>$aaff->prov
-            );
-
+            $rel_aaff = Model_Rel_Comaaff::find('first', array('where' => array('idcom' => $c->id)));
+            if($rel_aaff != null) {
+                $aaff = Model_Cliente::find($rel_aaff->idaaff);
+                $aaff_data = array(
+                    "nombre" => $aaff->nombre,
+                    "cif" => $aaff->cif_nif,
+                    "dir" => $aaff->direccion,
+                    "cp" => $aaff->cpostal,
+                    "loc" => $aaff->loc,
+                    "prov" => $aaff->prov
+                );
+            }else{
+                $aaff_data = array();
+            }
             $data['aaff'] = $aaff_data;
-			$rep =  Model_Personal::find('first',array('where'=>array('idcliente'=>$aaff->id,'relacion'=>1)));
         }
-		else{
-			$rep =  Model_Personal::find('first',array('where'=>array('idcliente'=>$contrato->idcliente,'relacion'=>1)));
-		}
-
-        $rep_legal = array(
-            "nombre" => $rep->nombre,
-            "nif" => $rep->dni
-        );
+        $rep =  Model_Personal::find($contrato->idcliente);
+        if($rep != null){
+            $rep_legal = array(
+                "nombre" => $rep->nombre,
+                "nif" => $rep->dni
+            );
+        }
 
         $data['servicios'] = Model_Servicios_Contratado::find('all',array('where'=>array('idcontrato'=>$idcontrato)));
         $data['cliente'] = $cliente;
