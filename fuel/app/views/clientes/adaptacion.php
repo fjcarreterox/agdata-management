@@ -22,7 +22,6 @@
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<?php echo Html::anchor('clientes/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Ficha completa', array('class' => 'btn btn-default')); ?>
-						<?php echo Html::anchor('clientes/doc_cesion/'.$item->id, '<span class="glyphicon glyphicon-file"></span> Vista previa cesión', array('class' => 'btn btn-info')); ?>
 						<?php echo Html::anchor('tareas/list/'.$item->id.'/1', '<span class="glyphicon glyphicon-check"></span> Ver tareas', array('class' => 'btn btn-warning')); ?>
                     </div>
 				</div>
