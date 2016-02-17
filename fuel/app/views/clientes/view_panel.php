@@ -30,7 +30,7 @@
                         <td colspan="4"><?php echo $cliente->direccion; ?>, <?php echo $cliente->cpostal; ?>, <?php echo $cliente->loc; ?>. <?php echo $cliente->prov; ?></td>
                     </tr>
                     <tr class="text-center">
-                        <td><?php echo $cliente->tel; ?></td>
+                        <td><?php echo $cliente->tel." / ".$cliente->tel2; ?></td>
                         <td><?php if($cliente->pweb!=''){echo $cliente->pweb;}else{echo '<span class="red">-- FALTA PAG. WEB --</span>';} ?></td>
                         <td><?php if($cliente->email!=''){echo $cliente->email;}else{echo '<span class="red">-- FALTA E-MAIL --</span>';} ?></td>
                         <td><?php echo $cliente->actividad; ?></td>

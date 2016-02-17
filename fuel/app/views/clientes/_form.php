@@ -33,6 +33,10 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             <?php echo Form::label('Teléfono', 'tel', array('class'=>'control-label')); ?>
             <?php echo Form::input('tel', Input::post('tel', isset($cliente) ? $cliente->tel : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Teléfono de contacto')); ?>
         </div>
+        <div class="form-group">
+            <?php echo Form::label('Teléfono adicional', 'tel2', array('class'=>'control-label')); ?>
+            <?php echo Form::input('tel2', Input::post('tel2', isset($cliente) ? $cliente->tel2 : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Otro teléfono de contacto')); ?>
+        </div>
 		<div class="form-group">
 			<?php echo Form::label('CIF/NIF', 'cif_nif', array('class'=>'control-label')); ?>
 			<?php echo Form::input('cif_nif', Input::post('cif_nif', isset($cliente) ? $cliente->cif_nif : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'CIF ó NIF del cliente')); ?>

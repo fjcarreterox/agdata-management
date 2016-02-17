@@ -187,6 +187,7 @@ class Controller_Clientes extends Controller_Template
 					'loc' => Input::post('loc'),
 					'prov' => Input::post('prov'),
 					'tel' => Input::post('tel'),
+					'tel2' => Input::post('tel2'),
 					'pweb' => Input::post('pweb'),
 					'email' => Input::post('email'),
 					'actividad' => Input::post('actividad'),
@@ -232,6 +233,7 @@ class Controller_Clientes extends Controller_Template
             $cliente->loc = Input::post('loc');
             $cliente->prov = Input::post('prov');
             $cliente->tel = Input::post('tel');
+            $cliente->tel2 = Input::post('tel2');
             $cliente->pweb = Input::post('pweb');
             $cliente->email = Input::post('email');
             $cliente->actividad = Input::post('actividad');
@@ -271,6 +273,7 @@ class Controller_Clientes extends Controller_Template
                 $cliente->loc = $val->validated('loc');
                 $cliente->prov = $val->validated('prov');
                 $cliente->tel = $val->validated('tel');
+                $cliente->tel2 = $val->validated('tel2');
                 $cliente->pweb = $val->validated('pweb');
                 $cliente->email = $val->validated('email');
                 $cliente->actividad = $val->validated('actividad');
