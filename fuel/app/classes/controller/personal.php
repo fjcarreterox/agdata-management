@@ -206,33 +206,36 @@ class Controller_Personal extends Controller_Template
         return new \Response(json_encode($data),200,$content_type);
     }
 
-    public function action_getRepLegal($idcliente = null)
-    {
+    public function action_getRepLegal($idcliente = null){
         if(is_null($idcliente)) $idcliente = $_POST['idcliente'];
-        $tipo_cliente = Model_Cliente::find($idcliente)->get('tipo');
-
-        //communities are diferent on this
-        if($tipo_cliente==6){
-            //Look for its aaff
-            $rel_aaff = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
-            $rep_legal[] = Model_Personal::find('first',array('where'=>array('idcliente'=>$rel_aaff->idaaff,'relacion'=>1)));
-            $rep_legal[] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>1)));
-        }
-        else{
-            $rep_legal[] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>1)));
-        }
-
-        if (count($rep_legal)>0){
-            foreach($rep_legal as $i => $rep) {
-                $data[$i]["id"] = $rep->id;
-                $data[$i]["nombre"] = $rep->nombre;
-                $data[$i]["cargo"] = $rep->cargofuncion;
+        $data = array();
+        if($idcliente) {
+            $tipo_cliente = Model_Cliente::find($idcliente)->get('tipo');
+            $rep_legal[] = array();
+            $rep_legal[] = Model_Personal::find('first', array('where' => array('idcliente' => $idcliente, 'relacion' => 1)));
+            //communities are diferent on this
+            if ($tipo_cliente == 6) {
+                //Look for its aaff
+                if ($rel_aaff = Model_Rel_Comaaff::find('first', array('where' => array('idcom' => $idcliente)))) {
+                    if (Model_Personal::find('first', array('where' => array('idcliente' => $rel_aaff->idaaff, 'relacion' => 1)))) {
+                        $rep_legal[] = Model_Personal::find('first', array('where' => array('idcliente' => $rel_aaff->idaaff, 'relacion' => 1)));
+                    }
+                }
             }
-            $data["message"] = "TODO OK.";
-        }
-        else{
-            $data["idcliente"] = $idcliente;
-            $data["message"] = "ERROR.";
+
+            if (count($rep_legal) > 0) {
+                foreach ($rep_legal as $i => $rep) {
+                    if (count($rep) > 0) {
+                        $data[$i]["id"] = $rep->id;
+                        $data[$i]["nombre"] = $rep->nombre;
+                        $data[$i]["cargo"] = $rep->cargofuncion;
+                    }
+                }
+                $data["message"] = "TODO OK.";
+            } else {
+                $data["idcliente"] = $idcliente;
+                $data["message"] = "ERROR.";
+            }
         }
         $content_type = array('Content-type'=>'application/json');
         return new \Response(json_encode($data),200,$content_type);
