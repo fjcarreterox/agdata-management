@@ -28,8 +28,16 @@ class Controller_Clientes extends Controller_Template
     public function action_doclopd(){
 
         if (Input::method() == 'POST'){
-            $data['idcliente'] = Input::post('idcliente');
-
+            $idcliente = Input::post('idcliente');
+            $data['idcliente'] = $idcliente;
+            $cesiones = Model_Cesione::find('all',array('where'=>array('idcliente'=>$idcliente)));
+            $cesionaria = 0;
+            foreach($cesiones as $c){
+                if($cesionaria != $c->idcesionaria){
+                    $cesionaria = $c->idcesionaria;
+                    $data['cesiones'][] = $c;
+                }
+            }
             $this->template->title = "Documentación LOPD";
             $this->template->content = View::forge('clientes/doclopd', $data);
         }
@@ -130,8 +138,7 @@ class Controller_Clientes extends Controller_Template
     {
         is_null($idcliente) and Response::redirect('clientes');
 
-        if ( ! $data['cliente'] = Model_Cliente::find($idcliente))
-        {
+        if ( ! $data['cliente'] = Model_Cliente::find($idcliente)){
             Session::set_flash('error', 'No se han podido localizar los datos del cliente solicitado.');
             Response::redirect('clientes');
         }else{

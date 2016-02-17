@@ -31,20 +31,20 @@ $tratamiento_ops = array("D.","Dª");
 //Only for communities
 if($isCPP){ ?>
     <h3>Presidente</h3>
-        <ul>
+    <ul>
         <li>Nombre del Presidente de la comunidad:
-   <?php
-    $pres_trat = "N/D";
-    $pres_name = '<span class="red">-- NO ESPECIFICADO --</span>';
-    $presidente = $pres_trat.' '.$pres_name;
-    if($pres = Model_Personal::find('first',array('where'=>array('idcliente'=>$cliente->id,'relacion'=>6)))){
-        $pres_trat = $pres->tratamiento;
-        $pres_name = $pres->nombre;
-        $presidente = $tratamiento_ops[$pres_trat].' '.$pres_name;
-    }
-    echo "<strong>".$presidente."</strong>";
-   ?></li>
-</ul>
+            <?php
+            $pres_trat = "N/D";
+            $pres_name = '<span class="red">-- NO ESPECIFICADO --</span>';
+            $presidente = $pres_trat.' '.$pres_name;
+            if($pres = Model_Personal::find('first',array('where'=>array('idcliente'=>$cliente->id,'relacion'=>6)))){
+                $pres_trat = $pres->tratamiento;
+                $pres_name = $pres->nombre;
+                $presidente = $tratamiento_ops[$pres_trat].' '.$pres_name;
+            }
+            echo "<strong>".$presidente."</strong>";
+            ?></li>
+    </ul>
 <?php }else{ ?>
     <h3>Representante Legal</h3>
     <ul>
@@ -79,8 +79,8 @@ if(count($cesiones)>0) {
             <li>
                 <strong>Tipo:</strong>
                 <?php
-                    echo $tipo = Model_Tipo_Fichero::find(Model_Fichero::find($c->idfichero)->get('idtipo'))->get('tipo');
-                    $ficheros[]=$tipo;
+                echo $tipo = Model_Tipo_Fichero::find(Model_Fichero::find($c->idfichero)->get('idtipo'))->get('tipo');
+                //$ficheros[]=$tipo;
                 ?>
             </li>
             <li><strong>Nivel de seguridad:</strong> <?php
@@ -101,13 +101,13 @@ if(count($cesiones)>0) {
                 ?></li>
             <li><strong>Soporte:</strong> <?php echo $soporte = Model_Fichero::find($c->idfichero)->get('soporte'); ?></li>
         </ul>
-    <?php
-        $reps_data[] = array(
+        <?php
+        $ficheros[] = array(
             "tipo" => $tipo,
             "nivel" => $nivel,
             "soporte" => $soporte);
 
-        endforeach;
+    endforeach;
 }else{
     echo "<p>No se han encontrado cesiones de ficheros aún. Ve a la ficha de cliente y defínelos en el apartado <i>Auditoría de adaptación</i>.</p>";
 }
@@ -166,30 +166,32 @@ if($isCPP) { ?>
 }else{
     echo "<h3>Empresa cesionaria</h3>";
     ?>
-        <ul>
-            <li>Nombre de la empresa cesionaria: <strong><?php echo urldecode($cesionaria->nombre); ?></strong></li>
-            <li>CIF: <strong><?php echo $cesionaria->cif_nif; ?></strong></li>
-            <li>Dirección: <strong><?php echo $cesionaria->direccion; ?></strong></li>
-            <li>Código postal: <strong><?php echo $cesionaria->cpostal; ?></strong></li>
-            <li>Localidad: <strong><?php echo $cesionaria->loc; ?></strong></li>
-            <li>Provincia: <strong><?php echo $cesionaria->prov; ?></strong></li>
-            <br/>
-            <?php
-            $rep_legal_ces = Model_Personal::find('first', array('where' => array('idcliente' => $cesionaria->id, 'relacion' => 1)));
-            $ces_data[] = array(
-                "nombre" => $rep_legal_ces->nombre,
-                "dni" => $rep_legal_ces->dni,
-                "nombre_aaff" => $cesionaria->nombre,
-                "cif_nif" => $cesionaria->cif_nif,
-                "dir" => $cesionaria->direccion,
-                "cp" => $cesionaria->cpostal,
-                "loc" => $cesionaria->loc,
-                "prov" => $cesionaria->prov
-            );
-            ?>
-            <li>Nombre del Rep. legal: <strong><?php echo $rep_legal_ces->nombre; ?></strong></li>
-            <li>DNI del Rep. legal: <strong><?php echo $rep_legal_ces->dni; ?></strong></li>
-        </ul>
+    <ul>
+        <li>Nombre de la empresa cesionaria: <strong><?php echo urldecode($cesionaria->nombre); ?></strong></li>
+        <li>CIF: <strong><?php echo $cesionaria->cif_nif; ?></strong></li>
+        <li>Dirección: <strong><?php echo $cesionaria->direccion; ?></strong></li>
+        <li>Código postal: <strong><?php echo $cesionaria->cpostal; ?></strong></li>
+        <li>Localidad: <strong><?php echo $cesionaria->loc; ?></strong></li>
+        <li>Provincia: <strong><?php echo $cesionaria->prov; ?></strong></li>
+        <li>Actividad: <strong><?php echo $cesionaria->actividad; ?></strong></li>
+        <br/>
+        <?php
+        $rep_legal_ces = Model_Personal::find('first', array('where' => array('idcliente' => $cesionaria->id, 'relacion' => 1)));
+        $ces_data = array(
+            "nombre_rep" => $rep_legal_ces->nombre,
+            "dni" => $rep_legal_ces->dni,
+            "nombre" => $cesionaria->nombre,
+            "cif_nif" => $cesionaria->cif_nif,
+            "servicio" => $cesionaria->actividad,
+            "dir" => $cesionaria->direccion,
+            "cp" => $cesionaria->cpostal,
+            "loc" => $cesionaria->loc,
+            "prov" => $cesionaria->prov
+        );
+        ?>
+        <li>Nombre del Rep. legal: <strong><?php echo $rep_legal_ces->nombre; ?></strong></li>
+        <li>DNI del Rep. legal: <strong><?php echo $rep_legal_ces->dni; ?></strong></li>
+    </ul>
 <?php }   ?>
 
 <br/>
@@ -199,7 +201,7 @@ if($isCPP) { ?>
         $script = 'contrato_cesion_com.php?q=';
     }
     else{
-        $params=base64_encode("cliente_data=".urlencode(json_encode($cliente_data))."&ficheros=".json_encode($ficheros)."&reps_data=".urlencode(json_encode($ces_data)));
+        $params=base64_encode("cliente_data=".urlencode(json_encode($cliente_data))."&ficheros=".json_encode($ficheros)."&rep_data=".urlencode(json_encode($ces_data)));
         $script = 'contrato_cesion.php?q=';
     }
     echo Html::anchor('http://localhost/docpdf/'.$script.$params, '<span class="glyphicon glyphicon-file"></span> Generar PDF del contrato de cesión', array('class' => 'btn btn-info','target'=>'_blank'));
