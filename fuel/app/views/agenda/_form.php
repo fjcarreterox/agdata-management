@@ -11,7 +11,13 @@ foreach($clientes as $c){
 echo Form::open(array("class"=>"form-horizontal")); ?>
 	<fieldset>
 		<div class="form-group">
-			<?php echo Form::label('Cliente', 'idcliente', array('class'=>'control-label')); ?>
+			<?php
+            $tel="";
+            if(isset($agenda)){
+                $tel=Model_Cliente::find($agenda->idcliente)->get('tel')." / ".Model_Cliente::find($agenda->idcliente)->get('tel2');
+                $str="(Tfno: $tel)";
+            }
+            echo Form::label('Cliente '.$str, 'idcliente', array('class'=>'control-label')); ?>
 			<?php echo Form::select('idcliente', Input::post('idcliente', isset($agenda) ? $agenda->idcliente : ''),$clientes_sel, array('class' => 'col-md-4 form-control', 'placeholder'=>'Cliente al que llamar/visitar')); ?>
 		</div>
         <div class="form-group">
