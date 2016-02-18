@@ -21,6 +21,7 @@ class Controller_Contrato extends Controller_Template
             "nombre"=> $c->nombre,
             "tipo"=> $c->tipo,
             "cif"=> $c->cif_nif,
+            "actividad"=> $c->actividad,
             "iban"=> $iban
         );
 
@@ -42,10 +43,11 @@ class Controller_Contrato extends Controller_Template
             }
             $data['aaff'] = $aaff_data;
         }
-        $rep =  Model_Personal::find($contrato->idcliente);
+        $tratamiento_ops = array("D.","Dª");
+        $rep =  Model_Personal::find($contrato->idpersonal);
         if($rep != null){
             $rep_legal = array(
-                "nombre" => $rep->nombre,
+                "nombre" => $tratamiento_ops[$rep->tratamiento]." ".$rep->nombre,
                 "nif" => $rep->dni
             );
         }

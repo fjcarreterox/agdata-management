@@ -178,7 +178,7 @@ if($isCPP) { ?>
         <?php
         $rep_legal_ces = Model_Personal::find('first', array('where' => array('idcliente' => $cesionaria->id, 'relacion' => 1)));
         $ces_data = array(
-            "nombre_rep" => $rep_legal_ces->nombre,
+            "nombre_rep" => $tratamiento_ops[$rep_legal_ces->tratamiento]." ".$rep_legal_ces->nombre,
             "dni" => $rep_legal_ces->dni,
             "nombre" => $cesionaria->nombre,
             "cif_nif" => $cesionaria->cif_nif,
@@ -189,7 +189,7 @@ if($isCPP) { ?>
             "prov" => $cesionaria->prov
         );
         ?>
-        <li>Nombre del Rep. legal: <strong><?php echo $rep_legal_ces->nombre; ?></strong></li>
+        <li>Nombre del Rep. legal: <strong><?php echo $tratamiento_ops[$rep_legal_ces->tratamiento]." ".$rep_legal_ces->nombre; ?></strong></li>
         <li>DNI del Rep. legal: <strong><?php echo $rep_legal_ces->dni; ?></strong></li>
     </ul>
 <?php }   ?>

@@ -13,6 +13,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 		<div class="form-group">
 			<?php
             $tel="";
+            $str="";
             if(isset($agenda)){
                 $tel=Model_Cliente::find($agenda->idcliente)->get('tel')." / ".Model_Cliente::find($agenda->idcliente)->get('tel2');
                 $str="(Tfno: $tel)";
