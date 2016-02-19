@@ -40,14 +40,24 @@ if (!isset($idcliente)) {
         <?php if ($tipo == 6) { ?>
             <li><?php echo Html::anchor('http://localhost/docpdf/portada.php?q=' . base64_encode(urlencode($nombre)), '<span class="glyphicon glyphicon-file"></span> Portada de la documentación', array('class' => 'btn btn-info btn-sm', 'target' => '_blank')); ?></li>
             <br/>
-        <?php }
-        foreach ($cesiones as $c) {
-            $nombre=Model_Cliente::find($c->idcesionaria)->get('nombre');
-            ?>
-            <li><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente.'/'.$c->idcesionaria, '<span class="glyphicon glyphicon-file"></span> Contrato de cesión de datos con '.$nombre, array('class' => 'btn btn-info btn-sm'));?></li>
-            <br/>
         <?php
+            $aaff= Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
+            //Default contract with its legal representative
+            $nombre = Model_Cliente::find($aaff->idaaff)->get('nombre');
+        ?>
+            <li><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente .'/'.$aaff->idaaff, '<span class="glyphicon glyphicon-file"></span> Contrato de cesión de datos con ' . $nombre, array('class' => 'btn btn-info btn-sm', 'target' => '_blank')); ?></li>
+            <br/>
+<?php
         }
+    if(isset($cesiones)) {
+        foreach ($cesiones as $c) {
+            $nombre = Model_Cliente::find($c->idcesionaria)->get('nombre');
+            ?>
+            <li><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-file"></span> Contrato de cesión de datos con ' . $nombre, array('class' => 'btn btn-info btn-sm')); ?></li>
+            <br/>
+            <?php
+        }
+    }
         ?>
         <li><?php echo Html::anchor('clientes/doc_seguridad/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Documento de seguridad', array('class' => 'btn btn-info btn-sm'));?></li>
     </ul>

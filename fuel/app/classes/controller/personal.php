@@ -92,7 +92,7 @@ class Controller_Personal extends Controller_Template
 
 				if ($personal and $personal->save()){
 					Session::set_flash('success', 'Añadido nuevo trabajador al sistema.');
-					Response::redirect('personal/listall');
+					Response::redirect('clientes/view/'.$personal->idcliente);
 				}
 				else{
 					Session::set_flash('error', 'No se pudo almacenar los datos del trabajador.');
