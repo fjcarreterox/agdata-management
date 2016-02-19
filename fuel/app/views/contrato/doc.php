@@ -9,6 +9,7 @@
     <li>Tipo de cliente: <strong><?php echo Model_Tipo_Cliente::find($cliente["tipo"])->get('tipo');?></strong></li>
     <li>CIF: <strong><?php echo $cliente["cif"];?></strong></li>
     <li>IBAN: <strong><?php echo $cliente["iban"];?></strong></li>
+    <li>Dirección completa: <strong><?php echo $cliente["dir"].", ".$cliente["cp"].", ".$cliente["loc"].", ".$cliente["prov"].".";?></strong></li>
     <li>Actividad: <strong><?php echo $cliente["actividad"];?></strong></li>
 </ul>
 

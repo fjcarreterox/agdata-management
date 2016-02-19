@@ -21,6 +21,10 @@ class Controller_Contrato extends Controller_Template
             "nombre"=> $c->nombre,
             "tipo"=> $c->tipo,
             "cif"=> $c->cif_nif,
+            "dir"=> $c->direccion,
+			"cp"=>$c->cpostal,
+			"loc"=>$c->loc,
+			"prov"=>$c->prov,
             "actividad"=> $c->actividad,
             "iban"=> $iban
         );
