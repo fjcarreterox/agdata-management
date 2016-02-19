@@ -80,11 +80,11 @@
 			<div class="col-md-4">
 				<h2>Menú LOPD</h2>
                 <ul>
-                    <li><a href="clientes/activos">Clientes LOPD</a></li>
                     <li><a href="clientes/adaptacion">Clientes en adaptación</a></li>
                     <li><a href="clientes/gestionLOPD">Gestión de tareas LOPD</a></li>
                     <li><a href="clientes/mantenimiento">Clientes en mantenimiento</a></li>
                     <li><a href="clientes/com_mantenimiento">CC.PP. en mantenimiento</a></li>
+                    <li><a href="tareas/historico">Histórico de tareas</a></li>
                 </ul>
 			</div>
 			<div class="col-md-4">
