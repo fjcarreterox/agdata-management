@@ -13,6 +13,8 @@
     <li>Provincia: <strong><?php echo $cliente->prov;?></strong></li>
 </ul>
 <?php
+$tratamiento_ops = array("D.","Dª");
+$isCPP= ($cliente->tipo==6)?1:0;
 $tipo = Model_Tipo_Cliente::find($cliente->tipo)->get('tipo');
 $cliente_data = array(
     "nombre" => $cliente->nombre,
@@ -26,7 +28,7 @@ $cliente_data = array(
 //Only for communities
 $reps_data = array();
 $pres_name = "NO DISPONIBLE";
-if($cliente->tipo==6){
+if($isCPP){
 
     if($pres != null){
         $pres_name = $pres->nombre;
@@ -61,6 +63,29 @@ if($cliente->tipo==6){
         }
     }
 }
+else{
+    echo "<h3>Representante legal</h3>";
+    $rep = Model_Personal::find('first', array('where' => array('idcliente' => $cliente->id, 'relacion' => 1)));
+    if ($rep != null) {
+        $reps_data[] = array(
+            "nombre" => $tratamiento_ops[$rep->get('tratamiento')]." ".$rep->get('nombre'),
+            "dni" => $rep->dni,
+            "cargo" => $rep->cargofuncion
+        );
+    }
+    echo "<ul><li>Nombre: <strong>".$tratamiento_ops[$rep->get('tratamiento')]." ".$rep->get('nombre')."</strong></li>";
+    echo "<li>DNI: <strong>".$rep->get('dni')."</strong></li>";
+    echo "<li>Cargo / Función: <strong>".$rep->get('cargofuncion')."</strong></li></ul>";
+
+    echo "<h3>Cesionarios</h3>";
+    $cesionarias = array();
+    foreach($cesiones as $c){
+        echo "<ul><li>Nombre: <strong>".Model_Cliente::find($c->idcesionaria)->get('nombre')."</strong></li>";
+        echo "<li>CIF/NIF: <strong>".Model_Cliente::find($c->idcesionaria)->get('cif_nif')."</strong></li>";
+        echo "<li>Nombre Rep. Legal: <strong>".Model_Personal::find('first', array('where' => array('idcliente' => $c->idcesionaria, 'relacion' => 1)))->get('nombre')."</strong></li>";
+        echo "<li>DNI Rep. Legal: <strong>".Model_Personal::find('first', array('where' => array('idcliente' => $c->idcesionaria, 'relacion' => 1)))->get('dni')."</strong></li></ul>";
+    }
+}
 ?>
 
 <h3>Datos de los ficheros declarados</h3>
@@ -89,6 +114,12 @@ if($ficheros != null){
     }
 }
     echo "<br/>";
-    $params=base64_encode("nombre=".urlencode($cliente->nombre)."&tipo=".$tipo."&cliente_data=".urlencode(json_encode($cliente_data))."&reps_data=".urlencode(json_encode($reps_data))."&pres_name=".urlencode($pres_name)."&f_data=".urlencode(json_encode($ficheros_data))."&max_nivel=".$max_nivel);
-    echo Html::anchor('http://localhost/docpdf/doc_seguridad_ccpp.php?q='.$params, '<span class="glyphicon glyphicon-file"></span> Generar PDF del Documento de seguridad', array('class' => 'btn btn-info','target'=>'_blank'));
-?>
+if($isCPP) {
+    $params = base64_encode("nombre=" . urlencode($cliente->nombre) . "&tipo=" . $tipo . "&cliente_data=" . urlencode(json_encode($cliente_data)) . "&reps_data=" . urlencode(json_encode($reps_data)) . "&pres_name=" . urlencode($pres_name) . "&f_data=" . urlencode(json_encode($ficheros_data)) . "&max_nivel=" . $max_nivel);
+    echo Html::anchor('http://localhost/docpdf/doc_seguridad_ccpp.php?q=' . $params, '<span class="glyphicon glyphicon-file"></span> Generar PDF del Documento de seguridad', array('class' => 'btn btn-info', 'target' => '_blank'));
+}
+else{
+    $params = base64_encode("nombre=" . urlencode($cliente->nombre) . "&tipo=" . $tipo . "&cliente_data=" . urlencode(json_encode($cliente_data)) . "&reps_data=" . urlencode(json_encode($reps_data)) . "&cesionarias=" . urlencode($cesionarias) . "&f_data=" . urlencode(json_encode($ficheros_data)) . "&max_nivel=" . $max_nivel);
+    echo Html::anchor('http://localhost/docpdf/doc_seguridad.php?q=' . $params, '<span class="glyphicon glyphicon-file"></span> Generar PDF del Documento de seguridad', array('class' => 'btn btn-info', 'target' => '_blank'));
+}
+    ?>
