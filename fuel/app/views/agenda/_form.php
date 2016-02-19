@@ -8,6 +8,12 @@ foreach($clientes as $c){
     $clientes_sel[$c->get('id')] = $c->get('nombre');
 }
 
+$user_ops = array();
+$user_ops[0] = "-- SIN ASIGNAR --";
+foreach($users as $u){
+    $user_ops[$u->id] = $u->user;
+}
+
 echo Form::open(array("class"=>"form-horizontal")); ?>
 	<fieldset>
 		<div class="form-group">
@@ -41,6 +47,10 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::label('Observaciones', 'observaciones', array('class'=>'control-label')); ?>
     		<?php echo Form::input('observaciones', Input::post('observaciones', isset($agenda) ? $agenda->observaciones : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Observaciones acerca del cliente')); ?>
 		</div>
+        <div class="form-group">
+            <?php echo Form::label('Asignado a', 'iduser', array('class'=>'control-label')); ?>
+            <?php echo Form::select('iduser', Input::post('iduser', isset($agenda) ? $agenda->iduser : ''),$user_ops, array('class' => 'col-md-4 form-control')); ?>
+        </div>
         <br/>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>

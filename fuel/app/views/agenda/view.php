@@ -23,6 +23,15 @@
 <p>
     <strong>Observaciones:</strong>
     <?php echo $agenda->observaciones; ?></p>
+<p>
+    <strong>Asignado a:</strong>
+    <?php
+    $user = Model_Usuario::find($agenda->iduser);
+    if($user != null){
+        echo $user->user;
+    }else{
+        echo "<span class='red'>-- SIN ASIGNAR --</span>";
+    }?></p>
 <br/>
 <?php echo Html::anchor('agenda/edit/'.$agenda->id, '<span class="glyphicon glyphicon-pencil"></span> Editar evento',array('class'=>'btn btn-success')); ?>&nbsp;
 <?php echo Html::anchor('agenda', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de visitas',array('class'=>'btn btn-danger')); ?>

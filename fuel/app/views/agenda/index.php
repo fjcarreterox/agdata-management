@@ -20,6 +20,7 @@
             <th>Cliente</th>
             <th>Teléfono</th>
             <th>Fecha y hora</th>
+            <th>Asignado a</th>
             <?php if($calendar){
                 echo "<th>Estado cliente</th>";
             }
@@ -43,6 +44,15 @@
                     }else{
                         echo date_conv($item->fecha)." a las $hora[0]:$hora[1]";
                     }
+                    ?></td>
+                <td><?php
+                    $user = Model_Usuario::find($item->iduser);
+                    if($user != null){
+                        echo $user->user;
+                    }else{
+                        echo "-- N/A --";
+                    }
+
                     ?></td>
                 <?php if($calendar) {
                     echo "<td>".Model_Estados_Cliente::find(Model_Cliente::find($item->idcliente)->get('estado'))->get('nombre')."</td>";

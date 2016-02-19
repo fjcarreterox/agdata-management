@@ -96,6 +96,7 @@ class Controller_Agenda extends Controller_Template
 						'hora' => Input::post('hora'),
 						'send_info' => Input::post('send_info'),
 						'observaciones' => Input::post('observaciones'),
+						'iduser' => Input::post('iduser'),
 				));
 
 				if ($agenda and $agenda->save()){
@@ -118,7 +119,7 @@ class Controller_Agenda extends Controller_Template
 		else{
 			$data["clientes"] = Model_Cliente::find('all',array('where'=>array(array('estado','<',3)),'order_by'=>'nombre'));
 		}
-
+        $data['users'] = Model_Usuario::find('all');
 		$this->template->title = "Crear nuevo evento en la Agenda";
 		$this->template->content = View::forge('agenda/create',$data);
 	}
@@ -141,6 +142,7 @@ class Controller_Agenda extends Controller_Template
 			$agenda->hora = Input::post('hora');
 			$agenda->send_info = Input::post('send_info');
 			$agenda->observaciones = Input::post('observaciones');
+			$agenda->iduser = Input::post('iduser');
 
 			if ($agenda->save()){
 				Session::set_flash('success', 'Evento actualizado en la Agenda');
@@ -162,12 +164,14 @@ class Controller_Agenda extends Controller_Template
 				$agenda->hora = $val->validated('hora');
 				$agenda->send_info = $val->validated('send_info');
 				$agenda->observaciones = $val->validated('observaciones');
+				$agenda->iduser = $val->validated('iduser');
 
 				Session::set_flash('error', $val->error());
 			}
 			$this->template->set_global('agenda', $agenda, false);
 		}
         $data["clientes"][] = Model_Cliente::find($agenda->idcliente);
+        $data['users'] = Model_Usuario::find('all');
 		$this->template->title = "Editando evento de la Agenda";
 		$this->template->content = View::forge('agenda/edit',$data);
 	}

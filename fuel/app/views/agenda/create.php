@@ -5,5 +5,6 @@
 <br/>
 <?php
 $data["clientes"] = $clientes;
+$data["users"] = $users;
 echo render('agenda/_form',$data); ?>
 <p><?php echo Html::anchor('agenda', '<span class="glyphicon glyphicon-backward"></span> Volver al listado',array('class'=>'btn btn-danger')); ?></p>

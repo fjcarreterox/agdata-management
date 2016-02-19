@@ -11,6 +11,7 @@ class Model_Agenda extends Model
         'hora',
 		'send_info',
 		'observaciones',
+		'iduser',
 		'created_at',
 		'updated_at',
 	);
