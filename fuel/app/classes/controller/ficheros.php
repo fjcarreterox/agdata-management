@@ -7,6 +7,19 @@ class Controller_Ficheros extends Controller_Template
 		$this->template->content = View::forge('ficheros/index', $data);
 	}
 
+	public function action_noinscritos(){
+		$data['ficheros'] = Model_Fichero::find('all',array('where'=>array('inscrito'=>0)));
+		$this->template->title = "Ficheros pendientes de inscribir";
+		$this->template->content = View::forge('ficheros/noinscritos', $data);
+	}
+
+    public function action_viewall($idcliente){
+        $data['ficheros'] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$idcliente)));
+        $this->template->title = "Ficheros de datos del cliente seleccionado";
+        $data['cliente'] = Model_Cliente::find($idcliente)->get('nombre');
+        $this->template->content = View::forge('ficheros/viewall', $data);
+    }
+
 	public function action_view($id = null){
 		is_null($id) and Response::redirect('ficheros');
 

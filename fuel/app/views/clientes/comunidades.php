@@ -6,7 +6,6 @@
 		<tr>
 			<th>Nombre/Razón social</th>
 			<th>CIF/NIF</th>
-			<th>Teléfono</th>
 			<th>Estado</th>
 			<th>&nbsp;</th>
 		</tr>
@@ -17,14 +16,14 @@
         <tr>
 			<td><?php echo $com->nombre; ?></td>
 			<td><?php echo $com->cif_nif; ?></td>
-			<td><?php echo $com->tel; ?></td>
 			<td><?php echo Model_Estados_Cliente::find($com->estado)->get('nombre'); ?></td>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<?php echo Html::anchor('clientes/view/'.$com->id, '<span class="glyphicon glyphicon-eye-open"></span> Ficha completa', array('class' => 'btn btn-default')); ?>
                         <?php echo Html::anchor('rel/comaaff/delete/'.$com->id.'/'.$idaaff, '<span class="glyphicon glyphicon-trash"></span> Desasociar de este administrador', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de esto?')")); ?>
-                    </div>
+						<?php echo Html::anchor('ficheros/viewall/'.$com->id, '<span class="glyphicon glyphicon-eye-open"></span> Ver ficheros', array('class' => 'btn btn-info')); ?>
+					</div>
 				</div>
 
 			</td>
