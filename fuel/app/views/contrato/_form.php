@@ -9,6 +9,11 @@ $periodo_ops = array(1=>'mensual',2=>'trimestral',3=>'anual',4=>'pago único');
 
 $rep_ops = array(0=>"-- NO DEFINIDO --");
 
+$path="../";
+if(isset($contrato)){
+    $path="../../";
+}
+
 echo Form::open(array("class"=>"form-horizontal")); ?>
 
 	<fieldset>
@@ -41,7 +46,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
         var rep_legal = "-- NO DEFINIDO --";
         $.ajax({
             type: "POST",
-            url: "../personal/getRepLegal",
+            url: <?php echo '"'.$path.'personal/getRepLegal"'; ?>,
             data: values,
             dataType: "json",
             cache: false
@@ -49,9 +54,11 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             $('select#form_idpersonal').find('option').remove().end();
             if(Object.keys(data).length > 0) {
                 var index;
-                for (index = 1; index < Object.keys(data).length; ++index) {
-                    rep_legal = data[index].nombre + " (" + data[index].cargo + ")";
-                    $('select#form_idpersonal').append("<option value='" + data[index].id + "'>" + rep_legal + "</option>");
+                for (index = 0; index < 3; ++index) {
+                    if (typeof data[index] != 'undefined') {
+                        rep_legal = data[index].nombre + " (" + data[index].cargo + ")";
+                        $('select#form_idpersonal').append("<option value='" + data[index].id + "'>" + rep_legal + "</option>");
+                    }
                 }
             }
             else{
