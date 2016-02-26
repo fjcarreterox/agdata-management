@@ -21,5 +21,12 @@
 <p>
 	<strong>Relación con AGDATA:</strong>
 	<?php echo Model_Relacion::find($personal->relacion)->get('nombre'); ?></p>
-<?php echo Html::anchor('personal/edit/'.$personal->id, 'Editar datos'); ?> |
-<?php echo Html::anchor('personal', 'Volver al listado general'); ?>
+<p>
+    <strong>Fecha de alta en el cliente:</strong>
+    <?php echo date_conv($personal->fecha_alta); ?></p>
+<p>
+    <strong>Fecha de baja en el cliente:</strong>
+    <?php echo date_conv($personal->fecha_baja); ?></p>
+<br/>
+<?php echo Html::anchor('personal/edit/'.$personal->id, 'Editar datos',array('class'=>'btn btn-success')); ?>&nbsp;
+<?php echo Html::anchor('personal', 'Volver al listado general',array('class'=>'btn btn-danger')); ?>

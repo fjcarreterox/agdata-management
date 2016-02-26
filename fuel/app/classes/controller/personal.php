@@ -1,9 +1,7 @@
 <?php
 class Controller_Personal extends Controller_Template
 {
-
-    public function action_index($idcliente)
-    {
+    public function action_index($idcliente){
         if(is_null($idcliente)){
             $idcliente = $_POST['idcliente'];
         }
@@ -23,28 +21,23 @@ class Controller_Personal extends Controller_Template
         return new \Response(json_encode($data),200,$content_type);
     }
 
-    public function action_aaff()
-    {
+    public function action_aaff(){
         $data['personals'] = Model_Personal::find('all',array('where' => array('relacion' => 5)));
         $this->template->title = "Personal del cliente";
         $this->template->content = View::forge('personal/index', $data);
     }
 
-    public function action_list($idcliente = null)
-    {
+    public function action_list($idcliente = null){
         is_null($idcliente) and Response::redirect('personal/index');
 
-        if (!Model_Cliente::find($idcliente))
-        {
+        if (!Model_Cliente::find($idcliente)){
             Session::set_flash('error', 'No se ha podido encontrar al cliente buscado.');
             Response::redirect('personal/listall');
         }
         else {
             $nombre_cliente = Model_Cliente::find($idcliente)->get('nombre');
-
             $data['personal'] = Model_Personal::find('all', array('where' => array('idcliente' => $idcliente)));
             $data['nombre_cliente'] = $nombre_cliente;
-
             $this->template->title = "Listado de personal del cliente $nombre_cliente";
             $this->template->content = View::forge('personal/listall', $data);
         }
@@ -56,29 +49,24 @@ class Controller_Personal extends Controller_Template
         $this->template->content = View::forge('personal/listall', $data);
     }
 
-	public function action_view($id = null)
-	{
+	public function action_view($id = null){
 		is_null($id) and Response::redirect('personal/listall');
 
-		if ( ! $data['personal'] = Model_Personal::find($id))
-		{
+		if ( ! $data['personal'] = Model_Personal::find($id)){
 			Session::set_flash('error', 'No se ha podido encontrar al trabajador especificado.');
 			Response::redirect('personal/listall');
 		}
 
 		$this->template->title = "Personal";
 		$this->template->content = View::forge('personal/view', $data);
-
 	}
 
 	public function action_create($idcliente = null){
 
-		if (Input::method() == 'POST')
-		{
+		if (Input::method() == 'POST'){
 			$val = Model_Personal::validate('create');
 
-			if ($val->run())
-			{
+			if ($val->run()){
 				$personal = Model_Personal::forge(array(
 					'idcliente' => Input::post('idcliente'),
 					'tratamiento' => Input::post('tratamiento'),
@@ -88,6 +76,8 @@ class Controller_Personal extends Controller_Template
 					'email' => Input::post('email'),
 					'cargofuncion' => Input::post('cargofuncion'),
 					'relacion' => Input::post('relacion'),
+					'fecha_alta' => Input::post('fecha_alta'),
+					'fecha_baja' => Input::post('fecha_baja'),
 				));
 
 				if ($personal and $personal->save()){
@@ -98,8 +88,7 @@ class Controller_Personal extends Controller_Template
 					Session::set_flash('error', 'No se pudo almacenar los datos del trabajador.');
 				}
 			}
-			else
-			{
+			else{
 				Session::set_flash('error', $val->error());
 			}
 		}
@@ -114,25 +103,21 @@ class Controller_Personal extends Controller_Template
 
         $data["relaciones"] = Model_Relacion::find('all',array('order_by'=>'nombre'));
 
-
 		$this->template->title = "Alta de nuevo Personal en el sistema";
 		$this->template->content = View::forge('personal/create',$data);
 	}
 
-	public function action_edit($id = null)
-	{
+	public function action_edit($id = null){
 		is_null($id) and Response::redirect('personal/listall');
 
-		if ( ! $personal = Model_Personal::find($id))
-		{
+		if ( ! $personal = Model_Personal::find($id)){
 			Session::set_flash('error', 'No se ha podido encontrar al trabajador especificado');
 			Response::redirect('personal/listall');
 		}
 
 		$val = Model_Personal::validate('edit');
 
-		if ($val->run())
-		{
+		if ($val->run()){
 			$personal->idcliente = Input::post('idcliente');
 			$personal->tratamiento = Input::post('tratamiento');
 			$personal->nombre = Input::post('nombre');
@@ -141,6 +126,8 @@ class Controller_Personal extends Controller_Template
 			$personal->email = Input::post('email');
 			$personal->cargofuncion = Input::post('cargofuncion');
 			$personal->relacion = Input::post('relacion');
+			$personal->fecha_alta = Input::post('fecha_alta');
+			$personal->fecha_baja = Input::post('fecha_baja');
 
 			if ($personal->save()){
 				Session::set_flash('success', 'Datos del trabajador actualizados');
@@ -161,6 +148,8 @@ class Controller_Personal extends Controller_Template
 				$personal->email = $val->validated('email');
 				$personal->cargofuncion = $val->validated('cargofuncion');
 				$personal->relacion = $val->validated('relacion');
+				$personal->fecha_alta = $val->validated('fecha_alta');
+				$personal->fecha_baja = $val->validated('fecha_baja');
 				Session::set_flash('error', $val->error());
 			}
 			$this->template->set_global('personal', $personal, false);
@@ -172,8 +161,7 @@ class Controller_Personal extends Controller_Template
 		$this->template->content = View::forge('personal/edit',$data);
 	}
 
-	public function action_delete($id = null)
-	{
+	public function action_delete($id = null){
 		is_null($id) and Response::redirect('personal/listall');
 
 		if ($personal = Model_Personal::find($id)){

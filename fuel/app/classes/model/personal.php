@@ -13,6 +13,8 @@ class Model_Personal extends Model
         'email',
 		'cargofuncion',
 		'relacion',
+		'fecha_alta',
+		'fecha_baja',
 		'created_at',
 		'updated_at',
 	);

@@ -9,7 +9,7 @@ if(isset($nombre_cliente)){
 ?>
 <h2>Listado de <span class='muted'>Personal</span> <?php echo $title; ?></h2>
 <br/>
-<p><?php echo Html::anchor('personal/create', '<span class="glyphicon glyphicon-plus"></span> '.$button_text, array('class' => 'btn btn-success')); ?></p>
+<p><?php echo Html::anchor('personal/create', '<span class="glyphicon glyphicon-plus"></span> '.$button_text, array('class' => 'btn btn-primary')); ?></p>
 <br/>
 <?php if ($personal): ?>
     <p>Nº total de personas en el sistema: <strong><?php echo count($personal); ?></strong></p>
@@ -49,4 +49,4 @@ if(isset($nombre_cliente)){
 <?php else: ?>
     <p>No se han encontrado aún trabajadores registrados de ningún tipo.</p>
 <?php endif; ?>
-<p><?php echo Html::anchor('personal/create', '<span class="glyphicon glyphicon-plus"></span> '.$button_text, array('class' => 'btn btn-success')); ?></p>
+<p><?php echo Html::anchor('personal/create', '<span class="glyphicon glyphicon-plus"></span> '.$button_text, array('class' => 'btn btn-primary')); ?></p>
