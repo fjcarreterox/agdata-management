@@ -70,7 +70,7 @@ class Controller_Clientes extends Controller_Template
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>4)));
         $data['intro'] = "No Interesados";
         $this->template->title = "Contactos aún no interesados";
-        $this->template->content = View::forge('clientes/index', $data);
+        $this->template->content = View::forge('clientes/nointeresados', $data);
     }
 
     public function action_mantenimiento(){

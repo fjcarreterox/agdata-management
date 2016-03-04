@@ -37,6 +37,17 @@ if (!isset($idcliente)) {
         del sistema que se van a volcar
         en el documento PDF correspondiente que se desea generar.</p>
     <ul>
+        <li><?php echo Html::anchor('clientes/doc_seguridad/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Documento de seguridad', array('class' => 'btn btn-info btn-sm'));?></li>
+
+        <?php
+        if(isset($cesiones)) {
+    foreach ($cesiones as $c) {
+    $nombre = Model_Cliente::find($c->idcesionaria)->get('nombre');
+    ?>
+    <li><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-file"></span> Contrato de cesión de datos con ' . $nombre, array('class' => 'btn btn-info btn-sm')); ?></li>
+    <br/>
+        <?php}
+}?>
         <?php if ($tipo == 6) { ?>
             <li><?php echo Html::anchor('http://localhost/docpdf/portada.php?q=' . base64_encode(urlencode($nombre)), '<span class="glyphicon glyphicon-file"></span> Portada de la documentación', array('class' => 'btn btn-info btn-sm', 'target' => '_blank')); ?></li>
             <br/>
@@ -49,17 +60,17 @@ if (!isset($idcliente)) {
             <br/>
 <?php
         }
-    if(isset($cesiones)) {
-        foreach ($cesiones as $c) {
-            $nombre = Model_Cliente::find($c->idcesionaria)->get('nombre');
-            ?>
-            <li><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-file"></span> Contrato de cesión de datos con ' . $nombre, array('class' => 'btn btn-info btn-sm')); ?></li>
-            <br/>
-            <?php
-        }
-    }
+        else{
         ?>
-        <li><?php echo Html::anchor('clientes/doc_seguridad/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Documento de seguridad', array('class' => 'btn btn-info btn-sm'));?></li>
+            <li><?php echo Html::anchor('clientes/doc_cesion/', '<span class="glyphicon glyphicon-file"></span> Xcada trabajador Cláusula legal para empleados', array('class' => 'btn btn-info btn-sm', 'target' => '_blank')); ?></li>
+            <br/>
+            <li><?php echo Html::anchor('clientes/doc_cesion/', '<span class="glyphicon glyphicon-file"></span> Cláusula de recogida de datos de clientes', array('class' => 'btn btn-info btn-sm', 'target' => '_blank')); ?></li>
+            <br/>
+            <li><?php echo Html::anchor('clientes/doc_cesion/', '<span class="glyphicon glyphicon-file"></span> Cláusula de recogida de datos de proveedores', array('class' => 'btn btn-info btn-sm', 'target' => '_blank')); ?></li>
+            <br/>
+            <li><?php echo Html::anchor('clientes/doc_cesion/', '<span class="glyphicon glyphicon-file"></span> Coletilla legal para e-mails', array('class' => 'btn btn-info btn-sm', 'target' => '_blank')); ?></li>
+            <br/>
+  <?php      }
+        ?>
     </ul>
-<?php
-} ?>
+<?php } ?>
