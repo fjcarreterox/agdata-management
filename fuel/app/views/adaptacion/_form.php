@@ -54,6 +54,18 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::label('¿Hay algún tipo de control de acceso a los ficheros de datos? (Vacío si no aplica)', 'access_control', array('class'=>'control-label')); ?>
 			<?php echo Form::input('access_control', Input::post('access_control', isset($adaptacion) ? $adaptacion->access_control : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el tipo de control de acceso utilizado')); ?>
 		</div>
+        <div class="form-group">
+            <?php echo Form::label('¿Se almacenan datos de afiliación sindical para realizar los pagos de las cuotas? (Vacío si no aplica)', 'afiliacion', array('class'=>'control-label')); ?>
+            <?php echo Form::input('access_control', Input::post('access_control', isset($adaptacion) ? $adaptacion->access_control : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el tipo de control de acceso utilizado')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo Form::label('¿Se recaban datos de salud de los empleados?', 'access_control', array('class'=>'control-label')); ?>
+            <?php echo Form::input('access_control', Input::post('access_control', isset($adaptacion) ? $adaptacion->access_control : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el tipo de control de acceso utilizado')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo Form::label('¿Existe para ello consentimiento por escrito del empleado?', 'access_control', array('class'=>'control-label')); ?>
+            <?php echo Form::input('access_control', Input::post('access_control', isset($adaptacion) ? $adaptacion->access_control : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el tipo de control de acceso utilizado')); ?>
+        </div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
 			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar datos de auditoría', array('class' => 'btn btn-primary','type'=>'submit')); ?>
