@@ -170,10 +170,15 @@ class Controller_Clientes extends Controller_Template
                 $data['rels_aaff'] = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idcliente)));
                 $data['pres'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>6)));
             }
+            else{
+                $data['personal'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>6)));
+                $data['trabajadores'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$idcliente,'relacion'=>4)));
+                $data['cesiones'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$idcliente)));
+            }
         }
         $data["ficheros"] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$idcliente)));
 
-        $this->template->title = "Contrato de cesión de datos";
+        $this->template->title = "Documento de seguridad";
         $this->template->content = View::forge('clientes/doc_seguridad', $data);
     }
 
