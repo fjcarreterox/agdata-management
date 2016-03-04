@@ -57,6 +57,7 @@
                             <td><strong>DNI</strong></td>
                             <td><strong>Cargo o función</strong></td>
                             <td><strong>Relación con AGDATA</strong></td>
+                            <td>&nbsp;</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -66,6 +67,7 @@
                                 <td><?php echo $c->dni; ?></td>
                                 <td><?php echo $c->cargofuncion; ?></td>
                                 <td><?php echo Model_Relacion::find($c->relacion)->get('nombre'); ?></td>
+                                <td><?php echo Html::anchor('personal/edit/'.$c->id, '<span class="glyphicon glyphicon-pencil"></span> Editar',array('class'=>'btn btn-success','target'=>'_blank','title'=>'Se abre en ventana nueva...')); ?></td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
@@ -246,7 +248,7 @@
                             <td><?php echo $adaptacion->backup_freq; ?></td>
                         </tr>
                         <tr class="text-left">
-                            <td>Software de gestión para almacenar datos de carárter personal</td>
+                            <td>Software de gestión para almacenar datos de carácter personal</td>
                             <td><?php if($adaptacion->management_sw!=''){echo $adaptacion->management_sw;}else{echo '<span class="red">-- NO ESPECIFICADO --</span>';} ?></td>
                         </tr>
                         <tr class="text-left">
@@ -311,7 +313,7 @@
                     <table class="table table-striped table-bordered table-hover table-responsive">
                         <thead>
                         <tr class="text-center">
-                            <td><strong>Empresa</strong></td>
+                            <td><strong>Cesionario</strong></td>
                             <td><strong>Fichero cesionado</strong></td>
                             <td><strong>Fecha de firma</strong></td>
                             <td>&nbsp;</td>
