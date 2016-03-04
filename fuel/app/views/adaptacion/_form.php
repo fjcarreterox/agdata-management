@@ -9,8 +9,9 @@ $pass_ops = array(
     "Nunca"=>"Nunca"
                 );
 
-echo Form::open(array("class"=>"form-horizontal")); ?>
+$bool_ops = array("NO","SÍ");
 
+echo Form::open(array("class"=>"form-horizontal")); ?>
     <table class="table table-striped table-bordered table-hover table-responsive">
         <tbody>
             <tr class="text-left">
@@ -51,20 +52,20 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::input('management_sw', Input::post('management_sw', isset($adaptacion) ? $adaptacion->management_sw : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el nombre de software de gestión')); ?>
     	</div>
 		<div class="form-group">
-			<?php echo Form::label('¿Hay algún tipo de control de acceso a los ficheros de datos? (Vacío si no aplica)', 'access_control', array('class'=>'control-label')); ?>
+			<?php echo Form::label('¿Hay algún tipo de control de acceso a los ficheros de datos?', 'access_control', array('class'=>'control-label')); ?>
 			<?php echo Form::input('access_control', Input::post('access_control', isset($adaptacion) ? $adaptacion->access_control : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el tipo de control de acceso utilizado')); ?>
 		</div>
         <div class="form-group">
-            <?php echo Form::label('¿Se almacenan datos de afiliación sindical para realizar los pagos de las cuotas? (Vacío si no aplica)', 'afiliacion', array('class'=>'control-label')); ?>
-            <?php echo Form::input('access_control', Input::post('access_control', isset($adaptacion) ? $adaptacion->access_control : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el tipo de control de acceso utilizado')); ?>
+            <?php echo Form::label('¿Se almacenan datos de afiliación sindical para realizar los pagos de las cuotas?', 'afiliacion', array('class'=>'control-label')); ?>
+            <?php echo Form::select('afiliacion', Input::post('afiliacion', isset($adaptacion) ? $adaptacion->afiliacion : ''), $bool_ops, array('class' => 'col-md-4 form-control')); ?>
         </div>
         <div class="form-group">
-            <?php echo Form::label('¿Se recaban datos de salud de los empleados?', 'access_control', array('class'=>'control-label')); ?>
-            <?php echo Form::input('access_control', Input::post('access_control', isset($adaptacion) ? $adaptacion->access_control : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el tipo de control de acceso utilizado')); ?>
+            <?php echo Form::label('¿Se recaban datos de salud de los empleados?', 'salud', array('class'=>'control-label')); ?>
+            <?php echo Form::select('salud', Input::post('salud', isset($adaptacion) ? $adaptacion->salud : ''), $bool_ops, array('class' => 'col-md-4 form-control')); ?>
         </div>
         <div class="form-group">
-            <?php echo Form::label('¿Existe para ello consentimiento por escrito del empleado?', 'access_control', array('class'=>'control-label')); ?>
-            <?php echo Form::input('access_control', Input::post('access_control', isset($adaptacion) ? $adaptacion->access_control : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el tipo de control de acceso utilizado')); ?>
+            <?php echo Form::label('¿Existe para ello consentimiento por escrito del empleado?', 'consentimiento', array('class'=>'control-label')); ?>
+            <?php echo Form::select('consentimiento', Input::post('consentimiento', isset($adaptacion) ? $adaptacion->consentimiento : ''), $bool_ops, array('class' => 'col-md-4 form-control')); ?>
         </div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>

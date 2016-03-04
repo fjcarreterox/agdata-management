@@ -255,6 +255,51 @@
                             <td>Tipo de control de acceso a los ficheros de datos</td>
                             <td><?php if($adaptacion->access_control!=''){echo $adaptacion->access_control;}else{echo '<span class="red">-- NO ESPECIFICADO --</span>';} ?></td>
                         </tr>
+                        <tr>
+                            <td>Datos almacenados de afiliación sindical (pagos de las cuotas)</td>
+                            <td><?php
+                            switch ($adaptacion->afiliacion) {
+                                case 0:
+                                    echo "NO";
+                                    break;
+                                case 1:
+                                    echo "SÍ";
+                                    break;
+                                default:
+                                    echo "-- NO ESPECIFICADO --";
+                            }
+                            ?></td>
+                        </tr>
+                        <tr>
+                            <td>Datos recabados de salud de los empleados</td>
+                            <td><?php
+                                switch ($adaptacion->salud) {
+                                    case 0:
+                                        echo "NO";
+                                        break;
+                                    case 1:
+                                        echo "SÍ";
+                                        break;
+                                    default:
+                                        echo "-- NO ESPECIFICADO --";
+                                }
+                                ?></td>
+                        </tr>
+                        <tr>
+                            <td>Consentimiento por escrito de lo anterior</td>
+                            <td><?php
+                                switch ($adaptacion->consentimiento) {
+                                    case 0:
+                                        echo "NO";
+                                        break;
+                                    case 1:
+                                        echo "SÍ";
+                                        break;
+                                    default:
+                                        echo "-- NO ESPECIFICADO --";
+                                }
+                                ?></td>
+                        </tr>
                         </tbody>
                     </table>
                     <p><?php echo Html::anchor('adaptacion/edit/'.$adaptacion->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos del cuestionario', array('class' => 'btn btn-success')); ?></p>

@@ -15,6 +15,9 @@ class Model_Adaptacion extends Model
 		'backup_freq',
 		'management_sw',
 		'access_control',
+        'afiliacion',
+        'salud',
+        'consentimiento',
 		'created_at',
 		'updated_at',
 	);
