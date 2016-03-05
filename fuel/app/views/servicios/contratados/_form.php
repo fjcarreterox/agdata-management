@@ -6,7 +6,7 @@ foreach($servicios as $s){
 }
 
 $year_ops = array(2013=>"2013",2014=>"2014",2015=>"2015",2016=>"2016",2017=>"2017",2018=>"2018",2019=>"2019",2020=>"2020",2021=>"2021",2022=>"2022",2023=>"2023",2024=>"2024",2025=>"2025");
-$months = array("1"=>"Enero","2"=>"Febrero","3"=>"Marzo","4"=>"Abril","5"=>"Mayo","6"=>"Junio","7"=>"Julio","8"=>"Agosto","9"=>"Septiembre","10"=>"Octubre","11"=>"Noviembre","12   "=>"Diciembre");
+$months = array("-- N/D --","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 $periodo_ops = array(-1=>'-- N/D --',12=>'Mensual',4=>'Trimestral',2=>'Semestral',1=>'Anual',0=>'Pago único');
 $forma_ops = array("transferencia bancaria"=>"transferencia bancaria","recibo domiciliado"=>"recibo domiciliado","cheque/pagaré"=>"cheque/pagaré","en metálico/caja"=>"en metálico/caja");
 

@@ -14,7 +14,7 @@
 	<?php echo $servicios_contratado->year; ?></p>
 <p>
 	<strong>Mes de comienzo de factura:</strong>
-	<?php echo $servicios_contratado->mes_factura; ?></p>
+	<?php echo getMes($servicios_contratado->mes_factura); ?></p>
 <p>
 	<strong>Periodicidad de pago:</strong>
 	<?php
