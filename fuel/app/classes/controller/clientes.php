@@ -182,6 +182,21 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/doc_seguridad', $data);
     }
 
+    public function action_clausula_empleados($idcliente = null){
+
+        is_null($idcliente) and Response::redirect('clientes');
+
+        if ( ! $data['cliente'] = Model_Cliente::find($idcliente)){
+            Session::set_flash('error', 'No se han podido localizar los datos del cliente solicitado.');
+            Response::redirect('clientes');
+        }else{
+            $data['trabajadores'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$idcliente,'relacion'=>4)));
+        }
+
+        $this->template->title = "Cláusulas legales de empleados";
+        $this->template->content = View::forge('clientes/clausula_empleados', $data);
+    }
+
 	public function action_create()
 	{
 		if (Input::method() == 'POST')
