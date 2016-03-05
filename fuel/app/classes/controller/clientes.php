@@ -172,10 +172,10 @@ class Controller_Clientes extends Controller_Template
             }
             else{
                 $data['personal'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>6)));
-                $data['trabajadores'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$idcliente,'relacion'=>4)));
                 $data['cesiones'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$idcliente)));
             }
         }
+        $data['trabajadores'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$idcliente,'relacion'=>4)));
         $data["ficheros"] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$idcliente)));
 
         $this->template->title = "Documento de seguridad";
