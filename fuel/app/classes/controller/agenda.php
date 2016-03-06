@@ -52,6 +52,25 @@ class Controller_Agenda extends Controller_Template
         $this->template->content = View::forge('agenda/index', $data);
     }
 
+    public function action_activos(){
+        $agenda = array();
+        $entradas = Model_Agenda::find('all');
+        foreach($entradas as $e){
+            if(Model_Cliente::find($e->idcliente)->get('estado')==5 || //if active customer
+                Model_Cliente::find($e->idcliente)->get('estado')==6){
+                $agenda[] = $e;
+            }
+        }
+        $data['agendas'] = $agenda;
+        $data['title'] = "Gestión de eventos para clientes activos";
+        $data['intro'] = "Llamadas y visitas de clientes activos en el sistema.";
+        $data['calendar'] = 1;
+        $data['void'] = Model_Agenda::find('all',array('where'=>array('tipo'=>0),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
+
+        $this->template->title = "Gestión de llamadas y visitas";
+        $this->template->content = View::forge('agenda/activos', $data);
+    }
+
 	public function action_view($id = null)
 	{
 		is_null($id) and Response::redirect('agenda');
