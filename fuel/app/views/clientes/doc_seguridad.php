@@ -29,22 +29,23 @@ $cliente_data = array(
 //Only for communities
 $reps_data = array();
 $pres_data = array();
-$pres_name = "NO DISPONIBLE";
 if($isCPP){
+    $pres_name = "NO DISPONIBLE";
+    $falta="";
+    $fbaja="";
     if($pres != null){
         $pres_name = $pres->nombre;
+        $falta=date_conv($pres->fecha_alta);
+        $fbaja=date_conv($pres->fecha_baja);
+        $pres_data["nombre"] = $pres_name;
+        $pres_data["falta"] = date_conv($pres->fecha_alta);
+        $pres_data["fbaja"] = date_conv($pres->fecha_baja);
     }
-    else{
-        $pres_name = "";
-    }
-    $pres_data["nombre"] = $pres_name;
-    $pres_data["falta"] = date_conv($pres->fecha_alta);
-    $pres_data["fbaja"] = date_conv($pres->fecha_baja);
 
     echo "<h3>Presidente</h3>";
     echo "<ul><li>Nombre: <strong>$pres_name</strong></li>";
-    echo "<li>Fecha de alta: <strong>".date_conv($pres->fecha_alta)."</strong></li>";
-    echo "<li>Fecha de baja: <strong>".date_conv($pres->fecha_baja)."</strong></li></ul>";
+    echo "<li>Fecha de alta: <strong>".$falta."</strong></li>";
+    echo "<li>Fecha de baja: <strong>".$fbaja."</strong></li></ul>";
 
     echo "<h3>Representante(s) legal(es)</h3>";
 
