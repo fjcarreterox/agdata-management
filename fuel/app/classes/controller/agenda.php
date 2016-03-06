@@ -143,6 +143,46 @@ class Controller_Agenda extends Controller_Template
 		$this->template->content = View::forge('agenda/create',$data);
 	}
 
+    public function action_create_activo($idcliente = null)
+    {
+        if (Input::method() == 'POST'){
+            $val = Model_Agenda::validate('create');
+
+            if ($val->run()){
+                if($idcliente != null){$id=$idcliente;}
+                else{$id=Input::post('idcliente');}
+                $agenda = Model_Agenda::forge(array(
+                    'idcliente' => $id,
+                    'tipo' => Input::post('tipo'),
+                    'fecha' => Input::post('fecha'),
+                    'hora' => Input::post('hora'),
+                    'send_info' => Input::post('send_info'),
+                    'observaciones' => Input::post('observaciones'),
+                    'iduser' => Input::post('iduser'),
+                ));
+
+                if ($agenda and $agenda->save()){
+                    Session::set_flash('success', 'Añadadido nuevo evento a la Agenda.');
+                    Response::redirect('agenda/activos');
+                }
+                else{
+                    Session::set_flash('error', 'No se ha podido crear el evento en la Agenda.');
+                }
+            }else{
+                Session::set_flash('error', $val->error());
+            }
+        }
+        if($idcliente != null){
+            $data["clientes"][] = Model_Cliente::find($idcliente);
+        }
+        else{
+            $data["clientes"] = Model_Cliente::find('all',array('where'=>array(array('estado'=>5),'or'=>array('estado' =>6)),'order_by'=>'nombre'));
+        }
+        $data['users'] = Model_Usuario::find('all');
+        $this->template->title = "Crear nuevo evento en la Agenda para clientes activos";
+        $this->template->content = View::forge('agenda/create',$data);
+    }
+
 	public function action_edit($id = null)
 	{
 		is_null($id) and Response::redirect('agenda');

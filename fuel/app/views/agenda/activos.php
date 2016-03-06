@@ -14,7 +14,7 @@ if ($agendas):
         if($calendar) {
             echo Html::anchor('agenda/calendar', '<span class="glyphicon glyphicon-calendar"></span> Ver calendario de visitas', array('class' => 'btn btn-info'));
         }?>&nbsp;
-        <?php echo Html::anchor('agenda/create', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?></p>
+        <?php echo Html::anchor('agenda/create_activo', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?></p>
     <br/>
     <table class="table table-striped">
         <thead>
@@ -81,18 +81,14 @@ if ($agendas):
     <p>No se han encontrado aún entradas en la Agenda.</p>
 <?php endif; ?>
 
-<p><?php echo Html::anchor('agenda/create', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?>&nbsp;&nbsp;
+<p><?php echo Html::anchor('agenda/create_activo', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?>&nbsp;&nbsp;
     <?php if($calendar){
         echo Html::anchor('agenda/calendar', '<span class="glyphicon glyphicon-calendar"></span> Ver calendario de visitas', array('class' => 'btn btn-info'))."&nbsp;&nbsp;";
-        echo Html::anchor('agenda/llamadas_comerciales', '<span class="glyphicon glyphicon-eye-open"></span> Ver listado de llamadas', array('class' => 'btn btn-default'));
     }
-    else{
-        echo Html::anchor('agenda', '<span class="glyphicon glyphicon-eye-open"></span> Ver listado de visitas', array('class' => 'btn btn-default'));
-    }?></p>
+?></p>
 <br/>
 <!-- For uncategorized events -->
 <?php if (count($void)>0):
-    $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada");
     ?>
     <h3>Eventos no categorizados</h3>
     <p>Se han detectado los siguientes eventos sin categorizar. Por favor, edítalos y establece si son <strong>
