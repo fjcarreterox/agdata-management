@@ -36,7 +36,18 @@
                         <td><?php echo $cliente->actividad; ?></td>
                     </tr>
                     <tr>
-                        <td colspan="4"><i>Observaciones: </i><strong><?php if($cliente->observ!=''){echo $cliente->observ;}else{echo '<span>Sin observaciones aún.</span>';} ?></strong></td>
+                        <td colspan="4"><i>Observaciones: </i><strong>
+                                <?php if($cliente->observ!=''){
+                                    $res = explode('- ',$cliente->observ);
+                                    echo "<ul>";
+                                    foreach($res as $r){
+                                        echo "<li>".$r."</li>";
+                                    }
+                                    echo "</ul>";
+                                }else{
+                                    echo '<span>Sin observaciones aún.</span>';
+                                } ?>
+                            </strong></td>
                     </tr>
                     </tbody>
                 </table>
