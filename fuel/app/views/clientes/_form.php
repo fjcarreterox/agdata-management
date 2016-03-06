@@ -61,13 +61,13 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             <?php echo Form::label('Correo electrónico', 'email', array('class'=>'control-label')); ?>
             <?php echo Form::input('email', Input::post('email', isset($cliente) ? $cliente->email : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'E-mail de contacto')); ?>
         </div>
+        <div class="form-group">
+            <?php echo Form::label('Estado', 'estado', array('class'=>'control-label')); ?>
+            <?php echo Form::select('estado', Input::post('estado', isset($cliente) ? $cliente->estado : ''), $estados_sel,array('class' => 'col-md-4 form-control', 'placeholder'=>'Estado en el que se encuentra en nuestro sistema')); ?>
+        </div>
 		<div class="form-group">
 			<?php echo Form::label('Observaciones', 'observ', array('class'=>'control-label')); ?>
-			<?php echo Form::input('observ', Input::post('observ', isset($cliente) ? $cliente->observ : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Observaciones de relavancia')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Estado', 'estado', array('class'=>'control-label')); ?>
-			<?php echo Form::select('estado', Input::post('estado', isset($cliente) ? $cliente->estado : ''), $estados_sel,array('class' => 'col-md-4 form-control', 'placeholder'=>'Estado en el que se encuentra en nuestro sistema')); ?>
+			<?php echo Form::textarea('observ', Input::post('observ', isset($cliente) ? $cliente->observ : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Observaciones de relavancia','rows' => 8)); ?>
 		</div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
