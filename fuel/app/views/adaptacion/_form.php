@@ -52,7 +52,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::input('management_sw', Input::post('management_sw', isset($adaptacion) ? $adaptacion->management_sw : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el nombre de software de gestión')); ?>
     	</div>
 		<div class="form-group">
-			<?php echo Form::label('¿Hay algún tipo de control de acceso a los ficheros de datos?', 'access_control', array('class'=>'control-label')); ?>
+			<?php echo Form::label('¿Hay algún tipo de control de acceso físico a los ficheros de datos? (llave, portero automático, teclado de control de acceso)', 'access_control', array('class'=>'control-label')); ?>
 			<?php echo Form::input('access_control', Input::post('access_control', isset($adaptacion) ? $adaptacion->access_control : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el tipo de control de acceso utilizado')); ?>
 		</div>
         <div class="form-group">

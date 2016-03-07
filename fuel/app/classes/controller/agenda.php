@@ -34,9 +34,8 @@ class Controller_Agenda extends Controller_Template
 
     public function action_llamadas_comerciales() //only calls
     {
-        $data['agendas'] = Model_Agenda::find('all',array('where'=>array('tipo'=>2),'order_by'=>array('fecha'=>'asc','hora'=>'asc')));
         $agenda = array();
-        $entradas = Model_Agenda::find('all');
+        $entradas = Model_Agenda::find('all',array('where'=>array('tipo'=>2),'order_by'=>array('fecha'=>'asc','hora'=>'asc')));
         foreach($entradas as $e){
             if(Model_Cliente::find($e->idcliente)->get('estado')<3){
                 $agenda[] = $e;
