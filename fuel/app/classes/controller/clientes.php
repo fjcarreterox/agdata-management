@@ -122,7 +122,6 @@ class Controller_Clientes extends Controller_Template
                 $data['aaff'] = Model_Rel_Comaaff::find('all', array('where' => array('idcom' => $id)));
             }
             $data['presupuestos'] = Model_Presupuesto::find('all', array('where' => array('idcliente' => $id)));
-            $data['ficha'] = Model_Ficha::find('first', array('where' => array('idcliente' => $id)));
             $data['adaptacion'] = Model_Adaptacion::find('first', array('where' => array('idcliente' => $id)));
             $data['ficheros'] = Model_Fichero::find('all', array('where' => array('idcliente' => $id)));
             $data['contrato'] = Model_Contrato::find('first', array('where' => array('idcliente' => $id)));
@@ -197,18 +196,17 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/clausula_empleados', $data);
     }
 
-	public function action_create()
-	{
+	public function action_create(){
 		if (Input::method() == 'POST')
 		{
 			$val = Model_Cliente::validate('create');
 
-			if ($val->run())
-			{
+			if ($val->run()){
 				$cliente = Model_Cliente::forge(array(
 					'nombre' => Input::post('nombre'),
 					'tipo' => Input::post('tipo'),
 					'cif_nif' => Input::post('cif_nif'),
+					'iban' => Input::post('iban'),
 					'direccion' => Input::post('direccion'),
 					'cpostal' => Input::post('cpostal'),
 					'loc' => Input::post('loc'),
@@ -216,10 +214,12 @@ class Controller_Clientes extends Controller_Template
 					'tel' => Input::post('tel'),
 					'tel2' => Input::post('tel2'),
 					'pweb' => Input::post('pweb'),
+					'num_trab' => Input::post('num_trab'),
 					'email' => Input::post('email'),
 					'actividad' => Input::post('actividad'),
 					'observ' => Input::post('observ'),
 					'estado' => Input::post('estado'),
+					'idsituacion' => Input::post('idsituacion'),
 				));
 
 				if ($cliente and $cliente->save()){
@@ -238,8 +238,7 @@ class Controller_Clientes extends Controller_Template
 		$this->template->content = View::forge('clientes/create');
 	}
 
-    public function action_edit($id = null)
-    {
+    public function action_edit($id = null){
         is_null($id) and Response::redirect('clientes');
 
         if ( ! $cliente = Model_Cliente::find($id))
@@ -255,6 +254,7 @@ class Controller_Clientes extends Controller_Template
             $cliente->nombre = Input::post('nombre');
             $cliente->tipo = Input::post('tipo');
             $cliente->cif_nif = Input::post('cif_nif');
+            $cliente->iban = Input::post('iban');
             $cliente->direccion = Input::post('direccion');
             $cliente->cpostal = Input::post('cpostal');
             $cliente->loc = Input::post('loc');
@@ -262,10 +262,12 @@ class Controller_Clientes extends Controller_Template
             $cliente->tel = Input::post('tel');
             $cliente->tel2 = Input::post('tel2');
             $cliente->pweb = Input::post('pweb');
+            $cliente->num_trab = Input::post('num_trab');
             $cliente->email = Input::post('email');
             $cliente->actividad = Input::post('actividad');
             $cliente->observ = Input::post('observ');
             $cliente->estado = Input::post('estado');
+            $cliente->idsituacion = Input::post('idsituacion');
 
             if ($cliente->save()){
                 $t = Model_Tarea::forge();
@@ -288,13 +290,12 @@ class Controller_Clientes extends Controller_Template
                 Session::set_flash('error', 'No se han podido actualizar los datos del cliente.');
             }
         }
-        else
-        {
-            if (Input::method() == 'POST')
-            {
+        else{
+            if (Input::method() == 'POST'){
                 $cliente->nombre = $val->validated('nombre');
                 $cliente->tipo = $val->validated('tipo');
                 $cliente->cif_nif = $val->validated('cif_nif');
+                $cliente->iban = $val->validated('iban');
                 $cliente->direccion = $val->validated('direccion');
                 $cliente->cpostal = $val->validated('cpostal');
                 $cliente->loc = $val->validated('loc');
@@ -302,10 +303,12 @@ class Controller_Clientes extends Controller_Template
                 $cliente->tel = $val->validated('tel');
                 $cliente->tel2 = $val->validated('tel2');
                 $cliente->pweb = $val->validated('pweb');
+                $cliente->num_trab = $val->validated('num_trab');
                 $cliente->email = $val->validated('email');
                 $cliente->actividad = $val->validated('actividad');
                 $cliente->observ = $val->validated('observ');
                 $cliente->estado = $val->validated('estado');
+                $cliente->idsituacion = $val->validated('idsituacion');
 
                 Session::set_flash('error', $val->error());
             }
@@ -316,8 +319,7 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/edit');
     }
 
-	public function action_delete($id = null)
-	{
+	public function action_delete($id = null){
 		is_null($id) and Response::redirect('clientes');
 
 		if ($cliente = Model_Cliente::find($id)){

@@ -35,6 +35,11 @@
                         <td><?php if($cliente->email!=''){echo $cliente->email;}else{echo '<span class="red">-- FALTA E-MAIL --</span>';} ?></td>
                         <td><?php echo $cliente->actividad; ?></td>
                     </tr>
+                    <tr class="text-center">
+                        <td><?php if($cliente->iban!=''){echo $cliente->iban;}else{echo '<span class="red">-- FALTA IBAN --</span>';} ?></td>
+                        <td>Núm. trabajadores: <?php echo $cliente->num_trab;?></td>
+                        <td colspan="2"><?php if($cliente->idsituacion!=0){echo Model_Tipo_Situacion::find($cliente->idsituacion)->get('tipo');}else{echo '<span class="red">-- SITUACIÓN N/D --</span>';} ?></td>
+                    </tr>
                     <tr>
                         <td colspan="4"><i>Observaciones: </i><strong>
                                 <?php if($cliente->observ!=''){
@@ -112,61 +117,12 @@
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo" class="collapsed">
-                    Datos adicionales para presupuestación
+                    Presupuestación
                 </a></span>
             </h3>
         </div>
         <div id="collapseTwo" class="panel-collapse collapse">
             <div class="panel-body">
-                <h4>Datos para presupuestación</h4>
-                    <?php if(empty($ficha)):?>
-                        <p>Se ha detectado que este cliente aún no tiene creada su ficha completa con los
-                            datos específicos requeridos para gestionar adecuadamente sus presupuestos y contratos.</p>
-                        <?php echo Html::anchor('ficha/create/'.$cliente->id, '<span class="glyphicon glyphicon-list"></span> Crear ficha completa de cliente',array('class'=>'btn btn-success')); ?>
-                    <?php else: ?>
-                        <p>Los clientes deben tener cumplimentados los siguientes campos adicionales que nos ayuden a gestionar los servicios
-                            contratados.</p>
-                        <table class="table table-striped table-bordered table-hover table-responsive">
-                            <tbody>
-                            <tr>
-                                <td><strong>Móvil de contacto</strong></td>
-                                <td><?php if($ficha->movil_contacto!=0){echo $ficha->movil_contacto;}else{echo '<span class="red">-- FALTA MÓVIL DE CONTACTO --</span>';} ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>E-mail de contacto</strong></td>
-                                <td><?php if($ficha->email_contacto!=''){echo $ficha->email_contacto;}else{echo '<span class="red">-- FALTA EMAIL DE CONTACTO --</span>';} ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ubicación de otras sedes</strong></td>
-                                <td><?php if($ficha->otras_sedes!=''){echo $ficha->otras_sedes;}else{echo '<span>No especificadas.</span>';} ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Núm. aproximado de trabajadores</strong></td>
-                                <td><?php echo $ficha->num_trabajadores; ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Núm. aproximado de equipos informáticos</strong></td>
-                                <td><?php echo $ficha->num_equipos; ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Código IBAN</strong></td>
-                                <td><?php if($ficha->iban!=''){echo $ficha->iban;}else{echo '<span class="red">-- FALTA CÓDIGO IBAN --</span>';} ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Fecha de entrega de documentación</strong></td>
-                                <td><?php echo date_conv($ficha->fecha_entrega); ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Fecha de auditoría</strong></td>
-                                <td><?php echo date_conv($ficha->fecha_auditoria); ?></td>
-                            </tr>
-
-                            </tbody>
-                        </table>
-                        <?php echo Html::anchor('ficha/edit/'.$cliente->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos específicos',array('class'=>'btn btn-success')); ?> &nbsp;
-                        <?php echo Html::anchor('clientes', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de clientes',array('class'=>'btn btn-danger')); ?>
-                    <?php endif; ?>
-                <br/><br/>
                 <h4>Presupuesto asociado</h4>
                 <?php if(empty($presupuestos)):?>
                     <p>Aún no existe un presupuesto en el sistema asociado a este cliente. Puedes crearlo desde aquí pulsando en el siguiente botón:</p>
