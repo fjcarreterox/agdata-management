@@ -41,8 +41,12 @@ if($isCPP){ ?>
                 $pres_trat = $pres->tratamiento;
                 $pres_name = $pres->nombre;
                 $presidente = $tratamiento_ops[$pres_trat].' '.$pres_name;
+                echo "<strong>".$presidente."</strong>";
             }
-            echo "<strong>".$presidente."</strong>";
+            else{
+                echo "<strong>".$presidente."</strong>";
+                $presidente = "............................................................";
+            }
             ?></li>
     </ul>
 <?php }else{ ?>
