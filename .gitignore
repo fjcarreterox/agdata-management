@@ -34,3 +34,10 @@ desktop.ini
 /fuel/app/vendor
 *.phar
 composer.phar
+docpdf/tutorial
+docpdf/doc
+docpdf/FAQ.htm
+docpdf/error_log
+docpdf/changelog.htm
+docpdf/makefont
+docpdf/font
