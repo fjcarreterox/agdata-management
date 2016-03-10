@@ -21,7 +21,15 @@ class Controller_Tareas extends Controller_Template
             $data['tareas_supp'] = $task->getSuppTasks($idcliente);
         }
 
+        $email_resp="NO DEFINIDO";
+        $resp = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>3)));
+        if($resp != null){
+            $email_resp = $resp->email;
+        }
+
         $data['idcliente'] = $idcliente;
+		$data['email_resp'] = $email_resp;
+
         $this->template->title = "Tareas del cliente seleccionado";
         $this->template->content = View::forge('tareas/list', $data);
     }

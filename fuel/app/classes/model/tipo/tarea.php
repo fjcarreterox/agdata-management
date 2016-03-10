@@ -7,6 +7,7 @@ class Model_Tipo_Tarea extends Model{
 		'nombre',
 		'descripcion',
 		'tipo',
+		'idplantilla',
 		'created_at',
 		'updated_at',
 	);

@@ -3,7 +3,8 @@
 <br/>
 <p><?php echo Html::anchor('tareas/create/'.$idcliente, '<span class="glyphicon glyphicon-plus"></span> Nueva tarea para este cliente', array('class' => 'btn btn-primary')); ?></p>
 <br/>
-<?php if (count($tareas_adapt)>0): ?>
+<?php
+if (count($tareas_adapt)>0): ?>
     <h3 class="muted">Tareas de adaptación</h3>
 <table class="table table-striped">
 	<thead>
@@ -15,7 +16,10 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach ($tareas_adapt as $item): ?>
+<?php
+    foreach ($tareas_adapt as $item):
+        $idplantilla = Model_Tipo_Tarea::find($item->idtipotarea)->get('idplantilla');
+        ?>
         <tr>
 			<td><?php $nombre_tarea = Model_Tipo_Tarea::find($item->idtipotarea)->get('nombre');echo $nombre_tarea; ?></td>
 			<td><?php echo date_conv($item->fecha); ?></td>
@@ -26,8 +30,9 @@
 						<?php echo Html::anchor('tareas/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar', array('class' => 'btn btn-success')); ?>
                         <?php echo Html::anchor('tareas/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de querer borrarla?')")); ?>
                         <?php
-                            if(strpos($nombre_tarea,'Correo') !== false){
-                                echo Html::mail_to('pepe@pepe', '<span class="glyphicon glyphicon-envelope"></span> Enviar Correo', 'Asunto', array('class' => 'btn btn-warning'));
+                            if($idplantilla != 0){
+                                $body = Model_Tipo_Plantilla::find($idplantilla)->get('cuerpo');
+                                echo Html::mail_to($email_resp, '<span class="glyphicon glyphicon-envelope"></span> Enviar Correo', urlencode($body), array('class' => 'btn btn-warning'));
                             }
                         ?>
                     </div>

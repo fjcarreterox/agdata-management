@@ -66,7 +66,7 @@ class Model_Tarea extends Model
     /* GETTERS  */
     public function getAdapTasks($idcliente){
         $res = array();
-        $tasks =Model_Tarea::find('all',array('where'=>array('idcliente'=>$idcliente),'order_by'=>array('fecha'=>'asc')));
+        $tasks =Model_Tarea::find('all',array('where'=>array('idcliente'=>$idcliente),'order_by'=>array('fecha'=>'asc','idtipotarea'=>'asc')));
         if($tasks != null){
             foreach($tasks as $t){
                 $taskType = Model_Tipo_Tarea::find($t->idtipotarea);
@@ -80,7 +80,7 @@ class Model_Tarea extends Model
 
     public function getSuppTasks($idcliente){
         $res = array();
-        $tasks =Model_Tarea::find('all',array('where'=>array('idcliente'=>$idcliente),'order_by'=>array('fecha'=>'asc')));
+        $tasks =Model_Tarea::find('all',array('where'=>array('idcliente'=>$idcliente),'order_by'=>array('fecha'=>'asc','idtipotarea'=>'asc')));
         if($tasks != null){
             foreach($tasks as $t){
                 $taskType = Model_Tipo_Tarea::find($t->idtipotarea);

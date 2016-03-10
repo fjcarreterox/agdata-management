@@ -8,6 +8,7 @@
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Tipo</th>
+            <th>Plantilla asociada</th>
             <th>&nbsp;</th>
         </tr>
         </thead>
@@ -17,6 +18,14 @@
                 <td><?php echo $item->nombre; ?></td>
                 <td><?php echo $item->descripcion; ?></td>
                 <td><?php echo Model_Servicio::find($item->tipo)->get('nombre'); ?></td>
+                <td><?php
+                    if($item->idplantilla != 0) {
+                        echo Model_Tipo_Plantilla::find($item->idplantilla)->get('nombre');
+                    }
+                    else{
+                        echo "-- N/D --";
+                    }
+                        ?></td>
                 <td>
                     <div class="btn-toolbar">
                         <div class="btn-group">

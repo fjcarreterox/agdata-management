@@ -29,6 +29,7 @@ class Controller_Tipo_Tarea extends Controller_Template
 					'nombre' => Input::post('nombre'),
 					'descripcion' => Input::post('descripcion'),
 					'tipo' => Input::post('tipo'),
+					'idplantilla' => Input::post('idplantilla'),
 				));
 
 				if ($tipo_tarea and $tipo_tarea->save()){
@@ -63,6 +64,7 @@ class Controller_Tipo_Tarea extends Controller_Template
 			$tipo_tarea->nombre = Input::post('nombre');
 			$tipo_tarea->descripcion = Input::post('descripcion');
 			$tipo_tarea->tipo = Input::post('tipo');
+			$tipo_tarea->idplantilla = Input::post('idplantilla');
 
 			if ($tipo_tarea->save()){
 				Session::set_flash('success', 'Tipo de tarea actualizada con éxito');
@@ -77,11 +79,13 @@ class Controller_Tipo_Tarea extends Controller_Template
 				$tipo_tarea->nombre = $val->validated('nombre');
 				$tipo_tarea->descripcion = $val->validated('descripcion');
 				$tipo_tarea->tipo = $val->validated('tipo');
+				$tipo_tarea->idplantilla = $val->validated('idplantilla');
 				Session::set_flash('error', $val->error());
 			}
 			$this->template->set_global('tipo_tarea', $tipo_tarea, false);
 		}
         $data["servicios"] = Model_Servicio::find('all');
+        $data["plantillas"] = Model_Tipo_Plantilla::find('all',array('order_by'=>'id'));
 
 		$this->template->title = "Tipo_tareas";
 		$this->template->content = View::forge('tipo/tarea/edit',$data);

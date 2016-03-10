@@ -1,8 +1,15 @@
 <?php
+$plantillas_ops = array();
+$plantillas_ops[0]="-- SIN PLANTILLA ASOCIADA --";
+foreach($plantillas as $p){
+    $plantillas_ops[$p->id] = $p->nombre;
+}
+
 $servicios_ops = array();
 foreach($servicios as $s){
     $servicios_ops[$s->id] = $s->nombre;
 }
+
 echo Form::open(array("class" => "form-horizontal")); ?>
     <fieldset>
         <div class="form-group">
@@ -16,6 +23,10 @@ echo Form::open(array("class" => "form-horizontal")); ?>
         <div class="form-group">
             <?php echo Form::label('Tipo', 'tipo', array('class' => 'control-label')); ?>
             <?php echo Form::select('tipo', Input::post('tipo', isset($tipo_tarea) ? $tipo_tarea->tipo : ''), $servicios_ops,array('class' => 'col-md-4 form-control')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo Form::label('Plantilla de e-mail asociada', 'idplantilla', array('class' => 'control-label')); ?>
+            <?php echo Form::select('idplantilla', Input::post('idplantilla', isset($tipo_tarea) ? $tipo_tarea->idplantilla : ''), $plantillas_ops,array('class' => 'col-md-4 form-control')); ?>
         </div>
         <div class="form-group">
             <label class='control-label'>&nbsp;</label>
