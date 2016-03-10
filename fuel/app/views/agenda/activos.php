@@ -4,9 +4,6 @@
 $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría");
 if ($agendas):
     $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría");
-    $subject = 'Servicios AGDATA LOPD 2016';
-    $body_aaff = 'A/A.:_______%0D%0A%0D%0ABuenos días,%0D%0A%0D%0ASegún conversación telefónica, le hacemos llegar información sobre nuestros servicios en materia de Protección de Datos, tanto para su despacho como para sus Comunidades de Propietarios.%0D%0A%0D%0AComo podrá comprobar, Análisis y Gestión de Datos SL, se encarga de actualizarles toda la documentación legal necesaria, de modificar o inscribir en la Agencia Española de Protección de Datos los ficheros de datos que gestione Ud. o la Comunidad de Propietarios, así como del asesoramiento jurídico ante cualquier consulta que puedan plantearle los propietarios en materia de protección de datos.%0D%0A%0D%0AComo asesores jurídicos del Colegio de Administradores de Fincas, le instamos a poder ampliarles esta información en una visita personal, para conocer su situación actual, así como aclararle cualquier consulta que tenga.%0D%0A%0D%0ASin otro particular,%0D%0A%0D%0AReciba un cordial saludo.%0D%0A%0D%0A ';
-    $body = 'A/A.:_______%0D%0A%0D%0ABuenos días,%0D%0A%0D%0ASegún conversación telefónica, le hacemos llegar información sobre nuestros servicios en materia de Protección de Datos.%0D%0A%0D%0AComo podrá comprobar, Análisis y Gestión de Datos SL, se encarga de actualizarles toda la documentación legal necesaria, de modificar o inscribir en la Agencia Española de Protección de Datos los ficheros de datos que gestione en el desarrollo de su actividad profesional, así como del asesoramiento jurídico ante cualquier consulta que se le puedan plantear en materia de protección de datos.%0D%0A%0D%0AEn cualquier caso, le instamos a poder ampliarles esta información en una visita personal, para conocer su situación actual, así como aclararle cualquier consulta que tenga.%0D%0A%0D%0ASin otro particular,%0D%0A%0D%0AReciba un cordial saludo.%0D%0A%0D%0A ';
     ?>
     <p><?php echo $intro;?></p>
     <br/>
@@ -14,7 +11,8 @@ if ($agendas):
         if($calendar) {
             echo Html::anchor('agenda/calendar', '<span class="glyphicon glyphicon-calendar"></span> Ver calendario de visitas', array('class' => 'btn btn-info'));
         }?>&nbsp;
-        <?php echo Html::anchor('agenda/create_activo', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?></p>
+        <?php echo Html::anchor('agenda/create_activo', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?>&nbsp;
+        <?php echo Html::anchor('agenda/create_activo/0', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo asunto particular', array('class' => 'btn btn-primary')); ?></p>
     <br/>
     <table class="table table-striped">
         <thead>
@@ -81,11 +79,13 @@ if ($agendas):
     <p>No se han encontrado aún entradas en la Agenda.</p>
 <?php endif; ?>
 
-<p><?php echo Html::anchor('agenda/create_activo', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?>&nbsp;&nbsp;
-    <?php if($calendar){
+<p><?php if($calendar){
         echo Html::anchor('agenda/calendar', '<span class="glyphicon glyphicon-calendar"></span> Ver calendario de visitas', array('class' => 'btn btn-info'))."&nbsp;&nbsp;";
     }
-?></p>
+?>
+    <?php echo Html::anchor('agenda/create_activo', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?>&nbsp;
+    <?php echo Html::anchor('agenda/create_activo/0', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo asunto particular', array('class' => 'btn btn-primary')); ?>&nbsp;
+</p>
 <br/>
 <!-- For uncategorized events -->
 <?php if (count($void)>0):
