@@ -12,11 +12,6 @@ class Controller_Contrato extends Controller_Template
         $contrato = Model_Contrato::find($idcontrato);
 
         $c = Model_Cliente::find($contrato->idcliente);
-        $iban="NO DISPONIBLE";
-        $f = Model_Ficha::find('first',array('where'=>array('idcliente'=>$contrato->idcliente)));
-        if($f != null && $f->iban != ""){
-            $iban = $f->iban;
-        }
         $cliente = array(
             "nombre"=> $c->nombre,
             "tipo"=> $c->tipo,
@@ -26,7 +21,7 @@ class Controller_Contrato extends Controller_Template
 			"loc"=>$c->loc,
 			"prov"=>$c->prov,
             "actividad"=> $c->actividad,
-            "iban"=> $iban
+            "iban"=> $c->iban
         );
 
         //only for communities
