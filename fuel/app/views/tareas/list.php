@@ -6,42 +6,43 @@
 <?php
 if (count($tareas_adapt)>0): ?>
     <h3 class="muted">Tareas de adaptación</h3>
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Nombre</th>
-			<th>Fecha</th>
-			<th>Fecha respuesta</th>
-			<th>&nbsp;</th>
-		</tr>
-	</thead>
-	<tbody>
-<?php
-    foreach ($tareas_adapt as $item):
-        $idplantilla = Model_Tipo_Tarea::find($item->idtipotarea)->get('idplantilla');
-        ?>
+    <table class="table table-striped">
+        <thead>
         <tr>
-			<td><?php $nombre_tarea = Model_Tipo_Tarea::find($item->idtipotarea)->get('nombre');echo $nombre_tarea; ?></td>
-			<td><?php echo date_conv($item->fecha); ?></td>
-			<td><?php echo date_conv($item->fecha_respuesta); ?></td>
-			<td>
-				<div class="btn-toolbar">
-					<div class="btn-group">
-						<?php echo Html::anchor('tareas/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar', array('class' => 'btn btn-success')); ?>
-                        <?php echo Html::anchor('tareas/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de querer borrarla?')")); ?>
-                        <?php
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Fecha respuesta</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($tareas_adapt as $item):
+            $idplantilla = Model_Tipo_Tarea::find($item->idtipotarea)->get('idplantilla');
+            ?>
+            <tr>
+                <td><?php $nombre_tarea = Model_Tipo_Tarea::find($item->idtipotarea)->get('nombre');echo $nombre_tarea; ?></td>
+                <td><?php echo date_conv($item->fecha); ?></td>
+                <td><?php echo date_conv($item->fecha_respuesta); ?></td>
+                <td>
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <?php echo Html::anchor('tareas/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar', array('class' => 'btn btn-success')); ?>
+                            <?php echo Html::anchor('tareas/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de querer borrarla?')")); ?>
+                            <?php
                             if($idplantilla != 0){
+                                $subject= Model_Tipo_Plantilla::find($idplantilla)->get('nombre');
                                 $body = Model_Tipo_Plantilla::find($idplantilla)->get('cuerpo');
-                                echo Html::mail_to($email_resp, '<span class="glyphicon glyphicon-envelope"></span> Enviar Correo', urlencode($body), array('class' => 'btn btn-warning'));
+                                echo Html::mail_to($email_resp, '<span class="glyphicon glyphicon-envelope"></span> Enviar Correo', $subject.'&body='.str_replace("+"," ",urlencode($body)), array('class' => 'btn btn-warning'));
                             }
-                        ?>
+                            ?>
+                        </div>
                     </div>
-				</div>
-			</td>
-		</tr>
-<?php endforeach; ?>
-    </tbody>
-</table>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
 <?php else: ?>
     <p>No se han encontrado aún <u>tareas de adaptación</u> definidas para este cliente.</p>
 <?php endif; ?>
