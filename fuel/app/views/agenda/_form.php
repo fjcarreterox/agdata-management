@@ -1,5 +1,5 @@
 <?php
-$tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría");
+$tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría","asuntos varios");
 $send_info = array("NO","SÍ");
 
 $clientes_sel = array();

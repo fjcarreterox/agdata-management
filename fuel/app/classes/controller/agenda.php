@@ -16,19 +16,42 @@ class Controller_Agenda extends Controller_Template
 	}
 
     public function action_calendar(){
-        $eventos = Model_Agenda::find('all',array('where'=>array(array('tipo'=>1),'or'=>array('tipo' => '3'))));
+        $eventos = Model_Agenda::find('all',array('where'=>array(array('tipo'=>1),'or'=>array(array('tipo' ,'>', '2')))));
         foreach($eventos as $e){
+            $cliente_name = "";
+            if($e->idcliente != 0){$cliente_name = Model_Cliente::find($e->idcliente)->get('nombre');}
             $data['eventos'][$e->id] = array(
                 "fecha" => $e->fecha,
                 "hora" => $e->hora,
                 "tipo" => $e->tipo,
                 "idcliente" => $e->idcliente,
-                "cliente" => Model_Cliente::find($e->idcliente)->get('nombre'),
+                "cliente" => $cliente_name,
                 "obs" => $e->observaciones
             );
         }
         $data['default_date'] = date("Y-m-d",time());
         $this->template->title = "Calendario de visitas";
+        $this->template->content = View::forge('agenda/calendar', $data);
+    }
+
+    public function action_usercal($iduser){
+        $eventos = Model_Agenda::find('all',array('where'=>array(array(array('tipo'=>1),'or'=>array('tipo' ,'>', '2')))));
+
+        foreach($eventos as $e){
+            if($e->iduser == $iduser) {
+                $data['eventos'][$e->id] = array(
+                    "fecha" => $e->fecha,
+                    "hora" => $e->hora,
+                    "tipo" => $e->tipo,
+                    "idcliente" => $e->idcliente,
+                    "cliente" => Model_Cliente::find($e->idcliente)->get('nombre'),
+                    "obs" => $e->observaciones
+                );
+            }
+        }
+        $data['default_date'] = date("Y-m-d",time());
+        $data['cal_title'] = "Calendario propio para el usuario: ".Model_Usuario::find($iduser)->get('nombre');
+        $this->template->title = "Calendario de visitas para el usuario ".Model_Usuario::find($iduser)->get('nombre');
         $this->template->content = View::forge('agenda/calendar', $data);
     }
 
@@ -55,7 +78,7 @@ class Controller_Agenda extends Controller_Template
         $agenda = array();
         $entradas = Model_Agenda::find('all');
         foreach($entradas as $e){
-            if(Model_Cliente::find($e->idcliente)->get('estado')==5 || //if active customer
+            if($e->idcliente == 0 || Model_Cliente::find($e->idcliente)->get('estado')==5 || //if active customer
                 Model_Cliente::find($e->idcliente)->get('estado')==6){
                 $agenda[] = $e;
             }
@@ -97,6 +120,38 @@ class Controller_Agenda extends Controller_Template
 
         $this->template->title = "Ver detalle del evento de la Agenda";
         $this->template->content = View::forge('agenda/index', $data);
+    }
+
+    public function action_create_asunto(){
+        if (Input::method() == 'POST'){
+            $val = Model_Agenda::validate('create');
+
+            if ($val->run()){
+                $agenda = Model_Agenda::forge(array(
+                    'idcliente' => 0,
+                    'tipo' => 4,
+                    'fecha' => Input::post('fecha'),
+                    'hora' => Input::post('hora'),
+                    'send_info' => 0,
+                    'observaciones' => Input::post('observaciones'),
+                    'iduser' => Input::post('iduser'),
+                ));
+
+                if ($agenda and $agenda->save()){
+                    Session::set_flash('success', 'Añadadido nuevo asunto propio a la Agenda.');
+                    Response::redirect('agenda/activos');
+                }
+                else{
+                    Session::set_flash('error', 'No se ha podido crear el asunto propio en la Agenda.');
+                }
+            }else{
+                Session::set_flash('error', $val->error());
+            }
+        }
+
+        $data['users'] = Model_Usuario::find('all');
+        $this->template->title = "Crear nuevo asunto propio en la Agenda";
+        $this->template->content = View::forge('agenda/create_asunto',$data);
     }
 
 	public function action_create($idcliente = null)

@@ -1,18 +1,17 @@
 <h2><?php echo $title; ?></h2>
 <br/>
 <?php
-$tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría");
 if ($agendas):
-    $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría");
+    $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría","asuntos varios");
     ?>
     <p><?php echo $intro;?></p>
     <br/>
     <p><?php
         if($calendar) {
-            echo Html::anchor('agenda/calendar', '<span class="glyphicon glyphicon-calendar"></span> Ver calendario de visitas', array('class' => 'btn btn-info'));
+            echo Html::anchor('agenda/calendar', '<span class="glyphicon glyphicon-calendar"></span> Ver calendario', array('class' => 'btn btn-info'));
         }?>&nbsp;
-        <?php echo Html::anchor('agenda/create_activo', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?>&nbsp;
-        <?php echo Html::anchor('agenda/create_activo/0', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo asunto particular', array('class' => 'btn btn-primary')); ?></p>
+        <?php echo Html::anchor('agenda/create_activo', '<span class="glyphicon glyphicon-plus"></span> Nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?>&nbsp;
+        <?php echo Html::anchor('agenda/create_asunto', '<span class="glyphicon glyphicon-plus"></span> Nuevo asunto particular', array('class' => 'btn btn-primary')); ?></p>
     <br/>
     <table class="table table-striped">
         <thead>
@@ -33,7 +32,13 @@ if ($agendas):
             $hora=explode(":",$item->hora);
             ?>
             <tr>
-                <td><?php echo Model_Cliente::find($item->idcliente)->get('nombre');
+                <td><?php
+                    if($item->idcliente != 0) {
+                        echo Model_Cliente::find($item->idcliente)->get('nombre');
+                    }
+                    else{
+                        echo "ASUNTO PARTICULAR";
+                    }
                     /*Html::anchor('agenda/view_events/'.$item->idcliente,Model_Cliente::find($item->idcliente)->get('nombre'),array('title'=>'Ver eventos sólo de este cliente'));*/ ?></td>
                 <td><?php echo $tipo_ops[$item->tipo]; ?></td>
                 <td><?php $dist = abs(strtotime($item->fecha) - strtotime(date('Y-m-d'))) / (60*60*24);
@@ -55,7 +60,12 @@ if ($agendas):
 
                     ?></td>
                 <?php if($calendar) {
-                    echo "<td>".Model_Estados_Cliente::find(Model_Cliente::find($item->idcliente)->get('estado'))->get('nombre')."</td>";
+                    if($item->idcliente != 0){
+                        echo "<td>".Model_Estados_Cliente::find(Model_Cliente::find($item->idcliente)->get('estado'))->get('nombre')."</td>";
+                    }
+                    else{
+                        echo "<td>-- N/D --</td>";
+                    }
                 }?>
                 <td>
                     <div class="btn-toolbar">
@@ -80,11 +90,11 @@ if ($agendas):
 <?php endif; ?>
 
 <p><?php if($calendar){
-        echo Html::anchor('agenda/calendar', '<span class="glyphicon glyphicon-calendar"></span> Ver calendario de visitas', array('class' => 'btn btn-info'))."&nbsp;&nbsp;";
+        echo Html::anchor('agenda/calendar', '<span class="glyphicon glyphicon-calendar"></span> Ver calendario', array('class' => 'btn btn-info'))."&nbsp;&nbsp;";
     }
 ?>
-    <?php echo Html::anchor('agenda/create_activo', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?>&nbsp;
-    <?php echo Html::anchor('agenda/create_activo/0', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo asunto particular', array('class' => 'btn btn-primary')); ?>&nbsp;
+    <?php echo Html::anchor('agenda/create_activo', '<span class="glyphicon glyphicon-plus"></span> Nuevo evento en la Agenda', array('class' => 'btn btn-primary')); ?>&nbsp;
+    <?php echo Html::anchor('agenda/create_asunto', '<span class="glyphicon glyphicon-plus"></span> Nuevo asunto particular', array('class' => 'btn btn-primary')); ?>&nbsp;
 </p>
 <br/>
 <!-- For uncategorized events -->

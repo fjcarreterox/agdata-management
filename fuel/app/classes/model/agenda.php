@@ -30,7 +30,7 @@ class Model_Agenda extends Model
 	public static function validate($factory)
 	{
 		$val = Validation::forge($factory);
-		$val->add_field('idcliente', 'Cliente', 'required|valid_string[numeric]');
+		//$val->add_field('idcliente', 'Cliente', 'required|valid_string[numeric]');
 		//$val->add_field('send_info', 'Información enviada', 'required');
 		//$val->add_field('observaciones', 'observaciones', 'required|max_length[255]');
 		return $val;

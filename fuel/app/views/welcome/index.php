@@ -75,6 +75,7 @@
                     <li><a href="agenda">Gestión de visitas y calendario</a></li>
                     <li><a href="clientes/presupuestados">Clientes presupuestados</a></li>
                     <li><a href="clientes/nointeresados">No interesados</a></li>
+                    <li><a href="agenda/usercal/<?php echo Session::get('iduser');?>">Mi calendario <span class="glyphicon glyphicon-calendar"></span></a></li>
                 </ul>
             </div>
 			<div class="col-md-4">

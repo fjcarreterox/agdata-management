@@ -35,11 +35,11 @@ echo Asset::css('fullcalendar.print.css', array('media' => 'print'), null, false
                 events: [
 <?php
                 if(isset($eventos)){
-                    $title = "Visita a ";
-                    $fondo = "";
                     foreach($eventos as $id => $e){
-                        if($e['tipo']== 3){$title = "Auditoría a "; $fondo = ", backgroundColor: '#a00', borderColor: '#a00' ";}
-                        echo "{id:$id, title:'".$title.html_entity_decode($e["cliente"])."', data_type:'".$e["tipo"]."', start:'".$e["fecha"]."T".$e["hora"]."', url:'../clientes/view/".$e["idcliente"]."', description:'".$e["obs"]."'".$fondo."},";
+                        if($e['tipo']== 3){$title = "Auditoría a ".html_entity_decode($e["cliente"]); $fondo = ", backgroundColor: '#a00', borderColor: '#a00' ";}
+                        elseif($e['tipo']== 4){$title = "Asuntos varios "; $fondo = ", backgroundColor: '#666', borderColor: '#333' ";}
+                        else{$title = "Visita a ".html_entity_decode($e["cliente"]); $fondo = "";}
+                        echo "{id:$id, title:'".$title."', data_type:'".$e["tipo"]."', start:'".$e["fecha"]."T".$e["hora"]."', url:'../clientes/view/".$e["idcliente"]."', url2:'/agdata-gestion/public/agenda/edit/".$id."', description:'".$e["obs"]."'".$fondo."},";
                     }
                 }
 ?>
@@ -56,6 +56,8 @@ echo Asset::css('fullcalendar.print.css', array('media' => 'print'), null, false
                         }
                         $("#eventLink").attr('href', event.url);
                         $("#eventLink").attr('title', 'Se abre en ventana nueva...');
+                        $("#eventEdit").attr('href', event.url2);
+                        $("#eventEdit").attr('title', 'Se abre en ventana nueva...');
                         $("#eventContent").dialog({ modal: true, title: event.title, width:450});
                     });
                 }
@@ -66,6 +68,11 @@ echo Asset::css('fullcalendar.print.css', array('media' => 'print'), null, false
 <h2>Calendario de <span class='muted'>visitas y auditorías</span> registradas en el sistema</h2>
 <p>En el siguiente calendario no se pueden borrar los eventos que aparecen. Para ello deberás volver al listado de
     <u>eventos</u> y eliminar o editar datos de los eventos que desees.</p>
+<?php
+if(isset($cal_title)){
+    echo "<h3>".$cal_title."</h3><br/>";
+}
+?>
 <br/>
 <div id="calendar"></div>
 <br/>
@@ -76,7 +83,8 @@ echo Asset::css('fullcalendar.print.css', array('media' => 'print'), null, false
     <br/><br/>
     <p><strong>Observaciones:</strong></p>
     <p id="eventInfo"></p>
-    <p><strong><a id="eventLink" href="" target="_blank">Abrir ficha de cliente</a></strong></p>
+    <p><strong><a id="eventEdit" href="" target="_blank">Editar evento</a></strong>&nbsp;&nbsp;
+        <strong><a id="eventLink" href="" target="_blank">Abrir ficha de cliente</a></strong></p>
 </div>
 
 <p><?php echo Html::anchor('agenda/create', '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento', array('class' => 'btn btn-primary')); ?>&nbsp;&nbsp;
