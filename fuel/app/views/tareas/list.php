@@ -1,8 +1,7 @@
 <h2>Listado de <span class='muted'>tareas</span> del cliente
     <span class='muted'><?php echo Model_Cliente::find($idcliente)->get('nombre'); ?></span></h2>
 <br/>
-<p><?php echo Html::anchor('tareas/create/'.$idcliente, '<span class="glyphicon glyphicon-plus"></span> Nueva tarea para este cliente', array('class' => 'btn btn-primary')); ?></p>
-<br/>
+<p><?php echo Html::anchor('clientes/view/'.$idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Ir a la Ficha del cliente', array('class' => 'btn btn-default','target'=>'_blank')); ?></p>
 <?php
 if (count($tareas_adapt)>0): ?>
     <h3 class="muted">Tareas de adaptación</h3>
@@ -80,5 +79,4 @@ if (count($tareas_adapt)>0): ?>
     <p>No se han encontrado aún <u>tareas de mantenimiento</u> definidas para este cliente.</p>
 <?php endif; ?>
 <br/>
-<p><?php echo Html::anchor('tareas/create/'.$idcliente, '<span class="glyphicon glyphicon-plus"></span> Nueva tarea para este cliente', array('class' => 'btn btn-primary')); ?>&nbsp;
-    <?php echo Html::anchor('clientes/view/'.$idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Ir a la Ficha del cliente', array('class' => 'btn btn-default','target'=>'_blank')); ?></p>
+<p><?php echo Html::anchor('clientes/view/'.$idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Ir a la Ficha del cliente', array('class' => 'btn btn-default','target'=>'_blank')); ?></p>

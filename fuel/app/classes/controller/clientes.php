@@ -77,7 +77,7 @@ class Controller_Clientes extends Controller_Template
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>6,array('tipo','<>',6))));
         $data['intro'] = "en régimen de mantenimiento de la LOPD";
         $this->template->title = "Clientes en régimen de mantenimiento de la LOPD";
-        $this->template->content = View::forge('clientes/index', $data);
+        $this->template->content = View::forge('clientes/mantenimiento', $data);
     }
 
     public function action_com_mantenimiento(){

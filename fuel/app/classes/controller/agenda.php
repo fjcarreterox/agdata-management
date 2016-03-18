@@ -199,7 +199,7 @@ class Controller_Agenda extends Controller_Template
 			$data["clientes"][] = Model_Cliente::find($idcliente);
 		}
 		else{
-			$data["clientes"] = Model_Cliente::find('all',array('where'=>array(array('estado','<',3)),'order_by'=>'nombre'));
+			$data["clientes"] = Model_Cliente::find('all',array('where'=>array(array('estado','<',4)),'order_by'=>'nombre'));
 		}
         $data['users'] = Model_Usuario::find('all');
 		$this->template->title = "Crear nuevo evento en la Agenda";
