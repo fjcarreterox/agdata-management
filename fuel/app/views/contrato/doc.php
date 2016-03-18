@@ -48,12 +48,19 @@ if($cliente["tipo"] == 6){
 $servicios_data = array();
 $periodo_ops = array(12=>'Mensual',4=>'Trimestral',2=>'Semestral',1=>'Anual',0=>'Pago único');
 foreach($servicios as $s):
-    $nombre = Model_Servicio::find($s->idtipo_servicio)->get('nombre');?>
+    $nombre = Model_Servicio::find($s->idtipo_servicio)->get('nombre');
+    $num_cuotas=1;
+    if($s->periodicidad != 0){
+        if($s->idtipo_servicio == 1){$num_cuotas=$s->periodicidad;}
+        else{$num_cuotas=2*$s->periodicidad;}
+    }
+    ?>
     <ul>
         <li>Nombre: <strong><?php echo $nombre;?></strong></li>
         <li>Precio: <strong><?php echo $s->importe;?> &euro;</strong></li>
         <li>Periodicidad: <strong><?php echo $periodo_ops[$s->periodicidad];?></strong></li>
         <li>Cuota: <strong><?php echo $s->cuota;?> &euro;</strong></li>
+        <li>Número de cuotas: <strong><?php echo $num_cuotas;?></strong></li>
         <li>Tipo de pago: <strong><?php echo $s->forma_pago;?></strong></li>
     </ul>
     <br/>
@@ -63,6 +70,7 @@ foreach($servicios as $s):
         "precio"=> $s->importe,
         "periodicidad"=> $periodo_ops[$s->periodicidad],
         "cuota"=> $s->cuota,
+        "num_cuotas" => $num_cuotas,
         "pago"=> $s->forma_pago
     );
 endforeach;
