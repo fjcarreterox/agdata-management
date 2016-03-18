@@ -39,12 +39,14 @@ class Controller_Agenda extends Controller_Template
 
         foreach($eventos as $e){
             if($e->iduser == $iduser) {
+                $cliente_name = "";
+                if($e->idcliente != 0){$cliente_name = Model_Cliente::find($e->idcliente)->get('nombre');}
                 $data['eventos'][$e->id] = array(
                     "fecha" => $e->fecha,
                     "hora" => $e->hora,
                     "tipo" => $e->tipo,
                     "idcliente" => $e->idcliente,
-                    "cliente" => Model_Cliente::find($e->idcliente)->get('nombre'),
+                    "cliente" => $cliente_name,
                     "obs" => $e->observaciones
                 );
             }

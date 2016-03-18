@@ -315,7 +315,7 @@ class Controller_Clientes extends Controller_Template
 
             $this->template->set_global('cliente', $cliente, false);
         }
-        $this->template->title = "Clientes";
+        $this->template->title = "Editar ficha de clientes";
         $this->template->content = View::forge('clientes/edit');
     }
 
