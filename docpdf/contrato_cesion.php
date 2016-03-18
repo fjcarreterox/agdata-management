@@ -135,7 +135,7 @@ $pdf->Cell(0,10,'En Sevilla, a '.$fecha[0].' de '.$pdf->getMes($fecha[1]).' de '
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,strtoupper('reunidos'),0,1,'C');
 
-$pdf->SetFont('Arial','',10);
+$pdf->SetFont('Arial','',9);
 $pdf->MultiCell(0, 6, utf8_decode('De una parte, '.$cliente["rep_nombre"].', mayor de edad, con  DNI ' . $cliente["rep_dni"] . ', en nombre y representación de '.$cliente["nombre"].', con domicilio en '.$cliente["dir"].', C.P. '.$cliente["cp"].' de '.$cliente["loc"].', provincia de '.$cliente["prov"].' y CIF nº '.$cliente["cif_nif"].' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
 $pdf->Ln(5);
 
@@ -143,26 +143,26 @@ $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep["nombre_rep"] . ', mayor de
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,strtoupper('acuerdan'),0,1,'C');
-$pdf->SetFont('Arial','',10);
+$pdf->SetFont('Arial','',9);
 $pdf->MultiCell(0, 6, utf8_decode('Celebrar el presente contrato de acceso a datos por cuenta de terceros, que tiene por objeto garantizar la seguridad de datos de carácter personal y evitar su tratamiento o acceso no autorizado, o la pérdida de los mismos, conforme establece la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal.'), 0, 'J');
 $pdf->Ln(5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,strtoupper('estipulaciones'),0,1,'C');
 
 /* estipulaciones */
-$pdf->SetFont('Arial','B',10);
+$pdf->SetFont('Arial','B',9);
 $pdf->Cell(0,10,strtoupper('primera'),0,1,'L');
-$pdf->SetFont('Arial','',10);
+$pdf->SetFont('Arial','',9);
 $pdf->MultiCell(0, 6, utf8_decode('Ambas partes se encuentran vinculadas por una relación contractual de prestación de servicios de '.$rep["servicio"].' para '.$cliente["nombre"].'.'),0,'J');
 $pdf->Ln(3);
-$pdf->SetFont('Arial','B',10);
+$pdf->SetFont('Arial','B',9);
 $pdf->Cell(0,10,strtoupper('segunda'),0,1,'L');
-$pdf->SetFont('Arial','',10);
+$pdf->SetFont('Arial','',9);
 $pdf->MultiCell(0, 6, utf8_decode('En orden a la prestación de dichos servicios es necesario que el Encargado del Tratamiento tenga acceso a los datos de carácter personal contenidos en los ficheros bajo la titularidad del Responsable del Fichero.'),0,'J');
 $pdf->Ln(3);
-$pdf->SetFont('Arial','B',10);
+$pdf->SetFont('Arial','B',9);
 $pdf->Cell(0,10,strtoupper('tercera'),0,1,'L');
-$pdf->SetFont('Arial','',10);
+$pdf->SetFont('Arial','',9);
 $pdf->MultiCell(0, 6, utf8_decode('Que por esta razón conforme a lo dispuesto en el Art. 12 de la LOPD, ambas partes libremente y de común acuerdo, deciden regular este acceso y tratamiento de datos de carácter personal de conformidad con las siguientes: '),0,'J');
 
 $pdf->AddPage();
@@ -204,14 +204,18 @@ $pdf->Ln(3);
 $pdf->MultiCell(0, 7, utf8_decode('9ª.- Las partes contratantes se someten expresamente al fuero de los Juzgados y Tribunales de la ciudad de Sevilla, para cuantas acciones o reclamaciones pudieran derivarse de este contrato.'),0,'J');
 $pdf->Ln(5);
 $pdf->MultiCell(0, 7, utf8_decode('Tanto el Responsable del Fichero como el Encargado del Tratamiento, aceptan el presente contrato en los términos y condiciones estipuladas en el mismo, y en prueba de ello, y para cumplimiento de lo convenido, lo firman por duplicado.'),0,'J');
-$pdf->Ln(5);
 
 /* firmas */
 $pdf->SetLeftMargin(20);
 $pdf->SetFont('Arial','',9);
-$pdf->Ln(10);
-$pdf->MultiCell(0, 6, utf8_decode($cliente["rep_nombre"] . '                                                             '. $rep["nombre_rep"]), 0, 'L');
-$pdf->MultiCell(0, 6, utf8_decode($cliente["nombre"] . '                                                                  '. $rep["nombre"]), 0, 'L');
+$pdf->Ln(5);
+$pdf->MultiCell(0, 6, utf8_decode($cliente["rep_nombre"] . '                                                          '. $rep["nombre_rep"]), 0, 'C');
+$nombre_empresa="              ";
+if($rep["tipo"] != 3){
+    $nombre_empresa=$rep["nombre"];
+}
+$pdf->Ln(7);
+$pdf->MultiCell(0, 6, utf8_decode($cliente["nombre"] . '                                                                    '.$nombre_empresa) , 0, 'C');
 
 
 /* Imprimimos */

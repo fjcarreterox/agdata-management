@@ -10,6 +10,7 @@ $isCPP= ($cliente->tipo==6)?1:0;
 //only the important data
 $cliente_data = array(
     "nombre" => $cliente->nombre,
+    "tipo" => $cliente->tipo,
     "cif_nif" => $cliente->cif_nif,
     "dir" => $cliente->direccion,
     "cp" => $cliente->cpostal,
@@ -19,6 +20,7 @@ $cliente_data = array(
 ?>
 <ul>
     <li>Nombre: <strong><?php echo $cliente->nombre;?></strong></li>
+    <li>Tipo: <strong><?php echo Model_Tipo_Cliente::find($cliente->tipo)->get('tipo');?></strong></li>
     <li>CIF: <strong><?php echo $cliente->cif_nif;?></strong></li>
     <li>Dirección: <strong><?php echo $cliente->direccion;?></strong></li>
     <li>Código Postal: <strong><?php echo $cliente->cpostal;?></strong></li>
@@ -172,6 +174,7 @@ if($isCPP) { ?>
     ?>
     <ul>
         <li>Nombre de la empresa cesionaria: <strong><?php echo urldecode($cesionaria->nombre); ?></strong></li>
+        <li>Tipo de empresa cesionaria: <strong><?php echo Model_Tipo_Cliente::find($cesionaria->tipo)->get('tipo'); ?></strong></li>
         <li>CIF: <strong><?php echo $cesionaria->cif_nif; ?></strong></li>
         <li>Dirección: <strong><?php echo $cesionaria->direccion; ?></strong></li>
         <li>Código postal: <strong><?php echo $cesionaria->cpostal; ?></strong></li>
@@ -183,6 +186,7 @@ if($isCPP) { ?>
         $rep_legal_ces = Model_Personal::find('first', array('where' => array('idcliente' => $cesionaria->id, 'relacion' => 1)));
         $ces_data = array(
             "nombre_rep" => $tratamiento_ops[$rep_legal_ces->tratamiento]." ".$rep_legal_ces->nombre,
+            "tipo" => $cesionaria->tipo,
             "dni" => $rep_legal_ces->dni,
             "nombre" => $cesionaria->nombre,
             "cif_nif" => $cesionaria->cif_nif,
