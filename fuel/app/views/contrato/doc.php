@@ -46,7 +46,7 @@ if($cliente["tipo"] == 6){
 <h3>Servicios contratados</h3>
 <?php
 $servicios_data = array();
-$periodo_ops = array(12=>'Mensual',4=>'Trimestral',2=>'Semestral',1=>'Anual',0=>'Pago único');
+$periodo_ops = array(12=>'mensualmente',4=>'trimestral',2=>'semestralmente',1=>'anualmente',0=>'Pago único');
 foreach($servicios as $s):
     $nombre = Model_Servicio::find($s->idtipo_servicio)->get('nombre');
     $num_cuotas=1;
