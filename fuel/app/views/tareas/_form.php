@@ -10,6 +10,10 @@
 			<?php echo Form::label('Fecha respuesta', 'fecha_respuesta', array('class'=>'control-label')); ?>
 			<?php echo Form::input('fecha_respuesta', Input::post('fecha_respuesta', isset($tarea) ? $tarea->fecha_respuesta : ''), array('class' => 'col-md-4 form-control', 'type'=>'date')); ?>
 		</div>
+        <div class="form-group">
+            <?php echo Form::label('Comentario', 'comentario', array('class'=>'control-label')); ?>
+            <?php echo Form::textarea('comentario', Input::post('comentario', isset($tarea) ? $tarea->comentario : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Escribe algún comentario relacionado con esta tarea...','rows'=>'5')); ?>
+        </div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
 			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar cambios', array('class' => 'btn btn-primary','type'=>'submit')); ?>

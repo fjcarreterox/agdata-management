@@ -9,6 +9,7 @@ class Model_Tarea extends Model
 		'idtipotarea',
 		'fecha',
 		'fecha_respuesta',
+		'comentario',
 		'created_at',
 		'updated_at',
 	);
@@ -34,7 +35,7 @@ class Model_Tarea extends Model
 
 		return $val;
 	}
-    /* CHECKS */
+    /* CHECKERS */
     public function existsAdapTasks($idcliente){
         $res = false;
         $tasks =Model_Tarea::find('all',array('where'=>array('idcliente'=>$idcliente)));
