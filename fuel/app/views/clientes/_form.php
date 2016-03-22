@@ -81,7 +81,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             <?php echo Form::select('estado', Input::post('estado', isset($cliente) ? $cliente->estado : ''), $estados_sel,array('class' => 'col-md-4 form-control', 'placeholder'=>'Estado en el que se encuentra en nuestro sistema')); ?>
         </div>
         <div class="form-group">
-            <?php echo Form::label('Situación del cliente (sólo aplicable para el estado de adaptación)', 'idsituacion', array('class'=>'control-label')); ?>
+            <?php echo Form::label('Situación del cliente', 'idsituacion', array('class'=>'control-label')); ?>
             <?php echo Form::select('idsituacion', Input::post('idsituacion', isset($cliente) ? $cliente->idsituacion : ''), $situacion_sel,array('class' => 'col-md-4 form-control')); ?>
         </div>
 		<div class="form-group">

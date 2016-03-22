@@ -8,6 +8,7 @@
 			<th>Nombre/Razón social</th>
 			<th>Tipo</th>
 			<th>CIF/NIF</th>
+			<th>Situación</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
@@ -17,6 +18,14 @@
 			<td><?php echo $item->nombre; ?></td>
 			<td><?php echo $tipo=Model_Tipo_Cliente::find($item->tipo)->get('tipo'); ?></td>
 			<td><?php echo $item->cif_nif; ?></td>
+			<td><?php
+				if($item->idsituacion != 0){
+					echo Model_Tipo_Situacion::find($item->idsituacion)->get('tipo');
+				}
+				else{
+					echo "-- N/D --";
+				}
+				?></td>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">

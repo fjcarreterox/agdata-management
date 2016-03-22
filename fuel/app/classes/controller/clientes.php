@@ -80,6 +80,20 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/mantenimiento', $data);
     }
 
+    public function action_tareas_mantenimiento($idcliente,$idcontrato=null){
+
+        if($idcontrato == null) {
+            $data['contratos'] = Model_Contrato::find('all', array('where' => array('idcliente' => $idcliente)));
+        }
+        else{
+            $data['contrato'] = Model_Contrato::find($idcontrato);
+        }
+        $data['nombre'] = Model_Cliente::find($idcliente)->get('nombre');
+        $data['idcliente'] = $idcliente;
+        $this->template->title = "Tareas de mantenimiento del cliente";
+        $this->template->content = View::forge('clientes/tareas', $data);
+    }
+
     public function action_com_mantenimiento(){
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>6,'tipo'=>6)));
         $data['intro'] = "en régimen de mantenimiento de la LOPD";
