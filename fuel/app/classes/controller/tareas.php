@@ -1,6 +1,5 @@
 <?php
-class Controller_Tareas extends Controller_Template
-{
+class Controller_Tareas extends Controller_Template{
 
 	public function action_index(){
 		$data['tareas'] = Model_Tarea::find('all');
@@ -37,8 +36,7 @@ class Controller_Tareas extends Controller_Template
 	public function action_view($id = null){
 		is_null($id) and Response::redirect('tareas');
 
-		if ( ! $data['tarea'] = Model_Tarea::find($id))
-		{
+		if ( ! $data['tarea'] = Model_Tarea::find($id)){
 			Session::set_flash('error', 'Could not find tarea #'.$id);
 			Response::redirect('tareas');
 		}
@@ -47,28 +45,23 @@ class Controller_Tareas extends Controller_Template
 		$this->template->content = View::forge('tareas/view', $data);
 	}
 
-	public function action_create()
-	{
-		if (Input::method() == 'POST')
-		{
+	public function action_create(){
+		if (Input::method() == 'POST'){
 			$val = Model_Tarea::validate('create');
 
-			if ($val->run())
-			{
+			if ($val->run()){
 				$tarea = Model_Tarea::forge(array(
 					'idcliente' => Input::post('idcliente'),
 					'idtipotarea' => Input::post('idtipotarea'),
 					'fecha' => Input::post('fecha'),
 					'fecha_respuesta' => Input::post('fecha_respuesta'),
+					'comentario' => Input::post('comentario'),
 				));
 
-				if ($tarea and $tarea->save())
-				{
+				if ($tarea and $tarea->save()){
 					Session::set_flash('success', 'Added tarea #'.$tarea->id.'.');
-
 					Response::redirect('tareas');
 				}
-
 				else{
 					Session::set_flash('error', 'Could not save tarea.');
 				}
@@ -78,7 +71,7 @@ class Controller_Tareas extends Controller_Template
 			}
 		}
 
-		$this->template->title = "Tareas";
+		$this->template->title = "Crear una nueva tarea";
 		$this->template->content = View::forge('tareas/create');
 	}
 
@@ -97,6 +90,7 @@ class Controller_Tareas extends Controller_Template
 			$tarea->idtipotarea = Input::post('idtipotarea');
 			$tarea->fecha = Input::post('fecha');
 			$tarea->fecha_respuesta = Input::post('fecha_respuesta');
+			$tarea->comentario = Input::post('comentario');
 
 			if ($tarea->save()){
 				$serv=Model_Tipo_Tarea::find($tarea->idtipotarea)->get('tipo');
@@ -113,35 +107,27 @@ class Controller_Tareas extends Controller_Template
 				$tarea->idtipotarea = $val->validated('idtipotarea');
 				$tarea->fecha = $val->validated('fecha');
 				$tarea->fecha_respuesta = $val->validated('fecha_respuesta');
-
+				$tarea->comentario = $val->validated('comentario');
 				Session::set_flash('error', $val->error());
 			}
 
 			$this->template->set_global('tarea', $tarea, false);
 		}
 
-		$this->template->title = "Tareas";
+		$this->template->title = "Editar detalle de la tarea seleccionada";
 		$this->template->content = View::forge('tareas/edit');
-
 	}
 
-	public function action_delete($id = null)
-	{
+	public function action_delete($id = null){
 		is_null($id) and Response::redirect('tareas');
 
-		if ($tarea = Model_Tarea::find($id))
-		{
+		if ($tarea = Model_Tarea::find($id)){
 			$tarea->delete();
-
-			Session::set_flash('success', 'Deleted tarea #'.$id);
+			Session::set_flash('success', 'Tarea borrada del sistema.');
 		}
-
-		else
-		{
-			Session::set_flash('error', 'Could not delete tarea #'.$id);
+		else{
+			Session::set_flash('error', 'No se ha podido borrar la tarea seleccionada.');
 		}
-
 		Response::redirect('tareas');
-
 	}
 }
