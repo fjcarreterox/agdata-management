@@ -101,7 +101,8 @@ class Model_Tarea extends Model
                     'idcliente' => $idcliente,
                     'idtipotarea' => $t->id,
                     'fecha' => '',
-                    'fecha_respuesta'=>''
+                    'fecha_respuesta'=>'',
+                    'comentario'=>''
             ));
 
             if ($newTask and $newTask->save()){
@@ -118,7 +119,8 @@ class Model_Tarea extends Model
                 'idcliente' => $idcliente,
                 'idtipotarea' => $t->id,
                 'fecha' => '',
-                'fecha_respuesta'=>''
+                'fecha_respuesta'=>'',
+                'comentario'=>''
             ));
 
             if ($newTask and $newTask->save()){
