@@ -71,7 +71,7 @@
                 <ul>
                     <li><a href="clientes/create">Añadir Nuevo Contacto</a></li>
                     <li><a href="clientes/potenciales">Posibles Clientes</a></li>
-                    <li><a href="agenda/llamadas_comerciales">Gestión de llamadas comerciales</a></li>
+                    <li><a href="agenda/llamadas_comerciales">Gestión de llamadas comerciales <span class="glyphicon glyphicon-earphone"></span></a></li>
                     <li><a href="agenda">Gestión de visitas y calendario</a></li>
                     <li><a href="clientes/presupuestados">Clientes presupuestados</a></li>
                     <li><a href="clientes/nointeresados">No interesados</a></li>

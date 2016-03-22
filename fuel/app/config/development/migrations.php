@@ -34,6 +34,7 @@ return array (
         25 => '025_create_rel_presservs',
         26 => '026_create_tipo_tareas',
         27 => '027_create_tareas',
+        28 => '028_create_gruposedes',
       ),
     ),
     'module' => 

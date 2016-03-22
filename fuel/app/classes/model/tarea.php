@@ -30,8 +30,9 @@ class Model_Tarea extends Model
 		$val = Validation::forge($factory);
 		$val->add_field('idcliente', 'Idcliente', 'required|valid_string[numeric]');
 		$val->add_field('idtipotarea', 'Idtipotarea', 'required|valid_string[numeric]');
-		$val->add_field('fecha', 'Fecha', 'required');
-		$val->add_field('fecha_respuesta', 'Fecha Respuesta', 'required');
+		//$val->add_field('fecha', 'Fecha', 'required');
+		//$val->add_field('fecha_respuesta', 'Fecha Respuesta', 'required');
+		//$val->add_field('comentario', 'Comentario', 'required');
 
 		return $val;
 	}

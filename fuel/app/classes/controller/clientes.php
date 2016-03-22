@@ -141,6 +141,7 @@ class Controller_Clientes extends Controller_Template
             $data['contrato'] = Model_Contrato::find('first', array('where' => array('idcliente' => $id)));
             $data['cesiones'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$id)));
             $data['contactos'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$id)));
+            $data['grupossedes'] = Model_Gruposede::find('all',array('where'=>array('idcliente'=>$id)));
         }
 
 		$this->template->title = "Ficha completa de cliente";

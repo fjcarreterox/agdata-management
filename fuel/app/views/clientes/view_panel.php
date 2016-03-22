@@ -181,7 +181,7 @@
                 <br/>
                 <?php if(empty($adaptacion)):?>
                     <p>No se ha realizado el cuestionario básico de adaptación al cliente. Procede desde el siguiente botón:</p>
-                    <p><?php echo Html::anchor('adaptacion/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Cuestionario básico de adaptación', array('class' => 'btn btn-success')); ?></p>
+                    <p><?php echo Html::anchor('adaptacion/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Cuestionario básico de adaptación', array('class' => 'btn btn-primary')); ?></p>
                 <?php else: ?>
                     <h4>Datos obtenidos del cuestionario básico de adptación</h4>
                     <table class="table table-striped table-bordered table-hover table-responsive">
@@ -316,7 +316,7 @@
                     </tbody>
                 </table>
                 <?php endif; ?>
-                <p><?php echo Html::anchor('ficheros/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo fichero', array('class' => 'btn btn-success')); ?></p>
+                <p><?php echo Html::anchor('ficheros/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo fichero', array('class' => 'btn btn-primary')); ?></p>
                 <br/>
                 <h4>Cesiones de datos</h4>
                 <?php if(empty($cesiones)):?>
@@ -348,7 +348,39 @@
                 <?php endif; ?>
                 <p><?php echo Html::anchor('cesiones/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Registrar una nueva cesión', array('class' => 'btn btn-primary')); ?>&nbsp;
                 <?php echo Html::anchor('clientes/create/', '<span class="glyphicon glyphicon-plus"></span> Añadir nueva empresa cesionaria', array('target'=>'_blank','title'=>'Se abre en ventana nueva...','class' => 'btn btn-primary')); ?></p>
-               </div>
+                <br/>
+                <h4>Otras sedes / Empresas del grupo</h4>
+                <p>Mostramos a continuación las otras posibles sedes del cliente u otras empresas del mismo grupo empresarial.</p>
+                <?php if(empty($grupossedes)):?>
+                    <p class="red">Aún no se ha notificado la existencia de otras sedes o empresas del mismo grupo.</p>
+                <?php else: ?>
+                    <table class="table table-striped table-bordered table-hover table-responsive">
+                        <thead>
+                        <tr class="text-center">
+                            <td><strong>Nombre</strong></td>
+                            <td><strong>Tipo</strong></td>
+                            <td><strong>Ficheros compartidos</strong></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            $tipo_ops = array("Otra sede","Empresa del Grupo");
+                            foreach($grupossedes as $g): ?>
+                            <tr>
+                                <td><?php echo $g->nombre; ?></td>
+                                <td><?php echo $tipo_ops[$g->tipo]; ?></td>
+                                <td><?php echo $g->ficheros; ?></td>
+                                <td><?php echo Html::anchor('gruposedes/view/'.$g->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank','title'=>'Se abre en ventana nueva...')); ?>
+                                    <?php echo Html::anchor('gruposedes/edit/'.$g->id, '<span class="glyphicon glyphicon-pencil"></span> Editar',array('class'=>'btn btn-success')); ?>
+                                    <?php echo Html::anchor('gruposedes/delete/'.$g->id, '<span class="glyphicon glyphicon-trash"></span> Borrar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarla del sistema?')")); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
+                <p><?php echo Html::anchor('gruposedes/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Notificar nueva sede / empresa del grupo', array('class' => 'btn btn-primary')); ?></p>
+            </div>
         </div>
     </div>
 
