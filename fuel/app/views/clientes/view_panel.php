@@ -351,9 +351,7 @@
                 <br/>
                 <h4>Otras sedes / Empresas del grupo</h4>
                 <p>Mostramos a continuación las otras posibles sedes del cliente u otras empresas del mismo grupo empresarial.</p>
-                <?php if(empty($grupossedes)):?>
-                    <p class="red">Aún no se ha notificado la existencia de otras sedes o empresas del mismo grupo.</p>
-                <?php else: ?>
+                <?php if(!empty($grupossedes)):?>
                     <table class="table table-striped table-bordered table-hover table-responsive">
                         <thead>
                         <tr class="text-center">

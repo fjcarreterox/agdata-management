@@ -176,12 +176,13 @@ class Controller_Agenda extends Controller_Template
 
 				if ($agenda and $agenda->save()){
 					Session::set_flash('success', 'Añadadido nuevo evento a la Agenda.');
-                    $observ ="";
-                    $c = Model_Cliente::find($agenda->idcliente);
-                    $observ = $c->get('observ');
-                    $observ .= "\n- (".date('d-m-Y').") ".$agenda->observaciones;
-                    $c->observ = $observ;
-                    $c->save();
+                    if($agenda->observaciones != "") {
+                        $c = Model_Cliente::find($agenda->idcliente);
+                        $observ = $c->get('observ');
+                        $observ .= "\n- (" . date('d-m-Y') . ") " . $agenda->observaciones;
+                        $c->observ = $observ;
+                        $c->save();
+                    }
 
 					if($agenda->tipo == 1)
 						Response::redirect('agenda');
@@ -226,12 +227,13 @@ class Controller_Agenda extends Controller_Template
 
                 if ($agenda and $agenda->save()){
                     Session::set_flash('success', 'Añadadido nuevo evento a la Agenda.');
-                    $observ ="";
-                    $c = Model_Cliente::find($agenda->idcliente);
-                    $observ = $c->get('observ');
-                    $observ .= "\n- (".date('d-m-Y').") ".$agenda->observaciones;
-                    $c->observ = $observ;
-                    $c->save();
+                    if($agenda->observaciones != "") {
+                        $c = Model_Cliente::find($agenda->idcliente);
+                        $observ = $c->get('observ');
+                        $observ .= "\n- (" . date('d-m-Y') . ") " . $agenda->observaciones;
+                        $c->observ = $observ;
+                        $c->save();
+                    }
                     Response::redirect('agenda/activos');
                 }
                 else{
@@ -274,12 +276,13 @@ class Controller_Agenda extends Controller_Template
 
 			if ($agenda->save()){
 				Session::set_flash('success', 'Evento actualizado en la Agenda');
-                $observ ="";
-                $c = Model_Cliente::find($agenda->idcliente);
-                $observ = $c->get('observ');
-                $observ .= "\n- (".date('d-m-Y').") ".$agenda->observaciones;
-                $c->observ = $observ;
-                $c->save();
+                if($agenda->observaciones != ''){
+                    $c = Model_Cliente::find($agenda->idcliente);
+                    $observ = $c->get('observ');
+                    $observ .= "\n- (" . date('d-m-Y') . ") " . $agenda->observaciones;
+                    $c->observ = $observ;
+                    $c->save();
+                }
 
                 if($c->estado == 5 || $c->estado == 6){
                     Response::redirect('agenda/activos');
