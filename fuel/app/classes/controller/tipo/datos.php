@@ -2,7 +2,7 @@
 class Controller_Tipo_Datos extends Controller_Template{
 
 	public function action_index()	{
-		$data['tipo_datos'] = Model_Tipo_Dato::find('all',array('order_by'=>'tipo'));
+		$data['tipo_datos'] = Model_Tipo_Dato::find('all',array('order_by'=>array('tipo','nombre')));
 		$this->template->title = "Listado ccon todos los tipos de datos";
 		$this->template->content = View::forge('tipo/datos/index', $data);
 	}
