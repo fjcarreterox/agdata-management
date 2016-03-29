@@ -1,4 +1,4 @@
-<h2>Mostrando el listado de todos los <span class='muted'>tipos de datos</span> asociados a estructuras de ficheros</h2>
+<h2>Listado de todos los <span class='muted'>tipos de datos</span> de ficheros</h2>
 <br/>
 <p><?php echo Html::anchor('tipo/datos/create', '<span class="glyphicon glyphicon-plus"></span> Añadir nuevo Tipo de dato', array('class' => 'btn btn-primary')); ?></p>
 <?php if ($tipo_datos):
