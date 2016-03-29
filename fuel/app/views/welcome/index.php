@@ -128,6 +128,7 @@
                     <li><a href="tipo/plantilla">Tipos de plantillas para mailings</a></li>
                     <li><a href="tipo/situacion">Tipos de situaciones de clientes en adaptación</a></li>
                     <li><a href="tipo/tarea">Tipos de tareas a completar</a></li>
+                    <li><a href="tipo/datos">Tipos de datos (estructura de ficheros)</a></li>
                 </ul>
             </div>
          <?php endif; ?>
