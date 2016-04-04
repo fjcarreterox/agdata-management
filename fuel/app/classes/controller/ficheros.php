@@ -34,8 +34,8 @@ class Controller_Ficheros extends Controller_Template
 	}
 
 	public function action_create($idcliente){
-		if (Input::method() == 'POST')
-		{
+
+		if (Input::method() == 'POST'){
 			$val = Model_Fichero::validate('create');
 
 			if ($val->run())
@@ -51,6 +51,13 @@ class Controller_Ficheros extends Controller_Template
 				));
 
 				if ($fichero and $fichero->save()){
+					foreach(Input::post('estructura') as $dato){
+						$estructura = Model_Rel_Estructura::forge(array(
+											'idfichero' => $fichero->id,
+											'idtipodato' => $dato
+										));
+						$estructura->save();
+					}
 					Session::set_flash('success', 'Nuevo fichero de datos añadido al sistema.');
 					Response::redirect('clientes/view/'.$idcliente);
 				}
@@ -68,6 +75,7 @@ class Controller_Ficheros extends Controller_Template
         $data['tipos'] = Model_Tipo_Fichero::find('all');
         $data['nombre'] = $nombre;
         $data['idcliente'] = $idcliente;
+		$data['datos'] = Model_Tipo_Dato::find('all');
 
 		$this->template->title = "Crear un nuevo fichero de datos";
 		$this->template->content = View::forge('ficheros/create',$data);
@@ -129,11 +137,11 @@ class Controller_Ficheros extends Controller_Template
 		if ($fichero = Model_Fichero::find($id)){
 			$fichero->delete();
 			Session::set_flash('success', 'Fichero de datos borrado del sistema.');
+			Response::redirect('clientes/view/'.$fichero->idcliente);
 		}
 		else{
 			Session::set_flash('error', 'No se ha podido borrar el fichero de datos deseado.');
+            Response::redirect('welcome');
 		}
-
-		Response::redirect('ficheros');
 	}
 }

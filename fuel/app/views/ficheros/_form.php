@@ -1,20 +1,19 @@
 <?php
-    $tipos_array = array();
-    foreach($tipos as $t){
-        $tipos_array[$t->get('id')] = $t->get('tipo')." (".$t->get('finalidad').")";
-    }
+$tipos_array = array();
+foreach($tipos as $t){
+    $tipos_array[$t->get('id')] = $t->get('tipo')." (".$t->get('finalidad').")";
+}
 
-    $soporte_ops = array(
-                        "digital"=>"En formato digital",
-                        "papel"=>"En papel",
-                        "mixto"=>"Mixto"
-                    );
-    $boolean_ops = array( "0"=>"NO","1"=>"SÍ");
+$soporte_ops = array(
+                    "digital"=>"En formato digital",
+                    "papel"=>"En papel",
+                    "mixto"=>"Mixto"
+                );
+$boolean_ops = array( "0"=>"NO","1"=>"SÍ");
 
-    $niveles_ops = array("NO ESPECIFICADO","Básico","Medio","Alto");
+$niveles_ops = array("NO ESPECIFICADO","Básico","Medio","Alto");
 
 echo Form::open(array("class"=>"form-horizontal")); ?>
-
 	<fieldset>
 		<div class="form-group">
 			<?php echo Form::label('Tipo de fichero (finalidad)', 'idtipo', array('class'=>'control-label')); ?>
@@ -41,7 +40,43 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::label('Cesión del fichero a terceros', 'cesion', array('class'=>'control-label')); ?>
 			<?php echo Form::select('cesion', Input::post('cesion', isset($fichero) ? $fichero->cesion : ''),$boolean_ops, array('class' => 'col-md-4 form-control')); ?>
 		</div>
-		<div class="form-group">
+<?php //print_r($datos);
+foreach($datos as $d){
+    $datos_tmp[$d["tipo"]][$d["id"]] = $d["nombre"];
+}
+//print_r($datos_tmp);
+$tipo_ops = array("Datos de carácter identificativo","Datos de características personales","Datos de circunstancias sociales","Datos académicos y profesionales","Datos de detalles de empleo","Datos de información comercial","Datos económico-financieros y de seguros","Datos de transacciones","Datos especialmente protegidos");
+echo '<div class="panel-group" id="accordion">';
+$i=1;
+foreach($datos_tmp as $t => $dt){
+    ?>
+    <!-- FIRST PANEL -->
+    <div class="panel panel-default" id="panel<?php echo $i;?>">
+        <div class="panel-heading">
+            <h3 class="panel-title datos_cliente"><span class="muted">
+                <a data-toggle="collapse" data-target="#collapse<?php echo $i;?>" href="#collapse<?php echo $i;?>">
+                    <?php echo $tipo_ops[$t];?>
+                </a></span>
+            </h3>
+        </div>
+        <div id="collapse<?php echo $i;?>" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <?php
+                foreach($dt as $id => $dato){
+                    echo Form::input('estructura[]', $id, array('class' => '','type'=>'checkbox'));echo "&nbsp;".$dato."<br/>";
+                 }
+                ?>
+            </div>
+        </div>
+    </div>
+    <?php
+    $i++;
+}
+echo "</div>";
+?>
+
+        <br/>
+            <div class="form-group">
 			<label class='control-label'>&nbsp;</label>
 			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar cambios', array('class' => 'btn btn-primary','type'=>'submit')); ?>
         </div>
