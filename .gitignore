@@ -17,6 +17,10 @@ desktop.ini
 # the composer package lock file and install directory
 /composer.lock
 /fuel/vendor
+public/docpdf/tutorial/
+public/docpdf/doc/
+public/docpdf/font/
+public/docpdf/makefont/
 
 # any of the fuel packages installed by default
 /docs/
@@ -34,10 +38,9 @@ desktop.ini
 /fuel/app/vendor
 *.phar
 composer.phar
-docpdf/tutorial
-docpdf/doc
-docpdf/FAQ.htm
-docpdf/error_log
-docpdf/changelog.htm
-docpdf/makefont
-docpdf/font
+public/docpdf/FAQ.htm
+public/docpdf/error_log
+public/docpdf/changelog.htm
+public/docpdf/fpdf.php
+public/docpdf/fpdf.css
+public/docpdf/mc_table.php
