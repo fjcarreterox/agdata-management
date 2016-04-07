@@ -78,7 +78,7 @@ class Controller_Agenda extends Controller_Template
 
     public function action_activos(){
         $agenda = array();
-        $entradas = Model_Agenda::find('all');
+        $entradas = Model_Agenda::find('all',array('order_by'=>'fecha'));
         foreach($entradas as $e){
             if($e->idcliente == 0 || Model_Cliente::find($e->idcliente)->get('estado')==5 || //if active customer
                 Model_Cliente::find($e->idcliente)->get('estado')==6){
@@ -276,8 +276,8 @@ class Controller_Agenda extends Controller_Template
 
 			if ($agenda->save()){
 				Session::set_flash('success', 'Evento actualizado en la Agenda');
+                $c = Model_Cliente::find($agenda->idcliente);
                 if($agenda->observaciones != ''){
-                    $c = Model_Cliente::find($agenda->idcliente);
                     $observ = $c->get('observ');
                     $observ .= "\n- (" . date('d-m-Y') . ") " . $agenda->observaciones;
                     $c->observ = $observ;
