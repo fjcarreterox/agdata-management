@@ -134,9 +134,9 @@ if($isCPP) { ?>
                     <?php
                     $aaff = Model_Cliente::find($rel_aaff->idaaff);
 
-                    $rep_trat = "N/D";
-                    $rep_dni = "N/D";
-                    $rep_name = '<span class="red">-- NO ESPECIFICADO --</span>';
+                    $rep_trat = "";
+                    $rep_dni = ".......................................";
+                    $rep_name = '...................................................................';
                     $representante = $rep_trat . ' ' . $rep_name;
                     if ($rep = Model_Personal::find('first', array('where' => array('idcliente' => $aaff->id, 'relacion' => 1)))) {
                         $rep_trat = $rep->tratamiento;
@@ -187,11 +187,17 @@ if($isCPP) { ?>
         <li>Actividad: <strong><?php echo $cesionaria->actividad; ?></strong></li>
         <br/>
         <?php
+        $nombre_rep_ces = "...........................................................................";
+        $dni_rep_ces = ".....................................";
         $rep_legal_ces = Model_Personal::find('first', array('where' => array('idcliente' => $cesionaria->id, 'relacion' => 1)));
+        if($rep_legal_ces != null){
+            $nombre_rep_ces = $tratamiento_ops[$rep_legal_ces->tratamiento]." ".$rep_legal_ces->nombre;
+            $dni_rep_ces = $rep_legal_ces->dni;
+        }
         $ces_data = array(
-            "nombre_rep" => $tratamiento_ops[$rep_legal_ces->tratamiento]." ".$rep_legal_ces->nombre,
+            "nombre_rep" => $nombre_rep_ces,
             "tipo" => $cesionaria->tipo,
-            "dni" => $rep_legal_ces->dni,
+            "dni" => $dni_rep_ces,
             "nombre" => $cesionaria->nombre,
             "cif_nif" => $cesionaria->cif_nif,
             "servicio" => $cesionaria->actividad,
@@ -201,8 +207,8 @@ if($isCPP) { ?>
             "prov" => $cesionaria->prov
         );
         ?>
-        <li>Nombre del Rep. legal: <strong><?php echo $tratamiento_ops[$rep_legal_ces->tratamiento]." ".$rep_legal_ces->nombre; ?></strong></li>
-        <li>DNI del Rep. legal: <strong><?php echo $rep_legal_ces->dni; ?></strong></li>
+        <li>Nombre del Rep. legal: <strong><?php echo $nombre_rep_ces; ?></strong></li>
+        <li>DNI del Rep. legal: <strong><?php echo $dni_rep_ces; ?></strong></li>
     </ul>
 <?php }   ?>
 

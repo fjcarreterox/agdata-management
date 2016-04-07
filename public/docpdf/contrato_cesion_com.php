@@ -128,7 +128,7 @@ $pdf->Cell(0,10,'Suscrito entre',0,1,'C');
 $pdf->SetFont('Arial','B',12);
 
 if($num_rep == 1){
-    $pdf->Cell(0,10,utf8_decode('Cdad. Propietarios '.$cliente["nombre"].' y '.$reps[0]["nombre"]),0,1,'C');
+    $pdf->Cell(0,10,utf8_decode('Cdad. Propietarios '.$cliente["nombre"].' y '.$reps[0]["nombre_aaff"]),0,1,'C');
 }
 else{
     $pdf->Cell(0,10,utf8_decode('Cdad. Propietarios '.$cliente["nombre"].', '),0,1,'C');
