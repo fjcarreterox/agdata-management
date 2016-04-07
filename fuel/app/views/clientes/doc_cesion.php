@@ -32,9 +32,9 @@ $cliente_data = array(
 $tratamiento_ops = array("D.","Dª");
 //Only for communities
 if($isCPP){ ?>
-    <h3>Presidente</h3>
+    <h3>Presidente de la CPP</h3>
     <ul>
-        <li>Nombre del Presidente de la comunidad:
+        <li>Nombre:
             <?php
             $pres_trat = "N/D";
             $pres_name = '<span class="red">-- NO ESPECIFICADO --</span>';
@@ -42,14 +42,18 @@ if($isCPP){ ?>
             if($pres = Model_Personal::find('first',array('where'=>array('idcliente'=>$cliente->id,'relacion'=>6)))){
                 $pres_trat = $pres->tratamiento;
                 $pres_name = $pres->nombre;
+                $pres_dni = $pres->dni;
                 $presidente = $tratamiento_ops[$pres_trat].' '.$pres_name;
-                echo "<strong>".$presidente."</strong>";
+                echo "<strong>".$presidente."</strong></li>";
+                echo "<li>DNI: <strong>".$pres_dni."</strong></li>";
             }
             else{
-                echo "<strong>".$presidente."</strong>";
                 $presidente = "............................................................";
+                $pres_dni = "....................................";
+                echo "<strong>".$presidente."</strong></li>";
+                echo "<li>DNI: <strong>".$pres_dni."</strong></li>";
             }
-            ?></li>
+            ?>
     </ul>
 <?php }else{ ?>
     <h3>Representante Legal</h3>
@@ -57,7 +61,7 @@ if($isCPP){ ?>
         <li>Nombre completo:
             <?php
             $rep_trat = "N/D";
-            $rep_dni = '<span class="red">-- NO ESPECIFICADO --</span>';
+            $rep_dni = '';
             $rep_name = '<span class="red">-- NO ESPECIFICADO --</span>';
             $rep_legal = $rep_trat.' '.$rep_name;
             if($rep_legal = Model_Personal::find('first',array('where'=>array('idcliente'=>$cliente->id,'relacion'=>1)))){
@@ -205,7 +209,7 @@ if($isCPP) { ?>
 <br/>
 <p><?php
     if($isCPP){
-        $params=base64_encode("cliente_data=".urlencode(json_encode($cliente_data))."&pres=".urlencode($presidente)."&reps_data=".urlencode(json_encode($reps_data)));
+        $params=base64_encode("cliente_data=".urlencode(json_encode($cliente_data))."&pres_dni=".urlencode($pres_dni)."&pres=".urlencode($presidente)."&reps_data=".urlencode(json_encode($reps_data)));
         $script = 'contrato_cesion_com.php?q=';
     }
     else{
