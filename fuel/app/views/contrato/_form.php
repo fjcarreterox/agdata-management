@@ -10,7 +10,7 @@ $periodo_ops = array(1=>'mensual',2=>'trimestral',3=>'anual',4=>'pago único');
 $rep_ops = array(0=>"-- NO DEFINIDO --");
 
 $path="../";
-if(isset($contrato)){
+if(isset($contrato) || count($clientes)==1){
     $path="../../";
 }
 
