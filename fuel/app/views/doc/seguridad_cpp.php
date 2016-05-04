@@ -1,18 +1,24 @@
 <?php
 
 class PDFp extends PDF_MC_Table{
+    var $customer = "";
+
+    function __construct($orientation='P', $unit='mm', $size='A4',$customer="NO DEFINIDO"){
+        parent::__construct($orientation, $unit, $size);
+        $this->customer = $customer;
+    }
 
     function Header(){
         $this->SetFont('Arial','B',18);
         $this->Cell(0,25,utf8_decode('                DOCUMENTO DE SEGURIDAD'),0,0,'C');
         $this->Ln(5);
         $this->SetFont('Arial','I',13);
-        $this->Cell(0,35,utf8_decode("                         TIPO"),0,0,'C');
+        $this->Cell(0,35,utf8_decode("                         Comunidad de propietarios"),0,0,'C');
         $this->Ln(3);
-        $this->Cell(0,45,utf8_decode("                         ".html_entity_decode("XXXXXX")),0,0,'C');
+        $this->Cell(0,45,utf8_decode("                         ".html_entity_decode($this->customer)),0,0,'C');
         $this->Ln(10);
         $this->Ln(10);
-        //$this->Image('./img/logo2.png',20,13,40);
+        $this->Image('http://gestion.agdata.es/assets/img/logo2.png',20,13,40);
         $this->Ln(10);
     }
 
@@ -25,12 +31,12 @@ class PDFp extends PDF_MC_Table{
     }
 }
 
-$pdf = new PDFp();
-
 $cname = html_entity_decode($cname);
 $dir = html_entity_decode($dir);
 $loc = html_entity_decode($loc);
 $prov = html_entity_decode($prov);
+
+$pdf = new PDFp('P','mm','A4',$cname);
 
 $pdf->AddFont('Arial','','arial.php');
 $title = 'DOCUMENTOS LEGALES LOPD: DOCUMENTO DE SEGURIDAD PARA CPP';

@@ -7,6 +7,7 @@ class PDFp extends PDF_MC_Table{
         parent::__construct($orientation, $unit, $size);
         $this->customer = $customer;
     }
+
     function Header(){
         $this->SetFont('Arial','B',18);
         $this->Cell(0,25,utf8_decode('                DOCUMENTO DE SEGURIDAD'),0,0,'C');
