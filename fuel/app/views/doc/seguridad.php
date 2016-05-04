@@ -1,15 +1,21 @@
 <?php
 //global $cname;
 class PDFp extends PDF_MC_Table{
+    var $customer = "";
+
+    function __construct($orientation='P', $unit='mm', $size='A4',$customer="NO DEFINIDO"){
+        parent::__construct($orientation, $unit, $size);
+        $this->customer = $customer;
+    }
     function Header(){
         $this->SetFont('Arial','B',18);
         $this->Cell(0,25,utf8_decode('                DOCUMENTO DE SEGURIDAD'),0,0,'C');
         $this->Ln(5);
         $this->SetFont('Arial','I',13);
-        $this->Cell(0,45,utf8_decode("                         ".html_entity_decode("XXXXXXXX")),0,0,'C');
+        $this->Cell(0,45,utf8_decode("                         ".$this->customer),0,0,'C');
         $this->Ln(10);
         $this->Ln(10);
-        //$this->Image('../../../assets/img/logo.png',20,13,40);
+        $this->Image('http://gestion.agdata.es/assets/img/logo2.png',20,13,40);
         $this->Ln(20);
     }
 
@@ -23,12 +29,12 @@ class PDFp extends PDF_MC_Table{
     }
 }
 
-$pdf = new PDFp();
-
 $cname = html_entity_decode($cname);
 $dir = html_entity_decode($dir);
 $loc = html_entity_decode($loc);
 $prov = html_entity_decode($prov);
+
+$pdf = new PDFp('P','mm','A4',$cname);
 
 $pdf->AddFont('Arial','','arial.php');
 $title = 'DOCUMENTOS LEGALES LOPD: DOCUMENTO DE SEGURIDAD';
@@ -43,9 +49,7 @@ $pdf->Ln(5);
 
 $pdf->SetDrawColor(0, 80, 185);
 $pdf->SetFillColor(255, 255, 255);
-//$pdf->RoundedRect(25, 12, 160, 50, 0.5, 'DF');
 
-/* Customer name */
 //First page
 $pdf->SetFont('Arial','B',26);
 $pdf->SetFillColor(255, 255, 155);
@@ -141,7 +145,7 @@ $pdf->MultiCell(0,10,utf8_decode(mb_strtoupper('2. Ámbito de aplicación')),0,'
 $pdf->MultiCell(0,10,utf8_decode('2.1. Ámbito legal'),0,'L');
 
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('Este documento ha sido elaborado bajo la responsabilidad de '.$reps[0]["nombre"].' quien, como representante de '.$cname.' y, por lo tanto, Responsable de los Ficheros, se compromete a implantar los procedimientos recogidos en el presente documento y mantenerlos actualizados dentro del ámbito de aplicación de la normativa vigente en protección de datos.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Este documento ha sido elaborado bajo la responsabilidad de '.html_entity_decode($rep_seg["nombre"]).' quien, como representante de '.$cname.' y, por lo tanto, Responsable de los Ficheros, se compromete a implantar los procedimientos recogidos en el presente documento y mantenerlos actualizados dentro del ámbito de aplicación de la normativa vigente en protección de datos.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('El Documento de Seguridad deberá ser revisado periódicamente por el Responsable de los Ficheros, con el fin de identificar cambios relevantes en el mismo. '),0,'J');$pdf->Ln(2.5);
 
 //2.2
@@ -169,16 +173,16 @@ $pdf->MultiCell(0,6,utf8_decode($cname.' mantiene '.$str.' a la Agencia Español
 $pdf->Ln(5);
 $pdf->SetDrawColor(0, 0, 0);
 
-    $pdf->SetWidths(array(60,55,55));
-    $pdf->SetAligns(array('C','C','C'));
-    $pdf->SetFont('Arial','B',10);
-    $pdf->Row(array("NOMBRE FICHERO","SOPORTE","NIVEL DE SEGURIDAD"));
+$pdf->SetWidths(array(60,55,55));
+$pdf->SetAligns(array('C','C','C'));
+$pdf->SetFont('Arial','B',10);
+$pdf->Row(array("NOMBRE FICHERO","SOPORTE","NIVEL DE SEGURIDAD"));
 foreach($files as $f){
     //structure table
     $pdf->SetFont('Arial','',10);
     $pdf->SetWidths(array(60,55,55));
     $pdf->SetAligns(array('C','C','C'));
-    $pdf->Row(array($f["name"],$f["supp"],html_entity_decode($f["level_name"])));
+    $pdf->Row(array(html_entity_decode($f["name"]),$f["supp"],html_entity_decode($f["level_name"])));
 }
 $pdf->Ln(5);
 
@@ -466,39 +470,39 @@ $recollect="ENCUESTAS / ENTREVISTAS"; //cvs,prov,prof
 $recollect="FORMULARIOS / CUPONES"; //alum,padres
 
 foreach($files as $f){
-        $pdf->SetWidths(array(50,50,65));
-        $pdf->SetAligns(array('L','L','L'));
-        $pdf->SetFont('Arial','B',10);
-        $pdf->Row(array("Fichero:",$f["name"],"Nº Inscripción R.G.P.D:"));
-        $pdf->SetFont('Arial','',10);
-        $pdf->Row(array("Responsable Fichero:",$cname,"Soporte papel / digital: ".strtoupper($f["supp"])));
-        $pdf->Row(array("Responsable Seguridad:",html_entity_decode($rep_seg["nombre"]),"Nivel de seguridad: ".mb_strtoupper(html_entity_decode($f["level_name"]))));
-        $pdf->SetWidths(array(165));
-        $pdf->SetAligns(array('L'));
-        $pdf->Row(array(""));
-        $pdf->SetWidths(array(50,115));
-        $pdf->SetAligns(array('L','L'));
-        $pdf->Row(array("Finalidad:",html_entity_decode($f["target"])));
-        $pdf->Row(array("Procedencia de los datos:",$origin));
-        $pdf->Row(array("Procedimiento de recogida:",$recollect));
-        $pdf->Ln(5);
-        //structure table
-        $pdf->SetWidths(array(165));
-        $pdf->SetAligns(array('C'));
-        $pdf->SetFont('Arial','B',13);
-        $pdf->Row(array("\nESTRUCTURA\n\n"));
-        $pdf->SetWidths(array(50,65,50));
-        $pdf->SetAligns(array('C','C','C'));
-        $pdf->SetFont('Arial','B',12);
-        $pdf->Row(array("CAMPOS DE DATOS","TIPO DE DATOS","NIVEL DE SEGURIDAD"));
-        $pdf->SetFont('Arial','',10);
-        //getting all the structured data for the current registered file
-        $sdata = Model_Rel_Estructura::find('all',array('where'=>array('idfichero'=>$f['id'])));
-        foreach($sdata as $sd){
-            $datatype=Model_Tipo_Dato::find($sd["idtipodato"]);
-            $pdf->Row(array($datatype->nombre,$type_ops[$datatype->tipo],$level_ops[$datatype->nivel]));
-        }
-        $pdf->Ln(20);
+    $pdf->SetWidths(array(50,50,65));
+    $pdf->SetAligns(array('L','L','L'));
+    $pdf->SetFont('Arial','B',10);
+    $pdf->Row(array("Fichero:",html_entity_decode($f["name"]),"Nº Inscripción R.G.P.D:"));
+    $pdf->SetFont('Arial','',10);
+    $pdf->Row(array("Responsable Fichero:",$cname,"Soporte papel / digital: ".strtoupper($f["supp"])));
+    $pdf->Row(array("Responsable Seguridad:",html_entity_decode($rep_seg["nombre"]),"Nivel de seguridad: ".mb_strtoupper(html_entity_decode($f["level_name"]))));
+    $pdf->SetWidths(array(165));
+    $pdf->SetAligns(array('L'));
+    $pdf->Row(array(""));
+    $pdf->SetWidths(array(50,115));
+    $pdf->SetAligns(array('L','L'));
+    $pdf->Row(array("Finalidad:",html_entity_decode($f["target"])));
+    $pdf->Row(array("Procedencia de los datos:",$origin));
+    $pdf->Row(array("Procedimiento de recogida:",$recollect));
+    $pdf->Ln(5);
+    //structure table
+    $pdf->SetWidths(array(165));
+    $pdf->SetAligns(array('C'));
+    $pdf->SetFont('Arial','B',13);
+    $pdf->Row(array("\nESTRUCTURA\n\n"));
+    $pdf->SetWidths(array(50,65,50));
+    $pdf->SetAligns(array('C','C','C'));
+    $pdf->SetFont('Arial','B',12);
+    $pdf->Row(array("CAMPOS DE DATOS","TIPO DE DATOS","NIVEL DE SEGURIDAD"));
+    $pdf->SetFont('Arial','',10);
+    //getting all the structured data for the current registered file
+    $sdata = Model_Rel_Estructura::find('all',array('where'=>array('idfichero'=>$f['id'])));
+    foreach($sdata as $sd){
+        $datatype=Model_Tipo_Dato::find($sd["idtipodato"]);
+        $pdf->Row(array($datatype->nombre,$type_ops[$datatype->tipo],$level_ops[$datatype->nivel]));
+    }
+    $pdf->Ln(20);
 }
 
 //ANEXO II
@@ -534,14 +538,14 @@ $falta="";
 if(strcmp($rep_seg["falta"],"00-00-0000")!=0){$falta=$rep_seg["falta"];}
 $fbaja="";
 if(strcmp($rep_seg["fbaja"],"00-00-0000")!=0){$fbaja=$rep_seg["fbaja"];}
-$pdf->Row(array(html_entity_decode($rep_seg["nombre"]),$rep_seg["cargofuncion"],$falta,$fbaja));
+$pdf->Row(array(html_entity_decode($rep_seg["nombre"]),html_entity_decode($rep_seg["cargofuncion"]),$falta,$fbaja));
 $pdf->Row(array("","","",""));
 $pdf->Row(array("","","",""));
 $pdf->Ln(10);
 
 $pdf->MultiCell(0,6,utf8_decode('PERSONAL CON ACCESO A LOS FICHEROS'),0,'J');
 $pdf->Ln(5);
-$pdf->SetWidths(array(50,35,25,30,30));
+$pdf->SetWidths(array(60,45,23,20,22));
 $pdf->SetAligns(array('C','C','C','C','C'));
 $pdf->Row(array("Nombre y Apellidos","Cargo","NIF","Fecha alta","Fecha baja"));
 foreach($trab as $t){
@@ -549,7 +553,7 @@ foreach($trab as $t){
     if(strcmp($t["falta"],"00-00-0000")!=0){$falta=$t["falta"];}
     $fbaja="";
     if(strcmp($t["fbaja"],"00-00-0000")!=0){$fbaja=$t["fbaja"];}
-    $pdf->Row(array(html_entity_decode($t["nombre"]),$t["cargofuncion"],$t["dni"],$falta,$fbaja));
+    $pdf->Row(array(html_entity_decode($t["nombre"]),html_entity_decode($t["cargofuncion"]),$t["dni"],$falta,$fbaja));
 }
 $pdf->Row(array("","","","",""));
 $pdf->Row(array("","","","",""));
@@ -885,7 +889,7 @@ $pdf->Ln(10);
 $pdf->SetFont('Arial','B',11);
 $pdf->MultiCell(0,6,utf8_decode('Solicitud a:'),0,'L');
 $pdf->Ln(3);
-$pdf->MultiCell(0,6,utf8_decode('A/A:             '.$cname),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('A/A:        '.$cname),0,'L');
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('                 '.html_entity_decode(urldecode($dir))),0,'L');
 $pdf->MultiCell(0,6,utf8_decode('                 '.$cp.', '.$loc.', '.$prov),0,'L');
@@ -916,7 +920,7 @@ $pdf->Ln(10);
 $pdf->SetFont('Arial','B',11);
 $pdf->MultiCell(0,6,utf8_decode('Solicitud a:'),0,'L');
 $pdf->Ln(3);
-$pdf->MultiCell(0,6,utf8_decode('A/A:             '.$cname),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('A/A:        '.$cname),0,'L');
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('                 '.html_entity_decode(urldecode($dir))),0,'L');
 $pdf->MultiCell(0,6,utf8_decode('                 '.$cp.', '.$loc.', '.$prov),0,'L');
@@ -968,7 +972,7 @@ $pdf->Ln(10);
 $pdf->SetFont('Arial','B',11);
 $pdf->MultiCell(0,6,utf8_decode('Solicitud a:'),0,'L');
 $pdf->Ln(3);
-$pdf->MultiCell(0,6,utf8_decode('A/A:             '.$cname),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('A/A:        '.$cname),0,'L');
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('                 '.html_entity_decode(urldecode($dir))),0,'L');
 $pdf->MultiCell(0,6,utf8_decode('                 '.$cp.', '.$loc.', '.$prov),0,'L');
