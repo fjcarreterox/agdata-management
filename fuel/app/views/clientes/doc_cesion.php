@@ -6,17 +6,6 @@
 <h3>Datos del cliente</h3>
 <?php
 $isCPP= ($cliente->tipo==6)?1:0;
-
-//only the important data
-$cliente_data = array(
-    "nombre" => $cliente->nombre,
-    "tipo" => $cliente->tipo,
-    "cif_nif" => $cliente->cif_nif,
-    "dir" => $cliente->direccion,
-    "cp" => $cliente->cpostal,
-    "loc" => $cliente->loc,
-    "prov" => $cliente->prov
-);
 ?>
 <ul>
     <li>Nombre: <strong><?php echo $cliente->nombre;?></strong></li>
@@ -71,8 +60,6 @@ if($isCPP){ ?>
                 $rep_legal = $tratamiento_ops[$rep_trat].' '.$rep_name;
             }
             echo "<strong>".$rep_legal."</strong>";
-            $cliente_data["rep_nombre"] = $rep_legal;
-            $cliente_data["rep_dni"] = $rep_dni;
             ?></li>
         <li>DNI: <?php echo "<strong>".$rep_dni."</strong>";?></li>
     </ul>
@@ -80,9 +67,7 @@ if($isCPP){ ?>
 
 <h3>Fichero(s) cedido(s)</h3>
 <?php
-$cesiones_data = array();
 if(count($cesiones)>0) {
-    $ficheros = array();
     foreach ($cesiones as $c):
         ?>
         <ul>
@@ -90,7 +75,6 @@ if(count($cesiones)>0) {
                 <strong>Tipo:</strong>
                 <?php
                 echo $tipo = Model_Tipo_Fichero::find(Model_Fichero::find($c->idfichero)->get('idtipo'))->get('tipo');
-                //$ficheros[]=$tipo;
                 ?>
             </li>
             <li><strong>Nivel de seguridad:</strong> <?php
@@ -112,21 +96,14 @@ if(count($cesiones)>0) {
             <li><strong>Soporte:</strong> <?php echo $soporte = Model_Fichero::find($c->idfichero)->get('soporte'); ?></li>
         </ul>
         <?php
-        $ficheros[] = array(
-            "tipo" => $tipo,
-            "nivel" => $nivel,
-            "soporte" => $soporte);
-
     endforeach;
 }else{
     echo "<p>No se han encontrado cesiones de ficheros aún. Ve a la ficha de cliente y defínelos en el apartado <i>Auditoría de adaptación</i>.</p>";
 }
 
 if($isCPP) { ?>
-
     <h3>Representante(s) legal(es)</h3>
     <?php
-    $reps_data = array();
     if (isset($rel_aaffs)) {
         foreach ($rel_aaffs as $rel_aaff): ?>
             <ul>
@@ -145,17 +122,6 @@ if($isCPP) { ?>
                         $representante = $tratamiento_ops[$rep_trat] . ' ' . $rep_name;
                     }
                     echo "<strong>" . $representante . "</strong>";
-                    //for the query string
-                    $reps_data[] = array(
-                        "nombre" => $representante,
-                        "dni" => $rep_dni,
-                        "nombre_aaff" => $aaff->nombre,
-                        "cif_nif" => $aaff->cif_nif,
-                        "dir" => $aaff->direccion,
-                        "cp" => $aaff->cpostal,
-                        "loc" => $aaff->loc,
-                        "prov" => $aaff->prov
-                    );
                     ?></li>
                 <li>DNI del Rep. legal: <strong><?php echo $rep_dni; ?></strong></li>
 
@@ -172,7 +138,7 @@ if($isCPP) { ?>
     } else {
         echo "<ul><li>No se han encontrado aún representantes asociados.</li></ul>";
     }
-
+    $ces=$aaff->id;
 }else{
     echo "<h3>Empresa cesionaria</h3>";
     ?>
@@ -194,18 +160,7 @@ if($isCPP) { ?>
             $nombre_rep_ces = $tratamiento_ops[$rep_legal_ces->tratamiento]." ".$rep_legal_ces->nombre;
             $dni_rep_ces = $rep_legal_ces->dni;
         }
-        $ces_data = array(
-            "nombre_rep" => $nombre_rep_ces,
-            "tipo" => $cesionaria->tipo,
-            "dni" => $dni_rep_ces,
-            "nombre" => $cesionaria->nombre,
-            "cif_nif" => $cesionaria->cif_nif,
-            "servicio" => $cesionaria->actividad,
-            "dir" => $cesionaria->direccion,
-            "cp" => $cesionaria->cpostal,
-            "loc" => $cesionaria->loc,
-            "prov" => $cesionaria->prov
-        );
+        $ces=$cesionaria->id;
         ?>
         <li>Nombre del Rep. legal: <strong><?php echo $nombre_rep_ces; ?></strong></li>
         <li>DNI del Rep. legal: <strong><?php echo $dni_rep_ces; ?></strong></li>
@@ -214,14 +169,5 @@ if($isCPP) { ?>
 
 <br/>
 <p><?php
-    if($isCPP){
-        $params=base64_encode("cliente_data=".urlencode(json_encode($cliente_data))."&pres_dni=".urlencode($pres_dni)."&pres=".urlencode($presidente)."&reps_data=".urlencode(json_encode($reps_data)));
-        $script = 'contrato_cesion_com.php?q=';
-    }
-    else{
-        $params=base64_encode("cliente_data=".urlencode(json_encode($cliente_data))."&ficheros=".json_encode($ficheros)."&rep_data=".urlencode(json_encode($ces_data)));
-        $script = 'contrato_cesion.php?q=';
-    }
-    echo Html::anchor('http://localhost/docpdf/'.$script.$params, '<span class="glyphicon glyphicon-file"></span> Generar PDF del contrato de cesión', array('class' => 'btn btn-info','target'=>'_blank'));
-    ?>
+    echo Html::anchor('doc/cesion/'.$cliente->tipo.'/'.$ces, '<span class="glyphicon glyphicon-file"></span> Generar PDF del contrato de cesión', array('class' => 'btn btn-info','target'=>'_blank'));?>
 </p>

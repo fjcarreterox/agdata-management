@@ -29,60 +29,67 @@ if (!isset($idcliente)) {
     </fieldset>
     <?php echo Form::close();
 } else {
-    $nombre_cliente = Model_Cliente::find($idcliente)->get('nombre');
-    $cif = Model_Cliente::find($idcliente)->get('cif_nif');
-    $tipo = Model_Cliente::find($idcliente)->get('tipo');
-    $dir = Model_Cliente::find($idcliente)->get('direccion').", ".Model_Cliente::find($idcliente)->get('cpostal').", ".Model_Cliente::find($idcliente)->get('loc').", en la provincia de ".Model_Cliente::find($idcliente)->get('prov');
-    echo '<h2>Ver la <span class="muted"> Documentación LOPD </span> del cliente <strong>' . $nombre_cliente . '</strong></h2>';
+    echo '<h2>Ver la <span class="muted"> Documentación LOPD </span> del cliente <strong>' . $name . '</strong></h2>';
     ?>
-    <p>Haciendo clic en cada uno de los siguientes botones, se mostrará la <strong>vista previa</strong> de los datos
-        del sistema que se van a volcar
-        en el documento PDF correspondiente que se desea generar.</p>
-
-    <ul>
-        <li><?php echo Html::anchor('clientes/doc_seguridad/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Documento de seguridad', array('class' => 'btn btn-info'));?></li>
-        <br/>
+    <p>Haciendo clic en los siguientes botones, se mostrará la <strong>vista previa</strong> de los datos del sistema que se van a volcar
+        en el documento PDF o bien podrá generarlo directamente si lo deseas.</p>
+    <br/>
+    <h3>Listado de documentos</h3>
+    <table class="table table-striped">
         <?php
         if(isset($cesiones)) {
             foreach ($cesiones as $c) {
-                $nombre = Model_Cliente::find($c->idcesionaria)->get('nombre');
+                $ces_name = Model_Cliente::find($c->idcesionaria)->get('nombre');
                 ?>
-                <li><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-file"></span> Contrato de cesión de datos con ' . $nombre, array('class' => 'btn btn-info')); ?></li>
-                <br/>
+                <tr>
+                    <td>Contrato de cesión de datos con <strong><?php echo $ces_name;?></strong></td>
+                        <td><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default')); ?>
+                &nbsp;<?php echo Html::anchor('doc/cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info')); ?></td></tr>
             <?php
             }
         }
-
-        if ($tipo == 6) {
-            ?>
-            <li><?php echo Html::anchor('http://localhost/docpdf/portada.php?q=' . base64_encode(urlencode($nombre_cliente)), '<span class="glyphicon glyphicon-file"></span> Portada de la documentación', array('class' => 'btn btn-info', 'target' => '_blank')); ?></li>
-            <br/>
-            <?php
+        if ($type == 6) {
+            //Would it be more than one?
             $aaff= Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
+
             //Default contract with its legal representative
-            $nombre = Model_Cliente::find($aaff->idaaff)->get('nombre');
+            $aaff_name = Model_Cliente::find($aaff->idaaff)->get('nombre');
             ?>
-            <li><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente .'/'.$aaff->idaaff, '<span class="glyphicon glyphicon-file"></span> Contrato de cesión de datos con ' . $nombre, array('class' => 'btn btn-info', 'target' => '_blank')); ?></li>
-            <br/>
+            <tr><td>Contrato de cesión de datos con <strong><?php echo $aaff_name;?></strong></td>
+                <td><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente . '/' . $aaff->idaaff, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default')); ?>
+                    &nbsp;<?php echo Html::anchor('doc/cesion/' . $idcliente .'/'.$aaff->idaaff, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')); ?></td>
+            </tr>
         <?php
         }
-        else{
-            ?>
-            <li><?php echo Html::anchor('clientes/clausula_empleados/'. $idcliente, '<span class="glyphicon glyphicon-file"></span> Cláusulas legales para empleados', array('class' => 'btn btn-info')); ?></li>
-            <br/>
-            <li><?php
-                $params = "nombre=".$nombre_cliente."&dir=".$dir."&cif=".$cif;
-                echo Html::anchor('http://localhost/docpdf/clausula_clientes.php?q='. base64_encode(urlencode($params)), '<span class="glyphicon glyphicon-file"></span> Cláusula de recogida de datos de clientes', array('class' => 'btn btn-info', 'target' => '_blank')); ?></li>
-            <br/>
-            <li><?php
-                echo Html::anchor('http://localhost/docpdf/clausula_proveedores.php?q='. base64_encode(urlencode($params)), '<span class="glyphicon glyphicon-file"></span> Cláusula de recogida de datos de proveedores', array('class' => 'btn btn-info', 'target' => '_blank')); ?></li>
-            <br/>
-            <li><?php
-                echo Html::anchor('http://localhost/docpdf/coletilla_correos.php?q='. base64_encode(urlencode($params)), '<span class="glyphicon glyphicon-file"></span> Coletilla legal para e-mails', array('class' => 'btn btn-info', 'target' => '_blank')); ?></li>
-            <br/>
-        <?php      }
+
+        //Security doc
+        echo "<tr><td>Documento de seguridad</td>";
+        echo "<td>".Html::anchor('clientes/doc_seguridad/' . $idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default'));
+        echo "&nbsp;".Html::anchor('doc/seguridad/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
+        //E-mail
+        echo "<tr><td>Coletilla legal para e-mails</td>";
+        echo "<td>".Html::anchor('doc/coletilla/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
+        //Portada
+        echo "<tr><td>Portada de la documentación</td>";
+        echo "<td>".Html::anchor('doc/portada/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
+        //Claúsulas
+        echo "<tr><td>Cláusulas legales para empleados</td>";
+        echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/E', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
+        echo "<tr><td>Cláusula de recogida de datos de clientes</td>";
+        echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/C', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
+        echo "<tr><td>Cláusula de recogida de datos de proveedores</td>";
+        echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/P', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
         ?>
+        </table>
+        <br/>
 
-    </ul>
+<?php
+    echo Html::anchor('clientes/view/'.$idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Abrir ficha de cliente', array('class' => 'btn btn-default', 'target' => '_blank', 'title'=>'En ventana nueva...'));
 
-<?php } ?>
+} ?>
