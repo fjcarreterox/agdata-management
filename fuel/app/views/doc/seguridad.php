@@ -345,7 +345,7 @@ $pdf->SetLeftMargin(20);
 $pdf->MultiCell(0,6,utf8_decode('- la autorización mediante firma del Responsable de los Ficheros.'),0,'L');
 
 //9
-$pdf->Ln(5);
+$pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,strtoupper(utf8_decode('9. Controles periódicos de verificación')),0,'L');
 $pdf->SetFont('Arial','',10);
@@ -360,7 +360,7 @@ $pdf->MultiCell(0,6,utf8_decode('Los informes de auditoría serán analizados po
 $pdf->MultiCell(0,6,utf8_decode('Estos informes de auditoría se conservarán y quedarán a disposición de la Agencia Española de Protección de Datos.'),0,'J');$pdf->Ln(2.5);
 
 //10
-$pdf->Ln(5);
+$pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,strtoupper(utf8_decode('10. ejercicio de los derechos de los interesados')),0,'L');
 $pdf->SetFont('Arial','',10);
@@ -372,9 +372,7 @@ $pdf->MultiCell(0,6,utf8_decode('- Rectificación o cancelación de datos person
 $pdf->MultiCell(0,6,utf8_decode('- Oposición en la recogida de datos de carácter personal'),0,'L');
 $pdf->SetLeftMargin(20);
 $pdf->MultiCell(0,6,utf8_decode('- Oposición a la comunicación de datos de carácter personal'),0,'L');
-
 $pdf->Ln(3);
-
 $pdf->MultiCell(0,6,utf8_decode('Los modelos de solicitud para cada uno de los derechos de los interesados, se adjuntan en el Anexo X: "Documentos para el ejercicio de derechos" del Documento de Seguridad.'),0,'J');$pdf->Ln(2.5);
 
 //10.1
@@ -404,7 +402,6 @@ $pdf->MultiCell(0,6,utf8_decode('- Domicilio a efectos de notificaciones'),0,'J'
 $pdf->MultiCell(0,6,utf8_decode('- Fecha y firma del solicitante'),0,'J');
 $pdf->SetLeftMargin(20);
 $pdf->MultiCell(0,6,utf8_decode('- Documentos acreditativos de la petición que formula, en su caso.'),0,'J');
-
 
 //10.2
 $pdf->SetFont('Arial','B',12);
@@ -438,6 +435,7 @@ $pdf->MultiCell(0,10,utf8_decode('10.5. Derechos de oposición a la cesión de d
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('El interesado podrá solicitar el ejercicio de este derecho en cualquier momento mediante escrito dirigido a la dirección indicada, disponiendo el Responsable de Seguridad de UN MES NATURAL para responderle afirmativamente.'),0,'J');$pdf->Ln(2.5);
 
+//11
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,strtoupper(utf8_decode('11. anexos')),0,'L');
@@ -532,13 +530,13 @@ $pdf->Ln(10);
 
 $pdf->MultiCell(0,6,utf8_decode('RESPONSABLE DE SEGURIDAD'),0,'J');
 $pdf->Ln(5);
-$pdf->SetWidths(array(80,30,30,30));
+$pdf->SetWidths(array(70,40,30,30));
 $pdf->SetAligns(array('C','C','C','C'));
 $pdf->Row(array("Nombre y Apellidos","Cargo","Fecha alta","Fecha baja"));
 $falta="";
-if(strcmp($rep_seg["falta"],"00-00-0000")!=0){$falta=$rep_seg["falta"];}
+if(strcmp($rep_seg["fecha_alta"],"0000-00-00")!=0){$falta=date_conv($rep_seg["fecha_alta"]);}
 $fbaja="";
-if(strcmp($rep_seg["fbaja"],"00-00-0000")!=0){$fbaja=$rep_seg["fbaja"];}
+if(strcmp($rep_seg["fecha_baja"],"0000-00-00")!=0){$fbaja=date_conv($rep_seg["fecha_baja"]);}
 $pdf->Row(array(html_entity_decode($rep_seg["nombre"]),html_entity_decode($rep_seg["cargofuncion"]),$falta,$fbaja));
 $pdf->Row(array("","","",""));
 $pdf->Row(array("","","",""));
@@ -546,14 +544,14 @@ $pdf->Ln(10);
 
 $pdf->MultiCell(0,6,utf8_decode('PERSONAL CON ACCESO A LOS FICHEROS'),0,'J');
 $pdf->Ln(5);
-$pdf->SetWidths(array(60,45,23,20,22));
+$pdf->SetWidths(array(60,43,23,22,22));
 $pdf->SetAligns(array('C','C','C','C','C'));
 $pdf->Row(array("Nombre y Apellidos","Cargo","NIF","Fecha alta","Fecha baja"));
 foreach($trab as $t){
     $falta="";
-    if(strcmp($t["falta"],"00-00-0000")!=0){$falta=$t["falta"];}
+    if(strcmp($t["fecha_alta"],"0000-00-00")!=0){$falta=date_conv($t["fecha_alta"]);}
     $fbaja="";
-    if(strcmp($t["fbaja"],"00-00-0000")!=0){$fbaja=$t["fbaja"];}
+    if(strcmp($t["fecha_baja"],"0000-00-00")!=0){$fbaja=date_conv($t["fecha_baja"]);}
     $pdf->Row(array(html_entity_decode($t["nombre"]),html_entity_decode($t["cargofuncion"]),$t["dni"],$falta,$fbaja));
 }
 $pdf->Row(array("","","","",""));
