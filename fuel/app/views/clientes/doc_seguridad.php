@@ -107,11 +107,6 @@ if($ficheros != null){
     }
 }
 echo "<br/>";
-if($isCPP){
-    echo Html::anchor('doc/seguridad_ccpp/'.$cliente->id, '<span class="glyphicon glyphicon-file"></span> Generar PDF del Documento de seguridad', array('class' => 'btn btn-info','target'=>'_blank'));
-}
-else{
-    echo Html::anchor('doc/seguridad/'.$cliente->id, '<span class="glyphicon glyphicon-file"></span> Generar PDF del Documento de seguridad', array('class' => 'btn btn-info','target'=>'_blank'));
-}
+echo Html::anchor('doc/seguridad/'.$cliente->id, '<span class="glyphicon glyphicon-file"></span> Generar PDF del Documento de seguridad', array('class' => 'btn btn-info','target'=>'_blank'));
 echo "&nbsp;".Html::anchor('clientes/view/'.$cliente->id, '<span class="glyphicon glyphicon-eye-open"></span> Abrir ficha de cliente', array('class' => 'btn btn-default','target'=>'_blank','title'=>'Se abre en ventana nueva...'));
 ?>
