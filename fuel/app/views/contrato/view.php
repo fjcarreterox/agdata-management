@@ -25,7 +25,7 @@
         }
     ?></p>
 <p>
-	<strong>Fecha firma:</strong>
+	<strong>Fecha contrato:</strong>
 	<?php echo date_conv($contrato->fecha_firma); ?></p>
 <br/>
 <?php echo Html::anchor('contrato/edit/'.$contrato->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos del contrato',array('class'=>'btn btn-success')); ?>&nbsp;&nbsp;

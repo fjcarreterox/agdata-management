@@ -13,6 +13,11 @@
     <li>Actividad: <strong><?php echo $cliente["actividad"];?></strong></li>
 </ul>
 
+<h3>Datos propios del contrato</h3>
+<ul>
+    <li>Nº: <strong><?php echo $contract["id"];?></strong></li>
+    <li>Fecha: <strong><?php echo date_conv($contract["date"]);?></strong></li>
+</ul>
 
 <h3>Representante legal</h3>
 <?php
@@ -62,6 +67,7 @@ foreach($servicios as $s):
         <li>Cuota: <strong><?php echo $s->cuota;?> &euro;</strong></li>
         <li>Número de cuotas: <strong><?php echo $num_cuotas;?></strong></li>
         <li>Tipo de pago: <strong><?php echo $s->forma_pago;?></strong></li>
+        <li>Fecha comienzo: <strong><?php echo $s->mes_factura;?>/<?php echo $s->year;?></strong></li>
     </ul>
     <br/>
     <?php
@@ -71,16 +77,18 @@ foreach($servicios as $s):
         "periodicidad"=> $periodo_ops[$s->periodicidad],
         "cuota"=> $s->cuota,
         "num_cuotas" => $num_cuotas,
-        "pago"=> $s->forma_pago
+        "pago"=> $s->forma_pago,
+        "mes_factura"=>$s->mes_factura,
+        "year"=>$s->year
     );
 endforeach;
 if($cliente["tipo"] == 6){
-    $params=base64_encode("cliente_data=".urlencode(json_encode($cliente))."&rep_data=".urlencode(json_encode($rep_legal))."&aaff_data=".urlencode(json_encode($aaff))."&serv=".urlencode(json_encode($servicios_data)));
+    $params=base64_encode("cliente_data=".urlencode(json_encode($cliente))."&contract=".urlencode(json_encode($contract))."&rep_data=".urlencode(json_encode($rep_legal))."&aaff_data=".urlencode(json_encode($aaff))."&serv=".urlencode(json_encode($servicios_data)));
     $script="contrato_prestacion_servicios_com.php";
 }
 else{
-    $params=base64_encode("cliente_data=".urlencode(json_encode($cliente))."&rep_data=".urlencode(json_encode($rep_legal))."&serv=".urlencode(json_encode($servicios_data)));
+    $params=base64_encode("cliente_data=".urlencode(json_encode($cliente))."&contract=".urlencode(json_encode($contract))."&rep_data=".urlencode(json_encode($rep_legal))."&serv=".urlencode(json_encode($servicios_data)));
     $script="contrato_prestacion_servicios.php";
 }
-echo Html::anchor('http://localhost/docpdf/'.$script.'?q='.$params, '<span class="glyphicon glyphicon-file"></span> Generar contrato', array('class' => 'btn btn-info','target'=>'_blank'));
+echo Html::anchor('http://localhost/public/docpdf/'.$script.'?q='.$params, '<span class="glyphicon glyphicon-file"></span> Generar contrato', array('class' => 'btn btn-info','target'=>'_blank'));
 ?>

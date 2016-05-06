@@ -30,7 +30,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::select('idpersonal', Input::post('idpersonal', isset($contrato) ? $contrato->idpersonal : 'NO DEFINIDO'), $rep_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Idpersonal')); ?>
 		</div>
 		<div class="form-group">
-			<?php echo Form::label('Fecha de firma', 'fecha_firma', array('class'=>'control-label')); ?>
+			<?php echo Form::label('Fecha del contrato', 'fecha_firma', array('class'=>'control-label')); ?>
 			<?php echo Form::input('fecha_firma', Input::post('fecha_firma', isset($contrato) ? $contrato->fecha_firma : ''), array('class' => 'col-md-4 form-control', 'type'=>'date')); ?>
 		</div>
 		<div class="form-group">

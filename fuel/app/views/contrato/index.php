@@ -12,7 +12,7 @@
 			<th>Cliente</th>
 			<th>Presupuesto relacionado</th>
 			<th>Representante legal</th>
-			<th>Fecha firma</th>
+			<th>Fecha contrato</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>

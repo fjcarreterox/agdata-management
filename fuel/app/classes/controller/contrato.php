@@ -54,6 +54,7 @@ class Controller_Contrato extends Controller_Template
         $data['servicios'] = Model_Servicios_Contratado::find('all',array('where'=>array('idcontrato'=>$idcontrato)));
         $data['cliente'] = $cliente;
         $data['rep_legal'] = $rep_legal;
+		$data['contract'] = array("id"=>$contrato->id,"date"=>$contrato->fecha_firma);
 
         $this->template->title = "Vista previa para generar Contrato";
         $this->template->content = View::forge('contrato/doc',$data);
