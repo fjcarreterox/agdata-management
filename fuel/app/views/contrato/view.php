@@ -18,7 +18,12 @@
 	<strong>Representante legal:</strong>
 	<?php
         if($contrato->idpersonal != 0) {
-            echo Model_Personal::find($contrato->idpersonal)->get('nombre');
+            if(Model_Personal::find($contrato->idpersonal) != null){
+                echo Model_Personal::find($contrato->idpersonal)->get('nombre');
+            }
+            else{
+                echo '<span class="red">-- NOMBRE NO ESPECIFICADO --</span>';
+            }
         }
         else{
             echo '<span class="red">-- AÚN NO ESPECIFICADO --</span>';

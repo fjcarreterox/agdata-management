@@ -30,7 +30,12 @@
 
 			<td><?php
                 if($item->idpersonal != 0) {
-                    echo Model_Personal::find($item->idpersonal)->get('nombre');
+                    if(Model_Personal::find($item->idpersonal) != null){
+                        echo Model_Personal::find($item->idpersonal)->get('nombre');
+                    }
+                    else{
+                        echo '<span class="red">-- NOMBRE NO ESPECIFICADO --</span>';
+                    }
                 }
                 else{
                     echo '<span class="red">-- AÚN NO ESPECIFICADO --</span>';
