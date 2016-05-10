@@ -21,8 +21,21 @@ class Controller_Doc extends Controller_Template{
         //TODO
     }
 
-    public function action_contrato($idcliente, $year){
-        //TODO
+    public function action_contrato($idcustomer, $idcontract){
+        $c=Model_Cliente::find($idcustomer);
+        $isCPP=($c->tipo == 6)? true: false;
+        $contract = Model_Contrato::find($idcontract);
+
+        $data['customer'] = $c;
+        $data['contract'] = $contract;
+        $data['services'] = Model_Servicios_Contratado::find('all',array('where'=>array('idcontrato'=>$idcontract)));
+        $data['rep'] =  Model_Personal::find($contract->idpersonal);
+
+        if($isCPP){
+            return View::forge('doc/contrato_cpp',$data)->render();
+        }else{
+            return View::forge('doc/contrato',$data)->render();
+        }
     }
 
     public function action_seguridad($idc){
