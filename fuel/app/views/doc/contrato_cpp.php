@@ -64,12 +64,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,'SEGUNDA',0,1,'L');
 $pdf->SetFont('Arial','',12);
-if($customer->tipo == 6) {
-    $pdf->MultiCell(0, 6, utf8_decode('Que EL BENEFICIARIO está constituido jurídicamente como una Comunidad de Propietarios.'), 0);
-}
-else {
-    $pdf->MultiCell(0, 6, utf8_decode('Que el BENEFICIARIO desarrolla la siguiente actividad principal: '.html_entity_decode($customer->actividad).'.'), 0);
-}
+$pdf->MultiCell(0, 6, utf8_decode('Que EL BENEFICIARIO está constituido jurídicamente como una Comunidad de Propietarios.'), 0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',12);

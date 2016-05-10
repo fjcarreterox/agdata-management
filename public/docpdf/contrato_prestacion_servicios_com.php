@@ -3,7 +3,6 @@ require('./fpdf.php');
 
 class PDF extends FPDF
 {
-// Cabecera de página
     function Header()
     {
         // Logo
@@ -18,7 +17,6 @@ class PDF extends FPDF
         $this->Ln(20);
     }
 
-// Pie de página
     function Footer()
     {
         // Posición: a 1,5 cm del final
@@ -76,13 +74,13 @@ $data = base64_decode(substr($_SERVER['QUERY_STRING'],2,strlen($_SERVER['QUERY_S
 //$data = base64_decode($_GET['q']);
 parse_str($data);
 $cliente=json_decode(urldecode($cliente_data),true);
+$contrato=json_decode(urldecode($contract),true);
 $aaff=json_decode(urldecode($aaff_data),true);
 $rep=json_decode(urldecode($rep_data),true);
 $servicios=json_decode($serv,true);
 $h1=0;
 $h2=0;
 
-// Creación del objeto de la clase heredada
 $pdf = new PDF();
 
 $title = utf8_decode('Contrato de prestación de servicios');
@@ -95,10 +93,10 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 
 $pdf->SetFont('Arial','',12);
-$fecha = date("d-m-Y",time());
+$fecha = $contrato["date"];
 $fecha_array=explode('-',$fecha);
 $mes = $pdf->getMes($fecha_array[1]);
-$fecha = "$fecha_array[0]-$mes-$fecha_array[2]";
+$fecha = "$fecha_array[2]-$mes-$fecha_array[0]";
 $pdf->Cell(0,10,'En Sevilla, a '.str_replace("-"," de ",$fecha),0,0,'C');
 $pdf->Ln(15);
 
@@ -190,7 +188,7 @@ if(isset($servicios[2])) {
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('- La adaptación a posibles novedades que puedan producirse en la normativa española sobre protección de datos que se produzcan durante la vigencia del presente contrato.'), 0);
     $pdf->Ln(5);
-$pdf->MultiCell(0, 6, utf8_decode('- Realización de Auditoría Bienal obligatoria para los niveles de seguridad medio y alto, al final del segundo año.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Realización de Auditoría Bienal obligatoria para los niveles de seguridad medio y alto, al final del segundo año.'), 0);
     $pdf->Ln(5);
 }
 else{
@@ -205,28 +203,28 @@ if(isset($servicios[1])) {
     $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS, S.L., asciende a un importe único de '.$servicios[1]["precio"].' EUROS, impuestos no incluidos, cantidad que será facturada por dicha entidad.'), 0);
     $pdf->Ln(5);
     if(strcmp($servicios[1]["pago"],"transferencia bancaria")==0){
-	    $pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe durante los diez primeros días posteriores a la fecha de firma del contrato mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423.'), 0);
-	}else{
-    		$pdf->MultiCell(0, 6, utf8_decode('Al BENEFICIARIO se le cargará dicho importe en su cuenta con código IBAN nº '.$cliente["iban"].', mediante recibo domiciliado.'), 0);
+        $pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe durante los diez primeros días posteriores a la fecha de firma del contrato mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423.'), 0);
+    }else{
+        $pdf->MultiCell(0, 6, utf8_decode('Al BENEFICIARIO se le cargará dicho importe en su cuenta con código IBAN nº '.$cliente["iban"].', mediante recibo domiciliado.'), 0);
     }
     $pdf->Ln(5);
 }
 //mantenimiento
 if(isset($servicios[2])) {
-	$per="";
-	if(strcmp($servicios[2]["periodicidad"],"Pago único")!==0){$per=$servicios[2]["periodicidad"]." ";}
+    $per="";
+    if(strcmp($servicios[2]["periodicidad"],"Pago único")!==0){$per=$servicios[2]["periodicidad"]." ";}
 
     $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de mantenimiento descritos, asciende a una cuota '.$per.'de '.$servicios[2]["cuota"].' EUROS, impuestos no incluidos, que serán facturados por ANÁLISIS Y GESTIÓN DE DATOS, S.L.'), 0);
     $pdf->Ln(5);
     if(strcmp($servicios[2]["pago"],"transferencia bancaria")==0){
-    	$pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe (o estos importes) mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423 durante los diez primeros días del mes acordado entre las partes para el comienzo de los servicios de
+        $pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe (o estos importes) mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423 durante los diez primeros días del mes acordado entre las partes para el comienzo de los servicios de
 mantenimiento, así como de las sucesivas renovaciones tácitas del contrato.'), 0);
     }else{
-	    $pdf->MultiCell(0, 6, utf8_decode('Al BENEFICIARIO se le cargará dicho importe en su cuenta con código IBAN nº '.$cliente["iban"].', mediante recibo domiciliado.'), 0);
-	    }
+        $pdf->MultiCell(0, 6, utf8_decode('Al BENEFICIARIO se le cargará dicho importe en su cuenta con código IBAN nº '.$cliente["iban"].', mediante recibo domiciliado.'), 0);
+    }
     $pdf->Ln(5);
 }
-$pdf->MultiCell(0, 6, utf8_decode('Los precios antes señalados serán revisados en las sucesivas prórrogas que produzcan en función de las variaciones del IPC anuales publicadas por el INE.'), 0);
+$pdf->MultiCell(0, 6, utf8_decode('Los precios antes señalados serán revisados en las sucesivas prórrogas que se produzcan en función de las variaciones del IPC anuales publicadas por el INE.'), 0);
 $pdf->Ln(5);
 $pdf->MultiCell(0, 6, utf8_decode('La primera domiciliación, que importará la suma de ambas cuotas anteriormente citadas, será girada por el PRESTATARIO durante los diez primeros días posteriores a la fecha de firma del contrato. Las siguientes domiciliaciones, anuales, correspondientes a los servicios de mantenimiento, serán giradas por el PRESTATARIO durante los diez primeros días del mes acordado entre las partes para el comienzo de los servicios de mantenimiento, así como de las sucesivas renovaciones tácitas del contrato.'), 0);
 $pdf->Ln(5);
