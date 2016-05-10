@@ -13,6 +13,7 @@ class Controller_Contrato extends Controller_Template
 
         $c = Model_Cliente::find($contrato->idcliente);
         $cliente = array(
+            "id"=> $c->id,
             "nombre"=> $c->nombre,
             "tipo"=> $c->tipo,
             "cif"=> $c->cif_nif,
@@ -42,6 +43,7 @@ class Controller_Contrato extends Controller_Template
             }
             $data['aaff'] = $aaff_data;
         }
+
         $tratamiento_ops = array("D.","Dª");
         $rep =  Model_Personal::find($contrato->idpersonal);
         if($rep != null){
