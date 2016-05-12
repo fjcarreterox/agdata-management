@@ -141,22 +141,40 @@ class Controller_Doc extends Controller_Template{
         $data["cp"]=$c->cpostal;
         $data["loc"]=$c->loc;
         $data["prov"]=$c->prov;
-        $cesiones = Model_Cesione::find('all',array('where'=>array('idcliente'=>$idc,'idcesionaria'=>$idces)));
         $files = array();
-        foreach ($cesiones as $c){
-            $files[] = array(
-                "type" => Model_Tipo_Fichero::find(Model_Fichero::find($c->idfichero)->get('idtipo'))->get('tipo'),
-                "level" => Model_Fichero::find($c->idfichero)->get('nivel'),
-                "supp" => Model_Fichero::find($c->idfichero)->get('soporte'));
-        }
-        $data['files'] = $files;
-
         if($isCPP){
             $data['pres'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idc,'relacion'=>6)));
-            $data['rel_aaffs'] = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idc)));
+            $rel_aaffs = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idc)));
+            $reps = array();
+            $i=0;
+            foreach($rel_aaffs as $r){
+                $rep_legal = Model_Personal::find('first',array('where'=>array('idcliente'=>$r->idaaff,'relacion'=>1)));
+                $reps[$i]["nombre"] = $rep_legal->nombre;
+                $reps[$i]["dni"] = $rep_legal->dni;
+                $reps[$i]["nombre_aaff"] = Model_Cliente::find($r->idaaff)->get('nombre');
+                $reps[$i]["dir"] = Model_Cliente::find($r->idaaff)->get('direccion');
+                $reps[$i]["cp"] = Model_Cliente::find($r->idaaff)->get('cpostal');
+                $reps[$i]["loc"] = Model_Cliente::find($r->idaaff)->get('loc');
+                $reps[$i]["prov"] = Model_Cliente::find($r->idaaff)->get('prov');
+                $i++;
+            }
+            $data['reps'] = $reps;
+            $files_tmp = Model_Fichero::find('all',array('where'=>array('idcliente'=>$idc)));
+            foreach($files_tmp as $f){
+                $files[]["type"] = Model_Tipo_Fichero::find($f->idtipo)->get('tipo');
+            }
+            $data['files'] = $files;
             return View::forge('doc/cesion_cpp',$data)->render();
         }
         else{
+            $cesiones = Model_Cesione::find('all',array('where'=>array('idcliente'=>$idc,'idcesionaria'=>$idces)));
+            foreach ($cesiones as $c){
+                $files[] = array(
+                    "type" => Model_Tipo_Fichero::find(Model_Fichero::find($c->idfichero)->get('idtipo'))->get('tipo'),
+                    "level" => Model_Fichero::find($c->idfichero)->get('nivel'),
+                    "supp" => Model_Fichero::find($c->idfichero)->get('soporte'));
+            }
+            $data['files'] = $files;
             $data['rep_legal'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idc,'relacion'=>1)));
             $data['ces'] = Model_Cliente::find($idces);
             $data['rep_legal_ces'] = Model_Personal::find('first', array('where' => array('idcliente' => $idces, 'relacion' => 1)));
