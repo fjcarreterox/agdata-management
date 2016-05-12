@@ -44,7 +44,7 @@ if (!isset($idcliente)) {
                 <tr>
                     <td>Contrato de cesión de datos con <strong><?php echo $ces_name;?></strong></td>
                         <td><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default')); ?>
-                &nbsp;<?php echo Html::anchor('doc/cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info')); ?></td></tr>
+                &nbsp;<?php echo Html::anchor('doc/cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info','target'=>'_blank')); ?></td></tr>
             <?php
             }
         }

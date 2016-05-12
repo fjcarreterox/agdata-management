@@ -1,6 +1,5 @@
 <?php
 define('EURO', chr(128) );
-
 $pdf = new \Fuel\Core\FPDF();
 
 $cname = html_entity_decode($cname);
@@ -39,12 +38,14 @@ if(strcmp($rep_legal['dni'],'')!=0){
 $pdf->MultiCell(0, 6, utf8_decode('De una parte, '.$rep_name.', mayor de edad, con  DNI ' . $rep_dni . ', en nombre y representación de '.$cname.', con domicilio en '.html_entity_decode($dir).', C.P. '.$cp.' de '.html_entity_decode($loc).', provincia de '.html_entity_decode($prov).' y CIF nº '.$cif_nif.' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
 $pdf->Ln(5);
 
+$ces_dir = html_entity_decode($ces["direccion"]);
+
 //the second one is included in the first one
-if(strpos($rep_legal_ces["nombre"],$ces["nombre"])>0){
-    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_legal_ces_name . ', mayor de edad, con  DNI ' . $rep_legal_ces["dni"] . ', en su propio nombre y representación, con domicilio en ' . $ces["dir"] . ', C.P. ' . $ces["cp"] . ' de ' . $ces["loc"] . ', provincia de ' . $ces["prov"] . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
+if(strcmp($rep_legal_ces["nombre"],$ces["nombre"])==0){
+    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_legal_ces_name . ', mayor de edad, con  DNI ' . $rep_legal_ces->dni . ', en su propio nombre y representación, con domicilio en ' . $ces_dir . ', C.P. ' . $ces["cpostal"] . ' de ' . $ces["loc"] . ', provincia de ' . $ces["prov"] . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
 }
 else {
-    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_legal_ces_name . ', mayor de edad, con  DNI ' . $rep_legal_ces["dni"] . ', en nombre y representación de ' . $ces["nombre"] . ', con domicilio en ' . $ces["dir"] . ', C.P. ' . $ces["cp"] . ' de ' . $ces["loc"] . ', provincia de ' . $ces["prov"] . ' y CIF nº ' . $ces["cif_nif"] . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_legal_ces_name . ', mayor de edad, con  DNI ' . $rep_legal_ces->dni . ', en nombre y representación de ' . $ces["nombre"] . ', con domicilio en ' . $ces_dir . ', C.P. ' . $ces["cpostal"] . ' de ' . $ces["loc"] . ', provincia de ' . $ces["prov"] . ' y CIF nº ' . $ces["cif_nif"] . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
 }
 
 $pdf->SetFont('Arial','B',12);
@@ -59,7 +60,7 @@ $pdf->Cell(0,10,strtoupper('estipulaciones'),0,1,'C');
 $pdf->SetFont('Arial','B',9);
 $pdf->Cell(0,10,strtoupper('primera'),0,1,'L');
 $pdf->SetFont('Arial','',9);
-$pdf->MultiCell(0, 6, utf8_decode('Ambas partes se encuentran vinculadas por una relación contractual de prestación de servicios de '.$ces["servicio"].' para '.$cname.'.'),0,'J');
+$pdf->MultiCell(0, 6, utf8_decode('Ambas partes se encuentran vinculadas por una relación contractual de prestación de servicios de '.html_entity_decode($ces["actividad"]).' para '.$cname.'.'),0,'J');
 $pdf->Ln(3);
 $pdf->SetFont('Arial','B',9);
 $pdf->Cell(0,10,strtoupper('segunda'),0,1,'L');
@@ -120,7 +121,7 @@ $nombre_empresa="              ";
 if($ces["tipo"] != 3){
     $nombre_empresa=$ces["nombre"];
 }
-$pdf->Ln(7);
+$pdf->Ln(10);
 $pdf->MultiCell(0, 6, utf8_decode($cname . '                                                                    '.$nombre_empresa) , 0, 'C');
 
 $pdf->Output("CONTRATO-CESION-".$cname."-".$ces['nombre'].".pdf",'I');

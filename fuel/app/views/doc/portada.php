@@ -24,7 +24,9 @@ $pdf->Ln(20);
 /* Customer name */
 $pdf->SetFont('Arial','B',24);
 $pdf->SetFillColor(255, 255, 255);
-$pdf->RoundedRect(25, 70, 160, 30, 0.5, 'DF');
+$h=30;
+if(strlen($name)>25){$h=40;}
+$pdf->RoundedRect(25, 70, 160, $h, 0.5, 'DF');
 $pdf->MultiCell(0,10,strtoupper('COMUNIDAD DE PROPIETARIOS'),0,'C');
 $pdf->MultiCell(0,10,utf8_decode(mb_strtoupper($name)),0,'C');
 $pdf->Ln(20);
