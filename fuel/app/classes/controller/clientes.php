@@ -29,7 +29,11 @@ class Controller_Clientes extends Controller_Template
 
         if (Input::method() == 'POST'){
             $idcliente = Input::post('idcliente');
+
             $data['idcliente'] = $idcliente;
+            $data['name'] = Model_Cliente::find($idcliente)->get('nombre');
+            $data['type'] = Model_Cliente::find($idcliente)->get('tipo');
+
             $cesiones = Model_Cesione::find('all',array('where'=>array('idcliente'=>$idcliente)));
             $cesionaria = 0;
             foreach($cesiones as $c){
@@ -38,8 +42,6 @@ class Controller_Clientes extends Controller_Template
                     $data['cesiones'][] = $c;
                 }
             }
-            $this->template->title = "Documentación LOPD";
-            $this->template->content = View::forge('clientes/doclopd', $data);
         }
         else{
             $clientes = Model_Cliente::find('all', array(
@@ -53,10 +55,9 @@ class Controller_Clientes extends Controller_Template
             ));
 
             $data['clientes'] = $clientes;
-
-            $this->template->title = "Documentación LOPD";
-            $this->template->content = View::forge('clientes/doclopd', $data);
         }
+        $this->template->title = "Documentación LOPD";
+        $this->template->content = View::forge('clientes/doclopd', $data);
     }
 
     public function action_adaptacion(){
