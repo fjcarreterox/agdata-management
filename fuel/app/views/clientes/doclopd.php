@@ -49,17 +49,18 @@ if (!isset($idcliente)) {
             }
         }
         if ($type == 6) {
-            //Would it be more than one?
-            $aaff= Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
-
-            //Default contract with its legal representative
-            $aaff_name = Model_Cliente::find($aaff->idaaff)->get('nombre');
-            ?>
-            <tr><td>Contrato de cesión de datos con <strong><?php echo $aaff_name;?></strong></td>
-                <td><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente . '/' . $aaff->idaaff, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default')); ?>
-                    &nbsp;<?php echo Html::anchor('doc/cesion/' . $idcliente .'/'.$aaff->idaaff, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')); ?></td>
-            </tr>
-        <?php
+            $aaffs = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idcliente)));
+            foreach($aaffs as $aaff) {
+                //Default contract with its legal representative
+                $aaff_name = Model_Cliente::find($aaff->idaaff)->get('nombre');
+                ?>
+                <tr>
+                    <td>Contrato de cesión de datos con <strong><?php echo $aaff_name; ?></strong></td>
+                    <td><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente . '/' . $aaff->idaaff, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default')); ?>
+                        &nbsp;<?php echo Html::anchor('doc/cesion/' . $idcliente . '/' . $aaff->idaaff, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')); ?></td>
+                </tr>
+                <?php
+            }
         }
 
         //Security doc
