@@ -1,5 +1,5 @@
 <?php
-//global $cname;
+
 class PDFp extends PDF_MC_Table{
     var $customer = "";
 
@@ -16,7 +16,7 @@ class PDFp extends PDF_MC_Table{
         $this->Cell(0,45,utf8_decode("                         ".$this->customer),0,0,'C');
         $this->Ln(10);
         $this->Ln(10);
-        $this->Image('http://gestion.agdata.es/assets/img/logo2.png',20,13,40);
+        //$this->Image('http://localhost/public/assets/img/logo2.png',20,13,40);
         $this->Ln(20);
     }
 
@@ -320,8 +320,8 @@ $pdf->MultiCell(0,6,utf8_decode('Los armarios, archivadores y otros elementos em
 $pdf->MultiCell(0,6,utf8_decode('La realización de copias o la reproducción de estos documentos únicamente podrán ser efectuadas bajo el control del personal autorizado por el Responsable de Seguridad.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Se procederá a la destrucción de las copias desechadas o inútiles, para evitar en lo posible el acceso a la información en ellas contenida.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('En los casos de traslado físico de la documentación contenida en un fichero, el Responsable de Seguridad adoptarán las medidas dirigidas a impedir el acceso o manipulación de la información objeto de traslado.'),0,'J');$pdf->Ln(2.5);
-
 $pdf->Ln(5);
+
 //8
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,strtoupper(utf8_decode('8. copias de respaldo y recuperación')),0,'L');

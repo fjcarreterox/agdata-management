@@ -98,7 +98,7 @@
 					<li><a href="doccomercial">Documentación comercial</a></li>
                     <li><a href="mailing/init">Mailing</a></li>
                     <li><a href="procedimiento">Procedimientos</a></li>
-                    <li><a href="report">Informes</a></li>
+                    <li><a href="doc/report">Informes</a></li>
 				</ul>
 			</div>
 		</div>
@@ -109,8 +109,8 @@
                     <li><a href="clientes/create">Añadir Nuevo Cliente</a></li>
                     <li><a href="clientes/aaff">Relación de AA.FF.</a></li>
                     <li><a href="personal/listall">Personas de contacto y Empleados</a></li>
-                    <li><a href="clientes">Listado completo de clientes</a></li>
                     <li><a href="agenda/activos">Llamadas y visitas a clientes</a></li>
+                    <li><a href="clientes">Listado completo de clientes</a></li>
                 </ul>
             </div>
          <?php if(Session::get('idrol')==1):?>

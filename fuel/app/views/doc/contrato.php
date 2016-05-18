@@ -64,12 +64,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,'SEGUNDA',0,1,'L');
 $pdf->SetFont('Arial','',12);
-if($customer->tipo == 6) {
-    $pdf->MultiCell(0, 6, utf8_decode('Que EL BENEFICIARIO está constituido jurídicamente como una Comunidad de Propietarios.'), 0);
-}
-else {
-    $pdf->MultiCell(0, 6, utf8_decode('Que el BENEFICIARIO desarrolla la siguiente actividad principal: '.html_entity_decode($customer->actividad).'.'), 0);
-}
+$pdf->MultiCell(0, 6, utf8_decode('Que el BENEFICIARIO desarrolla la siguiente actividad principal: '.html_entity_decode($customer->actividad).'.'), 0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',12);
@@ -160,12 +155,17 @@ $pdf->SetFont('Arial','',12);
 if(isset($servicios_data[1])) {
     $per="";$div="";
     if(strcmp($servicios_data[1]["periodicidad"],"Pago único")!==0 && strcmp($servicios_data[1]["periodicidad"],"anualmente")!==0){$per=$servicios_data[1]["periodicidad"].".";$div=' dividido en '.$servicios_data[1]["num_cuotas"].' importes de '.$servicios_data[1]["cuota"].' EUROS,';}
-    $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$servicios_data[1]["precio"].' EUROS,'.$div.' impuestos no incluidos, que serán facturados por dicha entidad.'), 0);
-    $pdf->Ln(5);
-    if(strcmp($servicios_data[1]["pago"],"transferencia bancaria")==0){
-        $pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423 durante los diez primeros días del mes, comenzando en '.getMes($servicios_data[1]["mes_factura"]).' de '.$servicios_data[1]["year"].'.'), 0);
+
+    if($servicios_data[1]["precio"]==0){
+        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$servicios_data[1]["precio"].' EUROS.'), 0);
     }else{
-        $pdf->MultiCell(0, 6, utf8_decode('La domiciliación de este importe será girada por el PRESTATARIO durante los diez primeros días del mes de '.getMes($servicios_data[1]["mes_factura"]).' de '.$servicios_data[1]["year"].', en la cuenta del BENEFICIARIO con código IBAN nº '.$customer["iban"].'.'), 0);
+        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$servicios_data[1]["precio"].' EUROS,'.$div.' impuestos no incluidos, que serán facturados por dicha entidad.'), 0);
+        $pdf->Ln(5);
+        if(strcmp($servicios_data[1]["pago"],"transferencia bancaria")==0){
+            $pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423 durante los diez primeros días del mes, comenzando en '.getMes($servicios_data[1]["mes_factura"]).' de '.$servicios_data[1]["year"].'.'), 0);
+        }else{
+            $pdf->MultiCell(0, 6, utf8_decode('La primera domiciliación será girada por el PRESTATARIO durante los diez primeros días del mes de '.getMes($servicios_data[1]["mes_factura"]).' de '.$servicios_data[1]["year"].', en la cuenta del BENEFICIARIO con código IBAN nº '.$customer["iban"].'.'), 0);
+        }
     }
     $pdf->Ln(5);
 }
@@ -173,17 +173,25 @@ if(isset($servicios_data[1])) {
 if(isset($servicios_data[2])) {
     $per="";$div="";
     if(strcmp($servicios_data[2]["periodicidad"],"Pago único")!==0){$per=$servicios_data[2]["periodicidad"].".";$div=' dividido en '.$servicios_data[2]["num_cuotas"].' importes de '.$servicios_data[2]["cuota"].' EUROS,';}
-    $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de mantenimiento descritos, asciende a un total de '.$servicios_data[2]["precio"].' EUROS,'.$div.' impuestos no incluidos, que serán facturados por ANÁLISIS Y GESTIÓN DE DATOS S.L. '.$per), 0);
-    $pdf->Ln(5);
-    if(strcmp($servicios_data[2]["pago"],"transferencia bancaria")==0){
-        $pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe (o estos importes) mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423 durante los diez primeros días del mes, comenzando en '.getMes($servicios_data[2]["mes_factura"]).' de '.$servicios_data[2]["year"].'.'), 0);
+
+    if($servicios_data[2]["precio"]==0){
+        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de mantenimiento descritos, asciende a un total de '.$servicios_data[2]["precio"].' EUROS.'), 0);
     }else{
-        $pdf->MultiCell(0, 6, utf8_decode('La primera domiciliación será girada por el PRESTATARIO durante los diez primeros días del mes de '.getMes($servicios_data[2]["mes_factura"]).' de '.$servicios_data[2]["year"].', en la cuenta del BENEFICIARIO con código IBAN nº '.$customer["iban"].'.'), 0);
+        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de mantenimiento descritos, asciende a un total de '.$servicios_data[2]["precio"].' EUROS,'.$div.' impuestos no incluidos, que serán facturados por ANÁLISIS Y GESTIÓN DE DATOS S.L. '.$per), 0);
+        $pdf->Ln(5);
+        if(strcmp($servicios_data[2]["pago"],"transferencia bancaria")==0){
+            $pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe (o estos importes) mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423 durante los diez primeros días del mes, comenzando en '.getMes($servicios_data[2]["mes_factura"]).' de '.$servicios_data[2]["year"].'.'), 0);
+        }else{
+            $pdf->MultiCell(0, 6, utf8_decode('La primera domiciliación será girada por el PRESTATARIO durante los diez primeros días del mes de '.getMes($servicios_data[2]["mes_factura"]).' de '.$servicios_data[2]["year"].', en la cuenta del BENEFICIARIO con código IBAN nº '.$customer["iban"].'.'), 0);
+        }
     }
     $pdf->Ln(5);
 }
-$pdf->MultiCell(0, 6, utf8_decode('Los precios antes señalados serán revisados en las sucesivas prórrogas que se produzcan en función de las variaciones del IPC anuales publicadas por el INE.'), 0);
-$pdf->Ln(5);
+
+if($servicios_data[1]["precio"]!=0 || $servicios_data[2]["precio"]!=0){
+    $pdf->MultiCell(0, 6, utf8_decode('Los precios antes señalados serán revisados en las sucesivas prórrogas que se produzcan en función de las variaciones del IPC anuales publicadas por el INE.'), 0);
+    $pdf->Ln(5);
+}
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,utf8_decode('3ª.- CONFIDENCIALIDAD'),0,1,'L');

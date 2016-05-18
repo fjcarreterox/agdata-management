@@ -18,7 +18,7 @@ class PDFp extends PDF_MC_Table{
         $this->Cell(0,45,utf8_decode("                         ".html_entity_decode($this->customer)),0,0,'C');
         $this->Ln(10);
         $this->Ln(10);
-        $this->Image('http://gestion.agdata.es/assets/img/logo2.png',20,13,40);
+        //$this->Image('http://localhost/public/assets/img/logo2.png',20,13,40);
         $this->Ln(10);
     }
 
