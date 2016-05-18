@@ -169,5 +169,5 @@ if($isCPP) { ?>
 
 <br/>
 <p><?php
-    echo Html::anchor('doc/cesion/'.$cliente->tipo.'/'.$ces, '<span class="glyphicon glyphicon-file"></span> Generar PDF del contrato de cesión', array('class' => 'btn btn-info','target'=>'_blank'));?>
+    echo Html::anchor('doc/cesion/'.$cliente->id.'/'.$ces, '<span class="glyphicon glyphicon-file"></span> Generar PDF del contrato de cesión', array('class' => 'btn btn-info','target'=>'_blank'));?>
 </p>

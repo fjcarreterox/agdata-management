@@ -8,6 +8,12 @@ class Controller_Doc extends Controller_Template{
 		$this->template->content = View::forge('doc/index', $data);
 	}
 
+
+    public function action_report(){
+        $this->template->title = "Informes del sistema";
+        $this->template->content = View::forge('doc/report');
+    }
+
     public function view_all($idc){
         //TODO: list all the documents for a single customer/contact
     }

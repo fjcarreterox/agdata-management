@@ -176,4 +176,20 @@ class Controller_Contrato extends Controller_Template
 
 		Response::redirect('contrato');
 	}
+
+	public function action_month_search(){
+        if (Input::method() == 'POST'){
+            $date = explode('-',Input::post('date_sign'));
+            $date_str="$date[0]-$date[1]-%";
+            //$data['contracts'] = Model_Contrato::find('all',array('where'=>array(array('fecha_firma','like',$date_str)),'order_by'=>'fecha_firma'));
+            $data['services'] = Model_Servicios_Contratado::find('all',array('where'=>array('year'=>$date[0],'mes_factura'=>$date[1]),'order_by'=>'idcontrato'));
+            $data['title'] = getMes($date[1])." de ".$date[0];
+            $this->template->title = "Contratos con servicios que comienzan en ".getMes($date[1])." de ".$date[0];
+            $this->template->content = View::forge('contrato/services',$data);
+        }
+        else{
+            $this->template->title = "Buscar servicios para una fecha determinada";
+            $this->template->content = View::forge('contrato/month_search');
+        }
+    }
 }
