@@ -98,74 +98,74 @@ if(count($cesiones)>0) {
         <?php
     endforeach;
 }else{
-    echo "<p>No se han encontrado cesiones de ficheros aún. Ve a la ficha de cliente y defínelos en el apartado <i>Auditoría de adaptación</i>.</p>";
+    echo "<p>No se han encontrado cesiones de ficheros aún. Ve a la ficha de cliente y defínelos en el apartado <i>Auditoría de adaptación</i>.
+Si el cliente es una CPP, entonces presuponemos que a falta de cesiones explícitas, los ficheros cedidos son todos los que tenga declarados.</p>";
 }
 
-if($isCPP) { ?>
-    <h3>Representante(s) legal(es)</h3>
-    <?php
-    if (isset($rel_aaffs)) {
-        foreach ($rel_aaffs as $rel_aaff): ?>
-            <ul>
-                <li>Nombre del Rep. legal:
-                    <?php
-                    $aaff = Model_Cliente::find($rel_aaff->idaaff);
+//if($isCPP) {
+if (isset($rel_aaffs)) {
+    echo "<h3>Representante(s) legal(es)</h3>";
+    foreach ($rel_aaffs as $rel_aaff): ?>
+        <ul>
+            <li>Nombre del Rep. legal:
+                <?php
+                $aaff = Model_Cliente::find($rel_aaff->idaaff);
 
-                    $rep_trat = "";
-                    $rep_dni = ".......................................";
-                    $rep_name = '...................................................................';
-                    $representante = $rep_trat . ' ' . $rep_name;
-                    if ($rep = Model_Personal::find('first', array('where' => array('idcliente' => $aaff->id, 'relacion' => 1)))) {
-                        $rep_trat = $rep->tratamiento;
-                        $rep_name = $rep->nombre;
-                        $rep_dni = $rep->dni;
-                        $representante = $tratamiento_ops[$rep_trat] . ' ' . $rep_name;
-                    }
-                    echo "<strong>" . $representante . "</strong>";
-                    ?></li>
-                <li>DNI del Rep. legal: <strong><?php echo $rep_dni; ?></strong></li>
+                $rep_trat = "";
+                $rep_dni = ".......................................";
+                $rep_name = '...................................................................';
+                $representante = $rep_trat . ' ' . $rep_name;
+                if ($rep = Model_Personal::find('first', array('where' => array('idcliente' => $aaff->id, 'relacion' => 1)))) {
+                    $rep_trat = $rep->tratamiento;
+                    $rep_name = $rep->nombre;
+                    $rep_dni = $rep->dni;
+                    $representante = $tratamiento_ops[$rep_trat] . ' ' . $rep_name;
+                }
+                echo "<strong>" . $representante . "</strong>";
+                ?></li>
+            <li>DNI del Rep. legal: <strong><?php echo $rep_dni; ?></strong></li>
 
-                <h4><i>En representación de la empresa Administradora de fincas:</i></h4>
-                <li>Nombre de la empresa cesionaria: <strong><?php echo urldecode($aaff->nombre); ?></strong></li>
-                <li>CIF: <strong><?php echo $aaff->cif_nif; ?></strong></li>
-                <li>Dirección: <strong><?php echo $aaff->direccion; ?></strong></li>
-                <li>Código postal: <strong><?php echo $aaff->cpostal; ?></strong></li>
-                <li>Localidad: <strong><?php echo $aaff->loc; ?></strong></li>
-                <li>Provincia: <strong><?php echo $aaff->prov; ?></strong></li>
-                <br/>
-            </ul>
-        <?php endforeach;
-    } else {
-        echo "<ul><li>No se han encontrado aún representantes asociados.</li></ul>";
-    }
+            <h4><i>En representación de la empresa Administradora de fincas:</i></h4>
+            <li>Nombre de la empresa cesionaria: <strong><?php echo urldecode($aaff->nombre); ?></strong></li>
+            <li>CIF: <strong><?php echo $aaff->cif_nif; ?></strong></li>
+            <li>Dirección: <strong><?php echo $aaff->direccion; ?></strong></li>
+            <li>Código postal: <strong><?php echo $aaff->cpostal; ?></strong></li>
+            <li>Localidad: <strong><?php echo $aaff->loc; ?></strong></li>
+            <li>Provincia: <strong><?php echo $aaff->prov; ?></strong></li>
+            <br/>
+        </ul>
+    <?php endforeach;
     $ces=$aaff->id;
-}else{
-    echo "<h3>Empresa cesionaria</h3>";
+}
+
+//}else{
+echo "<h3>Empresa cesionaria</h3>";
+?>
+<ul>
+    <li>Nombre de la empresa cesionaria: <strong><?php echo urldecode($cesionaria->nombre); ?></strong></li>
+    <li>Tipo de empresa cesionaria: <strong><?php echo Model_Tipo_Cliente::find($cesionaria->tipo)->get('tipo'); ?></strong></li>
+    <li>CIF: <strong><?php echo $cesionaria->cif_nif; ?></strong></li>
+    <li>Dirección: <strong><?php echo $cesionaria->direccion; ?></strong></li>
+    <li>Código postal: <strong><?php echo $cesionaria->cpostal; ?></strong></li>
+    <li>Localidad: <strong><?php echo $cesionaria->loc; ?></strong></li>
+    <li>Provincia: <strong><?php echo $cesionaria->prov; ?></strong></li>
+    <li>Actividad: <strong><?php echo $cesionaria->actividad; ?></strong></li>
+    <br/>
+    <?php
+    $nombre_rep_ces = "...........................................................................";
+    $dni_rep_ces = ".....................................";
+    $rep_legal_ces = Model_Personal::find('first', array('where' => array('idcliente' => $cesionaria->id, 'relacion' => 1)));
+    if($rep_legal_ces != null){
+        $nombre_rep_ces = $tratamiento_ops[$rep_legal_ces->tratamiento]." ".$rep_legal_ces->nombre;
+        $dni_rep_ces = $rep_legal_ces->dni;
+    }
+    $ces=$cesionaria->id;
     ?>
-    <ul>
-        <li>Nombre de la empresa cesionaria: <strong><?php echo urldecode($cesionaria->nombre); ?></strong></li>
-        <li>Tipo de empresa cesionaria: <strong><?php echo Model_Tipo_Cliente::find($cesionaria->tipo)->get('tipo'); ?></strong></li>
-        <li>CIF: <strong><?php echo $cesionaria->cif_nif; ?></strong></li>
-        <li>Dirección: <strong><?php echo $cesionaria->direccion; ?></strong></li>
-        <li>Código postal: <strong><?php echo $cesionaria->cpostal; ?></strong></li>
-        <li>Localidad: <strong><?php echo $cesionaria->loc; ?></strong></li>
-        <li>Provincia: <strong><?php echo $cesionaria->prov; ?></strong></li>
-        <li>Actividad: <strong><?php echo $cesionaria->actividad; ?></strong></li>
-        <br/>
-        <?php
-        $nombre_rep_ces = "...........................................................................";
-        $dni_rep_ces = ".....................................";
-        $rep_legal_ces = Model_Personal::find('first', array('where' => array('idcliente' => $cesionaria->id, 'relacion' => 1)));
-        if($rep_legal_ces != null){
-            $nombre_rep_ces = $tratamiento_ops[$rep_legal_ces->tratamiento]." ".$rep_legal_ces->nombre;
-            $dni_rep_ces = $rep_legal_ces->dni;
-        }
-        $ces=$cesionaria->id;
-        ?>
-        <li>Nombre del Rep. legal: <strong><?php echo $nombre_rep_ces; ?></strong></li>
-        <li>DNI del Rep. legal: <strong><?php echo $dni_rep_ces; ?></strong></li>
-    </ul>
-<?php }   ?>
+    <li>Nombre del Rep. legal: <strong><?php echo $nombre_rep_ces; ?></strong></li>
+    <li>DNI del Rep. legal: <strong><?php echo $dni_rep_ces; ?></strong></li>
+</ul>
+<?php //}
+?>
 
 <br/>
 <p><?php

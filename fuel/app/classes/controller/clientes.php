@@ -157,13 +157,7 @@ class Controller_Clientes extends Controller_Template
             Session::set_flash('error', 'No se han podido localizar los datos del cliente solicitado.');
             Response::redirect('clientes');
         }else{
-            //Tipo comunidad
-            if(Model_Cliente::find($idcliente)->get('tipo')==6){
-                $data['rel_aaffs'] = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idcliente)));
-            }
-            else{
-                $data['cesionaria'] = Model_Cliente::find($idcesionaria);
-            }
+            $data['cesionaria'] = Model_Cliente::find($idcesionaria);
         }
         $data['cesiones'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$idcliente,'idcesionaria'=>$idcesionaria)));
 

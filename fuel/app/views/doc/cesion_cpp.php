@@ -59,7 +59,7 @@ $pdf->Cell(0,10,strtoupper('estipulaciones'),0,1,'C');
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(0,10,strtoupper('primera'),0,1,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0, 6, utf8_decode('Ambas partes se encuentran vinculadas por una relación de prestación de servicios de administración y gestión de fincas.'),0,'J');
+$pdf->MultiCell(0, 6, utf8_decode('Ambas partes se encuentran vinculadas por una relación de prestación de servicios de '.html_entity_decode($rep["activ"]).'.'),0,'J');
 $pdf->Ln(3);
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(0,10,strtoupper('segunda'),0,1,'L');
@@ -112,6 +112,6 @@ $pdf->Ln(10);
 $pdf->SetLeftMargin(20);
 $pdf->SetFont('Arial','',9);
 
-$pdf->MultiCell(0, 6, utf8_decode('C.PP ' . $cname . '                                                     ' . html_entity_decode($rep["nombre"])), 0, 'C');
+$pdf->MultiCell(0, 6, utf8_decode('C.PP ' . $cname . '                                       ' . html_entity_decode($rep["nombre"])), 0, 'C');
 
 $pdf->Output("CONTRATO-CESION-C.PP.-".$cname.".pdf",'I');

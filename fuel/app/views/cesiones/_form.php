@@ -55,6 +55,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             $('select#form_idrep').find('option').remove().end();
             if(Object.keys(data).length > 0) {
                 var index;
+                $('select#form_idrep').append("<option value='0'> -- N/D -- </option>");
                 for (index = 0; index < 3; ++index) {
                     if (typeof data[index] != 'undefined') {
                         rep_legal = data[index].nombre + " (" + data[index].cargo + ")";

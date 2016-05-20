@@ -152,17 +152,31 @@ class Controller_Doc extends Controller_Template{
             $data['pres'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idc,'relacion'=>6)));
             $rep_legal = Model_Personal::find('first',array('where'=>array('idcliente'=>$idces,'relacion'=>1)));
 
-            $rep["nombre"] = $rep_legal->nombre;
-            $rep["dni"] = $rep_legal->dni;
+            $rep_legal_name = str_repeat(".",120);
+            $rep_legal_dni = str_repeat(".",50);
+            if($rep_legal != null){
+                $rep_legal_name = $rep_legal->nombre;
+                $rep_legal_dni = $rep_legal->dni;
+            }
+            $rep["nombre"] = $rep_legal_name;
+            $rep["dni"] = $rep_legal_dni;
             $rep["nombre_aaff"] = Model_Cliente::find($idces)->get('nombre');
+            $rep["activ"] = Model_Cliente::find($idces)->get('actividad');
+            $rep["cif_nif"] = Model_Cliente::find($idces)->get('cif_nif');
             $rep["dir"] = Model_Cliente::find($idces)->get('direccion');
             $rep["cp"] = Model_Cliente::find($idces)->get('cpostal');
             $rep["loc"] = Model_Cliente::find($idces)->get('loc');
             $rep["prov"] = Model_Cliente::find($idces)->get('prov');
 
-            $files_tmp = Model_Fichero::find('all',array('where'=>array('idcliente'=>$idc)));
-            foreach($files_tmp as $f){
-                $files[]["type"] = Model_Tipo_Fichero::find($f->idtipo)->get('tipo');
+            $cesion = Model_Cesione::find('first',array('where'=>array('idcliente'=>$idc,'idcesionaria'=>$idces)));
+            if($cesion != null){
+                $files[]["type"] = Model_Tipo_Fichero::find(Model_Fichero::find($cesion->idfichero)->get('idtipo'))->get('tipo');
+            }
+            else {
+                $files_tmp = Model_Fichero::find('all', array('where' => array('idcliente' => $idc)));
+                foreach ($files_tmp as $f) {
+                    $files[]["type"] = Model_Tipo_Fichero::find($f->idtipo)->get('tipo');
+                }
             }
 
             $data['files'] = $files;
