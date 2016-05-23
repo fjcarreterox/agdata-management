@@ -554,6 +554,14 @@ while($i<$num_reps){
     $pdf->Row(array(html_entity_decode($reps[$i]["nombre"]),$reps[$i]["dni"],"",""));
     $i++;
 }
+foreach($ces as $c){
+    $ces_name="N/D";
+    if($c->idcesionaria!=0){
+        $ces_name= Model_Cliente::find($c->idcesionaria)->get("nombre");
+    }
+    $ces_cif=Model_Cliente::find($c->idcesionaria)->get("cif_nif");
+    $pdf->Row(array(html_entity_decode($ces_name),$ces_cif,"",""));
+}
 $pdf->Row(array("","","",""));
 $pdf->Row(array("","","",""));
 $pdf->Ln(5);

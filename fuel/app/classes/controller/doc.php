@@ -79,6 +79,7 @@ class Controller_Doc extends Controller_Template{
         }
         $data['files'] = $files;
         $data['max_level'] = $max_level;
+        $data['ces'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$idc)));
 
         if($isCPP){
             $rels_aaff = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idc)));
@@ -106,7 +107,6 @@ class Controller_Doc extends Controller_Template{
             $data['reps'] = Model_Personal::find('first', array('where' => array('idcliente' => $idc, 'relacion' => 1)));
             $data['rep_seg'] = Model_Personal::find('first', array('where' => array('idcliente' => $idc, 'relacion' => 3)));
             $data['personal'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idc,'relacion'=>6)));
-            $data['ces'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$idc)));
             return View::forge('doc/seguridad',$data)->render();
         }
     }
