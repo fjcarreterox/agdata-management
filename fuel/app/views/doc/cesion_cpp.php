@@ -29,7 +29,11 @@ $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,strtoupper('reunidos'),0,1,'C');
 
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0, 6, utf8_decode('De una parte, '.html_entity_decode($pres_name).', mayor de edad, con DNI '.$pres->dni.', en nombre y representación de la Comunidad de Propietarios '.$cname.' en su calidad de PRESIDENTE, con domicilio en '.html_entity_decode($dir).' con C.P. '.$cp.' de '.html_entity_decode($loc).', provincia de '.html_entity_decode($prov).' y CIF nº '.$cif_nif.' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
+$pres_dni="...............................";
+if($pres->dni!=""){
+    $pres_dni=$pres->dni;
+}
+$pdf->MultiCell(0, 6, utf8_decode('De una parte, '.html_entity_decode($pres_name).', mayor de edad, con DNI '.$pres_dni.', en nombre y representación de la Comunidad de Propietarios '.$cname.' en su calidad de PRESIDENTE, con domicilio en '.html_entity_decode($dir).' con C.P. '.$cp.' de '.html_entity_decode($loc).', provincia de '.html_entity_decode($prov).' y CIF nº '.$cif_nif.' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
 $pdf->Ln(5);
 
 $rep_name = html_entity_decode($rep["nombre"]);
@@ -38,12 +42,17 @@ $aaff_dir = html_entity_decode($rep["dir"]);
 $aaff_loc = html_entity_decode($rep["loc"]);
 $aaff_prov = html_entity_decode($rep["prov"]);
 
+$rep_type="";
+if($rep["aaff_type"]==1){
+    $rep_type="como Administrador de Fincas, ";
+}
+
 //the second one is included in the first one
 if(strcmp($rep_name,$aaff_name) == 0){
-    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_name . ', mayor de edad con  DNI ' . $rep["dni"] . ', en representación propia y como Administrador de Fincas, con domicilio en ' . $aaff_dir . ', con C.P. ' . $rep["cp"] . ' de ' . $aaff_loc . ', provincia de ' . $aaff_prov . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_name . ', mayor de edad con  DNI ' . $rep["dni"] . ', en representación propia y '.$rep_type.'con domicilio en ' . $aaff_dir . ', con C.P. ' . $rep["cp"] . ' de ' . $aaff_loc . ', provincia de ' . $aaff_prov . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
 }
 else {
-    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_name . ', mayor de edad con  DNI ' . $rep["dni"] . ', en representación de ' . html_entity_decode($rep["nombre_aaff"]) . ' con CIF ' . $rep["cif_nif"] . ', como Administrador de Fincas, con domicilio en ' . $aaff_dir . ', con C.P. ' . $rep["cp"] . ' de ' . $aaff_loc . ', provincia de ' . $aaff_prov . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_name . ', mayor de edad con  DNI ' . $rep["dni"] . ', en representación de ' . html_entity_decode($rep["nombre_aaff"]) . ' con CIF ' . $rep["cif_nif"] . ', '.$rep_type.'con domicilio en ' . $aaff_dir . ', con C.P. ' . $rep["cp"] . ' de ' . $aaff_loc . ', provincia de ' . $aaff_prov . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
 }
 $pdf->Ln(3);
 
@@ -72,6 +81,7 @@ $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0, 6, utf8_decode('Que por esta razón conforme a lo dispuesto en el Art. 12 de la LOPD, ambas partes libremente y de común acuerdo, deciden regular este acceso y tratamiento de datos de carácter personal de conformidad con las siguientes: '),0,'J');
 
 $pdf->AddPage();
+/* clausulas */
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,utf8_decode(mb_strtoupper('claúsulas')),0,1,'C');
 $pdf->SetFont('Arial','',9);
@@ -109,9 +119,15 @@ $pdf->MultiCell(0, 7, utf8_decode('9ª.- Las partes contratantes se someten expr
 $pdf->Ln(5);
 $pdf->MultiCell(0, 7, utf8_decode('Tanto el Responsable del Fichero como el Encargado del Tratamiento, aceptan el presente contrato en los términos y condiciones estipuladas en el mismo, y en prueba de ello, y para cumplimiento de lo convenido, lo firman por duplicado.'),0,'J');
 $pdf->Ln(10);
+
 $pdf->SetLeftMargin(20);
 $pdf->SetFont('Arial','',9);
-
-$pdf->MultiCell(0, 6, utf8_decode('C.PP ' . $cname . '                                       ' . html_entity_decode($rep["nombre"])), 0, 'C');
+if(strpos($rep["nombre"],"......")===false){
+    $signature=html_entity_decode($rep["nombre"]);
+}
+else{
+    $signature = "...............................";
+}
+$pdf->MultiCell(0, 6, utf8_decode('C.PP ' . $cname . '                                         ' . $signature), 0, 'C');
 
 $pdf->Output("CONTRATO-CESION-C.PP.-".$cname.".pdf",'I');

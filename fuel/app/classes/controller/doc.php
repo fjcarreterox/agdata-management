@@ -161,6 +161,7 @@ class Controller_Doc extends Controller_Template{
             $rep["nombre"] = $rep_legal_name;
             $rep["dni"] = $rep_legal_dni;
             $rep["nombre_aaff"] = Model_Cliente::find($idces)->get('nombre');
+            $rep["aaff_type"] = Model_Cliente::find($idces)->get('tipo');
             $rep["activ"] = Model_Cliente::find($idces)->get('actividad');
             $rep["cif_nif"] = Model_Cliente::find($idces)->get('cif_nif');
             $rep["dir"] = Model_Cliente::find($idces)->get('direccion');
