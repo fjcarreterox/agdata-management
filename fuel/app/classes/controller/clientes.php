@@ -29,6 +29,10 @@ class Controller_Clientes extends Controller_Template
 
         if (Input::method() == 'POST'){
             $idcliente = Input::post('idcliente');
+            if($idcliente==0){
+                Session::set_flash('error', 'Por favor, selecciona un cliente válido.');
+                Response::redirect('clientes/doclopd');
+            }
 
             $data['idcliente'] = $idcliente;
             $data['name'] = Model_Cliente::find($idcliente)->get('nombre');
