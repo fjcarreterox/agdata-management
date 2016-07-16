@@ -18,7 +18,7 @@ class PDFp extends PDF_MC_Table{
         $this->Cell(0,45,utf8_decode("                         ".html_entity_decode($this->customer)),0,0,'C');
         $this->Ln(10);
         $this->Ln(10);
-        //$this->Image('http://localhost/public/assets/img/logo2.png',20,13,40);
+        $this->Image('http://gestion.agdata.es/assets/img/logo2.png',20,13,40);
         $this->Ln(10);
     }
 
@@ -94,10 +94,10 @@ $pdf->Cell(5,6,utf8_decode('   3.2. Funciones y obligaciones'),0,1,'L');$pdf->Ln
 $pdf->SetFont('Arial','',11);
 $pdf->Cell(5,6,'4. PROCEDIMIENTOS Y NORMAS DE SEGURIDAD',0,1,'L');
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(5,6,utf8_decode('   4.1. Centros de tratamiento y locales'),0,1,'L');
+$pdf->Cell(5,6,utf8_decode('   4.1. Centros de tratamiento'),0,1,'L');
 $pdf->Cell(5,6,utf8_decode('   4.2. Puestos de trabajo'),0,1,'L');
 $pdf->Cell(5,6,utf8_decode('   4.3. Sistema de información'),0,1,'L');
-$pdf->Cell(5,6,utf8_decode('   4.4. Aplicaciones de acceso a los ficheros'),0,1,'L');$pdf->Ln(2);
+$pdf->Cell(5,6,utf8_decode('   4.4. Salvaguarda y protección de las contraseñas personales'),0,1,'L');$pdf->Ln(2);
 $pdf->SetFont('Arial','',11);
 $pdf->Cell(5,6,utf8_decode('5. GESTIÓN DE INCIDENCIAS'),0,1,'L');
 $pdf->SetFont('Arial','B',10);
@@ -107,9 +107,8 @@ $pdf->SetFont('Arial','',11);
 $pdf->Cell(5,6,utf8_decode('6. GESTIÓN DE SOPORTES'),0,1,'L');
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(5,6,utf8_decode('   6.1. Identificación, inventario, reutilización y destrucción de soportes'),0,1,'L');
-$pdf->Cell(5,6,utf8_decode('   6.2. Entrada y salida de soportes'),0,1,'L');
-$pdf->Cell(5,6,utf8_decode('   6.3. Distribución de soportes'),0,1,'L');
-$pdf->Cell(5,6,utf8_decode('   6.4. Soportes en papel de ficheros no automatizados'),0,1,'L');$pdf->Ln(2);
+$pdf->Cell(5,6,utf8_decode('   6.2. Distribución de soportes'),0,1,'L');
+$pdf->Cell(5,6,utf8_decode('   6.3. Soportes en papel de ficheros no automatizados'),0,1,'L');$pdf->Ln(2);
 $pdf->SetFont('Arial','',11);
 $pdf->Cell(5,6,utf8_decode('7. COPIAS DE RESPALDO Y RECUPERACIÓN'),0,1,'L');$pdf->Ln(2);
 $pdf->Cell(5,6,'8. EJERCICIO DE LOS DERECHOS DE LOS INTERESADOS',0,1,'L');
@@ -120,12 +119,12 @@ $pdf->Cell(5,6,utf8_decode('   8.3. Derechos de rectificación y cancelación'),
 $pdf->Cell(5,6,utf8_decode('   8.4. Derecho de oposición a facilitar datos personales'),0,1,'L');
 $pdf->Cell(5,6,utf8_decode('   8.5. Derecho de oposición a la cesión de datos personales'),0,1,'L');$pdf->Ln(2);
 $pdf->SetFont('Arial','',11);
-$pdf->Cell(5,6,utf8_decode('9. COPIAS DE RESPALDO Y RECUPERACIÓN'),0,1,'L');$pdf->Ln(2);
+$pdf->Cell(5,6,utf8_decode('9. CESIONES DE DATOS Y COMUNICACIONES A TERCEROS'),0,1,'L');$pdf->Ln(2);
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(5,6,utf8_decode('   9.1. Recepción de solicitudes'),0,1,'L');
-$pdf->Cell(5,6,utf8_decode('   9.2. Derecho de acceso'),0,1,'L');
+$pdf->Cell(5,6,utf8_decode('   9.1. Encargados de tratamiento'),0,1,'L');
+$pdf->Cell(5,6,utf8_decode('   9.2. Comunicaciones de datos a terceros'),0,1,'L');
 $pdf->SetFont('Arial','',11);
-$pdf->Cell(5,6,'10. EJERCICIO DE LOS DERECHOS DE LOS INTERESADOS',0,1,'L');
+$pdf->Cell(5,6,'10. VIDEOVIGILANCIA',0,1,'L');
 $pdf->SetFont('Arial','',11);
 $pdf->Cell(5,6,'11. ANEXOS',0,1,'L');
 
@@ -226,14 +225,14 @@ $pdf->MultiCell(0,10,utf8_decode(strtoupper('4. Procedimientos y normas de segur
 $pdf->MultiCell(0,10,utf8_decode('4.1. Centros de tratamiento'),0,'L');
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('El acceso a los locales u oficinas donde se encuentren los ficheros, deberá estar restringido exclusivamente al personal autorizado para su tratamiento o aquél que deba realizar labores de mantenimiento para las que sea imprescindible el acceso físico.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0, 6, utf8_decode('La administración y gestión de los ficheros de la Comunidad de Propietarios se lleva a cabo tanto en ' . html_entity_decode($dir) . ' con C.P. ' . $cp . ' en ' . $loc . ', provincia de ' . $prov . ', como en las instalaciones de su Administrador de Fincas, ' . $reps[0]["nombre_aaff"] . ', situadas en ' . html_entity_decode($reps[0]["dir"]) . ' con C.P. ' . $reps[0]["cp"] . ' en ' . $reps[0]["loc"] . ', provincia de ' . $reps[0]["prov"] . '.'), 0, 'J');
+$pdf->MultiCell(0, 6, utf8_decode('La administración y gestión de los ficheros de la Comunidad de Propietarios se lleva a cabo tanto en ' . html_entity_decode($dir) . ' con C.P. ' . $cp . ' en ' . html_entity_decode($loc) . ', provincia de ' . html_entity_decode($prov) . ', como en las instalaciones de su Administrador de Fincas, ' . html_entity_decode($reps[0]["nombre_aaff"]) . ', situadas en ' . html_entity_decode($reps[0]["dir"]) . ' con C.P. ' . $reps[0]["cp"] . ' en ' . html_entity_decode($reps[0]["loc"]) . ', provincia de ' . html_entity_decode($reps[0]["prov"]) . '.'), 0, 'J');
 $pdf->Ln(2.5);
 
 
 if($num_reps > 1) {
     $i=1;
     while($i<$num_reps) {
-        $pdf->MultiCell(0, 6, utf8_decode('También en las instalaciones de su otra Administradora de Fincas, ' . $reps[$i]["nombre_aaff"] . ', situadas en ' . html_entity_decode($reps[$i]["dir"]) . ' con C.P. ' . $reps[$i]["cp"] . ' en ' . $reps[$i]["loc"] . ', provincia de ' . $reps[$i]["prov"] . '.'), 0, 'J');
+        $pdf->MultiCell(0, 6, utf8_decode('También en las instalaciones de su otra Administradora de Fincas, ' . html_entity_decode($reps[$i]["nombre_aaff"]) . ', situadas en ' . html_entity_decode($reps[$i]["dir"]) . ' con C.P. ' . $reps[$i]["cp"] . ' en ' . $reps[$i]["loc"] . ', provincia de ' . $reps[$i]["prov"] . '.'), 0, 'J');
         $pdf->Ln(2.5);
         $i++;
     }
@@ -401,10 +400,9 @@ $pdf->MultiCell(0,10,utf8_decode('9. CESIONES DE DATOS Y COMUNICACIONES A TERCER
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('9.1. Encargados de tratamiento'),0,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('Se entiende por Encargado del Tratamiento toda persona física o jurídica, autoridad pública, servicio o cualquier otro organismo que, sólo o conjuntamente con otros, trate datos personales por cuenta del Responsable de los Ficheros.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('Cuando el COLEGIO PROFESIONAL DE PROCURADORES DE SEVILLA facilite el acceso a los datos, a los soportes que los contengan o a los recursos de los sistemas de información que los traten, a un Encargado de Tratamiento que le preste sus servicios en las instalaciones del Colegio, se exigirá al personal del Encargado el cumplimiento de las medidas de seguridad previstas en el presente Documento.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('En el momento en que el COLEGIO PROFESIONAL DE PROCURADORES DE SEVILLA preste a otras empresas determinados servicios que impliquen el acceso o tratamiento de datos de carácter personal, ostentará la condición de Encargado del Tratamiento respecto de los datos de aquéllas y deberá garantizar la seguridad de los datos de cuyo tratamiento se encargue.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('En este sentido, el COLEGIO PROFESIONAL DE PROCURADORES DE SEVILLA deberá aplicar a los ficheros con datos de carácter personal de cuyo tratamiento se encargue en calidad de Encargado del Tratamiento, las medidas de seguridad establecidas en el presente Documento de Seguridad, en función del nivel de seguridad que corresponda a los datos tratados.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Se entiende por Encargado del Tratamiento toda persona física o jurídica, autoridad pública, servicio o cualquier otro organismo que, trate datos personales por cuenta del Responsable de los Ficheros.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Cuando la Comunidad de Propietarios facilite el acceso a los datos, a los soportes que los contengan o a los recursos de los sistemas de información que los traten, a un Encargado de Tratamiento que le preste sus servicios, se exigirá al personal del Encargado el cumplimiento de las medidas de seguridad previstas en el presente Documento.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Para el caso concreto de los Administradores de Fincas, se deberá firmar un contrato de Cesión de Datos donde el Encargado de Tratamiento se compromete a cumplir con las obligaciones que la LOPD le exige.'),0,'J');$pdf->Ln(2.5);
 
 //9.2
 $pdf->SetFont('Arial','B',12);
@@ -518,7 +516,11 @@ $pdf->SetWidths(array(80,30,30,30));
 $pdf->SetAligns(array('C','C','C','C'));
 $pdf->Row(array("Nombre y Apellidos","Cargo","Fecha alta","Fecha baja"));
 if(count($pres)>0){
-    $pdf->Row(array(html_entity_decode($pres["nombre"]),"PRESIDENTE",$pres["falta"],$pres["fbaja"]));
+    $falta="";
+    if(strcmp($pres["fecha_alta"],"0000-00-00")!=0){$falta=date_conv($pres["fecha_alta"]);}
+    $fbaja="";
+    if(strcmp($pres["fecha_baja"],"0000-00-00")!=0){$fbaja=date_conv($pres["fecha_baja"]);}
+    $pdf->Row(array(html_entity_decode($pres["nombre"]),"PRESIDENTE",$falta,$fbaja));
 }
 else{
     $pdf->Row(array("","","",""));
@@ -529,8 +531,8 @@ $pdf->Ln(10);
 
 $pdf->MultiCell(0,6,utf8_decode('PERSONAS DE LA COMUNIDAD CON ACCESO A LOS FICHEROS'),0,'J');
 $pdf->Ln(5);
-$pdf->SetWidths(array(50,35,25,30,30));
-$pdf->SetAligns(array('C','C','C','C','C'));
+$pdf->SetWidths(array(80,35,25,30));
+$pdf->SetAligns(array('C','C','C','C'));
 $pdf->Row(array("Nombre y Apellidos","Cargo","Fecha alta","Fecha baja"));
 if(count($trab)>0){
     foreach($trab as $t) {
