@@ -1,5 +1,5 @@
 <?php
-
+//global $cname;
 class PDFp extends PDF_MC_Table{
     var $customer = "";
 
@@ -16,7 +16,7 @@ class PDFp extends PDF_MC_Table{
         $this->Cell(0,45,utf8_decode("                         ".$this->customer),0,0,'C');
         $this->Ln(10);
         $this->Ln(10);
-        //$this->Image('http://localhost/public/assets/img/logo2.png',20,13,40);
+        $this->Image('http://gestion.agdata.es/assets/img/logo2.png',20,13,40);
         $this->Ln(20);
     }
 
@@ -146,7 +146,7 @@ $pdf->MultiCell(0,10,utf8_decode(mb_strtoupper('2. Ámbito de aplicación')),0,'
 $pdf->MultiCell(0,10,utf8_decode('2.1. Ámbito legal'),0,'L');
 
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('Este documento ha sido elaborado bajo la responsabilidad de '.html_entity_decode($rep_seg["nombre"]).' quien, como representante de '.$cname.' y, por lo tanto, Responsable de los Ficheros, se compromete a implantar los procedimientos recogidos en el presente documento y mantenerlos actualizados dentro del ámbito de aplicación de la normativa vigente en protección de datos.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Este documento ha sido elaborado bajo la responsabilidad de '.html_entity_decode($reps["nombre"]).' quien, como representante de '.$cname.' y, por lo tanto, Responsable de los Ficheros, se compromete a implantar los procedimientos recogidos en el presente documento y mantenerlos actualizados dentro del ámbito de aplicación de la normativa vigente en protección de datos.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('El Documento de Seguridad deberá ser revisado periódicamente por el Responsable de los Ficheros, con el fin de identificar cambios relevantes en el mismo. '),0,'J');$pdf->Ln(2.5);
 
 //2.2
@@ -560,17 +560,22 @@ $pdf->Ln(10);
 
 $pdf->MultiCell(0,6,utf8_decode('PERSONAS AJENAS CON ACCESO A LOS FICHEROS'),0,'J');
 $pdf->Ln(5);
-$pdf->SetWidths(array(50,35,25,30,30));
-$pdf->SetAligns(array('C','C','C','C','C'));
-$pdf->Row(array("Cesionario","Nombre y Apellidos","NIF","Fecha alta","Fecha baja"));
+$pdf->SetWidths(array(60,25,55,30));
+$pdf->SetAligns(array('C','C','C','C'));
+$pdf->Row(array("Cesionario","CIF","Actividad","Fecha firma"));
 $ces_table = array();
 foreach($ces as $c){
-    if(!in_array($c["nombre"],$ces_table)) {
-        $pdf->Row(array($c["nombre"], $c["nombre_rep"], $c["dni_rep"], "", ""));
-        $ces_table[] = $c["nombre"];
+    if(!in_array($c["idcesionaria"],$ces_table)) {
+        $nombre_ces = Model_Cliente::find($c["idcesionaria"])->get("nombre");
+        $act_ces = Model_Cliente::find($c["idcesionaria"])->get("actividad");
+        $cif_ces = Model_Cliente::find($c["idcesionaria"])->get("cif_nif");
+        $fecha_cont="";
+        if(strcmp($c["fecha_contrato"],"0000-00-00")!=0){$fecha_cont=date_conv($c["fecha_contrato"]);}
+        $pdf->Row(array($nombre_ces, $cif_ces,$act_ces,$fecha_cont));
+        $ces_table[] = $c["idcesionaria"];
     }
 }
-$pdf->Row(array("","","","",""));
+$pdf->Row(array("","","",""));
 $pdf->Ln(5);
 
 //ANEXO IV

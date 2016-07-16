@@ -159,8 +159,10 @@ if(isset($servicios_data[1])) {
     $pdf->Ln(5);
     if(strcmp($servicios_data[1]["pago"],"transferencia bancaria")==0){
         $pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423 durante los diez primeros días del mes, comenzando en '.getMes($servicios_data[1]["mes_factura"]).' de '.$servicios_data[1]["year"].'.'), 0);
+        //$pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe (o estos importes) durante los diez primeros días posteriores a la fecha de firma del contrato mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423.'), 0);
     }else{
         $pdf->MultiCell(0, 6, utf8_decode('La domiciliación de este importe será girada por el PRESTATARIO durante los diez primeros días del mes de '.getMes($servicios_data[1]["mes_factura"]).' de '.$servicios_data[1]["year"].', en la cuenta del BENEFICIARIO con código IBAN nº '.$customer["iban"].'.'), 0);
+        //$pdf->MultiCell(0, 6, utf8_decode('Al BENEFICIARIO se le cargará dicho importe (o dichos importes) en su cuenta con código IBAN nº '.$customer["iban"].', mediante recibo domiciliado.'), 0);
     }
     $pdf->Ln(5);
 }
