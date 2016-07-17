@@ -49,8 +49,8 @@ if (!isset($idcliente)) {
             }
         }
         if ($type == 6) {
-            $aaffs = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idcliente)));
-            foreach($aaffs as $aaff) {
+            $aaffs = Model_Rel_Comaaff::find('all', array('where' => array('idcom' => $idcliente)));
+            foreach ($aaffs as $aaff) {
                 //Default contract with its legal representative
                 $aaff_name = Model_Cliente::find($aaff->idaaff)->get('nombre');
                 ?>
@@ -60,6 +60,11 @@ if (!isset($idcliente)) {
                         &nbsp;<?php echo Html::anchor('doc/cesion/' . $idcliente . '/' . $aaff->idaaff, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')); ?></td>
                 </tr>
                 <?php
+            }
+            if (Model_Fichero::find('first',array('where'=>array('idcliente'=>$idcliente,'idtipo'=>6)))!=null) {
+                //Solicitud Acceso Fichero Videovigilancia
+                echo "<tr><td>Solicitud de acceso al Fichero de Videovigilancia</td>";
+                echo "<td>" . Html::anchor('doc/solicitud_video/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
             }
         }
 

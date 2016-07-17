@@ -138,6 +138,16 @@ class Controller_Doc extends Controller_Template{
         return View::forge('doc/coletilla',$data)->render();
     }
 
+    public function action_solicitud_video($idcliente){
+        $af = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
+        $data["afname"] = Model_Cliente::find($af->idaaff)->get('nombre');
+        $data["afdir1"] = Model_Cliente::find($af->idaaff)->get('direccion');
+        $data["afdir2"] = Model_Cliente::find($af->idaaff)->get('cpostal').' - '.Model_Cliente::find($af->idaaff)->get('prov');
+        $data["name"] = Model_Cliente::find($idcliente)->get('nombre');
+        $data["dir"] = Model_Cliente::find($idcliente)->get('direccion').", con C.P. ".Model_Cliente::find($idcliente)->get('cpostal').", en ".Model_Cliente::find($idcliente)->get('loc').", en la provincia de ".Model_Cliente::find($idcliente)->get('prov');
+        return View::forge('doc/solicitud',$data)->render();
+    }
+
     public function action_cesion($idc,$idces){
         $c=Model_Cliente::find($idc);
         $isCPP=($c->tipo == 6)? true: false;
