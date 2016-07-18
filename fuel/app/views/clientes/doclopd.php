@@ -61,17 +61,20 @@ if (!isset($idcliente)) {
                 </tr>
                 <?php
             }
-            if (Model_Fichero::find('first',array('where'=>array('idcliente'=>$idcliente,'idtipo'=>6)))!=null) {
-                //Solicitud Acceso Fichero Videovigilancia
-                echo "<tr><td>Solicitud de acceso al Fichero de Videovigilancia</td>";
-                echo "<td>" . Html::anchor('doc/solicitud_video/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
-            }
         }
 
         //Security doc
         echo "<tr><td>Documento de seguridad</td>";
         echo "<td>".Html::anchor('clientes/doc_seguridad/' . $idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default'));
         echo "&nbsp;".Html::anchor('doc/seguridad/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
+        if ($type == 6) {
+            if (Model_Fichero::find('first',array('where'=>array('idcliente'=>$idcliente,'idtipo'=>6)))!=null) {
+                //Solicitud Acceso Fichero Videovigilancia
+                echo "<tr><td>Solicitud de acceso al Fichero de Videovigilancia</td>";
+                echo "<td>" . Html::anchor('doc/solicitud_video/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
+            }
+        }
 
         //E-mail
         echo "<tr><td>Coletilla legal para e-mails</td>";
