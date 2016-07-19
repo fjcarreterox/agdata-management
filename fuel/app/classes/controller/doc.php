@@ -35,9 +35,11 @@ class Controller_Doc extends Controller_Template{
         $data['customer'] = $c;
         $data['contract'] = $contract;
         $data['services'] = Model_Servicios_Contratado::find('all',array('where'=>array('idcontrato'=>$idcontract)));
-        $data['rep'] =  Model_Personal::find($contract->idpersonal);
+        $rep =  Model_Personal::find($contract->idpersonal);
+        $data['rep'] =  $rep;
 
         if($isCPP){
+            $data["aaff_nombre"] = Model_Cliente::find($rep->idcliente)->get('nombre');
             return View::forge('doc/contrato_cpp',$data)->render();
         }else{
             return View::forge('doc/contrato',$data)->render();
