@@ -26,7 +26,7 @@ $pdf = new PDF();
 $pdf->SetTitle(utf8_decode('Contrato de prestación de servicios'));
 $pdf->SetAuthor('Análisis y gestión de datos S.L.');
 
-$pdf->SetMargins(12,10,12);
+$pdf->SetMargins(20,10,20);
 $pdf->AliasNbPages();
 $pdf->AddPage();
 
@@ -57,19 +57,19 @@ $pdf->Ln(3);
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,'PRIMERA',0,1,'L');
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',11);
 $pdf->MultiCell(0,6,utf8_decode('Que EL PRESTATARIO es una empresa que desarrolla, entre otras, la actividad de prestación de servicios de Auditoría de Seguridad en la Protección de Datos de Carácter Personal en aras a la adecuación de todo tipo de entidades y profesionales sometidos al cumplimiento de la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal (LOPD).'),0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,'SEGUNDA',0,1,'L');
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',11);
 $pdf->MultiCell(0, 6, utf8_decode('Que EL BENEFICIARIO está constituido jurídicamente como una Comunidad de Propietarios.'), 0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,'TERCERA',0,1,'L');
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',11);
 $pdf->MultiCell(0,6,utf8_decode('Que conforme a los expositivos precedentes, ambas partes han convenido en el otorgamiento del presente contrato de PRESTACIÓN DE SERVICIOS DE AUDITORIA Y CONSULTORÍA DE SEGURIDAD EN LA PROTECCIÓN DE DATOS DE CARÁCTER PERSONAL, que se regirá por lo dispuesto en el Código de Comercio y el Código Civil, y de forma especial por las siguientes.'),0);
 $pdf->Ln(5);
 

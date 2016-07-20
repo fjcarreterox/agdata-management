@@ -569,14 +569,15 @@ $pdf->Row(array("","","",""));
 $pdf->Ln(5);
 
 //ANEXO III
-foreach($trab as $t) {
+//foreach($trab as $t) {
     $pdf->AddPage();
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->MultiCell(0, 10, utf8_decode('Anexo III. Cláusula legal para empleados'), 0, 'L');
     $pdf->SetFont('Arial', '', 8.5);
     $pdf->MultiCell(0, 10, utf8_decode('En Sevilla, a ......... de ................. de ........'), 0, 'R');
     $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode(mb_strtoupper(html_entity_decode($t["nombre"])).', mayor de edad, con DNI nº '.$t["dni"].', en virtud de la relación de carácter laboral que le vincula a la Comunidad de Propietarios '.mb_strtoupper($cname).', se obliga a:'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('D/Dª ........................................................................................., mayor de edad, con DNI nº ................................................., en virtud de la relación de carácter laboral que le vincula a la Comunidad de Propietarios '.mb_strtoupper($cname).', se obliga a:'), 0, 'J');
+    //$pdf->MultiCell(0, 6, utf8_decode(mb_strtoupper(html_entity_decode($t["nombre"])).', mayor de edad, con DNI nº '.$t["dni"].', en virtud de la relación de carácter laboral que le vincula a la Comunidad de Propietarios '.mb_strtoupper($cname).', se obliga a:'), 0, 'J');
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('PRIMERO.- Guardar secreto profesional con respecto a los datos de carácter personal a los que tenga acceso por razón de su trabajo, así como guardarlos; obligaciones que se mantendrán aún después del cese de la relación laboral que le vincula a la Comunidad de Propietarios '.mb_strtoupper($cname)).'.', 0, 'J');
     $pdf->Ln(2);
@@ -596,8 +597,9 @@ foreach($trab as $t) {
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('El abajo firmante podrá ejercitar los derechos de acceso, rectificación, cancelación y oposición, en el ámbito reconocido por la normativa española en protección de datos, dirigiéndose por escrito a nuestra sede situada en '.$dir.", ".$cp.', en '.$loc.', provincia de '.$prov.'.'), 0, 'J');
     $pdf->Ln(10);
-    $pdf->MultiCell(0, 10, utf8_decode(html_entity_decode($t["nombre"]).'                                                                    '.$cname), 0, 'C');
-}
+    $pdf->MultiCell(0, 10, utf8_decode('..........................................................                                                                    '.$cname), 0, 'C');
+//}
+
 //ANEXO IV
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);

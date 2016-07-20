@@ -80,6 +80,10 @@ if (!isset($idcliente)) {
         echo "<tr><td>Coletilla legal para e-mails</td>";
         echo "<td>".Html::anchor('doc/coletilla/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
 
+        //E-mail
+        echo "<tr><td>Certificado</td>";
+        echo "<td>".Html::anchor('doc/cert/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
         //Portada
         echo "<tr><td>Portada de la documentación</td>";
         echo "<td>".Html::anchor('doc/portada/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";

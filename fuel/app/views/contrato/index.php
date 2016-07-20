@@ -5,7 +5,7 @@
 
 <br/>
 <p><?php echo Html::anchor('contrato/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo contrato', array('class' => 'btn btn-primary')); ?></p>
-<?php if ($contratos): ?>
+<?php if ($contracts): ?>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach ($contratos as $item): ?>
+<?php foreach ($contracts as $item): ?>
         <tr>
 			<td><?php echo Model_Cliente::find($item->idcliente)->get('nombre'); ?></td>
 			<td><?php

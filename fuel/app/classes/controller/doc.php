@@ -23,6 +23,11 @@ class Controller_Doc extends Controller_Template{
 		return View::forge('doc/portada',$data)->render();
 	}
 
+    public function action_cert($idcliente){
+        $data["name"] = Model_Cliente::find($idcliente)->get('nombre');
+        return View::forge('doc/cert',$data)->render();
+    }
+
     public function action_presupuesto($idcliente){
         //TODO
     }
@@ -85,6 +90,7 @@ class Controller_Doc extends Controller_Template{
 
         if($isCPP){
             $rels_aaff = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idc)));
+            $reps_data = null;
             foreach($rels_aaff as $rel_aaff) {
                 $aaff = Model_Cliente::find($rel_aaff->idaaff);
                 $rep = Model_Personal::find('first', array('where' => array('idcliente' => $aaff->id, 'relacion' => 1)));
