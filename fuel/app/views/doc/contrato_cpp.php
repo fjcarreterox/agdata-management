@@ -75,14 +75,13 @@ $pdf->Ln(5);
 
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(0,10,utf8_decode('CLAÚSULAS'),0,1,'C');
+$pdf->Cell(0,6,utf8_decode('CLAÚSULAS'),0,1,'C');
 $pdf->Ln(3);
-
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(0,10,utf8_decode('1ª.- OBJETO'),0,1,'L');
+$pdf->Cell(0,6,utf8_decode('1ª.- OBJETO'),0,1,'L');
 $pdf->SetFont('Arial','',12);
 $pdf->MultiCell(0,6,utf8_decode('El objeto del presente contrato es la prestación al BENEFICIARIO de los servicios de asesoramiento y consultoría en materia de protección de datos que se detallan a continuación, conforme a las exigencias contenidas en la normativa vigente en materia de Protección de Datos de Carácter Personal respecto a los datos personales que el BENEFICIARIO tiene declarados.'),0);
-$pdf->Ln(10);
+$pdf->Ln(5);
 
 $periodo_ops = array(12=>'mensualmente',4=>'trimestral',2=>'semestralmente',1=>'anualmente',0=>'Pago único');
 foreach($services as $s):
@@ -118,7 +117,7 @@ if(isset($servicios_data[1])) {
     $pdf->MultiCell(0, 6, utf8_decode('- Redacción de documentos, contratos y cláusulas legales necesarios para asegurar el correcto cumplimiento de la Ley y su Reglamento de desarrollo.'), 0);
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('    Una vez concluidos estos servicios de adaptación / actualización inicial, se concretará entre las partes el inicio de los servicios de mantenimiento durante un periodo anual, que será renovado automáticamente y con idéntica duración si ninguna de las partes con un mes de antelación a su finalización, advierte de forma fehaciente su voluntad de rescindir el presente contrato.'), 0);
-    $pdf->Ln(10);
+    $pdf->Ln(5);
 }
 else{
     $h2=158; //to readjust the signature high
