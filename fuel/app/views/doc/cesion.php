@@ -137,4 +137,4 @@ if($ces["tipo"] != 3){
 $pdf->Ln(10);
 //$pdf->MultiCell(0, 6, utf8_decode($cname . '                                                                    '.html_entity_decode($nombre_empresa)) , 0, 'C');
 
-$pdf->Output("CONTRATO-CESION-".$cname."-".$ces['nombre'].".pdf",'I');
+$pdf->Output("CONTRATO-CESION-".$cname."-".html_entity_decode($ces['nombre']).".pdf",'I');
