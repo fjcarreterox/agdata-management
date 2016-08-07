@@ -31,7 +31,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::select('year', Input::post('year', isset($servicios_contratado) ? $servicios_contratado->year : ''),$year_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Año en el que el cliente contrata el servicio')); ?>
 		</div>
 		<div class="form-group">
-			<?php echo Form::label('Periodicidad de facturación', 'periodicidad', array('class'=>'control-label')); ?>
+			<?php echo Form::label('Periodicidad de facturación <span class="red">(cambiar para actualizar la cuota)</span>', 'periodicidad', array('class'=>'control-label')); ?>
 			<?php echo Form::select('periodicidad', Input::post('periodicidad', isset($servicios_contratado) ? $servicios_contratado->periodicidad : ''), $periodo_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Periodicidad')); ?>
 		</div>
 		<div class="form-group">

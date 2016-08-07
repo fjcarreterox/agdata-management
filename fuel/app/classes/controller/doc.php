@@ -146,6 +146,27 @@ class Controller_Doc extends Controller_Template{
         return View::forge('doc/coletilla',$data)->render();
     }
 
+    public function action_factura($idfac){
+        $f = Model_Factura::find($idfac);
+        $data["num_fact"] = $f->num_fact;
+        $data["num_cuota"] = $f->num_cuota;
+        $data["year"] = $f->anyo_cobro;
+        $idsc = Model_Servicios_Contratado::find($f->get('idsc'));
+        $data["importe"] = $idsc->cuota;
+        $data["nombre_serv"] = Model_Servicio::find($idsc->idtipo_servicio)->get('nombre');
+        $query = Model_Factura::query()->where('idsc', $idsc->id);
+        $data["total_fact"] = $query->count();
+        $idcont = Model_Contrato::find($idsc->get('idcontrato'));
+        $data["forma"] = $idsc->forma_pago;
+        $data["cname"] = Model_Cliente::find($idcont->get('idcliente'))->get('nombre');
+        $data["cif"] = Model_Cliente::find($idcont->get('idcliente'))->get('cif_nif');
+        $data["dir"] = Model_Cliente::find($idcont->get('idcliente'))->get('direccion');
+        $data["cp"] = Model_Cliente::find($idcont->get('idcliente'))->get('cpostal');
+        $data["loc"] = Model_Cliente::find($idcont->get('idcliente'))->get('loc');
+        $data["prov"] = Model_Cliente::find($idcont->get('idcliente'))->get('prov');
+        return View::forge('doc/factura',$data)->render();
+    }
+
     public function action_solicitud_video($idcliente){
         $af = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idcliente)));
         $data["afname"] = Model_Cliente::find($af->idaaff)->get('nombre');

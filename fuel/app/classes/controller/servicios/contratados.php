@@ -44,7 +44,7 @@ class Controller_Servicios_Contratados extends Controller_Template
 
 			if ($val->run())
 			{
-				$servicios_contratado = Model_Servicios_Contratado::forge(array(
+				$sc  = Model_Servicios_Contratado::forge(array(
 					'idcontrato' => Input::post('idcontrato'),
 					'idtipo_servicio' => Input::post('idtipo_servicio'),
 					'importe' => Input::post('importe'),
@@ -55,10 +55,39 @@ class Controller_Servicios_Contratados extends Controller_Template
 					'forma_pago' => Input::post('forma_pago'),
 				));
 
-				if ($servicios_contratado and $servicios_contratado->save()){
-					Session::set_flash('success', 'Se ha añadido un nuevo servicio al cliente.');
-					Response::redirect('contrato/view/'.$idcontrato);
-				}
+				if ($sc and $sc->save()){
+                    $tipo = $sc->idtipo_servicio;
+                    $nfact=$sc->get('periodicidad');
+                    if($tipo == 2){$nfact=2*$nfact;}
+                    if($sc->get('periodicidad')==0){$nfact=1;}
+
+                    $now = strtotime("01-".$sc->mes_factura."-".$sc->year);
+                    for($i=0;$i<$nfact;$i++) {
+                        $year = date('Y',$now);
+                        $month = date('m',$now);
+                        $fact = Model_Factura::forge(array(
+                            'num_fact' => '',
+                            'num_cuota' => $i+1,
+                            'idsc' => $sc->id,
+                            'mes_cobro' => $month,
+                            'anyo_cobro' => $year,
+                            'estado' => 'no emitida',
+                        ));
+                        switch($sc->get('periodicidad')){
+                            case 12: $gap=1;break;
+                            case 4: $gap=3;break;
+                            case 2: $gap=6;break;
+                            case 1: $gap=12;break;
+                            default: $gap=1;break;
+                        }
+                        $gap_str = "+".$gap." month";
+                        $now = strtotime($gap_str,$now);
+                        $fact->save();
+                    }
+
+					Session::set_flash('success', 'Se ha añadido un nuevo servicio al contrato y se han generado todas sus facturas asociadas.');
+                    Response::redirect('contrato/view/'.$idcontrato);
+                }
 				else{
 					Session::set_flash('error', 'No se ha podido crear el servicio contratado deseado.');
 				}
@@ -141,8 +170,13 @@ class Controller_Servicios_Contratados extends Controller_Template
 
 		if ($servicios_contratado = Model_Servicios_Contratado::find($id)){
             $idcontrato = $servicios_contratado->idcontrato;
+
+            $facts = Model_Factura::find('all',array('where'=>array('idsc'=>$id)));
+            foreach($facts as $f){
+                $f->delete();
+            }
 			$servicios_contratado->delete();
-			Session::set_flash('success', 'Borrado el servicio contratado por el cliente.');
+			Session::set_flash('success', 'Se ha eliminado el servicio contratado por el cliente y todas sus facturas asociadas.');
 		}
 		else{
 			Session::set_flash('error', 'No se ha podido eliminar el servicio contratado seleccionado.');
