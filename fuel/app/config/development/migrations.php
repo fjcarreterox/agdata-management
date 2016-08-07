@@ -36,6 +36,7 @@ return array (
         27 => '027_create_tareas',
         28 => '029_create_tipo_datos',
         29 => '030_create_rel_estructuras',
+        30 => '031_create_facturas',
       ),
     ),
     'module' => 
