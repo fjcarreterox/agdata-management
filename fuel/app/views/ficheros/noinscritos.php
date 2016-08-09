@@ -13,10 +13,22 @@
 		<tbody>
 		<?php foreach ($ficheros as $item): ?>
 			<tr>
-				<td><?php echo Model_Cliente::find($item->idcliente)->get('nombre'); ?></td>
-				<td><?php echo Model_Cliente::find($item->idcliente)->get('cif_nif'); ?></td>
-				<td><?php echo Model_Tipo_Fichero::find($item->idtipo)->get('tipo'); ?></td>
-
+				<td><?php
+					$c = Model_Cliente::find($item->idcliente);
+					if($c != null) {
+						echo $c->nombre;
+					}else{
+						echo "<span class='red'>N/D</span>";
+					}
+					?></td>
+				<td><?php
+					if($c != null) {
+						echo $c->cif_nif;
+					}else{
+						echo "<span class='red'>N/D</span>";
+					}
+					?></td>
+				<td><?php echo Model_Tipo_Fichero::find($item->idtipo)->get('tipo');?></td>
 				<td>
 					<div class="btn-toolbar">
 						<div class="btn-group">
