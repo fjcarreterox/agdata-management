@@ -48,10 +48,9 @@
         <thead>
         <tr>
             <th>Tipo servicio</th>
-            <th>Importe neto</th>
-            <th>Cuota</th>
-            <th>Año facturación</th>
-            <th>Mes facturación</th>
+            <th>Importe total</th>
+            <th>Cuota neta</th>
+            <th>Fecha comienzo</th>
             <th>&nbsp;</th>
         </tr>
         </thead>
@@ -64,14 +63,21 @@
                 <td><?php echo Model_Servicio::find($item->idtipo_servicio)->get('nombre');?></td>
                 <td><?php echo $item->importe; ?> &euro;</td>
                 <td><?php echo $item->cuota; ?> &euro;</td>
-                <td><?php echo $item->year; ?></td>
-                <td><?php echo getMes($item->mes_factura);  ?></td>
+                <td><?php echo getMes($item->mes_factura)." / ".$item->year; ?></td>
                 <td>
                     <div class="btn-toolbar">
                         <div class="btn-group">
-                            <?php echo Html::anchor('servicios/contratados/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Ver detalle', array('class' => 'btn btn-default')); ?>
-                            <?php echo Html::anchor('servicios/contratados/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar servicio', array('class' => 'btn btn-success')); ?>
-                            <?php echo Html::anchor('servicios/contratados/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar servicio', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de querer eliminar el contrato?')")); ?>
+                            <?php echo Html::anchor('servicios/contratados/view/'.$item->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle', array('class' => 'btn btn-default')); ?>
+                            <?php echo Html::anchor('servicios/contratados/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar', array('class' => 'btn btn-success')); ?>
+                            <?php
+                            if(Model_Factura::find('first',array('where'=>array('idsc'=>$item->id)))) {
+                                echo Html::anchor('facturas/view_sc/' . $item->id, '<span class="glyphicon glyphicon-euro"></span> Ver facturas', array('class' => 'btn btn-info'));
+                            }
+                            else {
+                                echo Html::anchor('facturas/generate/' . $item->id, '<span class="glyphicon glyphicon-refresh"></span> Generar facturas', array('class' => 'btn btn-info'));
+                            }
+                            ?>
+                            <?php echo Html::anchor('servicios/contratados/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de querer eliminar el servicio contratado? Esto también eliminará del sistema las facturas asociadas a este servicio.')")); ?>
                         </div>
                     </div>
                 </td>
