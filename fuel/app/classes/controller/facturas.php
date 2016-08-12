@@ -8,11 +8,16 @@ class Controller_Facturas extends Controller_Template{
 	}
 
 	public function action_list($estado){
-        $estado_str="emitida";
-        if(strcmp($estado,"noemit")==0){$estado_str="no emitida";}
-		$data['facturas'] = Model_Factura::find('all',array('where'=>array('estado'=>$estado_str)));
-		$data['title'] = "facturas ".$estado_str."s";
-        $this->template->title = "Listado de facturas ".$estado_str."s";
+        if(strcmp($estado,"noemit")==0){
+            $str="Facturas no emitidas";
+            $data['facturas'] = Model_Factura::find('all',array('where'=>array('estado'=>'no emitida'),'order_by'=>array('num_fact'=>'asc')));
+        }
+		else{
+            $str="Histórico de facturas";
+            $data['facturas'] = Model_Factura::find('all',array('where'=>array(array('estado','<>','no emitida'))));
+        }
+		$data['title'] = $str;
+        $this->template->title = $str;
 		$this->template->content = View::forge('facturas/list', $data);
 	}
 

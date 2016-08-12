@@ -2,6 +2,7 @@
 $estados_fact=array(
     "no emitida" => "No emitida",
     "emitida" => "Emitida",
+    "pdte. de envío" => "Pendiente de Envío",
     "pdte. de cobro" => "Pendiente de Cobro",
     "cobrada" => "Cobrada",
     "anulada" => "Anulada",

@@ -1,4 +1,4 @@
-<h2>Listado de <span class='muted'><?php echo $title;?></span></h2>
+<h2><span class='muted'><?php echo $title;?></span> en el sistema</h2>
 <br>
 <?php if ($facturas): ?>
 <table class="table table-striped">
@@ -6,7 +6,7 @@
 		<tr>
 			<th>Cliente</th>
 			<th>Núm. factura</th>
-			<th>Servicio</th>
+			<th>Fecha Cobro</th>
 			<th>Estado</th>
 			<th>&nbsp;</th>
 		</tr>
@@ -18,6 +18,7 @@
 		<td><?php
             if(strcmp($item->num_fact,"")==0){echo '<span class="red">N/D</span>';}
             else{echo "L".str_pad($item->num_fact, 3, 0, STR_PAD_LEFT)."/".$item->anyo_cobro;} ?></td>
+		<td><?php echo getMes($item->mes_cobro)." / ".$item->anyo_cobro; ?></td>
 		<td><?php echo $item->estado; ?></td>
 		<td>
 			<div class="btn-toolbar">
@@ -35,9 +36,7 @@
 </table>
 
 <?php else: ?>
-<p>No se han encontrado facturas para este mes.</p>
-
-<?php endif; ?><p>
-	<?php echo Html::anchor('facturas/create', 'Add new Factura', array('class' => 'btn btn-success')); ?>
-
-</p>
+    <p>No se han encontrado facturas con el criterio seleccionado.</p>
+    <br/>
+<?php endif; ?>
+<p><?php echo Html::anchor('facturas', '<span class="glyphicon glyphicon-backward"></span> Volver al menú de facturas', array('class' => 'btn btn-danger')); ?></p>
