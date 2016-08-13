@@ -2,9 +2,10 @@
 class PDFp extends PDF_MC_Table{
     var $customer = "";
 
-    function __construct($orientation='P', $unit='mm', $size='A4',$num_f="N/D"){
+    function __construct($orientation='P', $unit='mm', $size='A4',$num_f="N/D",$fecha_emision="N/D"){
         parent::__construct($orientation, $unit, $size);
         $this->num_f = $num_f;
+        $this->fecha_emision = $fecha_emision;
     }
 
     function Header(){
@@ -17,7 +18,7 @@ class PDFp extends PDF_MC_Table{
         $this->Cell(0,15,utf8_decode("Nº L".$this->num_f).'       ',0,0,'R');
         $this->Ln(10);
         $fecha = explode("-",date("d-m-Y"));
-        $this->Cell(0,10,'Fecha: '.$fecha[0].' de '.getMes($fecha[1]).' de '.$fecha[2].'       ',0,1,'R');
+        $this->Cell(0,10,'Fecha: '.$this->fecha_emision.'       ',0,1,'R');
         $this->Image('http://gestion.agdata.es/assets/img/logo2.png',20,13,40);
         $this->Ln(20);
     }
@@ -31,7 +32,9 @@ class PDFp extends PDF_MC_Table{
 }
 
 $cname = html_entity_decode($cname);
-$pdf = new PDFp('P','mm','A4',str_pad($num_fact, 3, 0, STR_PAD_LEFT).' / '.$year);
+$f_temp=explode(' ',$fecha_emision);
+$f=date_conv($f_temp[0]);
+$pdf = new PDFp('P','mm','A4',str_pad($num_fact, 3, 0, STR_PAD_LEFT).' / '.$year,$f);
 define('EURO', chr(128) );
 
 $pdf->AddFont('Arial','','arial.php');

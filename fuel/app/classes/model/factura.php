@@ -11,6 +11,7 @@ class Model_Factura extends Model
 		'mes_cobro',
 		'anyo_cobro',
 		'estado',
+		'fecha_emision',
 		'created_at',
 		'updated_at',
 	);

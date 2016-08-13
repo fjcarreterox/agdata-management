@@ -13,6 +13,7 @@
             <th>Núm. factura</th>
             <th>Cuota nº</th>
             <th>Fecha de facturación</th>
+            <th>Fecha de emisión</th>
             <th>Estado</th>
             <th>&nbsp;</th>
         </tr>
@@ -21,10 +22,11 @@
         <?php foreach ($facturas as $item): ?>
             <tr>
                 <td class="text-center"><?php
-                    if(strcmp($item->num_fact,"")==0){echo '<span class="red">N/D</span>';}
+                    if($item->num_fact==0){echo '<span class="red">N/D</span>';}
                     else{echo "L".str_pad($item->num_fact, 3, 0, STR_PAD_LEFT)."/".$item->anyo_cobro;} ?></td>
                 <td><?php echo $item->num_cuota ?></td>
                 <td><?php echo getMes($item->mes_cobro)." / ".$item->anyo_cobro; ?></td>
+                <td><?php echo $item->fecha_emision; ?></td>
                 <td><?php
                         if(strcmp($item->estado,"no emitida")==0){
                             echo '<span class="red">'.$item->estado.'</span>';

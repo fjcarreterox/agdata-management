@@ -22,17 +22,17 @@ class Controller_Facturas extends Controller_Template{
 	}
 
     public function action_issue($idf){
-        $estado_str = "emitida";
         $f = Model_Factura::find($idf);
 
-        if (strcmp($f->num_fact, '') != 0) {
-            Session::set_flash('error', 'Esta factura ya ha sido emitida con el nº L' . str_pad($f->num_fact, 3, 0, STR_PAD_LEFT) . "/" . $f->anyo_cobro);
+        if ($f->num_fact != 0) {
+            Session::set_flash('error', 'Esta factura ya ha sido emitida con el nº L' . str_pad($f->num_fact, 3, 0, STR_PAD_LEFT) . "/" . $f->anyo_cobro." el día ".$f->fecha_emision);
             Response::redirect('facturas/view_sc/'.$f->idsc);
         } else{
             $query = Model_Factura::query();
             $max_id = $query->max('num_fact');
             $f->num_fact=$max_id+1;
             $f->estado = "emitida";
+            $f->fecha_emision = date('Y-m-d H:i:s',time());
             $f->save();
             Response::redirect('facturas/view_sc/'.$f->idsc);
         }

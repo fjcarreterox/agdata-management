@@ -143,7 +143,7 @@ class Controller_Clientes extends Controller_Template
             $data['presupuestos'] = Model_Presupuesto::find('all', array('where' => array('idcliente' => $id)));
             $data['adaptacion'] = Model_Adaptacion::find('first', array('where' => array('idcliente' => $id)));
             $data['ficheros'] = Model_Fichero::find('all', array('where' => array('idcliente' => $id)));
-            $data['contrato'] = Model_Contrato::find('first', array('where' => array('idcliente' => $id)));
+            $data['contratos'] = Model_Contrato::find('all', array('where' => array('idcliente' => $id)));
             $data['cesiones'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$id)));
             $data['contactos'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$id)));
             $data['grupossedes'] = Model_Gruposede::find('all',array('where'=>array('idcliente'=>$id)));

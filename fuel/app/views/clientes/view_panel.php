@@ -15,8 +15,9 @@
         <div id="collapseOne" class="panel-collapse collapse in">
             <div class="panel-body">
                 <h4>Datos básicos de contacto</h4>
-                <p>En la siguiente tabla mostramos los datos comúnes a todo tipo de clientes: <strong>estado, DNI/NIF, tipo de cliente,
-                        dirección completa, teléfono, página web, e-mail de contacto, actividad a la que se dedica y las observaciones</strong> que estimemos oportunas.</p>
+                <p>En la siguiente tabla mostramos los datos comúnes a todo tipo de clientes: <strong>estado, CIF/NIF, tipo de cliente,
+                        dirección completa, teléfonos, página web, e-mail de contacto, actividad a la que se dedica, su IBAN, el nº de trabajadores, su situación
+                        en la adaptación de la LOPD y las observaciones</strong> que estimemos oportunas.</p>
                 <br/>
                 <table class="table table-striped table-bordered table-hover">
                     <thead></thead>
@@ -57,7 +58,7 @@
                     </tbody>
                 </table>
                 <br/>
-                <?php echo Html::anchor('clientes/edit/'.$cliente->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos básicos',array('class'=>'btn btn-success')); ?> &nbsp;
+                <?php echo Html::anchor('clientes/edit/'.$cliente->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos básicos',array('class'=>'btn btn-success')); ?>&nbsp;
                 <?php echo Html::anchor('clientes', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de clientes',array('class'=>'btn btn-danger')); ?>&nbsp;
                 <?php echo Html::anchor('agenda/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento',array('class'=>'btn btn-primary')); ?>
                 <br/><br/>
@@ -150,16 +151,24 @@
         </div>
         <div id="collapseThree" class="panel-collapse collapse">
             <div class="panel-body">
-                <h4>Contrato vigente</h4>
-                <?php if(empty($contrato)):?>
-                    <p>Aún no se ha creado ningún contrato para este cliente. Puedes crearlo directamente el siguiente botón:</p>
-                    <p><?php echo Html::anchor('contrato/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Crear contrato', array('class' => 'btn btn-primary')); ?></p>
-                <?php else: ?>
-                    <p>A continuación puedes ver el contrato al detalle, incluidos los <strong>servicios contratados</strong> que están
-                    contenidos en dicho contrato.</p>
-                    <p><?php echo Html::anchor('contrato/view/'.$contrato->id, '<span class="glyphicon glyphicon-eye-open"></span> Ver detalle', array('class' => 'btn btn-default')); ?>&nbsp;&nbsp;
-                    <?php echo Html::anchor('contrato/doc/'.$contrato->id, '<span class="glyphicon glyphicon-file"></span> Vista previa del contrato', array('class' => 'btn btn-info')); ?></p>
-                <?php endif; ?>
+                <h4>Contratos del cliente</h4>
+                <?php if(empty($contratos)){
+                        echo "<p>Aún no se ha creado ningún contrato para este cliente. Puedes crearlo directamente el siguiente botón:</p>";
+                    }else{
+                        echo "<p>A continuación se listan todos los contratos asociados con el cliente.</p>";
+                        echo '<table class="table table-striped"><thead><tr><th>Núm. Contrato</th><th>Fecha de firma</th><th>&nbsp;</th></tr></thead><tbody>';
+                    foreach($contratos as $contrato) {
+                        ?>
+                        <tr>
+                        <p><?php echo "<td>".Html::anchor('contrato/view/' . $contrato->id, 'Contrato nº'.$contrato->id, array('target' => '_blank   '))."</td>"; ?>
+                            <?php echo "<td>".date_conv($contrato->fecha_firma)."</td>"; ?>
+                            <?php echo "<td>".Html::anchor('contrato/doc/' . $contrato->id, '<span class="glyphicon glyphicon-file"></span> Vista previa del contrato', array('class' => 'btn btn-info'))."</td>"; ?></p>
+                        </tr>
+                        <?php
+                    }
+                    echo "</tbody></table>";
+                }
+                echo "<br/><p>".Html::anchor('contrato/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Crear contrato', array('class' => 'btn btn-primary'))."</p>";?>
                 <br/>
             </div>
         </div>

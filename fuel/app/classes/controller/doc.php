@@ -151,6 +151,7 @@ class Controller_Doc extends Controller_Template{
         $data["num_fact"] = $f->num_fact;
         $data["num_cuota"] = $f->num_cuota;
         $data["year"] = $f->anyo_cobro;
+        $data["fecha_emision"] = $f->fecha_emision;
         $idsc = Model_Servicios_Contratado::find($f->get('idsc'));
         $data["importe"] = $idsc->cuota;
         $data["nombre_serv"] = Model_Servicio::find($idsc->idtipo_servicio)->get('nombre');

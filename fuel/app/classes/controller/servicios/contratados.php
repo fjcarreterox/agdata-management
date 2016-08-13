@@ -72,6 +72,7 @@ class Controller_Servicios_Contratados extends Controller_Template
                             'mes_cobro' => $month,
                             'anyo_cobro' => $year,
                             'estado' => 'no emitida',
+                            'fecha_emision' => 0,
                         ));
                         switch($sc->get('periodicidad')){
                             case 12: $gap=1;break;
