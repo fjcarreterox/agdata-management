@@ -93,9 +93,9 @@
 				<ul>
                     <li><a href="presupuesto">Presupuestos</a></li>
                     <li><a href="contrato">Contratos</a></li>
-                    <li><a href="factura">Facturas</a></li>
+                    <li><a href="facturas">Facturas</a></li>
 					<li><a href="clientes/doclopd">Documentación LOPD</a></li>
-					<li><a href="doccomercial">Documentación comercial</a></li>
+					<li><a href="doccomercial">Documentos comunes</a></li>
                     <li><a href="mailing/init">Mailing</a></li>
                     <li><a href="procedimiento">Procedimientos</a></li>
                     <li><a href="doc/report">Informes</a></li>

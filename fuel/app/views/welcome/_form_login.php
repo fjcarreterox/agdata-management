@@ -10,7 +10,7 @@
         </div>
         <div class="form-group">
             <label class='control-label'>&nbsp;</label>
-            <?php echo Form::button('submit', 'Entrar al sistema <span class="glyphicon glyphicon-chevron-right"></span>', array('class' => 'btn btn-primary','type'=>'submit')); ?>
+            <?php echo Form::button('submit', 'Acceder al sistema <span class="glyphicon glyphicon-chevron-right"></span>', array('class' => 'btn btn-primary','type'=>'submit')); ?>
         </div>
     </fieldset>
 <?php echo Form::close(); ?>

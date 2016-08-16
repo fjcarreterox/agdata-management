@@ -92,6 +92,20 @@ class Controller_Facturas extends Controller_Template{
         $this->template->content = View::forge('facturas/view_sc', $data);
     }
 
+    public function action_month_search(){
+        if (Input::method() == 'POST'){
+            $date = explode('-',Input::post('date_sign'));
+            $data['facturas'] = Model_Factura::find('all',array('where'=>array('anyo_cobro'=>$date[0],'mes_cobro'=>$date[1]),'order_by'=>'num_fact'));
+            $data['title'] = getMes($date[1])." de ".$date[0];
+            $this->template->title = "Facturas a emitir en ".getMes($date[1])." de ".$date[0];
+            $this->template->content = View::forge('facturas/list',$data);
+        }
+        else{
+            $this->template->title = "Buscar facturas en un mes determinado";
+            $this->template->content = View::forge('facturas/month_search');
+        }
+    }
+
     public function action_month_invoices(){
         $year = date('Y',time());
         $month = date('m',time());
