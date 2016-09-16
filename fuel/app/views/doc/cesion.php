@@ -128,8 +128,9 @@ $pdf->MultiCell(0, 7, utf8_decode('Tanto el Responsable del Fichero como el Enca
 /* signatures */
 $pdf->SetLeftMargin(20);
 $pdf->SetFont('Arial','',9);
-$pdf->Ln(10);
-$pdf->MultiCell(0, 6, utf8_decode($cname.'                                                                            '. $rep_legal_ces_name), 0, 'C');
+$pdf->Ln(20);
+//$pdf->MultiCell(0, 6, utf8_decode($cname.'                                                                            '. $rep_legal_ces_name), 0, 'C');
+$pdf->MultiCell(0, 6, utf8_decode($cname.'                                                                            '.$ces["nombre"]), 0, 'C');
 $nombre_empresa="              ";
 if($ces["tipo"] != 3){
     $nombre_empresa=$ces["nombre"];
