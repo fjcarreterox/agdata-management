@@ -90,6 +90,5 @@ else{
     $params=base64_encode("cliente_data=".urlencode(json_encode($cliente))."&contract=".urlencode(json_encode($contract))."&rep_data=".urlencode(json_encode($rep_legal))."&serv=".urlencode(json_encode($servicios_data)));
     $script="contrato_prestacion_servicios.php";
 }
-echo Html::anchor('http://localhost/public/docpdf/'.$script.'?q='.$params, '<span class="glyphicon glyphicon-file"></span> Generar contrato', array('class' => 'btn btn-info','target'=>'_blank'))."&nbsp;";
 echo Html::anchor('doc/contrato/'.$cliente["id"].'/'.$contract["id"], '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info','target'=>'_blank'));
 ?>

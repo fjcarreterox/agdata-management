@@ -224,7 +224,7 @@ if(isset($servicios_data[2])) {
     $pdf->SetFont('Arial','B',12);
     $pdf->Cell(0,10,utf8_decode('9ª.- DURACIÓN'),0,1,'L');
     $pdf->SetFont('Arial','',12);
-    $pdf->MultiCell(0,6,utf8_decode('El presente contrato tendrá una vigencia de DOS AÑOS desde la fecha de la firma. Transcurrido dicho término, el contrato se prorrogará automáticamente por idéntico periodo si ninguna de las partes comunica su deseo de finalizar la relación contractual con al menos un mes de antelación del final del tiempo estipulado.'),0);
+    $pdf->MultiCell(0,6,utf8_decode('El presente contrato tendrá una vigencia de UN AÑO desde la fecha de la firma. Transcurrido dicho término, el contrato se prorrogará automáticamente por idéntico periodo si ninguna de las partes comunica su deseo de finalizar la relación contractual con al menos un mes de antelación del final del tiempo estipulado.'),0);
     $pdf->Ln(10);
 }
 

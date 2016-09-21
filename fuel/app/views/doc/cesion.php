@@ -36,7 +36,7 @@ if(strcmp($rep_legal['dni'],'')!=0){
     $rep_dni = $rep_legal['dni'];
 }
 
-if(strcmp($rep_name,$cname)==0) {
+if(strcmp($rep_name,$cname)!=0) {
     $pdf->MultiCell(0, 6, utf8_decode('De una parte, ' . $rep_name . ', mayor de edad, con  DNI ' . $rep_dni . ', en nombre y representación de ' . $cname . ', con domicilio en ' . html_entity_decode($dir) . ', C.P. ' . $cp . ' de ' . html_entity_decode($loc) . ', provincia de ' . html_entity_decode($prov) . ' y CIF nº ' . $cif_nif . ' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
 }else{
     $pdf->MultiCell(0, 6, utf8_decode('De una parte, ' . $rep_name . ', mayor de edad, con  DNI ' . $rep_dni . ', en su propio nombre y representación, con domicilio en ' . html_entity_decode($dir) . ', C.P. ' . $cp . ' de ' . html_entity_decode($loc) . ', provincia de ' . html_entity_decode($prov) . ' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
