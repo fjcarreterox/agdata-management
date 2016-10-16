@@ -42,6 +42,13 @@ class Controller_Doc extends Controller_Template{
         $data['services'] = Model_Servicios_Contratado::find('all',array('where'=>array('idcontrato'=>$idcontract)));
         $rep =  Model_Personal::find($contract->idpersonal);
         $data['rep'] =  $rep;
+        if(count($data['services'])==1 ){
+            $serv = array_pop($data['services']);
+            if($serv->idtipo_servicio==3) {
+                $data['services'] = $serv;
+                return View::forge('doc/contrato_gestoria', $data)->render();
+            }
+        }
 
         if($isCPP){
             $data["aaff_nombre"] = Model_Cliente::find($rep->idcliente)->get('nombre');
@@ -137,6 +144,7 @@ class Controller_Doc extends Controller_Template{
             case 'C':
                 return View::forge('doc/clause/customer',$data)->render();
                 break;
+            default: break;
         }
     }
 

@@ -26,6 +26,7 @@
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<?php echo Html::anchor('contrato/view/'.$item->idcontrato, '<span class="glyphicon glyphicon-eye-open"></span> Ver detalle de contrato', array('class' => 'btn btn-default','target'=>'_blank')); ?>
+						<?php echo Html::anchor('clientes/view/'.$idc, '<span class="glyphicon glyphicon-eye-open"></span> Ficha cliente', array('class' => 'btn btn-default','target'=>'_blank')); ?>
                     </div>
 				</div>
 			</td>

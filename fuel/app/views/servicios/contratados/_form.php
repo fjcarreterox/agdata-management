@@ -19,7 +19,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::select('idtipo_servicio', Input::post('idtipo_servicio', isset($servicios_contratado) ? $servicios_contratado->idtipo_servicio : ''), $servicios_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Idtipo servicio')); ?>
 		</div>
 		<div class="form-group">
-			<?php echo Form::label('Importe sin IVA (&euro;)', 'importe', array('class'=>'control-label')); ?>
+			<?php echo Form::label('Importe sin IVA (sólo cifra, sin &euro;)', 'importe', array('class'=>'control-label')); ?>
 			<?php echo Form::input('importe', Input::post('importe', isset($servicios_contratado) ? $servicios_contratado->importe : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Importe en &euro; del coste del servicio')); ?>
 		</div>
         <div class="form-group">
@@ -92,6 +92,10 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             else if(s==2){
                 cuota = parseFloat(i/2);
                 return parseFloat(cuota/p);
+            }
+            //gestoria
+            else if(s==3){
+                cuota = parseFloat(i/p);
             }
         }
         return cuota;

@@ -4,9 +4,6 @@ $clientes_ops[0] = "-- SELECCIONA UN CLIENTE --";
 foreach($clientes as $c){
     $clientes_ops[$c->id] = $c->nombre;
 }
-
-$periodo_ops = array(1=>'mensual',2=>'trimestral',3=>'anual',4=>'pago único');
-
 $rep_ops = array(0=>"-- NO DEFINIDO --");
 
 $path="../";
