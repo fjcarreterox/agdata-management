@@ -28,6 +28,7 @@ $h=30;
 if(strlen($name)>25){$h=40;}
 $pdf->RoundedRect(25, 70, 160, $h, 0.5, 'DF');
 $pdf->MultiCell(0,10,strtoupper('COMUNIDAD DE PROPIETARIOS'),0,'C');
+$name = str_replace("o-d","o'd",strtolower($name));
 $pdf->MultiCell(0,10,utf8_decode(mb_strtoupper($name)),0,'C');
 $pdf->Ln(20);
 
