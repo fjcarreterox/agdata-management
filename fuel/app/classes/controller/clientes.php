@@ -8,6 +8,33 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/index', $data);
     }
 
+    public function action_new_pass($idc){
+        $c = Model_Cliente::find($idc);
+        $data['idc'] = $idc;
+        $email = "";
+        $data['name'] = $c->get('nombre');
+        if ($c->get('email') != "") {
+            $email = $c->get('email');
+        }
+        $data['email'] = $email;
+        if (Input::method() == 'POST') {
+            if(Input::post('pass1') != Input::post('pass2')){
+                Session::set_flash('error', 'Las contraseñas no coinciden. Por favor, vuelve a introducir otra.');
+                Response::redirect('clientes/new_pass',$data);
+            }
+            else{
+                $c->password = md5(Input::post('pass1'));
+                if($c->save()){Session::set_flash('success', 'Contraseña actualizada en el sistema.');}
+                else{Session::set_flash('error', 'Se ha producido un error al establecer la contraseña. Inténtalo más tarde.');}
+                Response::redirect('clientes/view/'.$idc);
+            }
+        } else {
+
+        }
+        $this->template->title = "Cambio de contraseña del área interna de cliente";
+        $this->template->content = View::forge('clientes/new_pass', $data);
+    }
+
     public function action_activos(){
         $clientes = Model_Cliente::find('all', array(
             'where' => array(

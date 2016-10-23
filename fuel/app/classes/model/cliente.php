@@ -19,6 +19,7 @@ class Model_Cliente extends Model
         'num_trab',
         'email',
 		'actividad',
+		'password',
 		'observ',
 		'estado',
         'idsituacion',

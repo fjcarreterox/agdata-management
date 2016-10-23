@@ -15,7 +15,7 @@
         <div id="collapseOne" class="panel-collapse collapse in">
             <div class="panel-body">
                 <h4>Datos básicos de contacto</h4>
-                <p>En la siguiente tabla mostramos los datos comúnes a todo tipo de clientes: <strong>estado, CIF/NIF, tipo de cliente,
+                <p>En la siguiente tabla mostramos los datos comúnes a todo tipo de clientes: <strong>tipo de cliente, estado, CIF/NIF,
                         dirección completa, teléfonos, página web, e-mail de contacto, actividad a la que se dedica, su IBAN, el nº de trabajadores, su situación
                         en la adaptación de la LOPD y las observaciones</strong> que estimemos oportunas.</p>
                 <br/>
@@ -23,9 +23,9 @@
                     <thead></thead>
                     <tbody>
                     <tr class="text-center">
+                        <td colspan="2"><?php echo Model_Tipo_Cliente::find($cliente->tipo)->get('tipo'); ?></td>
                         <td><?php echo Model_Estados_Cliente::find($cliente->estado)->get('nombre'); ?></td>
                         <td><?php if($cliente->cif_nif!=''){echo $cliente->cif_nif;}else{echo '<span class="red">-- FALTA NIF/CIF --</span>';} ?></td>
-                        <td colspan="2"><?php echo Model_Tipo_Cliente::find($cliente->tipo)->get('tipo'); ?></td>
                     </tr>
                     <tr>
                         <td colspan="4"><?php echo $cliente->direccion; ?>, <?php echo $cliente->cpostal; ?>, <?php echo $cliente->loc; ?>. <?php echo $cliente->prov; ?></td>
@@ -39,7 +39,11 @@
                     <tr class="text-center">
                         <td><?php if($cliente->iban!=''){echo $cliente->iban;}else{echo '<span class="red">-- FALTA IBAN --</span>';} ?></td>
                         <td>Núm. trabajadores: <?php echo $cliente->num_trab;?></td>
-                        <td colspan="2"><?php if($cliente->idsituacion!=0){echo Model_Tipo_Situacion::find($cliente->idsituacion)->get('tipo');}else{echo '<span class="red">-- SITUACIÓN N/D --</span>';} ?></td>
+                        <td><?php if($cliente->idsituacion!=0){echo Model_Tipo_Situacion::find($cliente->idsituacion)->get('tipo');}else{echo '<span class="red">-- SITUACIÓN N/D --</span>';} ?></td>
+                        <td><?php echo "Clave interna: ";
+                            if($cliente->password != NULL){echo "SÍ";}
+                            else{echo "NO";}
+                            ?></td>
                     </tr>
                     <tr>
                         <td colspan="4"><i>Observaciones: </i><strong>
@@ -60,7 +64,12 @@
                 <br/>
                 <?php echo Html::anchor('clientes/edit/'.$cliente->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos básicos',array('class'=>'btn btn-success')); ?>&nbsp;
                 <?php echo Html::anchor('clientes', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de clientes',array('class'=>'btn btn-danger')); ?>&nbsp;
-                <?php echo Html::anchor('agenda/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento',array('class'=>'btn btn-primary')); ?>
+                <?php echo Html::anchor('agenda/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento',array('class'=>'btn btn-primary')); ?>&nbsp;
+                <?php
+                if($cliente->password != NULL) {$btn_title="Cambiar contraseña";}
+                else{$btn_title="Generar nueva contraseña";}
+                echo Html::anchor('clientes/new_pass/' . $cliente->id, '<span class="glyphicon glyphicon-envelope"></span> '.$btn_title, array('class' => 'btn btn-warning'));
+                ?>
                 <br/><br/>
                 <h4>Personal de contacto</h4>
                 <?php if(empty($contactos)): ?>
