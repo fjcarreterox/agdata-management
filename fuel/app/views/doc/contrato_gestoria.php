@@ -160,7 +160,13 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,utf8_decode('5ª.- HONORARIOS'),0,1,'L');
 $pdf->SetFont('Arial','',12);
-$pdf->MultiCell(0,6,utf8_decode('El precio fijado para los servicios de asesoría descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$services->importe.' EUROS mensuales.'),0);
+
+$per="";$div="";
+if(strcmp($services->periodicidad,"Pago único")!==0 && strcmp($services->periodicidad,"anualmente")!==0){
+    $per=$services->periodicidad.".";
+    $div=' dividido en '.$services->periodicidad.' importes de '.$services->cuota.' EUROS,';
+}
+$pdf->MultiCell(0,6,utf8_decode('El precio fijado para los servicios de asesoría descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$services->importe.' EUROS,'.$div.' impuestos no incluidos, que serán facturados por dicha entidad.'),0);
 $pdf->Ln(5);
 
 $iban=".....................................................................";
