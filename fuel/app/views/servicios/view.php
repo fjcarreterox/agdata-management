@@ -4,8 +4,11 @@
     <strong>Nombre:</strong>
     <?php echo $servicio->nombre; ?></p>
 <p>
-    <strong>Precio base:</strong>
-    <?php echo $servicio->precio_base; ?> &euro;</p>
+    <strong>Categoría:</strong>
+    <?php
+    $cat_ops = array("LOPD","COMUNICACIÓN","GESTORÍA");
+    echo $cat_ops[$servicio->categoria];
+    ?></p>
 <br/>
 <?php echo Html::anchor('servicios/edit/'.$servicio->id, '<span class="glyphicon glyphicon-pencil"></span>  Editar datos',array('class'=>'btn btn-success')); ?>&nbsp;
 <?php echo Html::anchor('servicios', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de servicios',array('class'=>'btn btn-danger')); ?>

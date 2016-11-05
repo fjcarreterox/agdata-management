@@ -7,7 +7,7 @@
 	<thead>
 		<tr>
 			<th>Nombre del servicio ofrecido</th>
-			<th>Precio base</th>
+			<th>Categoría</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
@@ -15,7 +15,10 @@
 <?php foreach ($servicios as $item): ?>
         <tr>
 			<td><?php echo $item->nombre; ?></td>
-			<td><?php echo $item->precio_base; ?> &euro;</td>
+			<td><?php
+                $cat_ops = array("LOPD","COMUNICACIÓN","GESTORÍA");
+				echo $cat_ops[$item->categoria];
+				?></td>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">

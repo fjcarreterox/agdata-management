@@ -26,7 +26,7 @@ class Controller_Servicios extends Controller_Template
 			if ($val->run()){
 				$servicio = Model_Servicio::forge(array(
 					'nombre' => Input::post('nombre'),
-					'precio_base' => Input::post('precio_base'),
+					'categoria' => Input::post('categoria'),
 				));
 
 				if ($servicio and $servicio->save()){
@@ -58,7 +58,7 @@ class Controller_Servicios extends Controller_Template
 
 		if ($val->run()){
 			$servicio->nombre = Input::post('nombre');
-			$servicio->precio_base = Input::post('precio_base');
+			$servicio->categoria = Input::post('categoria');
 
 			if ($servicio->save()){
 				Session::set_flash('success', 'Datos del servicio actualizados.');
@@ -71,7 +71,7 @@ class Controller_Servicios extends Controller_Template
 		else{
 			if (Input::method() == 'POST'){
 				$servicio->nombre = $val->validated('nombre');
-				$servicio->precio_base = $val->validated('precio_base');
+				$servicio->categoria = $val->validated('categoria');
 				Session::set_flash('error', $val->error());
 			}
 			$this->template->set_global('servicio', $servicio, false);

@@ -1,12 +1,14 @@
-<?php echo Form::open(array("class"=>"form-horizontal")); ?>
+<?php
+$cat_ops = array("LOPD","COMUNICACIÓN","GESTORÍA");
+echo Form::open(array("class"=>"form-horizontal")); ?>
 	<fieldset>
 		<div class="form-group">
 			<?php echo Form::label('Nombre del servicio', 'nombre', array('class'=>'control-label')); ?>
 			<?php echo Form::input('nombre', Input::post('nombre', isset($servicio) ? $servicio->nombre : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Nombre del nuevo servicio a ofrecer a los clientes')); ?>
 		</div>
         <div class="form-group">
-            <?php echo Form::label('Precio base', 'precio_base', array('class'=>'control-label')); ?>
-            <?php echo Form::input('precio_base', Input::post('precio_base', isset($servicio) ? $servicio->precio_base : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Coste del servicio')); ?>
+            <?php echo Form::label('Categoría', 'categoria', array('class'=>'control-label')); ?>
+            <?php echo Form::select('categoria', Input::post('categoria', isset($servicio) ? $servicio->categoria : ''), $cat_ops, array('class' => 'col-md-4 form-control')); ?>
         </div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
