@@ -94,7 +94,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
                 return parseFloat(cuota/p);
             }
             //gestoria
-            else if(s==3){
+            else if(s>=3){
                 cuota = parseFloat(i/p);
             }
         }

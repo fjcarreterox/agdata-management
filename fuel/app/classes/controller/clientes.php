@@ -112,6 +112,53 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/mantenimiento', $data);
     }
 
+    public function action_filter($idtype){
+
+        switch($idtype){
+            case 1:
+                $data['intro'] = "en proceso de adaptación a la LOPD";
+                $this->template->title = "Clientes en proceso de adaptación a la LOPD";
+                break;
+            case 2:
+                $data['intro'] = "en régimen de mantenimiento de la LOPD";
+                $this->template->title = "Clientes en régimen de mantenimiento de la LOPD";
+                break;
+            case 3: //gest
+                break;
+            case 4: //blog
+                $data['intro'] = "servicio de gestión de blogs";
+                $this->template->title = "Clientes con servicio de blogs";
+                break;
+            case 5: //social
+                $data['intro'] = "servicio de gestión de Redes Sociales";
+                $this->template->title = "Clientes con servicio de Redes Sociales";
+                break;
+            case 6: //design
+                $data['intro'] = "servicio de diseño";
+                $this->template->title = "Clientes con servicio de diseño";
+                break;
+            case 7: //event
+                $data['intro'] = "servicio de gestión de eventos";
+                $this->template->title = "Clientes con servicio de gestión de eventos";
+                break;
+        }
+        $data["clientes"] = array();
+        $servs = Model_Servicios_Contratado::find('all',array('where'=>array('idtipo_servicio'=>$idtype)));
+        foreach($servs as $s){
+            $contract= Model_Contrato::find($s->idcontrato);
+            $data["clientes"][]=Model_Cliente::find($contract->idcliente);
+        }
+
+        $this->template->content = View::forge('clientes/filter', $data);
+    }
+
+    public function action_nointeresados(){
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>4)));
+        $data['intro'] = "No Interesados";
+        $this->template->title = "Contactos aún no interesados";
+        $this->template->content = View::forge('clientes/nointeresados', $data);
+    }
+
     public function action_tareas_mantenimiento($idcliente,$idcontrato=null){
 
         if($idcontrato == null) {

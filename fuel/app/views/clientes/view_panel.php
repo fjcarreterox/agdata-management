@@ -416,5 +416,20 @@
             </div>
         </div>
     </div>
+    <!-- SIXTH PANEL -->
+    <div class="panel panel-default" id="panel6">
+        <div class="panel-heading">
+            <h3 class="panel-title datos_cliente"><span class="muted">
+                <a data-toggle="collapse" data-target="#collapseSix" href="#collapseSix" class="collapsed">
+                    Comunicación
+                </a></span>
+            </h3>
+        </div>
+        <div id="collapseSix" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p><?php echo Html::anchor('comunicacion/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Cuestionario genérico', array('class' => 'btn btn-primary')); ?></p>
+            </div>
+        </div>
+    </div>
 </div>
 <br/>

@@ -81,24 +81,21 @@
 			<div class="col-md-4">
 				<h2>Menú LOPD</h2>
                 <ul>
-                    <li><a href="clientes/adaptacion">Clientes en adaptación</a></li>
-                    <li><a href="clientes/mantenimiento">Clientes en mantenimiento</a></li>
+                    <li><a href="clientes/filter/1">Clientes en adaptación</a></li>
+                    <li><a href="clientes/filter/2">Clientes en mantenimiento</a></li>
                     <li><a href="clientes/com_mantenimiento">CC.PP. en mantenimiento</a></li>
                     <li><a href="tareas/historico">Histórico de tareas</a></li>
                     <li><a href="ficheros/noinscritos">Ficheros pendientes de inscribir</a></li>
                 </ul>
 			</div>
 			<div class="col-md-4">
-				<h2>Documentación</h2>
+				<h2>Menú Comunicación</h2>
 				<ul>
-                    <li><a href="presupuesto">Presupuestos</a></li>
-                    <li><a href="contrato">Contratos</a></li>
-                    <li><a href="facturas">Facturas</a></li>
-					<li><a href="clientes/doclopd">Documentación LOPD</a></li>
-					<li><a href="doccomercial">Documentos comunes</a></li>
-                    <li><a href="mailing/init">Mailing</a></li>
-                    <li><a href="procedimiento">Procedimientos</a></li>
-                    <li><a href="doc/report">Informes</a></li>
+                    <li><a href="clientes/filter/4">Clientes de Blogs</a></li>
+                    <li><a href="clientes/filter/5">Clientes de Redes Sociales</a></li>
+                    <li><a href="clientes/filter/7">Clientes de Eventos</a></li>
+					<li><a href="clientes/filter/6">Clientes de Diseño</a></li>
+					<li><a href="XXX">Gestión de llamadas de comunicación <span class="glyphicon glyphicon-earphone"></span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -132,6 +129,19 @@
                 </ul>
             </div>
          <?php endif; ?>
+            <div class="col-md-4">
+                <h2>Documentación</h2>
+                <ul>
+                    <li><a href="presupuesto">Presupuestos</a></li>
+                    <li><a href="contrato">Contratos</a></li>
+                    <li><a href="facturas">Facturas</a></li>
+                    <li><a href="clientes/doclopd">Documentación LOPD</a></li>
+                    <li><a href="doccomercial">Documentos comunes</a></li>
+                    <li><a href="mailing/init">Mailing</a></li>
+                    <li><a href="procedimiento">Procedimientos</a></li>
+                    <li><a href="doc/report">Informes</a></li>
+                </ul>
+            </div>
         </div>
 		<hr/>
 		<footer>

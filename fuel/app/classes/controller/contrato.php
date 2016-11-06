@@ -1,8 +1,7 @@
 <?php
 class Controller_Contrato extends Controller_Template
 {
-	public function action_index()
-	{
+	public function action_index(){
 		$data['contratos'] = Model_Contrato::find('all');
 		$this->template->title = "Contratos";
 		$this->template->content = View::forge('contrato/index', $data);
@@ -43,7 +42,6 @@ class Controller_Contrato extends Controller_Template
             }
             $data['aaff'] = $aaff_data;
         }
-
         $tratamiento_ops = array("D.","Dª");
         $rep =  Model_Personal::find($contrato->idpersonal);
         if($rep != null){
