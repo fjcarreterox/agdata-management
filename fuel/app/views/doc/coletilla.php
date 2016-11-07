@@ -1,7 +1,10 @@
 <?php
 $pdf = new \Fuel\Core\FPDF();
 $name=html_entity_decode($name);
-$name = str_replace("o-d","O'd",strtolower($name));
+$pos = strpos($name,"o-d");
+if($pos !== false){
+	$name = str_replace("o-d","O'd",strtolower($name));
+}
 $dir=html_entity_decode($dir);
 $dir = str_replace("o-d","O'd",$dir);
 $pdf->AddFont('Arial','','arial.php');
