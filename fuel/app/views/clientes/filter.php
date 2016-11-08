@@ -16,7 +16,14 @@
 <?php foreach ($clientes as $item): ?>
         <tr>
 			<td><?php echo $item->nombre; ?></td>
-			<td><?php echo $tipo=Model_Tipo_Cliente::find($item->tipo)->get('tipo'); ?></td>
+			<td><?php
+				if(Model_Tipo_Cliente::find($item->tipo)!=null){
+					echo Model_Tipo_Cliente::find($item->tipo)->get('tipo');
+				}
+				else{
+					echo '<span class="red">N/D</span>';
+				}
+                ?></td>
 			<td><?php echo $item->cif_nif; ?></td>
 			<td><?php
 				if($item->idsituacion != 0){

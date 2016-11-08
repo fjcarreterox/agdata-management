@@ -146,7 +146,9 @@ class Controller_Clientes extends Controller_Template
         $servs = Model_Servicios_Contratado::find('all',array('where'=>array('idtipo_servicio'=>$idtype)));
         foreach($servs as $s){
             $contract= Model_Contrato::find($s->idcontrato);
-            $data["clientes"][]=Model_Cliente::find($contract->idcliente);
+            if (Model_Cliente::find($contract->idcliente) != null) {
+                $data["clientes"][] = Model_Cliente::find($contract->idcliente);
+            }
         }
 
         $this->template->content = View::forge('clientes/filter', $data);
