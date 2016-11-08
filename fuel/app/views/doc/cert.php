@@ -17,6 +17,10 @@ $pdf->SetFont('Futura','',18);
 $pdf->MultiCell(0,10,utf8_decode(mb_strtoupper('análisis y gestión de datos s.l. certifica que:')),0,'C');
 $pdf->Ln(10);
 $pdf->SetFont('Futura','',28);
+$pos = strpos($name,"o-d");
+if($pos !== false){
+	$name = str_replace("o-d","O'd",strtolower($name));
+}
 $pdf->MultiCell(0,10,utf8_decode(mb_strtoupper($name)),0,'C');
 $pdf->Ln(10);
 $pdf->SetFont('Futura','',14);
