@@ -4,10 +4,14 @@ class Controller_Doc extends Controller_Template{
 
 	public function action_index(){
 		$data["subnav"] = array('index'=> 'active' );
-		$this->template->title = 'Doc &raquo; Index';
+		$this->template->title = 'Documentación comercial';
 		$this->template->content = View::forge('doc/index', $data);
 	}
 
+    public function action_aaff(){
+        $this->template->title = 'Documentación para AA.FF.';
+        $this->template->content = View::forge('doc/aaff');
+    }
 
     public function action_report(){
         $this->template->title = "Informes del sistema";

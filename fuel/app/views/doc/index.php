@@ -1,5 +1,6 @@
-<ul class="nav nav-pills">
-	<li class='<?php echo Arr::get($subnav, "index" ); ?>'><?php echo Html::anchor('doc/index','Index');?></li>
+<h2><span class="muted">Documentación comercial</span></h2>
+<br/>
+<ul class="circle">
+	<li><a href="/public/assets/docs/Tarifas_podologos_2016.pdf" target="_blank">Tarifas podólogos 2016</a></li>
 
 </ul>
-<p>Index</p>
