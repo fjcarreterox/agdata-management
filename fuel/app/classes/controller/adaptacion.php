@@ -48,7 +48,7 @@ class Controller_Adaptacion extends Controller_Template
 
 				if ($adaptacion and $adaptacion->save()){
 					Session::set_flash('success', 'Creada la auditoría de adaptación en el sistema.');
-					Response::redirect('adaptacion');
+					Response::redirect('clientes/view/'.$idcliente);
 				}else{
 					Session::set_flash('error', 'Hubo un problema al crear la auditoría de adaptación.');
 				}
