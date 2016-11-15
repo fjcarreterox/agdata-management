@@ -146,7 +146,6 @@ class Controller_Doc extends Controller_Template{
                 return View::forge('doc/clause/customer',$data)->render();
                 break;
             case 'CV':
-                $data["rep_legal"]=Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>1)));
                 return View::forge('doc/clause/cvs',$data)->render();
                 break;
             default: break;
