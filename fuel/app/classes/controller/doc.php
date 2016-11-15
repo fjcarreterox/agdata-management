@@ -142,11 +142,12 @@ class Controller_Doc extends Controller_Template{
                 $data['trab'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$idcliente,'relacion'=>4)));
                 return View::forge('doc/clause/employee',$data)->render();
                 break;
-            case 'P':
-                return View::forge('doc/clause/provider',$data)->render();
-                break;
             case 'C':
                 return View::forge('doc/clause/customer',$data)->render();
+                break;
+            case 'CV':
+                $data["rep_legal"]=Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>1)));
+                return View::forge('doc/clause/cvs',$data)->render();
                 break;
             default: break;
         }

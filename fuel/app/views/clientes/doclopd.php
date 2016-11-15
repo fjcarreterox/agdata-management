@@ -33,7 +33,6 @@ if (!isset($idcliente)) {
     ?>
     <p>Haciendo clic en los siguientes botones, se mostrará la <strong>vista previa</strong> de los datos del sistema que se van a volcar
         en el documento PDF o bien podrá generarlo directamente si lo deseas.</p>
-    <br/>
     <h3>Listado de documentos</h3>
     <table class="table table-striped">
         <?php
@@ -95,8 +94,8 @@ if (!isset($idcliente)) {
         echo "<tr><td>Cláusula de recogida de datos de clientes</td>";
         echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/C', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
 
-        echo "<tr><td>Cláusula de recogida de datos de proveedores</td>";
-        echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/P', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+        echo "<tr><td>Cláusula de recepción de CVs</td>";
+        echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/CV', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
 
         ?>
         </table>
