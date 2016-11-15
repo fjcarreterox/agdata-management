@@ -94,9 +94,10 @@ if (!isset($idcliente)) {
         echo "<tr><td>Cláusula de recogida de datos de clientes</td>";
         echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/C', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
 
-        echo "<tr><td>Cláusula de recepción de CVs</td>";
-        echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/CV', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
-
+        if (Model_Fichero::find('first',array('where'=>array('idcliente'=>$idcliente,'idtipo'=>4)))!=null) {
+            echo "<tr><td>Cláusula de recepción de CVs</td>";
+            echo "<td>" . Html::anchor('doc/clausula/' . $idcliente . '/CV', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
+        }
         ?>
         </table>
         <br/>
