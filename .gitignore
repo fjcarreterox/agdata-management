@@ -21,6 +21,7 @@ public/docpdf/tutorial/
 public/docpdf/doc/
 public/docpdf/font/
 public/docpdf/makefont/
+public/assets/docs/*
 
 # any of the fuel packages installed by default
 /docs/

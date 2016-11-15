@@ -428,6 +428,63 @@
         <div id="collapseSix" class="panel-collapse collapse">
             <div class="panel-body">
                 <p><?php echo Html::anchor('comunicacion/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Cuestionario genérico', array('class' => 'btn btn-primary')); ?></p>
+                <p><?php
+                    if($events != null){
+                        echo "<h4>Datos de eventos</h4>";
+                        ?>
+                        <table class="table table-striped table-bordered table-hover table-responsive">
+                            <thead>
+                                <tr class="text-center">
+                                    <td><strong>Tipo</strong></td>
+                                    <td><strong>Fecha y hora</strong></td>
+                                    <td><strong>Localización</strong></td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $type_ops = array(
+                                "N/D" => "-- NO DEFINIDO --",
+                                "comida" => "Comida/Cena de empresa",
+                                "marca" => "Evento corporativo para conocer la marca",
+                                "producto" => "Evento corporativo para presentar un producto",
+                                "premios" => "Evento de entrega de premios para personal",
+                                "diplomas" => "Evento de entrega de diplomas formativos",
+                                "obsequios" => "Evento de obsequios a clientes",
+                                "sorteo" => "Evento de sorteos o promociones",
+                                "colaborativo" => "Evento colaborativo con otra empresa",
+                                "formacion" => "Jornada de formación",
+                                "abiertas" => "Jornada de puertas abiertas",
+                                "ocio" => "Actividades de ocio para el personal",
+                                "prensa" => "Ruedas de prensa",
+                                "otro" => "Otro",
+                            );
+                            $loc_ops = array(
+                                "N/D" => "-- NO DEFINIDO --",
+                                "hotel" => "Hotel",
+                                "emblema" => "Lugar emblemático de la ciudad",
+                                "propias" => "Estancias propias",
+                                "sala" => "Sala de reunión",
+                                "restaurante" => "Restaurante / Club",
+                                "finca" => "Finca rústica",
+                                "otro" => "Otro",
+                            );
+                            foreach($events as $e): ?>
+                                <tr>
+                                    <td><?php echo $type_ops[$e->type]; ?></td>
+                                    <td><?php echo $e->date_time; ?></td>
+                                    <td><?php echo $loc_ops[$e->location]; ?></td>
+                                    <td><?php echo Html::anchor('qevents/view/'.$e->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank','title'=>'Se abre en ventana nueva...')); ?>
+                                        <?php echo Html::anchor('qevents/edit/'.$e->id, '<span class="glyphicon glyphicon-pencil"></span> Editar',array('class'=>'btn btn-success')); ?>
+                                        <?php echo Html::anchor('qevents/delete/'.$e->id, '<span class="glyphicon glyphicon-trash"></span> Borrar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarla del sistema?')")); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php
+                    }
+                    echo Html::anchor('qevents/create/' . $cliente->id, '<span class="glyphicon glyphicon-plus"></span> Cuestionario para eventos', array('class' => 'btn btn-primary'));
+                    ?></p>
             </div>
         </div>
     </div>

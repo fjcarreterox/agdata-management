@@ -37,6 +37,7 @@ return array (
         28 => '029_create_tipo_datos',
         29 => '030_create_rel_estructuras',
         30 => '031_create_facturas',
+        31 => '032_create_qevents',
       ),
     ),
     'module' => 
