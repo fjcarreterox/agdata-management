@@ -33,18 +33,29 @@ if (!isset($idcliente)) {
     ?>
     <p>Haciendo clic en los siguientes botones, se mostrará la <strong>vista previa</strong> de los datos del sistema que se van a volcar
         en el documento PDF o bien podrá generarlo directamente si lo deseas.</p>
+    <br/>
     <h3>Listado de documentos</h3>
     <table class="table table-striped">
         <?php
+        //Security doc
+        echo "<tr><td>Documento de seguridad</td>";
+        echo "<td>".Html::anchor('clientes/doc_seguridad/' . $idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default'));
+        echo "&nbsp;".Html::anchor('doc/seguridad/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
+        //Portada
+        echo "<tr><td>Portada de la documentación</td>";
+        echo "<td>".Html::anchor('doc/portada/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
+        //cesiones
         if(isset($cesiones)) {
             foreach ($cesiones as $c) {
                 $ces_name = Model_Cliente::find($c->idcesionaria)->get('nombre');
                 ?>
                 <tr>
                     <td>Contrato de cesión de datos con <strong><?php echo $ces_name;?></strong></td>
-                        <td><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default')); ?>
-                &nbsp;<?php echo Html::anchor('doc/cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info','target'=>'_blank')); ?></td></tr>
-            <?php
+                    <td><?php echo Html::anchor('clientes/doc_cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default')); ?>
+                        &nbsp;<?php echo Html::anchor('doc/cesion/' . $idcliente . '/' . $c->idcesionaria, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info','target'=>'_blank')); ?></td></tr>
+                <?php
             }
         }
         if ($type == 6) {
@@ -62,30 +73,9 @@ if (!isset($idcliente)) {
             }
         }
 
-        //Security doc
-        echo "<tr><td>Documento de seguridad</td>";
-        echo "<td>".Html::anchor('clientes/doc_seguridad/' . $idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default'));
-        echo "&nbsp;".Html::anchor('doc/seguridad/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
-
-        if ($type == 6) {
-            if (Model_Fichero::find('first',array('where'=>array('idcliente'=>$idcliente,'idtipo'=>6)))!=null) {
-                //Solicitud Acceso Fichero Videovigilancia
-                echo "<tr><td>Solicitud de acceso al Fichero de Videovigilancia</td>";
-                echo "<td>" . Html::anchor('doc/solicitud_video/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
-            }
-        }
-
         //E-mail
         echo "<tr><td>Coletilla legal para e-mails</td>";
         echo "<td>".Html::anchor('doc/coletilla/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
-
-        //E-mail
-        echo "<tr><td>Certificado</td>";
-        echo "<td>".Html::anchor('doc/cert/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
-
-        //Portada
-        echo "<tr><td>Portada de la documentación</td>";
-        echo "<td>".Html::anchor('doc/portada/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
 
         //Claúsulas
         echo "<tr><td>Cláusulas legales para empleados</td>";
@@ -98,11 +88,24 @@ if (!isset($idcliente)) {
             echo "<tr><td>Cláusula de recepción de CVs</td>";
             echo "<td>" . Html::anchor('doc/clausula/' . $idcliente . '/CV', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
         }
-        ?>
-        </table>
-        <br/>
 
-<?php
+        if ($type == 6) {
+            if (Model_Fichero::find('first',array('where'=>array('idcliente'=>$idcliente,'idtipo'=>6)))!=null) {
+                //Solicitud Acceso Fichero Videovigilancia
+                echo "<tr><td>Solicitud de acceso al Fichero de Videovigilancia</td>";
+                echo "<td>" . Html::anchor('doc/solicitud_video/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
+            }
+        }
+
+        //Cert
+        echo "<tr><td>Certificado</td>";
+        echo "<td>".Html::anchor('doc/cert/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
+        ?>
+    </table>
+    <br/>
+
+    <?php
     echo Html::anchor('clientes/view/'.$idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Abrir ficha de cliente', array('class' => 'btn btn-default', 'target' => '_blank', 'title'=>'En ventana nueva...'));
 
 } ?>
