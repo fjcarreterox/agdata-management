@@ -43,7 +43,11 @@ $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,'REUNIDOS',0,1,'C');
 $pdf->Ln(5);
 $pdf->SetFont('Arial','',12);
-$pdf->MultiCell(0,6,utf8_decode('          De una parte, '.$tratamiento_ops[$rep->tratamiento] .' '. html_entity_decode($rep->nombre).', mayor de edad, con DNI nº '.$rep->dni.', como representante legal de '.html_entity_decode($customer->nombre).', con domicilio en '.html_entity_decode($customer->direccion).', C.P '.$customer->cpostal.', en '.html_entity_decode($customer->loc).', provincia de '.html_entity_decode($customer->prov).' y con CIF nº '.$customer->cif_nif.' (en adelante, EL BENEFICIARIO).'),0);
+$extra_txt = "";
+if(strcmp($rep->nombre,$customer->nombre) != 0){
+    $extra_txt = " como representante legal de ".html_entity_decode($customer->nombre).",";
+}
+$pdf->MultiCell(0,6,utf8_decode('          De una parte, '.$tratamiento_ops[$rep->tratamiento] .' '. html_entity_decode($rep->nombre).', mayor de edad, con DNI nº '.$rep->dni.','.$extra_txt.' con domicilio en '.html_entity_decode($customer->direccion).', C.P '.$customer->cpostal.', en '.html_entity_decode($customer->loc).', provincia de '.html_entity_decode($customer->prov).' y con CIF nº '.$customer->cif_nif.' (en adelante, EL BENEFICIARIO).'),0);
 $pdf->Ln(5);
 $pdf->MultiCell(0,6,utf8_decode('          De otra, D. Casimiro Galán Garrido, mayor de edad, con DNI nº 28.884.460-W, en nombre y representación de ANÁLISIS Y GESTIÓN DE DATOS, S.L. (AGDATA), con domicilio social en Tomares (Sevilla), Edificio RAMCAB en Avda. del Aljarafe, S/N Planta 2ª módulo 42, y CIF nº  B-91.341.297 (en adelante, EL PRESTATARIO).'),0);
 $pdf->Ln(5);
@@ -187,10 +191,12 @@ if(isset($servicios_data[2])) {
     }
     $pdf->Ln(5);
 }
-
-if($servicios_data[1]["precio"]!=0 || $servicios_data[2]["precio"]!=0){
-    $pdf->MultiCell(0, 6, utf8_decode('Los precios antes señalados serán revisados en las sucesivas prórrogas que se produzcan en función de las variaciones del IPC anuales publicadas por el INE.'), 0);
-    $pdf->Ln(5);
+foreach($servicios_data as $s){
+    if($s["precio"]!=0){
+        $pdf->MultiCell(0, 6, utf8_decode('Los precios antes señalados serán revisados en las sucesivas prórrogas que se produzcan en función de las variaciones del IPC anuales publicadas por el INE.'), 0);
+        $pdf->Ln(5);
+    }
+    break;
 }
 
 $pdf->SetFont('Arial','B',12);

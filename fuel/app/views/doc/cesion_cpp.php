@@ -2,8 +2,11 @@
 define('EURO', chr(128) );
 $pdf = new \Fuel\Core\FPDF();
 
+$dir = str_replace("o-d","O'd",strtolower($dir));
 $cname = html_entity_decode($cname);
-$pres_name = html_entity_decode($pres->nombre);
+if(strpos($cname,"O'd") !== false) {
+    $cname = str_replace("o-d", "O'd", strtolower($cname));
+}
 
 $pdf->AddFont('Arial','','arial.php');
 $title = 'CONTRATO DE ACCESO A DATOS POR CUENTA DE TERCEROS';
@@ -29,11 +32,16 @@ $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,strtoupper('reunidos'),0,1,'C');
 
 $pdf->SetFont('Arial','',10);
+$pdf->SetFont('Arial','',10);
+$pres_name=".........................................................";
+if($pres->nombre != ""){
+    $pres_name = html_entity_decode($pres->nombre);
+}
 $pres_dni="...............................";
 if($pres->dni!=""){
     $pres_dni=$pres->dni;
 }
-$pdf->MultiCell(0, 6, utf8_decode('De una parte, '.html_entity_decode($pres_name).', mayor de edad, con DNI '.$pres_dni.', en nombre y representación de la Comunidad de Propietarios '.$cname.' en su calidad de PRESIDENTE, con domicilio en '.html_entity_decode($dir).' con C.P. '.$cp.' de '.html_entity_decode($loc).', provincia de '.html_entity_decode($prov).' y CIF nº '.$cif_nif.' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
+$pdf->MultiCell(0, 6, utf8_decode('De una parte, '.$pres_name.', mayor de edad, con DNI '.$pres_dni.', en nombre y representación de la Comunidad de Propietarios '.$cname.' en su calidad de PRESIDENTE, con domicilio en '.html_entity_decode($dir).' con C.P. '.$cp.' de '.html_entity_decode($loc).', provincia de '.html_entity_decode($prov).' y CIF nº '.$cif_nif.' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
 $pdf->Ln(5);
 
 $rep_name = html_entity_decode($rep["nombre"]);
