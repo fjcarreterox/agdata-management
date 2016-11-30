@@ -9,6 +9,7 @@
 			<th>Tipo</th>
 			<th>CIF/NIF</th>
 			<th>Dirección</th>
+			<th>Teléfono</th>
 			<th>Estado</th>
 			<th>&nbsp;</th>
 		</tr>
@@ -20,6 +21,7 @@
 			<td><?php echo $tipo=Model_Tipo_Cliente::find($item->tipo)->get('tipo'); ?></td>
 			<td><?php echo $item->cif_nif; ?></td>
 			<td><?php echo $item->direccion; ?></td>
+            <td><?php echo $item->tel; ?></td>
 			<td><?php echo Model_Estados_Cliente::find($item->estado)->get('nombre'); ?></td>
 			<td>
 				<div class="btn-toolbar">
