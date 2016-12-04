@@ -24,6 +24,7 @@ class Controller_Doc extends Controller_Template{
 
 	public function action_portada($idcliente){
 		$data["name"] = Model_Cliente::find($idcliente)->get('nombre');
+		$data["type"] = Model_Cliente::find($idcliente)->get('tipo');
 		return View::forge('doc/portada',$data)->render();
 	}
 
