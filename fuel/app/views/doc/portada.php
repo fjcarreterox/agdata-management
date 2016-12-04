@@ -71,4 +71,4 @@ $pdf->Row(array("CONTRATACIÓN DE NUEVO TRABAJADOR","Cláusula legal para emplea
 $pdf->Row(array("COLOCACIÓN DE CAMARAS DE SEGURIDAD","Ficheros de datos y resoluciones de la Agencia Española de protección de Datos","Notificar a AGDATA para inscripción del nuevo fichero de Videovigilancia en la AGPD"));
 $pdf->Row(array("RECTIFICACIÓN / CAMBIO DE DATOS DE UN ".mb_strtoupper($sec_text)." (p.ej. Cuenta Bancaria)","Impreso de rectificación de datos","Debe rellenar impreso de rectificación de datos. Se archivará en la documentación LOPD"));
 
-$pdf->Output("PORTADA-C.PP-$name.pdf",'I');
+$pdf->Output("PORTADA-".utf8_decode($type_name)."-".utf8_decode($name).".pdf",'I');
