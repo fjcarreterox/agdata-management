@@ -13,7 +13,7 @@
     <li>Provincia: <strong><?php echo $cliente->prov;?></strong></li>
 </ul>
 <?php
-$isCPP= ($cliente->tipo==6)?1:0;
+$isCPP= ($cliente->tipo==6 || $cliente->tipo==10)?1:0;
 $tratamiento_ops = array("D.","Dª");
 
 if($isCPP){
@@ -32,29 +32,39 @@ if($isCPP){
     echo "<li>Fecha de baja: <strong>".$fbaja."</strong></li></ul>";
 
     echo "<h3>Representante(s) legal(es)</h3>";
-    foreach($rels_aaff as $rel_aaff) {
-        $aaff = Model_Cliente::find($rel_aaff->idaaff);
-        $rep = Model_Personal::find('first', array('where' => array('idcliente' => $aaff->id, 'relacion' => 1)));
-        if ($rep != null) {
-            echo "<ul><li>Nombre: <strong>".$rep->get('nombre')."</strong></li>";
-            echo "<li>DNI: <strong>".$rep->get('dni')."</strong></li></ul>";
-            echo "<li><h4><i>En representación de la empresa:</i></h4></li>";
-            echo "
-                <li>Nombre o razón social: <strong>".$aaff->nombre."</strong></li>
-                <li>Dirección: <strong>".$aaff->direccion."</strong></li>
-                <li>Código postal: <strong>".$aaff->cpostal."</strong></li>
-                <li>Localidad: <strong>".$aaff->loc."</strong></li>
-                <li>Provincia: <strong>".$aaff->prov."</strong></li>
-            </ul><br/>";
+    if(count($rels_aaff) > 0) {
+        foreach ($rels_aaff as $rel_aaff) {
+            $aaff = Model_Cliente::find($rel_aaff->idaaff);
+            $rep = Model_Personal::find('first', array('where' => array('idcliente' => $aaff->id, 'relacion' => 1)));
+            if ($rep != null) {
+                echo "<ul><li>Nombre: <strong>" . $rep->get('nombre') . "</strong></li>";
+                echo "<li>DNI: <strong>" . $rep->get('dni') . "</strong></li></ul>";
+                echo "<li><h4><i>En representación de la empresa:</i></h4>";
+                echo "
+                <ul><li>Nombre o razón social: <strong>" . $aaff->nombre . "</strong></li>
+                <li>Dirección: <strong>" . $aaff->direccion . "</strong></li>
+                <li>Código postal: <strong>" . $aaff->cpostal . "</strong></li>
+                <li>Localidad: <strong>" . $aaff->loc . "</strong></li>
+                <li>Provincia: <strong>" . $aaff->prov . "</strong></li>
+            </ul></li></ul><br/>";
+            }
         }
+    }
+    else{
+        echo "<ul><li><strong>N/D</strong> (Por favor, defínelo(s) en su ficha de cliente)</li></ul>";
     }
 }
 else{
     echo "<h3>Representante legal</h3>";
     $rep = Model_Personal::find('first', array('where' => array('idcliente' => $cliente->id, 'relacion' => 1)));
-    echo "<ul><li>Nombre: <strong>".$tratamiento_ops[$rep->get('tratamiento')]." ".$rep->get('nombre')."</strong></li>";
-    echo "<li>DNI: <strong>".$rep->get('dni')."</strong></li>";
-    echo "<li>Cargo / Función: <strong>".$rep->get('cargofuncion')."</strong></li></ul>";
+    if($rep!=null) {
+        echo "<ul><li>Nombre: <strong>" . $tratamiento_ops[$rep->get('tratamiento')] . " " . $rep->get('nombre') . "</strong></li>";
+        echo "<li>DNI: <strong>" . $rep->get('dni') . "</strong></li>";
+        echo "<li>Cargo / Función: <strong>" . $rep->get('cargofuncion') . "</strong></li></ul>";
+    }
+    else{
+        echo "<ul><li><strong>N/D</strong> (por favor, agregue uno en su ficha de cliente)</li></ul>";
+    }
 
     echo "<h3>Responsable de seguridad</h3>";
     $rep_seg = Model_Personal::find('first', array('where' => array('idcliente' => $cliente->id, 'relacion' => 3)));
@@ -103,7 +113,7 @@ if($ficheros != null){
             <li>Nivel de seguridad: <strong><?php echo $niveles[$f->nivel];?></strong></li>
             <li>Soporte: <strong><?php echo $f->soporte;?></strong></li>
         </ul>
-    <?php
+        <?php
     }
 }
 echo "<br/>";

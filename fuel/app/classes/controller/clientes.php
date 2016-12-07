@@ -150,7 +150,6 @@ class Controller_Clientes extends Controller_Template
                 $data["clientes"][] = Model_Cliente::find($contract->idcliente);
             }
         }
-
         $this->template->content = View::forge('clientes/filter', $data);
     }
 
@@ -212,8 +211,9 @@ class Controller_Clientes extends Controller_Template
 			Session::set_flash('error', 'No se ha podido localizar al cliente solicitado.');
 			Response::redirect('clientes');
 		}else {
-            //Tipo comunidad
-            if (Model_Cliente::find($id)->get('tipo') == 6) {
+            //Tipo comunidad / asociación
+            $type = Model_Cliente::find($id)->get('tipo');
+            if ($type == 6 || $type == 10) {
                 $data['aaff'] = Model_Rel_Comaaff::find('all', array('where' => array('idcom' => $id)));
             }
             $data['presupuestos'] = Model_Presupuesto::find('all', array('where' => array('idcliente' => $id)));
@@ -249,13 +249,14 @@ class Controller_Clientes extends Controller_Template
 
         is_null($idcliente) and Response::redirect('clientes');
 
-        if ( ! $data['cliente'] = Model_Cliente::find($idcliente))
-        {
+        $type = Model_Cliente::find($idcliente)->get('tipo');
+
+        if ( ! $data['cliente'] = Model_Cliente::find($idcliente)){
             Session::set_flash('error', 'No se han podido localizar los datos del cliente solicitado.');
             Response::redirect('clientes');
         }else{
-            //Tipo comunidad
-            if(Model_Cliente::find($idcliente)->get('tipo')==6){
+            //Tipo comunidad / asociación
+            if($type == 6 || $type == 10){
                 $data['rels_aaff'] = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idcliente)));
                 $data['pres'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>6)));
             }

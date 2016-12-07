@@ -1,4 +1,4 @@
-<h2>Asignar un administrador de fincas a la comunidad <span class='muted'><?php echo $nombre?></span></h2>
+<h2>Asignar un administrador de fincas al cliente <span class='muted'><?php echo $nombre?></span></h2>
 <br/>
 <?php
 $data['idcom'] = $idcom;

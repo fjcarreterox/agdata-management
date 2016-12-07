@@ -65,7 +65,7 @@ class Controller_Doc extends Controller_Template{
 
     public function action_seguridad($idc){
         $c=Model_Cliente::find($idc);
-        $isCPP=($c->tipo == 6)? true: false;
+        $isCPP=($c->tipo == 6 || $c->tipo == 10)? true: false;
         //getting all the customer data
         $data["idc"]=$idc;
         $data["type"] = Model_Tipo_Cliente::find($c->tipo)->get('tipo');

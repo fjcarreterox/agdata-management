@@ -58,7 +58,7 @@ if (!isset($idcliente)) {
                 <?php
             }
         }
-        if ($type == 6) {
+        if ($type == 6 || $type == 10) {
             $aaffs = Model_Rel_Comaaff::find('all', array('where' => array('idcom' => $idcliente)));
             foreach ($aaffs as $aaff) {
                 //Default contract with its legal representative
@@ -73,23 +73,25 @@ if (!isset($idcliente)) {
             }
         }
 
-        //E-mail
-        echo "<tr><td>Coletilla legal para e-mails</td>";
-        echo "<td>".Html::anchor('doc/coletilla/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
-
+        if ($type != 6) {
+            //E-mail
+            echo "<tr><td>Coletilla legal para e-mails</td>";
+            echo "<td>" . Html::anchor('doc/coletilla/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
+        }
         //Claúsulas
         echo "<tr><td>Cláusulas legales para empleados</td>";
         echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/E', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
 
-        echo "<tr><td>Cláusula de recogida de datos de clientes</td>";
-        echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/C', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
-
+        if ($type != 6) {
+            echo "<tr><td>Cláusula de recogida de datos de clientes</td>";
+            echo "<td>" . Html::anchor('doc/clausula/' . $idcliente . '/C', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
+        }
         if (Model_Fichero::find('first',array('where'=>array('idcliente'=>$idcliente,'idtipo'=>4)))!=null) {
             echo "<tr><td>Cláusula de recepción de CVs</td>";
             echo "<td>" . Html::anchor('doc/clausula/' . $idcliente . '/CV', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
         }
 
-        if ($type == 6) {
+        if ($type == 6 || $type == 10) {
             if (Model_Fichero::find('first',array('where'=>array('idcliente'=>$idcliente,'idtipo'=>6)))!=null) {
                 //Solicitud Acceso Fichero Videovigilancia
                 echo "<tr><td>Solicitud de acceso al Fichero de Videovigilancia</td>";

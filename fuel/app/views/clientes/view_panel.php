@@ -102,7 +102,7 @@
                 <?php echo Html::anchor('personal/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir personal',array('class'=>'btn btn-success')); ?>
                 <br/><br/>
                 <!--Tipo Comunidad -->
-                <?php if($cliente->tipo==6): ?>
+                <?php if($cliente->tipo==6 || $cliente->tipo==10): ?>
                     <h4>Administrador de fincas asociado</h4>
                     <?php if(empty($aaff)): ?>
                         <p>No se ha encontrado aún un administrador de fincas que gestione esta comunidad. Selecciona una empresa gestora que la represente.</p>

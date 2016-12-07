@@ -1,4 +1,4 @@
-<h2>Editando asociación de <b>administrador de fincas</b> para la comunidad <span class='muted'><?php echo $nombre;?></span></h2>
+<h2>Editando asociación de <b>administrador de fincas</b> para el cliente <span class='muted'><?php echo $nombre;?></span></h2>
 <br/>
 <?php
 $data['idcom'] = $idcom;

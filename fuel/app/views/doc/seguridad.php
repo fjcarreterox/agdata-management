@@ -146,7 +146,8 @@ $pdf->MultiCell(0,10,utf8_decode(mb_strtoupper('2. Ámbito de aplicación')),0,'
 $pdf->MultiCell(0,10,utf8_decode('2.1. Ámbito legal'),0,'L');
 
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('Este documento ha sido elaborado bajo la responsabilidad de '.html_entity_decode($reps["nombre"]).' quien, como representante de '.$cname.' y, por lo tanto, Responsable de los Ficheros, se compromete a implantar los procedimientos recogidos en el presente documento y mantenerlos actualizados dentro del ámbito de aplicación de la normativa vigente en protección de datos.'),0,'J');$pdf->Ln(2.5);
+//$pdf->MultiCell(0,6,utf8_decode('Este documento ha sido elaborado bajo la responsabilidad de '.html_entity_decode($reps["nombre"]).' quien, como representante de '.$cname.' y, por lo tanto, Responsable de los Ficheros, se compromete a implantar los procedimientos recogidos en el presente documento y mantenerlos actualizados dentro del ámbito de aplicación de la normativa vigente en protección de datos.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Este documento ha sido elaborado bajo la responsabilidad de '.html_entity_decode($reps["nombre"]).' que, como Responsable de los Ficheros, se compromete a implantar los procedimientos recogidos en el presente documento y mantenerlos actualizados dentro del ámbito de aplicación de la normativa vigente en protección de datos.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('El Documento de Seguridad deberá ser revisado periódicamente por el Responsable de los Ficheros, con el fin de identificar cambios relevantes en el mismo. '),0,'J');$pdf->Ln(2.5);
 
 //2.2

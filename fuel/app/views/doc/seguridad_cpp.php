@@ -3,9 +3,10 @@
 class PDFp extends PDF_MC_Table{
     var $customer = "";
 
-    function __construct($orientation='P', $unit='mm', $size='A4',$customer="NO DEFINIDO"){
+    function __construct($orientation='P', $unit='mm', $size='A4',$customer="NO DEFINIDO",$type){
         parent::__construct($orientation, $unit, $size);
         $this->customer = $customer;
+        $this->type = $type;
     }
 
     function Header(){
@@ -13,7 +14,7 @@ class PDFp extends PDF_MC_Table{
         $this->Cell(0,25,utf8_decode('                DOCUMENTO DE SEGURIDAD'),0,0,'C');
         $this->Ln(5);
         $this->SetFont('Arial','I',13);
-        $this->Cell(0,35,utf8_decode("                         Comunidad de propietarios"),0,0,'C');
+        $this->Cell(0,35,utf8_decode("                         ".html_entity_decode($this->type)),0,0,'C');
         $this->Ln(3);
         $this->Cell(0,45,utf8_decode("                         ".html_entity_decode($this->customer)),0,0,'C');
         $this->Ln(10);
@@ -30,13 +31,16 @@ class PDFp extends PDF_MC_Table{
         }
     }
 }
-
+if(strpos($cname,"O'd")!==false) {
+    $cname = str_replace("o-d", "o'd", strtolower($cname));
+}
+$dir = str_replace("o-d","o'd",strtolower($dir));
 $cname = html_entity_decode($cname);
 $dir = html_entity_decode($dir);
 $loc = html_entity_decode($loc);
 $prov = html_entity_decode($prov);
 
-$pdf = new PDFp('P','mm','A4',$cname);
+$pdf = new PDFp('P','mm','A4',$cname, $type);
 
 $pdf->AddFont('Arial','','arial.php');
 $title = 'DOCUMENTOS LEGALES LOPD: DOCUMENTO DE SEGURIDAD PARA CPP';
@@ -62,7 +66,7 @@ $pdf->SetFont('Arial','',16);
 $pdf->MultiCell(0,12,strtoupper('responsable de los ficheros'),0,'C');
 $pdf->Ln(5);
 $pdf->SetFont('Arial','B',20);
-$pdf->MultiCell(0,12,strtoupper("comunidad de propietarios"),0,'C');
+$pdf->MultiCell(0,12,utf8_decode(mb_strtoupper(html_entity_decode($type))),0,'C');
 $pdf->MultiCell(0,12,utf8_decode(mb_strtoupper(html_entity_decode($cname))),0,'C');
 $pdf->Ln(10);
 
@@ -73,6 +77,10 @@ $date = "$m de $date_array[1]";
 
 $pdf->SetFont('Arial','I',11);
 $pdf->MultiCell(0,12,strtoupper($date),0,'C');
+
+$type = html_entity_decode($type);
+$type_short = "CDAD. PROP.";
+if(strcmp($type,"Asociación")==0){$type_short ="ASOC.";}
 
 //Index
 $pdf->AddPage();
@@ -135,7 +143,7 @@ $pdf->MultiCell(0,10,strtoupper('1. objeto'),0,'L');
 
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('El presente documento responde a la obligación establecida en el artículo 88 del Capítulo II, del Real Decreto 1720/2007, de 21 de diciembre, por el que se aprueba el Reglamento de desarrollo de la Ley Orgánica 15/1999, de 13 de diciembre, de Protección de Datos de Carácter Personal.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('En este Documento de Seguridad se recogerán todas aquellas medidas de índole técnica y organizativa que deben reunir los ficheros con datos de carácter personal pertenecientes a la CDAD.PROP. '.$cname.' situada en '.$dir.' con C.P. '.$cp.' en '.$loc.', provincia de '.$prov.'.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('En este Documento de Seguridad se recogerán todas aquellas medidas de índole técnica y organizativa que deben reunir los ficheros con datos de carácter personal pertenecientes a la '.$type.' '.$cname.' situada en '.$dir.' con C.P. '.$cp.' en '.$loc.', provincia de '.$prov.'.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Los procedimientos y normas de seguridad recogidas en el Documento de Seguridad serán de obligado cumplimiento para todos aquéllos que tengan acceso a los ficheros con datos de carácter personal, automatizados o en papel, según lo dispuesto en el Reglamento de desarrollo de la LOPD anteriormente mencionado.'),0,'J');
 
 $pdf->Ln(5);
@@ -146,7 +154,7 @@ $pdf->MultiCell(0,10,utf8_decode(mb_strtoupper('2. Ámbito de aplicación')),0,'
 $pdf->MultiCell(0,10,utf8_decode('2.1. Ámbito legal'),0,'L');
 
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('Este documento ha sido elaborado bajo la responsabilidad del presidente de dicha Comunidad de Propietarios quien, como representante de la comunidad y, por lo tanto, Responsable de los Ficheros, se compromete a implantar los procedimientos recogidos en el presente documento y mantenerlos actualizados dentro del ámbito de aplicación de la normativa vigente en protección de datos.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Este documento ha sido elaborado bajo la responsabilidad del presidente de dicha '.$type.' quien, como representante de la '.$type.' y, por lo tanto, Responsable de los Ficheros, se compromete a implantar los procedimientos recogidos en el presente documento y mantenerlos actualizados dentro del ámbito de aplicación de la normativa vigente en protección de datos.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('El Documento de Seguridad deberá ser revisado periódicamente por el Responsable de los Ficheros, con el fin de identificar cambios relevantes en el mismo. '),0,'J');$pdf->Ln(2.5);
 
 //2.2
@@ -166,10 +174,9 @@ $pdf->MultiCell(0,6,utf8_decode('Los recursos que quedarán bajo el ámbito de a
 $pdf->MultiCell(0,6,utf8_decode('     - Locales o dependencias donde se encuentren ubicados los ficheros o se almacenen los soportes que los contengan.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('       - Puestos de trabajo y sistemas informáticos desde los que se acceda a los ficheros. '),0,'J');$pdf->Ln(2.5);
 $pdf->Ln(5);
-
 $str="mantiene un fichero con datos de carácter personal, el cual ha sido convenientemente notificado";
-if(count($files>1)){$str="mantienen ".count($files)." ficheros con datos de carácter personal, los cuales han sido convenientemente notificados";}
-$pdf->MultiCell(0,6,utf8_decode('La Comunidad de Propietarios '.$str.' a la Agencia Española de Protección de Datos para su inscripción en el Registro General de Protección de Datos.'),0,'J');$pdf->Ln(2.5);
+if(count($files)>1){$str="mantienen ".count($files)." ficheros con datos de carácter personal, los cuales han sido convenientemente notificados";}
+$pdf->MultiCell(0,6,utf8_decode('La '.$type.' '.$str.' a la Agencia Española de Protección de Datos para su inscripción en el Registro General de Protección de Datos.'),0,'J');$pdf->Ln(2.5);
 
 $pdf->Ln(5);
 $pdf->SetDrawColor(0, 0, 0);
@@ -189,7 +196,7 @@ $pdf->Ln(5);
 
 $str="del fichero declarado";
 if(count($files>1)){$str="de los ficheros declarados";}
-$pdf->MultiCell(0,6,utf8_decode('La descripción y tipología '.$str.' por la Comunidad de Propietarios viene especificada en el Anexo I: "Ficheros de datos declarados y resoluciones de la AEPD" del presente documento.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('La descripción y tipología '.$str.' por la '.$type.' viene especificada en el Anexo I: "Ficheros de datos declarados y resoluciones de la AEPD" del presente documento.'),0,'J');$pdf->Ln(2.5);
 $levels = array("N/D","BÁSICO","MEDIO","ALTO");
 $pdf->MultiCell(0,6,utf8_decode('Una vez analizada la tipología de los ficheros a proteger, se recogerán en el Documento de Seguridad, con carácter general, los procedimientos y normas de seguridad establecidas como de nivel '.$levels[$max_level].'.'),0,'J');$pdf->Ln(2.5);
 
@@ -206,7 +213,7 @@ $pdf->MultiCell(0,10,utf8_decode(strtoupper('3. Funciones y obligaciones del per
 $pdf->MultiCell(0,10,utf8_decode('3.1. Normas generales'),0,'L');
 
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('La Comunidad de Propietarios '.$cname.', designa como Responsable de Seguridad al Presidente vigente de la Comunidad, quien desempeñará las funciones propias de coordinación y control de las medidas de seguridad implantadas en materia de protección de datos.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('La '.$type.' '.$cname.', designa como Responsable de Seguridad al Presidente vigente de la '.$type.', quien desempeñará las funciones propias de coordinación y control de las medidas de seguridad implantadas en materia de protección de datos.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('En ningún caso, la designación del Responsable de Seguridad supone la delegación de la responsabilidad que corresponde al Responsable de los Ficheros, quién conservará todas aquellas funciones que le corresponden, según lo establecido en la LOPD.'),0,'J');$pdf->Ln(2.5);
 
 //3.2
@@ -225,7 +232,7 @@ $pdf->MultiCell(0,10,utf8_decode(strtoupper('4. Procedimientos y normas de segur
 $pdf->MultiCell(0,10,utf8_decode('4.1. Centros de tratamiento'),0,'L');
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('El acceso a los locales u oficinas donde se encuentren los ficheros, deberá estar restringido exclusivamente al personal autorizado para su tratamiento o aquél que deba realizar labores de mantenimiento para las que sea imprescindible el acceso físico.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0, 6, utf8_decode('La administración y gestión de los ficheros de la Comunidad de Propietarios se lleva a cabo tanto en ' . html_entity_decode($dir) . ' con C.P. ' . $cp . ' en ' . html_entity_decode($loc) . ', provincia de ' . html_entity_decode($prov) . ', como en las instalaciones de su Administrador de Fincas, ' . html_entity_decode($reps[0]["nombre_aaff"]) . ', situadas en ' . html_entity_decode($reps[0]["dir"]) . ' con C.P. ' . $reps[0]["cp"] . ' en ' . html_entity_decode($reps[0]["loc"]) . ', provincia de ' . html_entity_decode($reps[0]["prov"]) . '.'), 0, 'J');
+$pdf->MultiCell(0, 6, utf8_decode('La administración y gestión de los ficheros de la '.$type.' se lleva a cabo tanto en ' . $dir . ' con C.P. ' . $cp . ' en ' . html_entity_decode($loc) . ', provincia de ' . html_entity_decode($prov) . ', como en las instalaciones de su Administrador de Fincas, ' . html_entity_decode($reps[0]["nombre_aaff"]) . ', situadas en ' . html_entity_decode($reps[0]["dir"]) . ' con C.P. ' . $reps[0]["cp"] . ' en ' . html_entity_decode($reps[0]["loc"]) . ', provincia de ' . html_entity_decode($reps[0]["prov"]) . '.'), 0, 'J');
 $pdf->Ln(2.5);
 
 
@@ -302,7 +309,7 @@ $pdf->MultiCell(0,6,utf8_decode('Deberá evitarse, en lo posible, el tratamiento
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('6.3. Soportes en papel de ficheros no automatizados'),0,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('El acceso a la documentación del fichero que la Comunidad mantiene en soporte papel, como es "COMUNIDAD DE PROPIETARIOS", quedará limitado al personal expresamente autorizado por el Responsable de Seguridad en el Anexo II: "Listado de usuarios con acceso a los ficheros".'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('El acceso a la documentación de los ficheros que la '.$type.' mantiene en soporte papel quedará limitado al personal expresamente autorizado por el Responsable de Seguridad en el Anexo II: "Listado de usuarios con acceso a los ficheros".'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Los armarios, archivadores y otros elementos empleados para almacenar estos ficheros deberán encontrarse en áreas cuyo acceso esté protegido con puertas de acceso restringido mediante llave o dispositivo equivalente.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('La realización de copias o la reproducción de estos documentos únicamente podrán ser efectuadas bajo el control del personal autorizado por el Responsable de Seguridad.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Se procederá a la destrucción de las copias desechadas o inútiles, para evitar en lo posible el acceso a la información en ellas contenida.'),0,'J');$pdf->Ln(2.5);
@@ -322,7 +329,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,strtoupper(utf8_decode('8. ejercicio de los derechos de los interesados')),0,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('En cumplimiento de lo establecido en los artículos 15 y 16 de la LOPD, la Comunidad definirá las tareas necesarias y establecerá los criterios aplicables a seguir ante una solicitud de un interesado, relativa a sus datos personales. El ejercicio de estos derechos será  totalmente gratuito para los interesados.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('En cumplimiento de lo establecido en los artículos 15 y 16 de la LOPD, la '.$type.' definirá las tareas necesarias y establecerá los criterios aplicables a seguir ante una solicitud de un interesado, relativa a sus datos personales. El ejercicio de estos derechos será  totalmente gratuito para los interesados.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Estas solicitudes pueden ser:'),0,'J');$pdf->Ln(2.5);
 $pdf->SetLeftMargin(25);
 $pdf->MultiCell(0,6,utf8_decode('- Acceso a los ficheros informatizados'),0,'L');
@@ -341,7 +348,7 @@ $pdf->MultiCell(0,6,utf8_decode('Los interesados deberán dirigirse, siempre por
 $pdf->Ln(3);
 
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->MultiCell(0, 6, utf8_decode(mb_strtoupper('     A/A:  Comunidad de Propietarios ' . $cname)), 0, 'L');
+$pdf->MultiCell(0, 6, utf8_decode(mb_strtoupper('     A/A:  '.$type.' ' . $cname)), 0, 'L');
 $pdf->SetFont('Arial', '', 11);
 $pdf->MultiCell(0, 6, utf8_decode(mb_strtoupper('                ' . $dir)), 0, 'L');
 $pdf->MultiCell(0, 6, utf8_decode(mb_strtoupper('                C.P.' . $cp . ', ' . $loc . ', ' . $prov)), 0, 'L');
@@ -374,7 +381,7 @@ $pdf->MultiCell(0,6,utf8_decode('Se podrá denegar el acceso a los datos de car�
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('8.3. Derechos de rectificación y cancelación'),0,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('Cuando la Comunidad de Propietarios tenga conocimiento de que alguno/s de los datos contenidos en un fichero son inexactos o incompletos, o se reciba una solicitud de rectificación de datos, lo pondrá en conocimiento del Responsable de Seguridad, quien procederá a la rectificación de los mismos EN EL PLAZO DE DIEZ DÍAS desde la recepción de la solicitud.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Cuando la '.$type.' tenga conocimiento de que alguno/s de los datos contenidos en un fichero son inexactos o incompletos, o se reciba una solicitud de rectificación de datos, lo pondrá en conocimiento del Responsable de Seguridad, quien procederá a la rectificación de los mismos EN EL PLAZO DE DIEZ DÍAS desde la recepción de la solicitud.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Cuando los datos tratados no se ajusten a lo dispuesto en la Ley Orgánica de Protección de Datos, el Responsable de los Ficheros procederá al bloqueo efectivo de los mismos, conservándose únicamente a disposición de las Administraciones Públicas, Jueces y Tribunales, para la atención de las posibles responsabilidades nacidas del tratamiento.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Una vez cumplido el plazo de prescripción correspondiente, se procederá a su supresión definitiva.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Si los datos rectificados o cancelados hubieran sido comunicados previamente, se deberá notificar la rectificación o cancelación a quien se hayan comunicado, en el caso de que se mantenga el tratamiento por este último, para que proceda del mismo modo.'),0,'J');$pdf->Ln(2.5);
@@ -401,7 +408,7 @@ $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('9.1. Encargados de tratamiento'),0,'L');
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Se entiende por Encargado del Tratamiento toda persona física o jurídica, autoridad pública, servicio o cualquier otro organismo que, trate datos personales por cuenta del Responsable de los Ficheros.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('Cuando la Comunidad de Propietarios facilite el acceso a los datos, a los soportes que los contengan o a los recursos de los sistemas de información que los traten, a un Encargado de Tratamiento que le preste sus servicios, se exigirá al personal del Encargado el cumplimiento de las medidas de seguridad previstas en el presente Documento.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Cuando la '.$type.' facilite el acceso a los datos, a los soportes que los contengan o a los recursos de los sistemas de información que los traten, a un Encargado de Tratamiento que le preste sus servicios, se exigirá al personal del Encargado el cumplimiento de las medidas de seguridad previstas en el presente Documento.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Para el caso concreto de los Administradores de Fincas, se deberá firmar un contrato de Cesión de Datos donde el Encargado de Tratamiento se compromete a cumplir con las obligaciones que la LOPD le exige.'),0,'J');$pdf->Ln(2.5);
 
 //9.2
@@ -464,8 +471,8 @@ foreach($files as $f){
     $pdf->SetFont('Arial','B',10);
     $pdf->Row(array("Fichero:",$f["name"],"Nº Inscripción R.G.P.D:"));
     $pdf->SetFont('Arial','',10);
-    $pdf->Row(array("Responsable Fichero:","CDAD. PROP. ".$cname,"Soporte papel / digital: ".strtoupper($f["supp"])));
-    $pdf->Row(array("Responsable Seguridad:","PRESIDENTE DE LA COMUNIDAD","Nivel de seguridad: ".mb_strtoupper(html_entity_decode($f["level_name"]))));
+    $pdf->Row(array("Responsable Fichero:",$type_short." ".$cname,"Soporte papel / digital: ".strtoupper($f["supp"])));
+    $pdf->Row(array("Responsable Seguridad:","PRESIDENTE","Nivel de seguridad: ".mb_strtoupper(html_entity_decode($f["level_name"]))));
     $pdf->SetWidths(array(165));
     $pdf->SetAligns(array('L'));
     $pdf->Row(array(""));
@@ -506,7 +513,7 @@ $pdf->MultiCell(0,6,utf8_decode('RESPONSABLE DE LOS FICHEROS'),0,'J');
 $pdf->Ln(5);
 $pdf->SetWidths(array(100,35,35));
 $pdf->SetAligns(array('C','C','C'));
-$pdf->Row(array("COMUNIDAD DE PROPIETARIOS","Fecha alta","Fecha baja"));
+$pdf->Row(array(mb_strtoupper($type),"Fecha alta","Fecha baja"));
 $pdf->Row(array($cname,"",""));
 $pdf->Ln(10);
 
@@ -529,7 +536,7 @@ $pdf->Row(array("","","",""));
 $pdf->Row(array("","","",""));
 $pdf->Ln(10);
 
-$pdf->MultiCell(0,6,utf8_decode('PERSONAS DE LA COMUNIDAD CON ACCESO A LOS FICHEROS'),0,'J');
+$pdf->MultiCell(0,6,utf8_decode('PERSONAS DE LA '.mb_strtoupper($type).' CON ACCESO A LOS FICHEROS'),0,'J');
 $pdf->Ln(5);
 $pdf->SetWidths(array(80,35,25,30));
 $pdf->SetAligns(array('C','C','C','C'));
@@ -546,7 +553,7 @@ $pdf->Row(array("","","",""));
 $pdf->Row(array("","","",""));
 $pdf->Ln(10);
 
-$pdf->MultiCell(0,6,utf8_decode('PERSONAS AJENAS A LA COMUNIDAD CON ACCESO A LOS FICHEROS'),0,'J');
+$pdf->MultiCell(0,6,utf8_decode('PERSONAS AJENAS A LA '.mb_strtoupper($type).' CON ACCESO A LOS FICHEROS'),0,'J');
 $pdf->Ln(5);
 $pdf->SetWidths(array(75,25,35,35));
 $pdf->SetAligns(array('C','C','C','C'));
@@ -570,34 +577,34 @@ $pdf->Ln(5);
 
 //ANEXO III
 //foreach($trab as $t) {
-    $pdf->AddPage();
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->MultiCell(0, 10, utf8_decode('Anexo III. Cláusula legal para empleados'), 0, 'L');
-    $pdf->SetFont('Arial', '', 8.5);
-    $pdf->MultiCell(0, 10, utf8_decode('En Sevilla, a ......... de ................. de ........'), 0, 'R');
-    $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('D/Dª ........................................................................................., mayor de edad, con DNI nº ................................................., en virtud de la relación de carácter laboral que le vincula a la Comunidad de Propietarios '.mb_strtoupper($cname).', se obliga a:'), 0, 'J');
-    //$pdf->MultiCell(0, 6, utf8_decode(mb_strtoupper(html_entity_decode($t["nombre"])).', mayor de edad, con DNI nº '.$t["dni"].', en virtud de la relación de carácter laboral que le vincula a la Comunidad de Propietarios '.mb_strtoupper($cname).', se obliga a:'), 0, 'J');
-    $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('PRIMERO.- Guardar secreto profesional con respecto a los datos de carácter personal a los que tenga acceso por razón de su trabajo, así como guardarlos; obligaciones que se mantendrán aún después del cese de la relación laboral que le vincula a la Comunidad de Propietarios '.mb_strtoupper($cname)).'.', 0, 'J');
-    $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('SEGUNDO.- Comunicar a su superior inmediato cualquier incidencia que se produzca en el tratamiento de estos datos.'), 0, 'J');
-    $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('TERCERO.- Seguir las instrucciones de la Comunidad de Propietarios '.mb_strtoupper($cname).' en relación a las políticas de protección de datos descritas en el documento de seguridad.'), 0, 'J');
-    $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('CUARTO.- Trasladar al Responsable de Seguridad cualquier comunicación que llegue a la Comunidad de Propietarios '.mb_strtoupper($cname).', relativa al ejercicio de los derechos de acceso, rectificación, cancelación y oposición por parte de los afectados respecto a sus datos de carácter personal.'), 0, 'J');
-    $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('En caso de incumplimiento de alguna de estas cláusulas, el empleado podrá ser sancionado por incurrir en responsabilidad contractual derivada de la relación laboral que le vincula. Si además, como consecuencia del incumplimiento, la empresa es sancionada como responsable del fichero, ésta podrá pedir daños y perjuicios al empleado que dolosamente haya realizado actos prohibidos en estas cláusulas.'), 0, 'J');
-    $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('Asimismo, y en cumplimiento de lo dispuesto en el artículo 5 de la Ley Orgánica 15/1999, de 13 de diciembre de Protección de Datos de Carácter Personal (LOPD), la Comunidad de Propietarios '.mb_strtoupper($cname).', con CIF '.$cif.', le informa que sus datos de carácter personal, actualmente en posesión de la Comunidad de Propietarios '.mb_strtoupper($cname).', formarán parte de un fichero automatizado del que es titular y único responsable.'), 0, 'J');
-    $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('La finalidad de su creación, existencia y mantenimiento es el tratamiento de los datos con los exclusivos fines de gestionar las relaciones laborales (pago de nóminas, control de asistencia, seguros sociales) que mantiene con la Comunidad de Propietarios '.mb_strtoupper($cname).'.'), 0, 'J');
-    $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('Igualmente, queda informado que para alcanzar los fines arriba indicados, sus datos de carácter personal podrán ser cedidos a otras entidades para la prestación de servicios por cuenta de la empresa, cumpliendo en cualquier caso con lo estipulado en la LOPD.'), 0, 'J');
-    $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('El abajo firmante podrá ejercitar los derechos de acceso, rectificación, cancelación y oposición, en el ámbito reconocido por la normativa española en protección de datos, dirigiéndose por escrito a nuestra sede situada en '.$dir.", ".$cp.', en '.$loc.', provincia de '.$prov.'.'), 0, 'J');
-    $pdf->Ln(10);
-    $pdf->MultiCell(0, 10, utf8_decode('..........................................................                                                                    '.$cname), 0, 'C');
+$pdf->AddPage();
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->MultiCell(0, 10, utf8_decode('Anexo III. Cláusula legal para empleados'), 0, 'L');
+$pdf->SetFont('Arial', '', 8.5);
+$pdf->MultiCell(0, 10, utf8_decode('En Sevilla, a ......... de ................. de ........'), 0, 'R');
+$pdf->Ln(2);
+$pdf->MultiCell(0, 6, utf8_decode('D/Dª ........................................................................................., mayor de edad, con DNI nº ................................................., en virtud de la relación de carácter laboral que le vincula a la '.mb_strtoupper($type).' '.mb_strtoupper($cname).', se obliga a:'), 0, 'J');
+//$pdf->MultiCell(0, 6, utf8_decode(mb_strtoupper(html_entity_decode($t["nombre"])).', mayor de edad, con DNI nº '.$t["dni"].', en virtud de la relación de carácter laboral que le vincula a la '.$type.' '.mb_strtoupper($cname).', se obliga a:'), 0, 'J');
+$pdf->Ln(2);
+$pdf->MultiCell(0, 6, utf8_decode('PRIMERO.- Guardar secreto profesional con respecto a los datos de carácter personal a los que tenga acceso por razón de su trabajo, así como guardarlos; obligaciones que se mantendrán aún después del cese de la relación laboral que le vincula a la '.mb_strtoupper($type).' '.mb_strtoupper($cname)).'.', 0, 'J');
+$pdf->Ln(2);
+$pdf->MultiCell(0, 6, utf8_decode('SEGUNDO.- Comunicar a su superior inmediato cualquier incidencia que se produzca en el tratamiento de estos datos.'), 0, 'J');
+$pdf->Ln(2);
+$pdf->MultiCell(0, 6, utf8_decode('TERCERO.- Seguir las instrucciones de la '.mb_strtoupper($type).' '.mb_strtoupper($cname).' en relación a las políticas de protección de datos descritas en el documento de seguridad.'), 0, 'J');
+$pdf->Ln(2);
+$pdf->MultiCell(0, 6, utf8_decode('CUARTO.- Trasladar al Responsable de Seguridad cualquier comunicación que llegue a la '.mb_strtoupper($type).' '.mb_strtoupper($cname).', relativa al ejercicio de los derechos de acceso, rectificación, cancelación y oposición por parte de los afectados respecto a sus datos de carácter personal.'), 0, 'J');
+$pdf->Ln(2);
+$pdf->MultiCell(0, 6, utf8_decode('En caso de incumplimiento de alguna de estas cláusulas, el empleado podrá ser sancionado por incurrir en responsabilidad contractual derivada de la relación laboral que le vincula. Si además, como consecuencia del incumplimiento, la empresa es sancionada como responsable del fichero, ésta podrá pedir daños y perjuicios al empleado que dolosamente haya realizado actos prohibidos en estas cláusulas.'), 0, 'J');
+$pdf->Ln(2);
+$pdf->MultiCell(0, 6, utf8_decode('Asimismo, y en cumplimiento de lo dispuesto en el artículo 5 de la Ley Orgánica 15/1999, de 13 de diciembre de Protección de Datos de Carácter Personal (LOPD), la '.mb_strtoupper($type).' '.mb_strtoupper($cname).', con CIF '.$cif.', le informa que sus datos de carácter personal, actualmente en posesión de la '.mb_strtoupper($type).' '.mb_strtoupper($cname).', formarán parte de un fichero automatizado del que es titular y único responsable.'), 0, 'J');
+$pdf->Ln(2);
+$pdf->MultiCell(0, 6, utf8_decode('La finalidad de su creación, existencia y mantenimiento es el tratamiento de los datos con los exclusivos fines de gestionar las relaciones laborales (pago de nóminas, control de asistencia, seguros sociales) que mantiene con la '.mb_strtoupper($type).' '.mb_strtoupper($cname).'.'), 0, 'J');
+$pdf->Ln(2);
+$pdf->MultiCell(0, 6, utf8_decode('Igualmente, queda informado que para alcanzar los fines arriba indicados, sus datos de carácter personal podrán ser cedidos a otras entidades para la prestación de servicios por cuenta de la empresa, cumpliendo en cualquier caso con lo estipulado en la LOPD.'), 0, 'J');
+$pdf->Ln(2);
+$pdf->MultiCell(0, 6, utf8_decode('El abajo firmante podrá ejercitar los derechos de acceso, rectificación, cancelación y oposición, en el ámbito reconocido por la normativa española en protección de datos, dirigiéndose por escrito a nuestra sede situada en '.$dir.", ".$cp.', en '.$loc.', provincia de '.$prov.'.'), 0, 'J');
+$pdf->Ln(5);
+$pdf->MultiCell(0, 10, utf8_decode('..........................................................                                                                    '.$type.' '.$cname), 0, 'C');
 //}
 
 //ANEXO IV
@@ -699,4 +706,4 @@ $pdf->Row(array("Persona que realiza la comunicación:\n\n\nFirma:","Responsable
 $pdf->MultiCell(0,10,utf8_decode('** A rellenar sólo si la incidencia es de este tipo.'),0,'L');
 
 // Write all to the output
-$pdf->Output("DOC-SEGURIDAD-C.PP.-".$cname.".pdf",'I');
+$pdf->Output("DOC-SEGURIDAD-".$type_short."-".$cname.".pdf",'I');
