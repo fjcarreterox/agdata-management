@@ -201,8 +201,8 @@ class Controller_Personal extends Controller_Template
             $tipo_cliente = Model_Cliente::find($idcliente)->get('tipo');
             $rep_legal[] = array();
             $rep_legal[] = Model_Personal::find('first', array('where' => array('idcliente' => $idcliente, 'relacion' => 1)));
-            //communities are diferent on this
-            if ($tipo_cliente == 6) {
+            //communities and asociations are diferent on this
+            if ($tipo_cliente == 6 || $tipo_cliente == 10) {
                 //Look for its aaff
                 if ($rel_aaff = Model_Rel_Comaaff::find('first', array('where' => array('idcom' => $idcliente)))) {
                     if (Model_Personal::find('first', array('where' => array('idcliente' => $rel_aaff->idaaff, 'relacion' => 1)))) {
