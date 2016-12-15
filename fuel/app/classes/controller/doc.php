@@ -53,6 +53,7 @@ class Controller_Doc extends Controller_Template{
                 $data['services'] = $serv;
                 return View::forge('doc/contrato_gestoria', $data)->render();
             }
+            $data['services'][0] = $serv;
         }
 
         if($isCPP){
