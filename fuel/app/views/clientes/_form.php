@@ -88,6 +88,10 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::label('Observaciones', 'observ', array('class'=>'control-label')); ?>
 			<?php echo Form::textarea('observ', Input::post('observ', isset($cliente) ? $cliente->observ : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Observaciones de relavancia','rows' => 8)); ?>
 		</div>
+        <div class="form-group">
+            <?php echo Form::label('Tareas pendientes', 'pending', array('class'=>'control-label')); ?>
+            <?php echo Form::textarea('pending', Input::post('pending', isset($cliente) ? $cliente->pending : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Tareas pendientes para comunicar al cliente','rows' => 8)); ?>
+        </div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
 			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar', array('class' => 'btn btn-primary','type'=>'submit','onclick' => "return validateForm($('form'))")); ?>

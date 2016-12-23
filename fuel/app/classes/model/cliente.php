@@ -21,6 +21,7 @@ class Model_Cliente extends Model
 		'actividad',
 		'password',
 		'observ',
+		'pending',
 		'estado',
         'idsituacion',
 		'created_at',

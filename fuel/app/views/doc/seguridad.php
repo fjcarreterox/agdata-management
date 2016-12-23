@@ -523,10 +523,10 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('RESPONSABLE DE LOS FICHEROS'),0,'J');
 $pdf->Ln(5);
-$pdf->SetWidths(array(100,35,35));
+$pdf->SetWidths(array(100,25,45));
 $pdf->SetAligns(array('C','C','C'));
-$pdf->Row(array("Nombre","Fecha alta","Fecha baja"));
-$pdf->Row(array($cname,"",""));
+$pdf->Row(array("Nombre","CIF/NIF","Representante legal"));
+$pdf->Row(array($cname,$cif,html_entity_decode($reps["nombre"])));
 $pdf->Ln(10);
 
 $pdf->MultiCell(0,6,utf8_decode('RESPONSABLE DE SEGURIDAD'),0,'J');

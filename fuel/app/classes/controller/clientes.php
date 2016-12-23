@@ -309,6 +309,7 @@ class Controller_Clientes extends Controller_Template
 					'email' => Input::post('email'),
 					'actividad' => Input::post('actividad'),
 					'observ' => Input::post('observ'),
+					'pending' => Input::post('pending'),
 					'estado' => Input::post('estado'),
 					'idsituacion' => Input::post('idsituacion'),
 				));
@@ -357,6 +358,7 @@ class Controller_Clientes extends Controller_Template
             $cliente->email = Input::post('email');
             $cliente->actividad = Input::post('actividad');
             $cliente->observ = Input::post('observ');
+            $cliente->pending = Input::post('pending');
             $cliente->estado = Input::post('estado');
             $cliente->idsituacion = Input::post('idsituacion');
 
@@ -398,6 +400,7 @@ class Controller_Clientes extends Controller_Template
                 $cliente->email = $val->validated('email');
                 $cliente->actividad = $val->validated('actividad');
                 $cliente->observ = $val->validated('observ');
+                $cliente->pending = $val->validated('pending');
                 $cliente->estado = $val->validated('estado');
                 $cliente->idsituacion = $val->validated('idsituacion');
 

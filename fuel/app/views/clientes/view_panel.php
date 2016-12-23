@@ -59,6 +59,20 @@
                                 } ?>
                             </strong></td>
                     </tr>
+                    <tr>
+                        <td colspan="4"><i>Tareas pendientes: </i><strong>
+                                <?php if($cliente->pending!=''){
+                                    $res = explode('- ',$cliente->pending);
+                                    echo "<ul>";
+                                    foreach($res as $r){
+                                        echo "<li>".$r."</li>";
+                                    }
+                                    echo "</ul>";
+                                }else{
+                                    echo '<span>Sin tareas pendientes aún.</span>';
+                                } ?>
+                            </strong></td>
+                    </tr>
                     </tbody>
                 </table>
                 <br/>

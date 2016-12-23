@@ -1,6 +1,7 @@
 <?php
 $pass_ops = array(
     "No especificado"=>"No especificado",
+    "Diario"=>"Diario",
     "Semanal"=>"Semanal",
     "Mensual"=>"Mensual",
     "Trimestral"=>"Trimestral",
