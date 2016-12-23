@@ -78,6 +78,13 @@ if (!isset($idcliente)) {
             echo "<tr><td>Coletilla legal para e-mails</td>";
             echo "<td>" . Html::anchor('doc/coletilla/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
         }
+
+        if ($type == 1) {
+            //E-mail
+            echo "<tr><td>Cláusula de exoneración de responsabilidad</td>";
+            echo "<td>" . Html::anchor('/assets/docs/Clausula_exoneracion_de_responsabilidad_AA.FF..pdf', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
+        }
+
         //Claúsulas
         echo "<tr><td>Cláusulas legales para empleados</td>";
         echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/E', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
