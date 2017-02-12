@@ -2,7 +2,7 @@
 <br/>
 <?php
 if ($agendas):
-    $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría","asuntos varios");
+    $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría","asuntos varios","pisos");
     ?>
     <p><?php echo $intro;?></p>
     <br/>

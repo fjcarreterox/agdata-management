@@ -45,3 +45,4 @@ public/docpdf/changelog.htm
 public/docpdf/fpdf.php
 public/docpdf/fpdf.css
 public/docpdf/mc_table.php
+fuel/app/config/development/db.php

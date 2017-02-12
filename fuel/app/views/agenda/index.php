@@ -1,7 +1,7 @@
 <h2><?php echo $title; ?></h2>
 <br/>
 <?php if ($agendas):
-    $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría");
+    $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría","asuntos varios","pisos");
     $subject = 'Servicios AGDATA LOPD 2016';
     $body_aaff = 'A/A.:%0D%0A%0D%0ABuenos días,%0D%0A%0D%0ASegún conversación telefónica, le hacemos llegar información sobre nuestros servicios en materia de Protección de Datos, tanto para su despacho como para sus Comunidades de Propietarios.%0D%0AComo asesores jurídicos del Colegio de Administradores de Fincas, podrán beneficiarse de unas tarifas más económicas orientadas a los Administradores de Fincas colegiados.%0D%0A%0D%0AComo podrá comprobar, Análisis y Gestión de Datos SL, se encarga de actualizarles toda la documentación legal necesaria, de modificar o inscribir en la Agencia Española de Protección de Datos los ficheros de datos que gestione Ud. o la Comunidad de Propietarios, así como del asesoramiento jurídico ante cualquier consulta que puedan plantearle los propietarios en materia de protección de datos.%0D%0A%0D%0ASin otro particular, le instamos a poder ampliarles esta información en una visita personal, para conocer su situación actual, así como aclararle cualquier consulta que le surja.%0D%0A%0D%0AReciba un cordial saludo.%0D%0A%0D%0A ';
     $body = 'A/A.:%0D%0A%0D%0ABuenos días,%0D%0A%0D%0ASegún conversación telefónica, le hacemos llegar información sobre nuestros servicios en materia de Protección de Datos.%0D%0A%0D%0AComo podrá comprobar, Análisis y Gestión de Datos SL, se encarga de actualizarles toda la documentación legal necesaria, de modificar o inscribir en la Agencia Española de Protección de Datos los ficheros de datos que gestione en el desarrollo de su actividad profesional, así como del asesoramiento jurídico ante cualquier consulta que se le puedan plantear en materia de protección de datos.%0D%0A%0D%0AEn cualquier caso, le instamos a poder ampliarles esta información en una visita personal, para conocer su situación actual, así como aclararle cualquier consulta que tenga.%0D%0A%0D%0ASin otro particular,%0D%0A%0D%0AReciba un cordial saludo.%0D%0A%0D%0A ';
@@ -89,7 +89,7 @@
 <br/>
 <!-- For uncategorized events -->
 <?php if (count($void)>0):
-    $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada");
+    $tipo_ops = array("-- NO ESPECIFICADO --","visita","llamada","auditoría","asuntos varios","pisos");
     ?>
     <h3>Eventos no categorizados</h3>
     <p>Se han detectado los siguientes eventos sin categorizar. Por favor, edítalos y establece si son <strong>
