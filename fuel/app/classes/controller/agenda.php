@@ -131,7 +131,7 @@ class Controller_Agenda extends Controller_Template
             if ($val->run()){
                 $agenda = Model_Agenda::forge(array(
                     'idcliente' => 0,
-                    'tipo' => 4,
+                    'tipo' => Input::post('tipo'),
                     'fecha' => Input::post('fecha'),
                     'hora' => Input::post('hora'),
                     'send_info' => 0,

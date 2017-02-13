@@ -1,4 +1,6 @@
 <?php
+$tipo_ops = array(0=>"-- NO ESPECIFICADO --",4=>"asuntos varios",5=>"pisos");
+
 $user_ops = array();
 $user_ops[0] = "-- SIN ASIGNAR --";
 foreach($users as $u){
@@ -7,6 +9,10 @@ foreach($users as $u){
 
 echo Form::open(array("class"=>"form-horizontal")); ?>
 	<fieldset>
+        <div class="form-group">
+            <?php echo Form::label('Tipo de evento', 'tipo', array('class'=>'control-label')); ?>
+            <?php echo Form::select('tipo', Input::post('tipo', isset($agenda) ? $agenda->tipo : ''),$tipo_ops, array('class' => 'col-md-4 form-control')); ?>
+        </div>
         <div class="form-group">
             <?php echo Form::label('Fecha del evento', 'fecha', array('class'=>'control-label')); ?>
             <?php echo Form::input('fecha', Input::post('fecha', isset($agenda) ? $agenda->fecha : ''), array('type'=>'date','class' => 'col-md-4 form-control')); ?>
