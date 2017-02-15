@@ -38,6 +38,7 @@ echo Asset::css('fullcalendar.print.css', array('media' => 'print'), null, false
                     foreach($eventos as $id => $e){
                         if($e['tipo']== 3){$title = "Auditoría a ".html_entity_decode($e["cliente"]); $fondo = ", backgroundColor: '#a00', borderColor: '#a00' ";}
                         elseif($e['tipo']== 4){$title = "Asuntos varios "; $fondo = ", backgroundColor: '#666', borderColor: '#333' ";}
+                        elseif($e['tipo']== 5){$title = "Donkey Apartments"; $fondo = ", backgroundColor: '#deb887', borderColor: '#333' ";}
                         else{$title = "Visita a ".html_entity_decode($e["cliente"]); $fondo = "";}
                         echo "{id:$id, title:'".$title."', data_type:'".$e["tipo"]."', start:'".$e["fecha"]."T".$e["hora"]."', url:'../clientes/view/".$e["idcliente"]."', url2:'/agdata-gestion/public/agenda/edit/".$id."', description:'".$e["obs"]."'".$fondo."},";
                     }
