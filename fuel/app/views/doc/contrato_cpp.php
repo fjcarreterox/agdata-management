@@ -45,7 +45,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','',12);
 $pdf->MultiCell(0,6,utf8_decode('          De una parte, '.$tratamiento_ops[$rep->tratamiento] .' '. html_entity_decode($rep->nombre).', mayor de edad, con DNI nº '.$rep->dni.', como representante legal de '.html_entity_decode($aaff_nombre).', y mandatario de la Comunidad de Propietarios '.html_entity_decode($customer->nombre).', con domicilio en '.html_entity_decode($customer->direccion).', C.P '.$customer->cpostal.', en '.html_entity_decode($customer->loc).', provincia de '.html_entity_decode($customer->prov).' y con CIF nº '.$customer->cif_nif.' (en adelante, EL BENEFICIARIO).'),0);
 $pdf->Ln(5);
-$pdf->MultiCell(0,6,utf8_decode('          De otra, D. Casimiro Galán Garrido, mayor de edad, con DNI nº 28.884.460-W, en nombre y representación de ANÁLISIS Y GESTIÓN DE DATOS, S.L. (AGDATA), con domicilio social en Tomares (Sevilla), Edificio RAMCAB en Avda. del Aljarafe, S/N Planta 2ª módulo 42, y CIF nº  B-91.341.297 (en adelante, EL PRESTATARIO).'),0);
+$pdf->MultiCell(0,6,utf8_decode('          De otra, D. Miguel Ángel Chávez López, mayor de edad, con DNI nº 28.753.494-K, en nombre y representación de ANÁLISIS Y GESTIÓN DE DATOS, S.L. (AGDATA), con domicilio social en Plaza Padre Jerónimo de Córdoba, nº 13, 6ºB, C.P. 41003, Sevilla, y CIF nº  B-91.341.297 (en adelante, EL PRESTATARIO).'),0);
 $pdf->Ln(5);
 $pdf->MultiCell(0,6,utf8_decode('        Ambas partes (en adelante "las partes") se reconocen mutua y recíprocamente, la capacidad legal necesaria y suficiente para el otorgamiento del presente contrato mercantil y'),0);
 $pdf->Ln(5);
@@ -231,7 +231,7 @@ if(isset($servicios_data[2])) {
 /* firmas */
 $pdf->MultiCell(0,6,utf8_decode('Fdo. por el beneficiario                                                Fdo. por el prestatario'),0,'C');
 $pdf->Ln(30);
-$pdf->MultiCell(0,6,utf8_decode('    '.html_entity_decode($rep["nombre"]).'                                      D. Casimiro Galán Garrido'),0,'C');
+$pdf->MultiCell(0,6,utf8_decode('    '.html_entity_decode($rep["nombre"]).'                                      D. Miguel Ángel Chávez López'),0,'C');
 /* Imprimimos */
 $pdf->Output('CONTRATO-PRESTACION-SERVICIOS-'.html_entity_decode($customer->nombre).'.pdf','I');
 ?>

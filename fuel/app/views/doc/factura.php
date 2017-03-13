@@ -96,9 +96,8 @@ $pdf->Image('http://gestion.agdata.es/assets/img/firma.png',120,217,60);
 
 $pdf->SetTextColor(0, 80, 185);
 $pdf->SetFont('Arial','B',9);
-$pdf->MultiCell(0, 5, utf8_decode('Av. Del Aljarafe, S/N'),0,'L');
-$pdf->MultiCell(0, 5, utf8_decode('Edif. Ramcab, Oficina 42'),0,'L');
-$pdf->MultiCell(0, 5, utf8_decode('41940 Tomares (Sevilla)'),0,'L');
+$pdf->MultiCell(0, 5, utf8_decode('Plaza Padre Jerónimo de Córdoba, nº 13, 6ºB'),0,'L');
+$pdf->MultiCell(0, 5, utf8_decode('41003 Sevilla'),0,'L');
 $pdf->MultiCell(0, 5, utf8_decode('Tlfn.. 954 15 73 39'),0,'L');
 $pdf->MultiCell(0, 5, utf8_decode('www.agdata.es'),0,'L');
 $pdf->SetTextColor(0, 0, 0);

@@ -33,6 +33,6 @@ $pdf->Ln(5);
 $pdf->MultiCell(0,8,utf8_decode('                    Sevilla, a '.date('d',time()).' de '.getMes(date('m',time())).' de '.date('Y',time())),0,'J');
 $pdf->Ln(10);
 $pdf->SetFont('Futura','',18);
-$pdf->MultiCell(0,8,utf8_decode('D. Casimiro Galán Garrido       '),0,'R');
+$pdf->MultiCell(0,8,utf8_decode('D. Miguel Ángel Chávez López       '),0,'R');
 
 $pdf->Output("CERTIFICADO-$name.pdf",'I');
