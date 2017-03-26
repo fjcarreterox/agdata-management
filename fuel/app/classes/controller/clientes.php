@@ -194,6 +194,13 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/aaff', $data);
     }
 
+    public function action_podologos(){
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('tipo'=>4)));
+        $data['intro'] = "Podólogos";
+        $this->template->title = "Podólogos";
+        $this->template->content = View::forge('clientes/podologos', $data);
+    }
+
     public function action_potenciales()
     {
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array(array('estado','<',3))));
