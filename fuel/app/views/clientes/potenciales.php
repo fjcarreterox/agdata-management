@@ -7,6 +7,7 @@
 		<thead>
 		<tr>
 			<th>Nombre/Razón social</th>
+			<th>Tipo</th>
 			<th>Estado</th>
 			<th>Observaciones</th>
 			<th>&nbsp;</th>
@@ -16,6 +17,7 @@
 		<?php foreach ($clientes as $item): ?>
 			<tr>
 				<td><?php echo $item->nombre; ?></td>
+				<td><?php echo Model_Tipo_Cliente::find($item->tipo)->get('tipo'); ?></td>
 				<td><?php echo Model_Estados_Cliente::find($item->estado)->get('nombre'); ?></td>
 				<td><?php echo $item->observ; ?></td>
 				<td>
