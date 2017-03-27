@@ -62,10 +62,11 @@ class Controller_Agenda extends Controller_Template
         $agenda = array();
         $entradas = Model_Agenda::find('all',array('where'=>array('tipo'=>2),'order_by'=>array('fecha'=>'asc','hora'=>'asc')));
         foreach($entradas as $e){
-            if(Model_Cliente::find($e->idcliente)->get('estado')<3){
+            if(Model_Cliente::find($e->idcliente)!=null && Model_Cliente::find($e->idcliente)->get('estado')<3){
                 $agenda[] = $e;
             }
         }
+
         $data['agendas'] = $agenda;
         $data['title'] = "Gestión de llamadas comerciales";
         $data['intro'] = "Creación y seguimiento diario de las llamadas comerciales realizadas a posibles clientes.";
@@ -73,7 +74,7 @@ class Controller_Agenda extends Controller_Template
         $data['void'] = Model_Agenda::find('all',array('where'=>array('tipo'=>0),'order_by'=>array('fecha'=>'desc','hora'=>'desc')));
 
         $this->template->title = "Gestión de llamadas";
-        $this->template->content = View::forge('agenda/index', $data);
+        $this->template->content = View::forge('agenda/llamadas', $data);
     }
 
     public function action_activos(){
