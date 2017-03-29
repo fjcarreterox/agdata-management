@@ -316,7 +316,7 @@ $pdf->MultiCell(0,6,utf8_decode('Deberá evitarse, en lo posible, el tratamiento
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('7.4. Soportes en papel de ficheros no automatizados'),0,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('El acceso a la documentación del fichero que la Comunidad mantiene en soporte papel, como es "COMUNIDAD DE PROPIETARIOS", quedará limitado al personal expresamente autorizado por el Responsable de Seguridad en el Anexo III: "Personal con acceso autorizado".'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('El acceso a la documentación del fichero que '.$cname.' mantiene en soporte papel, quedará limitado al personal expresamente autorizado por el Responsable de Seguridad en el Anexo III: "Personal con acceso autorizado".'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Los armarios, archivadores y otros elementos empleados para almacenar estos ficheros deberán encontrarse en áreas cuyo acceso esté protegido con puertas de acceso restringido mediante llave o dispositivo equivalente.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('La realización de copias o la reproducción de estos documentos únicamente podrán ser efectuadas bajo el control del personal autorizado por el Responsable de Seguridad.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Se procederá a la destrucción de las copias desechadas o inútiles, para evitar en lo posible el acceso a la información en ellas contenida.'),0,'J');$pdf->Ln(2.5);
@@ -365,7 +365,7 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,strtoupper(utf8_decode('10. ejercicio de los derechos de los interesados')),0,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('En cumplimiento de lo establecido en los artículos 15 y 16 de la LOPD, la Comunidad definirá las tareas necesarias y establecerá los criterios aplicables a seguir ante una solicitud de un interesado, relativa a sus datos personales. El ejercicio de estos derechos será  totalmente gratuito para los interesados.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('En cumplimiento de lo establecido en los artículos 15 y 16 de la LOPD, '.$cname.' definirá las tareas necesarias y establecerá los criterios aplicables a seguir ante una solicitud de un interesado, relativa a sus datos personales. El ejercicio de estos derechos será  totalmente gratuito para los interesados.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Estas solicitudes pueden ser:'),0,'J');$pdf->Ln(2.5);
 $pdf->SetLeftMargin(25);
 $pdf->MultiCell(0,6,utf8_decode('- Acceso a los ficheros informatizados'),0,'L');
@@ -393,7 +393,7 @@ $pdf->Ln(5);
 
 $pdf->SetFont('Arial', '', 10);
 $pdf->MultiCell(0,6,utf8_decode('Cualquier solicitud de ejercicio de derechos debe ser efectuada por el propio afectado, o representante legal, lo que se comprobará mediante la correspondiente acreditación.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('En el Anexo X se relacionan modelos de posibles respuestas tipo para cada uno de los derechos que los interesados ejerciten ante la Comunidad de Propietarios.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('En el Anexo X se relacionan modelos de posibles respuestas tipo para cada uno de los derechos que los interesados ejerciten ante '.$cname.'.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Si el interesado solicita información de cómo ejercer sus derechos, se le informará de que la documentación que debe presentar es la siguiente:'),0,'J');$pdf->Ln(2.5);
 
 $pdf->SetLeftMargin(25);
@@ -418,7 +418,7 @@ $pdf->MultiCell(0,6,utf8_decode('Se podrá denegar el acceso a los datos de car�
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('10.3. Derechos de rectificación y cancelación'),0,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('Cuando la Comunidad de Propietarios tenga conocimiento de que alguno/s de los datos contenidos en un fichero son inexactos o incompletos, o se reciba una solicitud de rectificación de datos, lo pondrá en conocimiento del Responsable de Seguridad, quien procederá a la rectificación de los mismos EN EL PLAZO DE DIEZ DÍAS desde la recepción de la solicitud.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Cuando '.$cname.' tenga conocimiento de que alguno/s de los datos contenidos en un fichero son inexactos o incompletos, o se reciba una solicitud de rectificación de datos, lo pondrá en conocimiento del Responsable de Seguridad, quien procederá a la rectificación de los mismos EN EL PLAZO DE DIEZ DÍAS desde la recepción de la solicitud.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Cuando los datos tratados no se ajusten a lo dispuesto en la Ley Orgánica de Protección de Datos, el Responsable de los Ficheros procederá al bloqueo efectivo de los mismos, conservándose únicamente a disposición de las Administraciones Públicas, Jueces y Tribunales, para la atención de las posibles responsabilidades nacidas del tratamiento.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Una vez cumplido el plazo de prescripción correspondiente, se procederá a su supresión definitiva.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Si los datos rectificados o cancelados hubieran sido comunicados previamente, se deberá notificar la rectificación o cancelación a quien se hayan comunicado, en el caso de que se mantenga el tratamiento por este último, para que proceda del mismo modo.'),0,'J');$pdf->Ln(2.5);
@@ -511,7 +511,7 @@ $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('Anexo II. Notificación e inscripción de ficheros'),0,'L');
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Documentos de NOTIFICACIÓN a la Agencia Española de Protección de Datos para su inscripción en el Registro General de Protección de Datos (R.G.P.D.), de cada fichero de nueva creación, así como modificación o supresión de los ficheros existentes.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('En este mismo anexo se recogerán las RESOLUCIONES, de inscripción, modificación o supresión de los ficheros notificados, remitidas a la Comunidad por parte de la Agencia Española de Protección de Datos.'),0,'J');
+$pdf->MultiCell(0,6,utf8_decode('En este mismo anexo se recogerán las RESOLUCIONES, de inscripción, modificación o supresión de los ficheros notificados, remitidas a '.$cname.' por parte de la Agencia Española de Protección de Datos.'),0,'J');
 $pdf->Ln(5);
 
 //ANEXO III
@@ -523,7 +523,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('RESPONSABLE DE LOS FICHEROS'),0,'J');
 $pdf->Ln(5);
-$pdf->SetWidths(array(100,25,45));
+$pdf->SetWidths(array(80,25,65));
 $pdf->SetAligns(array('C','C','C'));
 $pdf->Row(array("Nombre","CIF/NIF","Representante legal"));
 $pdf->Row(array($cname,$cif,html_entity_decode($reps["nombre"])));
@@ -607,7 +607,7 @@ $pdf->MultiCell(0,6,utf8_decode('        - El Responsable de los Ficheros se enc
 $pdf->MultiCell(0,6,utf8_decode('        - Asimismo cuidará que todos los usuarios autorizados para acceder a los ficheros, relacionados en el Anexo III, tengan un código de usuario que será único, y que estará asociado a la contraseña correspondiente, que sólo será conocida por el propio usuario.'),0,'L');$pdf->Ln(2.5);
 $pdf->Ln(3);
 $pdf->MultiCell(0,6,utf8_decode('   3. Gestión de soportes'),0,'L');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('        - La salida de soportes informáticos, que contengan datos de carácter personal, fuera de los locales de la Comunidad, deberá ser expresamente autorizada por el Responsable de los Ficheros.'),0,'L');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('        - La salida de soportes informáticos, que contengan datos de carácter personal, fuera de los locales de '.$cname.', deberá ser expresamente autorizada por el Responsable de los Ficheros.'),0,'L');$pdf->Ln(2.5);
 $pdf->Ln(3);
 $pdf->MultiCell(0,6,utf8_decode('   4. Procedimientos de respaldo y recuperación'),0,'L');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('        - El Responsable de los Ficheros se encargará de verificar la definición y correcta aplicación de las copias de respaldo y recuperación de los datos.'),0,'L');$pdf->Ln(2.5);
@@ -682,7 +682,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','U',10);
 $pdf->MultiCell(0,6,utf8_decode('IDENTIFICACIÓN'),0,'L');
 $pdf->SetFont('Arial','',9);
-$pdf->MultiCell(0,6,utf8_decode('   - Los soportes utilizados en la Comunidad deberán estar claramente identificados mediante una etiqueta que permita conocer el tipo de información contenido en cada unidad. En caso de los CD´s, en los que adosar una etiqueta dañaría la unidad láser lectora, se empleará un marcador indeleble.'),0,'J');
+$pdf->MultiCell(0,6,utf8_decode('   - Los soportes utilizados en '.$cname.' deberán estar claramente identificados mediante una etiqueta que permita conocer el tipo de información contenido en cada unidad. En caso de los CD´s, en los que adosar una etiqueta dañaría la unidad láser lectora, se empleará un marcador indeleble.'),0,'J');
 $pdf->MultiCell(0,6,utf8_decode('   - No es válida la identificación externa (cajas, fundas,..) de los soportes, puesto que en muchos casos no se vuelven a insertar en su lugar, y por lo tanto, no se alcanzaría la finalidad perseguida de control sobre los mismos.'),0,'J');
 $pdf->Ln(5);
 $pdf->SetFont('Arial','U',10);
