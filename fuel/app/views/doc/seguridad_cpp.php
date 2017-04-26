@@ -34,7 +34,9 @@ class PDFp extends PDF_MC_Table{
 if(strpos($cname,"O'd")!==false) {
     $cname = str_replace("o-d", "o'd", strtolower($cname));
 }
-$dir = str_replace("o-d","o'd",strtolower($dir));
+if(strpos($dir,"O'd")!==false) {
+    $dir = str_replace("o-d", "o'd", strtolower($dir));
+}
 $cname = html_entity_decode($cname);
 $dir = html_entity_decode($dir);
 $loc = html_entity_decode($loc);
@@ -390,8 +392,11 @@ $pdf->MultiCell(0,6,utf8_decode('Si los datos rectificados o cancelados hubieran
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('8.4. Derecho de oposición a facilitar datos personales'),0,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('Durante el proceso de recogida de datos, se debe informar al interesado de su derecho a no facilitar sus datos personales, y las consecuencias de dicha oposición, es decir, la ausencia de tratamiento de sus datos.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('Una vez incluidos los datos en el fichero con la aceptación del interesado, podrá revocar este consentimiento, solicitándolo por escrito a la dirección indicada al principio.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('El interesado podrá ejercitar el derecho de oposición en los siguientes supuestos:'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('- Cuando no sea necesario su consentimiento'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('- Cuando la finalidad del tratamiento sean actividades de publicidad o prospección comercial'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('- Cuando la finalidad del tratamiento automatizado sea adoptar una decisión referida al afectado'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Una vez recibida la solicitud, '.$cname.' deberá contestar en un plazo máximo de DIEZ DÍAS NATURALES a contar desde la recepción de la solicitud.'),0,'J');$pdf->Ln(2.5);
 
 //8.5
 $pdf->SetFont('Arial','B',12);
@@ -612,7 +617,7 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('Anexo IV. Impreso de rectificación de datos'),0,'L');
 $pdf->SetFont('Arial','B',11);
-$pdf->MultiCell(0,6,utf8_decode('A/A:        C.PP. '.$cname),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('A/A:        '.$type_short.' '.$cname),0,'L');
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('                 '.html_entity_decode(urldecode($dir))),0,'L');
 $pdf->MultiCell(0,6,utf8_decode('                 '.$cp.', '.$loc.', '.$prov),0,'L');

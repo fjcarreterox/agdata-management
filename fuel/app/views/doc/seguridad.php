@@ -427,8 +427,11 @@ $pdf->MultiCell(0,6,utf8_decode('Si los datos rectificados o cancelados hubieran
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('10.4. Derecho de oposición a facilitar datos personales'),0,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('Durante el proceso de recogida de datos, se debe informar al interesado de su derecho a no facilitar sus datos personales, y las consecuencias de dicha oposición, es decir, la ausencia de tratamiento de sus datos.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('Una vez incluidos los datos en el fichero con la aceptación del interesado, podrá revocar este consentimiento, solicitándolo por escrito a la dirección indicada al principio.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('El interesado podrá ejercitar el derecho de oposición en los siguientes supuestos:'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('- Cuando no sea necesario su consentimiento'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('- Cuando la finalidad del tratamiento sean actividades de publicidad o prospección comercial'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('- Cuando la finalidad del tratamiento automatizado sea adoptar una decisión referida al afectado'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('Una vez recibida la solicitud, '.$cname.' deberá contestar en un plazo máximo de DIEZ DÍAS NATURALES a contar desde la recepción de la solicitud.'),0,'J');$pdf->Ln(2.5);
 
 //10.5
 $pdf->SetFont('Arial','B',12);
@@ -994,6 +997,45 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('1.- Que en el plazo de diez días desde la recepción de esta solicitud, se proceda a la efectiva cancelación de cualesquiera datos relativos a mi persona que se encuentren en sus ficheros, en los términos previstos en la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal y me lo comuniquen de forma escrita a la dirección arriba indicada.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('2.- Que, en el caso de que el responsable del fichero considere que dicha cancelación no procede, lo comunique igualmente, de forma motivada y dentro del plazo de diez días señalado, a fin de poder interponer la reclamación prevista en el artículo 18 de la Ley.'),0,'J');$pdf->Ln(2.5);
+$pdf->Ln(15);
+$pdf->MultiCell(0,6,utf8_decode('En ............................, a ......... de ........................... de ...........'),0,'C');
+
+//Letter 4
+$pdf->AddPage();
+$pdf->SetFont('Arial','B',16);
+$pdf->MultiCell(0,6,utf8_decode('SOLICITUD DE EJERCICIO DEL DERECHO DE OPOSICIÓN'),0,'C');
+$pdf->SetFont('Arial','',10);
+$pdf->MultiCell(0,6,utf8_decode('Para la petición de la oposición al tratamiento de sus datos personales'),0,'C');
+$pdf->Ln(10);
+$pdf->SetFont('Arial','B',11);
+$pdf->MultiCell(0,6,utf8_decode('Solicitud a:'),0,'L');
+$pdf->Ln(3);
+$pdf->MultiCell(0,6,utf8_decode('A/A:        '.$cname),0,'L');
+$pdf->SetFont('Arial','',10);
+$pdf->MultiCell(0,6,utf8_decode('                 '.html_entity_decode(urldecode($dir))),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('                 '.$cp.', '.$loc.', '.$prov),0,'L');
+$pdf->Ln(10);
+$pdf->SetFont('Arial','B',11);
+$pdf->MultiCell(0,6,utf8_decode('DATOS DEL SOLICITANTE'),0,'L');
+$pdf->Ln(5);
+$pdf->SetFont('Arial','',10);
+$pdf->MultiCell(0,6,utf8_decode('D/Dª .......................................................................................... mayor de edad, con D.N.I............................ (del que acompaña fotocopia), con domicilio en la calle ............................................................................... nº ........., Localidad ......................................... Provincia .........................................C.P. ............ por medio del presente escrito manifiesta su deseo de ejercer su derecho de oposición, de conformidad con los artículos 6.4, 17 y 30.4 de la Ley Orgánica 15/1999, y los artículos 34 a 36 del Real Decreto 1720/2007.'),0,'J');
+$pdf->Ln(10);
+$pdf->SetFont('Arial','B',11);
+$pdf->MultiCell(0,6,utf8_decode('EXPONGO'),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('...........................................................................................................'),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('...........................................................................................................'),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('...........................................................................................................'),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('Para acreditar la situación descrita, acompaño copia de los siguientes documentos:'),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('...........................................................................................................'),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('...........................................................................................................'),0,'L');
+$pdf->MultiCell(0,6,utf8_decode('...........................................................................................................'),0,'L');
+$pdf->Ln(10);
+$pdf->SetFont('Arial','B',11);
+$pdf->MultiCell(0,6,utf8_decode('SOLICITO.-'),0,'L');
+$pdf->Ln(5);
+$pdf->SetFont('Arial','',10);
+$pdf->MultiCell(0,6,utf8_decode('Que sea atendido mi ejercicio del derecho de oposición en los términos anteriormente expuestos.'),0,'J');$pdf->Ln(2.5);
 $pdf->Ln(15);
 $pdf->MultiCell(0,6,utf8_decode('En ............................, a ......... de ........................... de ...........'),0,'C');
 
