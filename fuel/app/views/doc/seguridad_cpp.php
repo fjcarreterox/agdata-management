@@ -81,7 +81,7 @@ $pdf->SetFont('Arial','I',11);
 $pdf->MultiCell(0,12,strtoupper($date),0,'C');
 
 $type = html_entity_decode($type);
-$type_short = "CDAD. PROP.";
+$type_short = "COM. DE PROP.";
 if(strcmp($type,"Asociación")==0){$type_short ="ASOC.";}
 
 //Index
@@ -188,11 +188,14 @@ $pdf->SetAligns(array('C','C','C'));
 $pdf->SetFont('Arial','B',10);
 $pdf->Row(array("NOMBRE FICHERO","SOPORTE","NIVEL DE SEGURIDAD"));
 $pdf->SetFont('Arial','',10);
+$show_video_append=0;
 foreach($files as $f){
     $pdf->SetWidths(array(60,55,55));
     $pdf->SetAligns(array('C','C','C'));
     $pdf->Row(array($f["name"],$f["supp"],html_entity_decode($f["level_name"])));
-
+    if(strcmp($f["name"],"Videovigilancia")==0){
+        $show_video_append=1;
+    }
 }
 $pdf->Ln(5);
 
@@ -453,6 +456,10 @@ $pdf->MultiCell(0,6,utf8_decode('Anexo II.       Listado de usuarios con acceso 
 $pdf->MultiCell(0,6,utf8_decode('Anexo III.      Cláusula legal para empleados.'),0,'J');
 $pdf->MultiCell(0,6,utf8_decode('Anexo IV.      Impreso de rectificación de datos.'),0,'J');
 $pdf->MultiCell(0,6,utf8_decode('Anexo V.       Registro de incidencias.'),0,'J');
+if($show_video_append) {
+    $pdf->MultiCell(0, 6, utf8_decode('Anexo VI.      Cláusula informativa del fichero de videovigilancia.'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('Anexo VII.     Modelo de solicitud de acceso a las imágenes grabadas.'), 0, 'J');
+}
 $pdf->Ln(5);
 
 //ANEXO I
@@ -584,9 +591,9 @@ $pdf->Ln(5);
 //foreach($trab as $t) {
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->MultiCell(0, 10, utf8_decode('Anexo III. Cláusula legal para empleados'), 0, 'L');
+$pdf->MultiCell(0, 8, utf8_decode('Anexo III. Cláusula legal para empleados'), 0, 'L');
 $pdf->SetFont('Arial', '', 8.5);
-$pdf->MultiCell(0, 10, utf8_decode('En Sevilla, a ......... de ................. de ........'), 0, 'R');
+$pdf->MultiCell(0, 6, utf8_decode('En Sevilla, a ......... de ................. de ........'), 0, 'R');
 $pdf->Ln(2);
 $pdf->MultiCell(0, 6, utf8_decode('D/Dª ........................................................................................., mayor de edad, con DNI nº ................................................., en virtud de la relación de carácter laboral que le vincula a la '.mb_strtoupper($type).' '.mb_strtoupper($cname).', se obliga a:'), 0, 'J');
 //$pdf->MultiCell(0, 6, utf8_decode(mb_strtoupper(html_entity_decode($t["nombre"])).', mayor de edad, con DNI nº '.$t["dni"].', en virtud de la relación de carácter laboral que le vincula a la '.$type.' '.mb_strtoupper($cname).', se obliga a:'), 0, 'J');
@@ -609,7 +616,7 @@ $pdf->MultiCell(0, 6, utf8_decode('Igualmente, queda informado que para alcanzar
 $pdf->Ln(2);
 $pdf->MultiCell(0, 6, utf8_decode('El abajo firmante podrá ejercitar los derechos de acceso, rectificación, cancelación y oposición, en el ámbito reconocido por la normativa española en protección de datos, dirigiéndose por escrito a nuestra sede situada en '.$dir.", ".$cp.', en '.$loc.', provincia de '.$prov.'.'), 0, 'J');
 $pdf->Ln(5);
-$pdf->MultiCell(0, 10, utf8_decode('..........................................................                                                                    '.$type.' '.$cname), 0, 'C');
+$pdf->MultiCell(0, 10, utf8_decode('..........................................................                                                                    '.$type_short.' '.$cname), 0, 'C');
 //}
 
 //ANEXO IV
@@ -710,5 +717,103 @@ $pdf->Row(array("Persona que realiza la comunicación:\n\n\nFirma:","Responsable
 
 $pdf->MultiCell(0,10,utf8_decode('** A rellenar sólo si la incidencia es de este tipo.'),0,'L');
 
+if($show_video_append) {
+//ANEXO VI
+    $pdf->AddPage();
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->MultiCell(0, 10, utf8_decode('Anexo VI. MODELO CLAUSULA INFORMATIVA'), 0, 'L');
+    $pdf->Ln(15);
+    $pdf->SetFont('Arial', 'BU', 14);
+    $pdf->MultiCell(0, 10, utf8_decode('MODELO CLAUSULA INFORMATIVA'), 0, 'C');
+    $pdf->Ln(10);
+    $pdf->SetFont('Arial', '', 12);
+    $pdf->MultiCell(0, 6, utf8_decode('Art. 3, apartado B. Instrucción 1/2006, de 8 de noviembre, de la Agencia Española de Protección de Datos, sobre el tratamiento de datos personales con fines de vigilancia a través de sistemas de cámaras o videocámaras.'), 0, 'J');
+    $pdf->Ln(10);
+    $pdf->SetFont('Arial', 'BU', 12);
+    $pdf->MultiCell(0, 6, utf8_decode('FICHERO PRIVADO'), 0, 'L');
+    $pdf->Ln(10);
+    $pdf->SetFont('Arial', '', 12);
+    $pdf->MultiCell(0, 6, utf8_decode('De conformidad con lo dispuesto en el art. 5.1 LO 15/1999, de 13 de diciembre, de Protección de Datos, se informa:'), 0, 'J');
+    $pdf->Ln(5);
+    $pdf->MultiCell(0, 6, utf8_decode('1. Que sus datos personales se incorporarán al fichero denominado VIDEOVIGILANCIA y serán tratados con la finalidad de seguridad a través de un sistema de videovigilancia.'), 0, 'J');
+    $pdf->Ln(5);
+    $pdf->MultiCell(0, 6, utf8_decode('2. Que el destinatario de sus datos personales es:'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('     a. La empresa de seguridad'), 0, 'L');
+    $pdf->MultiCell(0, 6, utf8_decode('     ....................................................................................................................................'), 0, 'L');
+    $pdf->MultiCell(0, 6, utf8_decode('     b. El dueño del establecimiento'), 0, 'L');
+    $pdf->MultiCell(0, 6, utf8_decode('     ....................................................................................................................................'), 0, 'L');
+    $pdf->Ln(5);
+    $pdf->MultiCell(0, 6, utf8_decode('3. Que puede ejercitar sus derechos de acceso, rectificación, cancelación y oposición ante el responsable del fichero.'), 0, 'J');
+    $pdf->Ln(5);
+    $pdf->MultiCell(0, 6, utf8_decode('4. Que el responsable del fichero tratamiento es .......................................................................................................................................... o su representante D./Da. .......................................................................................................................................... ubicado en C/ ....................................................................................................................................................................................................................................................................................'), 0, 'L');
+    $pdf->Ln(5);
+    /*
+    $pdf->AddPage();
+    $pdf->SetFont('Arial','B',12);
+    $pdf->MultiCell(0,10,utf8_decode('Anexo VI. MODELO CLAUSULA INFORMATIVA'),0,'L');
+    $pdf->Ln(15);
+    $pdf->SetFont('Arial','BU',14);
+    $pdf->MultiCell(0,10,utf8_decode('MODELO CLAUSULA INFORMATIVA'),0,'C');
+    $pdf->Ln(10);
+    $pdf->SetFont('Arial','',12);
+    $pdf->MultiCell(0, 6, utf8_decode('Art. 3, apartado B. Instrucción 1/2006, de 8 de noviembre, de la Agencia Española de Protección de Datos, sobre el tratamiento de datos personales con fines de vigilancia a través de sistemas de cámaras o videocámaras.'), 0, 'J');
+    $pdf->Ln(10);
+    $pdf->SetFont('Arial','BU',12);
+    $pdf->MultiCell(0, 6, utf8_decode('FICHERO PÚBLICO'), 0, 'L');
+    $pdf->Ln(10);
+    $pdf->SetFont('Arial','',12);
+    $pdf->MultiCell(0, 6, utf8_decode('De conformidad con lo dispuesto en el art. 5.1 LO 15/1999, de 13 de diciembre, de Protección de Datos, se informa:'), 0, 'J');
+    $pdf->Ln(5);
+    $pdf->MultiCell(0, 6, utf8_decode('1. Que sus datos personales se incorporarán al fichero denominado ...........  del que es responsable ese organismo, creado por Resolución........(BOE......) y/o serán tratados con la finalidad de seguridad a través de un sistema de videovigilancia.'), 0, 'J');
+    $pdf->Ln(5);
+    $pdf->MultiCell(0, 6, utf8_decode('2. Que el destinatario de sus datos personales es la empresa de seguridad..........'), 0, 'J');
+    $pdf->Ln(5);
+    $pdf->MultiCell(0, 6, utf8_decode('3. Que puede ejercitar sus derechos de acceso, cancelación y oposición ante el responsable del fichero.'), 0, 'J');
+    $pdf->Ln(5);
+    $pdf->MultiCell(0, 6, utf8_decode('4. Que el responsable del fichero tratamiento es ...............(nombre o razón social)............ ubicado en C/ .........'), 0, 'J');
+    $pdf->Ln(5);
+    */
+//ANEXO VII
+    $pdf->AddPage();
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->MultiCell(0, 10, utf8_decode(mb_strtoupper('Solicitud de acceso al fichero de videovigilancia')), 0, 'C');
+    $pdf->Ln(10);
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->MultiCell(0, 6, utf8_decode('SOLICITUD A:'), 0, 'L');
+    $pdf->Ln(5);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->MultiCell(0, 6, utf8_decode('A/A:        ' . $type_short . ' ' . $cname), 0, 'L');
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(0, 6, utf8_decode('                 ' . html_entity_decode(urldecode($dir))), 0, 'L');
+    $pdf->MultiCell(0, 6, utf8_decode('                 ' . $cp . ', ' . $loc . ', ' . $prov), 0, 'L');
+    $pdf->Ln(5);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->MultiCell(0, 6, utf8_decode('DATOS DEL SOLICITANTE'), 0, 'L');
+    $pdf->Ln(5);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(0, 6, utf8_decode('D/Dª ............................................................... mayor de edad, con D.N.I.......................... (del que acompaño fotocopia), vecino de la ' . $type . ' ' . $cname . ', con domicilio en la calle ............................................................... nº.........., Localidad ............................................, Provincia .............................................C.P. ................, por medio del presente escrito manifiesta su deseo de ejercer su derecho de acceso, de conformidad con el artículo 15 de la Ley Orgánica 15/1999, y los artículos 12 y 13 del Real Decreto 1332/94.'), 0, 'J');
+    $pdf->Ln(5);
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->MultiCell(0, 6, utf8_decode('SOLICITA.-'), 0, 'L');
+    $pdf->Ln(5);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->MultiCell(0, 6, utf8_decode('Que se me facilite gratuitamente el acceso al fichero de videovigilancia propiedad de la ' . $type . ' arriba indicada, en el plazo máximo de 10 días a contar desde la recepción de esta solicitud, conforme a las siguientes especificaciones:'), 0, 'J');
+    $pdf->Ln(5);
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetWidths(array(80, 90));
+    $pdf->SetAligns(array('L', 'L'));
+    $pdf->Row(array("Fecha/s de grabación:\n\n\n\n", "Intervalo horario solicitado:\n\n\n\n"));
+
+    $pdf->SetWidths(array(170));
+    $pdf->SetAligns(array('L'));
+    $pdf->Row(array("Medio o soporte para el envío de la información:\n\n\n\n"));
+
+    $pdf->SetWidths(array(170));
+    $pdf->SetAligns(array('L'));
+    $pdf->Row(array("Motivo fundado que justifica esta solicitud:\n\n\n\n"));
+
+    $pdf->Ln(10);
+    $pdf->MultiCell(0, 6, utf8_decode('En ................................... a........... de............................. de 201....'), 0, 'L');
+}
 // Write all to the output
 $pdf->Output("DOC-SEGURIDAD-".$type_short."-".$cname.".pdf",'I');
