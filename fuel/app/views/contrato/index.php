@@ -19,7 +19,10 @@
 	<tbody>
 <?php foreach ($contratos as $item): ?>
         <tr>
-			<td><?php echo Model_Cliente::find($item->idcliente)->get('nombre'); ?></td>
+			<td><?php
+                if(Model_Cliente::find($item->idcliente)){echo Model_Cliente::find($item->idcliente)->get('nombre');}
+                else{echo "<span class='red'>CLIENTE NO RECONOCIDO</span> (idcliente: <b>$item->idcliente</b>)";}
+                ?></td>
 			<td><?php
                 $serv=Model_Servicios_Contratado::find('first',array('where'=>array('idcontrato'=>$item->id)));
                 if($serv != null){
