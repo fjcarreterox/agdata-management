@@ -2,7 +2,7 @@
 class Controller_Contrato extends Controller_Template
 {
 	public function action_index(){
-		$data['contratos'] = Model_Contrato::find('all');
+		$data['contratos'] = Model_Contrato::find('all',array('order_by'=>array('fecha_firma'=>'desc')));
 		$this->template->title = "Contratos";
 		$this->template->content = View::forge('contrato/index', $data);
 	}
