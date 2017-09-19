@@ -11,9 +11,12 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach ($comunidades as $item):
+<?php
+    $num_com=0;
+    foreach ($comunidades as $item):
             $com = Model_Cliente::find($item->idcom);
         if($com!=null) {
+            $num_com++;
             ?>
             <tr>
                 <td><?php echo $com->nombre; ?></td>
@@ -32,10 +35,11 @@
             </tr>
             <?php
         }
+        else{echo "<p class='red'>No se ha encontrado ficha para la C.PROP con id: $item->idcom";}
         endforeach; ?>
     </tbody>
 </table>
-
+<p>Este administrador de fincas tiene <b><?php echo $num_com;?></b> comunidades asociadas.</p>
 <?php else: ?>
     <p>No se han encontrado aún comunidades asociadas a este administrador de fincas.</p>
 <?php endif; ?>
