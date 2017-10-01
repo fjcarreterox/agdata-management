@@ -81,7 +81,7 @@ $pdf->SetFont('Arial','I',11);
 $pdf->MultiCell(0,12,strtoupper($date),0,'C');
 
 $type = html_entity_decode($type);
-$type_short = "COM. DE PROP.";
+$type_short = "Com. de Prop.";
 if(strcmp($type,"Asociación")==0){$type_short ="ASOC.";}
 
 //Index
@@ -816,4 +816,4 @@ if($show_video_append) {
     $pdf->MultiCell(0, 6, utf8_decode('En ................................... a........... de............................. de 201....'), 0, 'L');
 }
 // Write all to the output
-$pdf->Output("DOC-SEGURIDAD-".$type_short."-".$cname.".pdf",'I');
+$pdf->Output("DOC. SEGURIDAD - ".$type_short." ".$cname.".pdf",'I');
