@@ -562,7 +562,7 @@ $pdf->Row(array("","","","",""));
 $pdf->Row(array("","","","",""));
 $pdf->Ln(10);
 
-$pdf->MultiCell(0,6,utf8_decode('PERSONAS AJENAS CON ACCESO A LOS FICHEROS'),0,'J');
+$pdf->MultiCell(0,6,utf8_decode('ENTIDADES Y PERSONAS AJENAS, CON ACCESO A LOS FICHEROS'),0,'J');
 $pdf->Ln(5);
 $pdf->SetWidths(array(60,25,55,30));
 $pdf->SetAligns(array('C','C','C','C'));
