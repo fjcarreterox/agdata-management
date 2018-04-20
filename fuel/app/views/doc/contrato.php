@@ -49,7 +49,7 @@ if(strcmp($rep->nombre,$customer->nombre) != 0){
 }
 $pdf->MultiCell(0,6,utf8_decode('          De una parte, '.$tratamiento_ops[$rep->tratamiento] .' '. html_entity_decode($rep->nombre).', mayor de edad, con DNI nº '.$rep->dni.','.$extra_txt.' con domicilio en '.html_entity_decode($customer->direccion).', C.P '.$customer->cpostal.', en '.html_entity_decode($customer->loc).', provincia de '.html_entity_decode($customer->prov).' y con CIF nº '.$customer->cif_nif.' (en adelante, EL BENEFICIARIO).'),0);
 $pdf->Ln(5);
-$pdf->MultiCell(0,6,utf8_decode('          De otra, D. Miguel Ángel Chávez López, mayor de edad, con DNI nº 28.753.494-K, en nombre y representación de ANÁLISIS Y GESTIÓN DE DATOS, S.L. (AGDATA), con domicilio social en Plaza Padre Jerónimo de Córdoba, nº 13, 6ºB, C.P. 41003, Sevilla, y CIF nº  B-91.341.297 (en adelante, EL PRESTATARIO).'),0);
+$pdf->MultiCell(0,6,utf8_decode('          De otra, D. Juan Andrés Carretero García, mayor de edad, con DNI nº 28.770.039-T, en nombre y representación de ANÁLISIS Y GESTIÓN DE DATOS, S.L. (AGDATA), con domicilio social en Plaza Padre Jerónimo de Córdoba, nº 13, 6ºB, C.P. 41003, Sevilla, y CIF nº  B-91.341.297 (en adelante, EL PRESTATARIO).'),0);
 $pdf->Ln(5);
 $pdf->MultiCell(0,6,utf8_decode('        Ambas partes (en adelante "las partes") se reconocen mutua y recíprocamente, la capacidad legal necesaria y suficiente para el otorgamiento del presente contrato mercantil y'),0);
 $pdf->Ln(5);
@@ -62,7 +62,7 @@ $pdf->Ln(3);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,'PRIMERA',0,1,'L');
 $pdf->SetFont('Arial','',12);
-$pdf->MultiCell(0,6,utf8_decode('Que EL PRESTATARIO es una empresa que desarrolla, entre otras, la actividad de prestación de servicios de Auditoría de Seguridad en la Protección de Datos de Carácter Personal en aras a la adecuación de todo tipo de entidades y profesionales sometidos al cumplimiento de la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal (LOPD).'),0);
+$pdf->MultiCell(0,6,utf8_decode('Que EL PRESTATARIO es una empresa que desarrolla, entre otras, la actividad de prestación de servicios de Auditoría de Seguridad en la Protección de Datos de Carácter Personal en aras a la adecuación de todo tipo de entidades y profesionales sometidos al cumplimiento de la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal (LOPD) y al Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales (Reglamento Europeo de Protección de Datos).'),0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',12);
@@ -115,11 +115,13 @@ if(isset($servicios_data[1])) {
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('- Análisis previo pormenorizado del estado del cliente. Auditoría previa y estudio de su documentación, para identificar deficiencias actuales en materia de protección de datos.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Actualización del Documento de Seguridad del Administrador de Fincas, si fuese necesario.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Elaboración del Documento de Seguridad del cliente, o actualización, si fuese necesario.'), 0);
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('- Notificaciones a la Agencia Española de Protección de Datos, de las modificaciones, bajas o altas necesarias para la correcta adecuación de sus ficheros de datos personales.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de documentos, contratos y cláusulas legales necesarios para asegurar el correcto cumplimiento de la Ley y su Reglamento de desarrollo.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de documentos, contratos y cláusulas legales necesarios para asegurar el correcto cumplimiento de la normativa vigente en materia de protección de datos.'), 0);
+    $pdf->Ln(5);
+    $pdf->MultiCell(0, 6, utf8_decode('- Sesión formativa opcional para el personal con acceso a los ficheros de datos.'), 0);
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('    Una vez concluidos estos servicios de adaptación / actualización inicial, se concretará entre las partes el inicio de los servicios de mantenimiento durante un periodo anual, que será renovado automáticamente y con idéntica duración si ninguna de las partes con un mes de antelación a su finalización, advierte de forma fehaciente su voluntad de rescindir el presente contrato.'), 0);
     $pdf->Ln(10);
@@ -142,9 +144,9 @@ if(isset($servicios_data[2])) {
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('- Redacción de documentos, contratos y cláusulas legales que resulten necesarios para asegurar el correcto cumplimiento de la normativa vigente.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- La adaptación a posibles novedades que puedan producirse en la normativa española sobre protección de datos que se produzcan durante la vigencia del presente contrato.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- La adaptación a posibles novedades en la normativa española y europea sobre protección de datos que se produzcan durante la vigencia del presente contrato.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Realización de Auditoría Bienal obligatoria para los niveles de seguridad medio y alto, al final del segundo año.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Realización de Auditoría Bienal obligatoria para los niveles de seguridad medio y alto, al final del segundo año de mantenimiento.'), 0);
     $pdf->Ln(5);
 }
 else{
@@ -161,9 +163,9 @@ if(isset($servicios_data[1])) {
     if(strcmp($servicios_data[1]["periodicidad"],"Pago único")!==0 && strcmp($servicios_data[1]["periodicidad"],"anualmente")!==0){$per=$servicios_data[1]["periodicidad"].".";$div=' dividido en '.$servicios_data[1]["num_cuotas"].' importes de '.$servicios_data[1]["cuota"].' EUROS,';}
 
     if($servicios_data[1]["precio"]==0){
-        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$servicios_data[1]["precio"].' EUROS.'), 0);
+        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$servicios_data[1]["precio"].' EUROS al año.'), 0);
     }else{
-        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$servicios_data[1]["precio"].' EUROS,'.$div.' impuestos no incluidos, que serán facturados por dicha entidad.'), 0);
+        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$servicios_data[1]["precio"].' EUROS al año,'.$div.' impuestos no incluidos, que serán facturados por dicha entidad.'), 0);
         $pdf->Ln(5);
         if(strcmp($servicios_data[1]["pago"],"transferencia bancaria")==0){
             $pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423 durante los diez primeros días del mes, comenzando en '.getMes($servicios_data[1]["mes_factura"]).' de '.$servicios_data[1]["year"].'.'), 0);
@@ -179,9 +181,9 @@ if(isset($servicios_data[2])) {
     if(strcmp($servicios_data[2]["periodicidad"],"Pago único")!==0){$per=$servicios_data[2]["periodicidad"].".";$div=' dividido en '.$servicios_data[2]["num_cuotas"].' importes de '.$servicios_data[2]["cuota"].' EUROS,';}
 
     if($servicios_data[2]["precio"]==0){
-        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de mantenimiento descritos, asciende a un total de '.$servicios_data[2]["precio"].' EUROS.'), 0);
+        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de mantenimiento descritos, asciende a un total de '.$servicios_data[2]["precio"].' EUROS al año.'), 0);
     }else{
-        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de mantenimiento descritos, asciende a un total de '.$servicios_data[2]["precio"].' EUROS,'.$div.' impuestos no incluidos, que serán facturados por ANÁLISIS Y GESTIÓN DE DATOS S.L. '.$per), 0);
+        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de mantenimiento descritos, asciende a un total de '.$servicios_data[2]["precio"].' EUROS al año,'.$div.' impuestos no incluidos, que serán facturados por ANÁLISIS Y GESTIÓN DE DATOS S.L. '.$per), 0);
         $pdf->Ln(5);
         if(strcmp($servicios_data[2]["pago"],"transferencia bancaria")==0){
             $pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe (o estos importes) mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423 durante los diez primeros días del mes, comenzando en '.getMes($servicios_data[2]["mes_factura"]).' de '.$servicios_data[2]["year"].'.'), 0);
@@ -242,14 +244,14 @@ if(isset($servicios_data[2])) {
     $pdf->SetFont('Arial','B',12);
     $pdf->Cell(0,10,utf8_decode('9ª.- DURACIÓN'),0,1,'L');
     $pdf->SetFont('Arial','',12);
-    $pdf->MultiCell(0,6,utf8_decode('El presente contrato tendrá una vigencia de DOS AÑOS desde la fecha de la firma. Transcurrido dicho término, el contrato se prorrogará automáticamente por idéntico periodo si ninguna de las partes comunica su deseo de finalizar la relación contractual con al menos un mes de antelación del final del tiempo estipulado.'),0);
+    $pdf->MultiCell(0,6,utf8_decode('El presente contrato tendrá una vigencia de UN AÑO desde la fecha de la firma. Transcurrido dicho término, el contrato se prorrogará automáticamente por idéntico periodo si ninguna de las partes comunica su deseo de finalizar la relación contractual con al menos un mes de antelación del final del tiempo estipulado.'),0);
     $pdf->Ln(10);
 }
 
 /* firmas */
 $pdf->MultiCell(0,6,utf8_decode('Fdo. por el beneficiario                                                Fdo. por el prestatario'),0,'C');
 $pdf->Ln(30);
-$pdf->MultiCell(0,6,utf8_decode('    '.html_entity_decode($rep["nombre"]).'                                      D. Miguel Ángel Chávez López'),0,'C');
+$pdf->MultiCell(0,6,utf8_decode('    '.html_entity_decode($rep["nombre"]).'                                            D. Juan Andrés Carretero García'),0,'C');
 /* Imprimimos */
 $pdf->Output('CONTRATO-PRESTACION-SERVICIOS-'.html_entity_decode($customer->nombre).'.pdf','I');
 ?>
