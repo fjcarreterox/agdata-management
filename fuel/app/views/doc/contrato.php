@@ -49,7 +49,7 @@ if(strcmp($rep->nombre,$customer->nombre) != 0){
 }
 $pdf->MultiCell(0,6,utf8_decode('          De una parte, '.$tratamiento_ops[$rep->tratamiento] .' '. html_entity_decode($rep->nombre).', mayor de edad, con DNI nº '.$rep->dni.','.$extra_txt.' con domicilio en '.html_entity_decode($customer->direccion).', C.P '.$customer->cpostal.', en '.html_entity_decode($customer->loc).', provincia de '.html_entity_decode($customer->prov).' y con CIF nº '.$customer->cif_nif.' (en adelante, EL BENEFICIARIO).'),0);
 $pdf->Ln(5);
-$pdf->MultiCell(0,6,utf8_decode('          De otra, D. Juan Andrés Carretero García, mayor de edad, con DNI nº 28.770.039-T, en nombre y representación de ANÁLISIS Y GESTIÓN DE DATOS, S.L. (AGDATA), con domicilio social en Plaza Padre Jerónimo de Córdoba, nº 13, 6ºB, C.P. 41003, Sevilla, y CIF nº  B-91.341.297 (en adelante, EL PRESTATARIO).'),0);
+$pdf->MultiCell(0,6,utf8_decode('          De otra, D. Juan Andrés Carretero García, mayor de edad, con DNI nº 28.770.539-T, en nombre y representación de ANÁLISIS Y GESTIÓN DE DATOS, S.L. (AGDATA), con domicilio social en Plaza Padre Jerónimo de Córdoba, nº 13, 6ºB, C.P. 41003, Sevilla, y CIF nº  B-91.341.297 (en adelante, EL PRESTATARIO).'),0);
 $pdf->Ln(5);
 $pdf->MultiCell(0,6,utf8_decode('        Ambas partes (en adelante "las partes") se reconocen mutua y recíprocamente, la capacidad legal necesaria y suficiente para el otorgamiento del presente contrato mercantil y'),0);
 $pdf->Ln(5);
@@ -117,7 +117,7 @@ if(isset($servicios_data[1])) {
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('- Elaboración del Documento de Seguridad del cliente, o actualización, si fuese necesario.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Notificaciones a la Agencia Española de Protección de Datos, de las modificaciones, bajas o altas necesarias para la correcta adecuación de sus ficheros de datos personales.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Notificaciones a la Agencia Española de Protección de Datos, de las modificaciones, bajas o altas necesarias para la correcta adecuación de sus ficheros de datos personales (exigencia obligatoria hasta el 25 de mayo de 2018).'), 0);
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('- Redacción de documentos, contratos y cláusulas legales necesarios para asegurar el correcto cumplimiento de la normativa vigente en materia de protección de datos.'), 0);
     $pdf->Ln(5);
