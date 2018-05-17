@@ -140,7 +140,7 @@ if(isset($servicios_data[2])) {
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('- Modificaciones posteriores del Documento de Seguridad, que deban realizarse cuando se produzcan las situaciones contempladas en la normativa que impliquen su modificación.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Notificaciones a la Agencia Española de Protección de Datos, de las modificaciones, bajas o altas que se produzcan en los ficheros de datos titularidad del BENEFICIARIO.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Notificaciones a la Agencia Española de Protección de Datos, de las modificaciones, bajas o altas necesarias para la correcta adecuación de sus ficheros de datos personales (exigencia obligatoria hasta el 25 de mayo de 2018).'), 0);
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('- Redacción de documentos, contratos y cláusulas legales que resulten necesarios para asegurar el correcto cumplimiento de la normativa vigente.'), 0);
     $pdf->Ln(5);
