@@ -18,7 +18,9 @@ $pdf->Cell(0,10,strtoupper($title),0,1,'C');
 $pdf->SetFont('Arial','',12);
 $pdf->Cell(0,10,'Suscrito entre',0,1,'C');
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(0,10,utf8_decode($cname.' y '.html_entity_decode($ces["nombre"])),0,1,'C');
+$pdf->Cell(0,8,utf8_decode($cname),0,1,'C');
+$pdf->Cell(0,8,utf8_decode(' y '),0,1,'C');
+$pdf->Cell(0,8,utf8_decode(html_entity_decode($ces["nombre"])),0,1,'C');
 
 $pdf->SetFont('Arial','',12);
 $fecha = explode("-",date("d-m-Y"));
@@ -105,30 +107,54 @@ if(count($files)>1){
     $str="los ficheros denominados ".strtoupper($ficheros_str);
 }
 
-$pdf->MultiCell(0, 7, utf8_decode('1ª.- El Responsable del Fichero pone a disposición del Encargado del Tratamiento '.$str.'.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('PRIMERA. FICHEROS.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('El  Responsable  del  Fichero pone  a  disposición  del  Encargado  del  Tratamiento datos de los  ficheros  denominados '.$str.'.'),0,'J');
 $pdf->Ln(3);
-$pdf->MultiCell(0, 7, utf8_decode('2ª.-  El acceso por parte del Encargado del Tratamiento a los datos de carácter personal contenidos en estos ficheros, se realizará única y exclusivamente con la finalidad de prestar servicios de '.html_entity_decode($ces["actividad"]).' para el Responsable del Fichero.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('SEGUNDA. FINALIDAD.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('2.1. El acceso por parte del Encargado del Tratamiento a los datos de carácter personal contenidos en estos ficheros, se realizará única y exclusivamente con la finalidad de prestar servicios de '.html_entity_decode($ces["actividad"]).' para el Responsable del Fichero. Para llevar a cabo cualquier otra actividad que implique el tratamiento o utilización de los ficheros, que exceda de lo previsto, será necesario el consentimiento previo y por escrito del Responsable de los Ficheros.'),0,'J');
 $pdf->Ln(3);
-$pdf->MultiCell(0, 7, utf8_decode('3ª.- El Encargado del Tratamiento únicamente tratará los datos conforme a las instrucciones dadas por el Responsable del Fichero y nos los utilizará con fines distintos al de este contrato, ni los comunicará a terceros sin su consentimiento.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('2.2. El Encargado del Tratamiento únicamente tratará los datos conforme a las instrucciones que en cada momento indique el Responsable del Fichero, así como lo dispuesto en la normativa legal aplicable.'),0,'J');
 $pdf->Ln(3);
-$pdf->MultiCell(0, 7, utf8_decode('4ª.- El Encargado del Tratamiento está obligado al secreto profesional respecto de los datos de carácter personal y al deber guardarlos incluso después de finalizar sus relaciones con el Responsable del Fichero.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('2.3. El Encargado del Tratamiento se obliga a no realizar ningún otro tratamiento distinto del solicitado por el Responsable de los Ficheros, de los datos a los que tenga acceso, comprometiéndose, además, a no hacer uso de los ficheros en su propio beneficio o en el de un tercero.'),0,'J');
 $pdf->Ln(3);
-$pdf->MultiCell(0, 7, utf8_decode('5ª.- El Encargado del Tratamiento se compromete a adoptar las medidas de índole técnica y organizativas necesarias que garanticen la seguridad de los datos de carácter personal y eviten su tratamiento o acceso no autorizado, alteración o pérdida de los mismos, conforme a lo estipulado en la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('TERCERA. MEDIDAS DE SEGURIDAD.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('3.1. El Encargado del Tratamiento se compromete a adoptar las medidas de índole técnica y organizativas necesarias que garanticen la seguridad de los datos de carácter personal y eviten su tratamiento o acceso no autorizado, alteración o pérdida de los mismos, conforme a lo estipulado en la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal.'),0,'J');
 $pdf->Ln(3);
-$pdf->MultiCell(0, 7, utf8_decode('6ª.- El Encargado del Tratamiento no registrará datos de carácter personal en ficheros que no reúnan las condiciones que establece el Reglamento de desarrollo de la Ley Orgánica 15/1999, de 13 de diciembre, de Protección de Datos de Carácter Personal, con respecto a su seguridad o integridad, y a las de los centros de tratamiento locales, equipos, sistemas y programas instalados. '),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('3.2. El Encargado del Tratamiento no registrará datos de carácter personal en ficheros que no reúnan las condiciones que establece el Reglamento de desarrollo de la Ley Orgánica 15/1999, de 13 de diciembre, de Protección de Datos de Carácter Personal, con respecto a su seguridad o integridad, y a las de los centros de tratamiento locales, equipos, sistemas y programas instalados.'),0,'J');
 $pdf->Ln(3);
-$pdf->MultiCell(0, 7, utf8_decode('7ª.- Una vez cumplida la prestación contractual, los datos de carácter personal serán destruidos o devueltos al Responsable del Fichero, al igual que cualquier soporte o documento en los que conste algún dato de carácter personal objeto de tratamiento.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('3.3. El Encargado del Tratamiento se compromete a no copiar o reproducir los datos a los que tenga acceso, salvo cuando sea necesario para su tratamiento en los términos previstos en este contrato. Cada una de las copias o reproducciones estará sometida a los mismos compromisos y obligaciones que en este documento se establecen.'),0,'J');
 $pdf->Ln(3);
-$pdf->MultiCell(0, 7, utf8_decode('8ª.- El Responsable del Fichero quedan eximido de responsabilidad alguna derivada del incumplimiento por parte del Encargado del Tratamiento, o del personal sujeto al mismo, de las estipulaciones acordadas en el presente contrato.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('CUARTA. EJERCICIO DE DERECHOS.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('Cuando los titulares de los datos ejerciten alguno de los derechos ARCO (acceso, rectificación, cancelación, oposición) directamente frente al Encargado del Tratamiento y soliciten el ejercicio frente al Responsable de los Ficheros, el Encargado del Tratamiento le trasladará dicha solicitud en el plazo de 3 días, a fin de que el Responsable de los Ficheros la resuelva en los plazos legales previstos en la normativa.'),0,'J');
+$pdf->Ln(10);
+$pdf->MultiCell(0, 7, utf8_decode('QUINTA. RESOLUCIÓN.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('5.1. Una vez cumplida la prestación contractual, o bien en el supuesto de resolución, los datos de carácter personal que pudieran permanecer en poder del Encargado del Tratamiento deberán serán destruidos o devueltos al Responsable del Fichero, al igual que cualquier soporte o documento en los que conste algún dato de carácter personal objeto de tratamiento.'),0,'J');
 $pdf->Ln(3);
-$pdf->MultiCell(0, 7, utf8_decode('9ª.- Las partes contratantes se someten expresamente al fuero de los Juzgados y Tribunales de la ciudad de Sevilla, para cuantas acciones o reclamaciones pudieran derivarse de este contrato.'),0,'J');
-$pdf->Ln(5);
-$pdf->MultiCell(0, 7, utf8_decode('Tanto el Responsable del Fichero como el Encargado del Tratamiento, aceptan el presente contrato en los términos y condiciones estipuladas en el mismo, y en prueba de ello, y para cumplimiento de lo convenido, lo firman por duplicado.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('5.2. Con independencia de lo indicado anteriormente, el Encargado del Tratamiento deberá conservar, debidamente bloqueados, los datos de tanto pudieran derivarse responsabilidades de su relación con el Responsable de los Ficheros.'),0,'J');
+$pdf->Ln(3);
+$pdf->MultiCell(0, 7, utf8_decode('SEXTA. RESPONSABILIDADES.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('6.1.  El Encargado del Tratamiento  será considerado responsable en el caso de que destine los datos a otra finalidad, los comunique o los utilice incumpliendo el presente contrato. En estos casos, responderá de las infracciones en que hubiera incurrido personalmente e indemnizará al Responsable de los Ficheros por los daños y perjuicios ocasionados.'),0,'J');
+$pdf->Ln(3);
+$pdf->MultiCell(0, 7, utf8_decode('6.2. Responsable del Fichero quedan eximido de responsabilidad alguna derivada del incumplimiento por parte del Encargado del Tratamiento, o del personal sujeto al mismo, de las estipulaciones acordadas en el presente contrato.'),0,'J');
+$pdf->Ln(3);
+$pdf->MultiCell(0, 7, utf8_decode('SÉPTIMA. SECRETO PROFESIONAL.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('El Encargado del Tratamiento está obligado al secreto profesional respecto de los datos de carácter personal que, de conformidad con el artículo 10 de la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal, subsistirá aún después de finalizar sus relaciones con el Responsable de los Ficheros.'),0,'J');
+$pdf->Ln(3);
+$pdf->MultiCell(0, 7, utf8_decode('OCTAVA. CONTROLES Y AUDITORÍAS.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('El Responsable de los Ficheros se reserva el derecho a efectuar en cualquier momento los controles y auditorías que estime oportunos para comprobar el correcto cumplimiento por parte del Encargado del Tratamiento del presente contrato. Por su parte, el Encargado del Tratamiento deberá facilitar al Responsable de los Ficheros cuantos datos o documentos le requiera para el adecuado cumplimiento de dichos controles y auditorías.'),0,'J');
+$pdf->Ln(3);
+$pdf->MultiCell(0, 7, utf8_decode('NOVENA. EMPLEADOS.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('El Encargado del Tratamiento permitirá únicamente el acceso a los datos y ficheros al personal que tenga necesidad de acceder a éstos para llevar a cabo sus funciones laborales, y deberá advertirles del carácter confidencial de la información y de su responsabilidad en caso de divulgarla ilícitamente.'),0,'J');
+$pdf->Ln(3);
+$pdf->MultiCell(0, 7, utf8_decode('Las partes contratantes se someten expresamente al fuero de los Juzgados y Tribunales de la ciudad de Sevilla, para cuantas acciones o reclamaciones pudieran derivarse de este contrato.'),0,'J');
+$pdf->Ln(3);
+$pdf->MultiCell(0, 7, utf8_decode('Tanto el Responsable del Fichero como el Encargado del Tratamiento, aceptan el presente contrato en los términos y clausulas estipuladas en el mismo, y en prueba de ello, y para cumplimiento de lo convenido, lo firman por duplicado.'),0,'J');
+
 
 /* signatures */
 $pdf->SetLeftMargin(20);
 $pdf->SetFont('Arial','',9);
-$pdf->Ln(20);
+$pdf->Ln(10);
 //$pdf->MultiCell(0, 6, utf8_decode($cname.'                                                                            '. $rep_legal_ces_name), 0, 'C');
 $pdf->MultiCell(0, 6, utf8_decode($cname.'                                                                            '.html_entity_decode($ces["nombre"])), 0, 'C');
 $nombre_empresa="              ";
