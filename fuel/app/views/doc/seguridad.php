@@ -170,7 +170,7 @@ $pdf->Ln(5);
 
 $str="un fichero con datos de carácter personal:";
 if(count($files>1)){$str=count($files)." ficheros con datos de carácter personal:";}
-$pdf->MultiCell(0,6,utf8_decode($cname.' mantiene '.$str.' .'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode($cname.' mantiene '.$str),0,'J');$pdf->Ln(2.5);
 
 $pdf->Ln(5);
 $pdf->SetDrawColor(0, 0, 0);
@@ -193,11 +193,6 @@ if(count($files>1)){$str="de los ficheros declarados";}
 $pdf->MultiCell(0,6,utf8_decode('La descripción y tipología '.$str.' por '.$cname.' viene especificada en el Anexo I: "Descripción de los ficheros" del presente documento.'),0,'J');$pdf->Ln(2.5);
 $levels = array("N/D","BÁSICO","MEDIO","ALTO");
 $pdf->MultiCell(0,6,utf8_decode('Una vez analizada la tipología de los ficheros a proteger, se recogerán en el Documento de Seguridad, con carácter general, los procedimientos y normas de seguridad establecidas como de nivel '.$levels[$max_level].'.'),0,'J');$pdf->Ln(2.5);
-
-$str1="del fichero identificado";
-$str2="del fichero";
-if(count($files>1)){$str1="de los ficheros identificados";$str2="de los ficheros";}
-$pdf->MultiCell(0,6,utf8_decode('El Responsable de los Ficheros ha procedido a notificar al Registro General de Protección de Datos (RGPD) la creación '.$str1.'. Dichas notificaciones así como las correspondientes resoluciones de inscripción '.$str2.' se adjuntan en el Anexo II: "Notificación e inscripción de ficheros" del Documento de Seguridad.'),0,'J');$pdf->Ln(2.5);
 
 $pdf->Ln(5);
 

@@ -178,7 +178,7 @@ $pdf->MultiCell(0,6,utf8_decode('       - Puestos de trabajo y sistemas informá
 $pdf->Ln(5);
 $str="mantiene un fichero con datos de carácter personal:";
 if(count($files)>1){$str="mantiene ".count($files)." ficheros con datos de carácter personal:";}
-$pdf->MultiCell(0,6,utf8_decode('La '.$type.' '.$str.'.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('La '.$type.' '.$str),0,'J');$pdf->Ln(2.5);
 
 $pdf->Ln(5);
 $pdf->SetDrawColor(0, 0, 0);
