@@ -176,9 +176,9 @@ $pdf->MultiCell(0,6,utf8_decode('Los recursos que quedarán bajo el ámbito de a
 $pdf->MultiCell(0,6,utf8_decode('     - Locales o dependencias donde se encuentren ubicados los ficheros o se almacenen los soportes que los contengan.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('       - Puestos de trabajo y sistemas informáticos desde los que se acceda a los ficheros. '),0,'J');$pdf->Ln(2.5);
 $pdf->Ln(5);
-$str="mantiene un fichero con datos de carácter personal, el cual ha sido convenientemente notificado";
-if(count($files)>1){$str="mantienen ".count($files)." ficheros con datos de carácter personal, los cuales han sido convenientemente notificados";}
-$pdf->MultiCell(0,6,utf8_decode('La '.$type.' '.$str.' a la Agencia Española de Protección de Datos para su inscripción en el Registro General de Protección de Datos.'),0,'J');$pdf->Ln(2.5);
+$str="mantiene un fichero con datos de carácter personal:";
+if(count($files)>1){$str="mantiene ".count($files)." ficheros con datos de carácter personal:";}
+$pdf->MultiCell(0,6,utf8_decode('La '.$type.' '.$str.'.'),0,'J');$pdf->Ln(2.5);
 
 $pdf->Ln(5);
 $pdf->SetDrawColor(0, 0, 0);
@@ -204,11 +204,6 @@ if(count($files>1)){$str="de los ficheros declarados";}
 $pdf->MultiCell(0,6,utf8_decode('La descripción y tipología '.$str.' por la '.$type.' viene especificada en el Anexo I: "Ficheros de datos declarados y resoluciones de la AEPD" del presente documento.'),0,'J');$pdf->Ln(2.5);
 $levels = array("N/D","BÁSICO","MEDIO","ALTO");
 $pdf->MultiCell(0,6,utf8_decode('Una vez analizada la tipología de los ficheros a proteger, se recogerán en el Documento de Seguridad, con carácter general, los procedimientos y normas de seguridad establecidas como de nivel '.$levels[$max_level].'.'),0,'J');$pdf->Ln(2.5);
-
-$str1="del fichero identificado";
-$str2="del fichero";
-if(count($files>1)){$str1="de los ficheros identificados";$str2="de los ficheros";}
-$pdf->MultiCell(0,6,utf8_decode('El Responsable de los Ficheros ha procedido a notificar al Registro General de Protección de Datos (RGPD) la creación '.$str1.'. Dichas notificaciones así como las correspondientes resoluciones de inscripción '.$str2.' se adjuntan en el Anexo I: "Ficheros de datos declarados y resoluciones de la AEPD". del Documento de Seguridad.'),0,'J');$pdf->Ln(2.5);
 
 $pdf->Ln(5);
 

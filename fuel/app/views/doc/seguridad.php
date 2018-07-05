@@ -168,9 +168,9 @@ $pdf->MultiCell(0,6,utf8_decode('       - Locales o dependencias donde se encuen
 $pdf->MultiCell(0,6,utf8_decode('       - Puestos de trabajo y sistemas informáticos desde los que se acceda a los ficheros. '),0,'J');$pdf->Ln(2.5);
 $pdf->Ln(5);
 
-$str="un fichero con datos de carácter personal, el cual ha sido convenientemente notificado";
-if(count($files>1)){$str=count($files)." ficheros con datos de carácter personal, los cuales han sido convenientemente notificados";}
-$pdf->MultiCell(0,6,utf8_decode($cname.' mantiene '.$str.' a la Agencia Española de Protección de Datos para su inscripción en el Registro General de Protección de Datos.'),0,'J');$pdf->Ln(2.5);
+$str="un fichero con datos de carácter personal:";
+if(count($files>1)){$str=count($files)." ficheros con datos de carácter personal:";}
+$pdf->MultiCell(0,6,utf8_decode($cname.' mantiene '.$str.' .'),0,'J');$pdf->Ln(2.5);
 
 $pdf->Ln(5);
 $pdf->SetDrawColor(0, 0, 0);
