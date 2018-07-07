@@ -440,7 +440,7 @@ $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,strtoupper(utf8_decode('11. anexos')),0,'L');
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Anexo I.        Descripción de los ficheros.'),0,'J');
-$pdf->MultiCell(0,6,utf8_decode('Anexo II.       Notificación e inscripción de ficheros.'),0,'J');
+$pdf->MultiCell(0,6,utf8_decode('Anexo II.       Registro de Actividades de Tratamiento.'),0,'J');
 $pdf->MultiCell(0,6,utf8_decode('Anexo III.      Personal con acceso autorizado.'),0,'J');
 $pdf->MultiCell(0,6,utf8_decode('Anexo IV.      Funciones y obligaciones del personal.'),0,'J');
 $pdf->MultiCell(0,6,utf8_decode('Anexo V.       Procedimientos de control y seguridad.'),0,'J');
@@ -506,10 +506,10 @@ foreach($files as $f){
 //ANEXO II
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
-$pdf->MultiCell(0,10,utf8_decode('Anexo II. Notificación e inscripción de ficheros'),0,'L');
+$pdf->MultiCell(0,10,utf8_decode('Anexo II. Registro de Actividades de Tratamiento'),0,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('Documentos de NOTIFICACIÓN a la Agencia Española de Protección de Datos para su inscripción en el Registro General de Protección de Datos (R.G.P.D.), de cada fichero de nueva creación, así como modificación o supresión de los ficheros existentes.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('En este mismo anexo se recogerán las RESOLUCIONES, de inscripción, modificación o supresión de los ficheros notificados, remitidas a '.$cname.' por parte de la Agencia Española de Protección de Datos.'),0,'J');
+//$pdf->MultiCell(0,6,utf8_decode('Documentos de NOTIFICACIÓN a la Agencia Española de Protección de Datos para su inscripción en el Registro General de Protección de Datos (R.G.P.D.), de cada fichero de nueva creación, así como modificación o supresión de los ficheros existentes.'),0,'J');$pdf->Ln(2.5);
+//$pdf->MultiCell(0,6,utf8_decode('En este mismo anexo se recogerán las RESOLUCIONES, de inscripción, modificación o supresión de los ficheros notificados, remitidas a '.$cname.' por parte de la Agencia Española de Protección de Datos.'),0,'J');
 $pdf->Ln(5);
 
 //ANEXO III

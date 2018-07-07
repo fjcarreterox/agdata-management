@@ -442,25 +442,27 @@ $pdf->MultiCell(0,6,utf8_decode('- El uso de dispositivos de videovigilancia deb
 $pdf->MultiCell(0,6,utf8_decode('- Las cámaras ubicadas en espacios privados no podrán grabar espacios públicos, salvo en los casos recogidos en el Real Decreto 596/1999 que desarrolla la Ley Orgánica 4/1997 que regula la utilización de videocámaras por las Fuerzas y Cuerpos de Seguridad en espacios públicos.'),0,'L');
 $pdf->MultiCell(0,6,utf8_decode('- Las imágenes grabadas por dispositivos de videovigilancia deben ser canceladas en el plazo máximo de un mes desde su captación.'),0,'L');
 
+//ANEXOS
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,strtoupper(utf8_decode('11. anexos')),0,'L');
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('Anexo I.        Ficheros de datos declarados y resoluciones de la AEPD.'),0,'J');
+$pdf->MultiCell(0,6,utf8_decode('Anexo I.        Ficheros de datos declarados.'),0,'J');
 $pdf->MultiCell(0,6,utf8_decode('Anexo II.       Listado de usuarios con acceso a los ficheros.'),0,'J');
 $pdf->MultiCell(0,6,utf8_decode('Anexo III.      Cláusula legal para empleados.'),0,'J');
 $pdf->MultiCell(0,6,utf8_decode('Anexo IV.      Impreso de rectificación de datos.'),0,'J');
 $pdf->MultiCell(0,6,utf8_decode('Anexo V.       Registro de incidencias.'),0,'J');
+$pdf->MultiCell(0,6,utf8_decode('Anexo VI.       Registro de actividades de tratamiento.'),0,'J');
 if($show_video_append) {
-    $pdf->MultiCell(0, 6, utf8_decode('Anexo VI.      Cláusula informativa del fichero de videovigilancia.'), 0, 'J');
-    $pdf->MultiCell(0, 6, utf8_decode('Anexo VII.     Modelo de solicitud de acceso a las imágenes grabadas.'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('Anexo VII.      Cláusula informativa del fichero de videovigilancia.'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('Anexo VIII.     Modelo de solicitud de acceso a las imágenes grabadas.'), 0, 'J');
 }
 $pdf->Ln(5);
 
 //ANEXO I
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
-$pdf->MultiCell(0,10,utf8_decode('Anexo I. Ficheros de datos declarados y resoluciones de la AEPD'),0,'L');
+$pdf->MultiCell(0,10,utf8_decode('Anexo I. Ficheros de datos declarados'),0,'L');
 
 $pdf->Ln(5);
 $pdf->SetDrawColor(0, 0, 0);
@@ -712,11 +714,17 @@ $pdf->Row(array("Persona que realiza la comunicación:\n\n\nFirma:","Responsable
 
 $pdf->MultiCell(0,10,utf8_decode('** A rellenar sólo si la incidencia es de este tipo.'),0,'L');
 
-if($show_video_append) {
 //ANEXO VI
+$pdf->AddPage();
+$pdf->SetFont('Arial','B',12);
+$pdf->MultiCell(0,10,utf8_decode('Anexo VI. Registro de actividades de tratamiento'),0,'L');
+$pdf->Ln(5);
+
+if($show_video_append) {
+//ANEXO VII
     $pdf->AddPage();
     $pdf->SetFont('Arial', 'B', 12);
-    $pdf->MultiCell(0, 10, utf8_decode('Anexo VI. MODELO CLAUSULA INFORMATIVA'), 0, 'L');
+    $pdf->MultiCell(0, 10, utf8_decode('Anexo VII. MODELO CLAUSULA INFORMATIVA'), 0, 'L');
     $pdf->Ln(15);
     $pdf->SetFont('Arial', 'BU', 14);
     $pdf->MultiCell(0, 10, utf8_decode('MODELO CLAUSULA INFORMATIVA'), 0, 'C');
@@ -768,7 +776,7 @@ if($show_video_append) {
     $pdf->MultiCell(0, 6, utf8_decode('4. Que el responsable del fichero tratamiento es ...............(nombre o razón social)............ ubicado en C/ .........'), 0, 'J');
     $pdf->Ln(5);
     */
-//ANEXO VII
+//ANEXO VIII
     $pdf->AddPage();
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->MultiCell(0, 10, utf8_decode(mb_strtoupper('Solicitud de acceso al fichero de videovigilancia')), 0, 'C');
