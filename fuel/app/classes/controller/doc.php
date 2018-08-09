@@ -141,6 +141,7 @@ class Controller_Doc extends Controller_Template{
             case 'E':
                 //TODO
                 //return \Fuel\Core\Response::redirect('clientes/clausula_empleados/'.$idcliente);
+                $data['rep'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$idcliente,'relacion'=>1)));
                 $data['trab'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$idcliente,'relacion'=>4)));
                 return View::forge('doc/clause/employee',$data)->render();
                 break;
