@@ -508,9 +508,118 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('Anexo II. Registro de Actividades de Tratamiento'),0,'L');
 $pdf->SetFont('Arial','',10);
-//$pdf->MultiCell(0,6,utf8_decode('Documentos de NOTIFICACIÓN a la Agencia Española de Protección de Datos para su inscripción en el Registro General de Protección de Datos (R.G.P.D.), de cada fichero de nueva creación, así como modificación o supresión de los ficheros existentes.'),0,'J');$pdf->Ln(2.5);
-//$pdf->MultiCell(0,6,utf8_decode('En este mismo anexo se recogerán las RESOLUCIONES, de inscripción, modificación o supresión de los ficheros notificados, remitidas a '.$cname.' por parte de la Agencia Española de Protección de Datos.'),0,'J');
 $pdf->Ln(5);
+
+foreach($files as $f) {
+    if ($f['idtype'] == 1) { //CLIENTES
+        $pdf->SetWidths(array(80, 90));
+        $pdf->SetAligns(array('L', 'L'));
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Row(array("TRATAMIENTO:", strtoupper(html_entity_decode($f["name"]))));
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Row(array("FINALIDAD:", html_entity_decode($f["target"])));
+        $pdf->Row(array("CATEGORÍAS DE DATOS PERSONALES:", "Los necesarios para el mantenimiento de la relación comercial o negocial:"));
+        $pdf->Row(array("", " - Datos identificativos \n - Datos bancarios"));
+        $pdf->Row(array("CATEGORÍAS DE DESTINATARIOS A QUIÉN SE COMUNIQUEN LOS DATOS:", " - Administración tributaria \n - Entidades financieras \n - Gestorías / Asesorías"));
+        $pdf->Ln(5);
+    }
+    if ($f['idtype'] == 2) { //PROVEEDORES
+        $pdf->SetWidths(array(80, 90));
+        $pdf->SetAligns(array('L', 'L'));
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Row(array("TRATAMIENTO:", strtoupper(html_entity_decode($f["name"]))));
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Row(array("FINALIDAD:", html_entity_decode($f["target"])));
+        $pdf->Row(array("CATEGORÍAS DE DATOS PERSONALES:", "Los necesarios para el mantenimiento de la relación comercial o negocial:"));
+        $pdf->Row(array("", " - Datos identificativos \n - Datos bancarios"));
+        $pdf->Row(array("CATEGORÍAS DE DESTINATARIOS A QUIÉN SE COMUNIQUEN LOS DATOS:", " - Administración tributaria \n - Entidades financieras \n - Gestorías / Asesorías"));
+        $pdf->Ln(5);
+    }
+    if ($f['idtype'] == 3) { //PERSONAL
+        $pdf->SetWidths(array(80, 90));
+        $pdf->SetAligns(array('L', 'L'));
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Row(array("TRATAMIENTO:", strtoupper(html_entity_decode($f["name"]))));
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Row(array("FINALIDAD:", html_entity_decode($f["target"])));
+        $pdf->Row(array("CATEGORÍAS DE DATOS PERSONALES:", "Los necesarios para el mantenimiento de la relación laboral:"));
+        $pdf->Row(array("", " - Datos identificativos \n - Datos de características personales \n - Datos académicos y profesionales \n - Datos bancarios"));
+        $pdf->Row(array("CATEGORÍAS DE DESTINATARIOS A QUIÉN SE COMUNIQUEN LOS DATOS:", " - Administración tributaria \n - Entidades financieras \n - Gestorías / Asesorías"));
+        $pdf->Ln(5);
+    }
+    if ($f['idtype'] == 4) { //CVs
+        $pdf->SetWidths(array(80, 90));
+        $pdf->SetAligns(array('L', 'L'));
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Row(array("TRATAMIENTO:", strtoupper(html_entity_decode($f["name"]))));
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Row(array("FINALIDAD:", html_entity_decode($f["target"])));
+        $pdf->Row(array("CATEGORÍAS DE DATOS PERSONALES:", "Los necesarios para la finalidad señalada:"));
+        $pdf->Row(array("", " - Datos identificativos \n - Datos de características personales \n - Datos académicos y profesionales \n - Datos bancarios"));
+        $pdf->Row(array("CATEGORÍAS DE DESTINATARIOS A QUIÉN SE COMUNIQUEN LOS DATOS:", " - No se contemplan cesiones de datos"));
+        $pdf->Ln(5);
+    }
+    if ($f['idtype'] == 6) { //Videovigilancia
+        $pdf->SetWidths(array(80, 90));
+        $pdf->SetAligns(array('L', 'L'));
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Row(array("TRATAMIENTO:", strtoupper(html_entity_decode($f["name"]))));
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Row(array("FINALIDAD:", html_entity_decode($f["target"])));
+        $pdf->Row(array("CATEGORÍAS DE DATOS PERSONALES:", "Imágenes grabadas de clientes y/o empleados"));
+        $pdf->Row(array("", " - Datos identificativos: imágenes"));
+        $pdf->Row(array("CATEGORÍAS DE DESTINATARIOS A QUIÉN SE COMUNIQUEN LOS DATOS:", " - Empresas de seguridad y/o vigilancia \n - Cuerpos y fuerzas de seguridad del Estado"));
+        $pdf->Ln(5);
+    }
+    if ($f['idtype'] == 9) { //TRANSPORTISTAS
+        $pdf->SetWidths(array(80, 90));
+        $pdf->SetAligns(array('L', 'L'));
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Row(array("TRATAMIENTO:", strtoupper(html_entity_decode($f["name"]))));
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Row(array("FINALIDAD:", html_entity_decode($f["target"])));
+        $pdf->Row(array("CATEGORÍAS DE DATOS PERSONALES:", "Los necesarios para el mantenimiento de la relación comercial:"));
+        $pdf->Row(array("", " - Datos identificativos \n - Datos bancarios"));
+        $pdf->Row(array("CATEGORÍAS DE DESTINATARIOS A QUIÉN SE COMUNIQUEN LOS DATOS:", " - Administración tributaria \n - Entidades financieras \n - Gestorías / Asesorías"));
+        $pdf->Ln(5);
+    }
+    if ($f['idtype'] == 73) { //PROCURADORES
+        $pdf->SetWidths(array(80, 90));
+        $pdf->SetAligns(array('L', 'L'));
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Row(array("TRATAMIENTO:", strtoupper(html_entity_decode($f["name"]))));
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Row(array("FINALIDAD:", html_entity_decode($f["target"])));
+        $pdf->Row(array("CATEGORÍAS DE DATOS PERSONALES:", "Los necesarios para el mantenimiento de la relación:"));
+        $pdf->Row(array("", " - Datos identificativos \n - Datos bancarios"));
+        $pdf->Row(array("CATEGORÍAS DE DESTINATARIOS A QUIÉN SE COMUNIQUEN LOS DATOS:", " - Administración tributaria \n - Entidades financieras \n - Gestorías / Asesorías"));
+        $pdf->Ln(5);
+    }
+    if ($f['idtype'] == 74) { //ABOGADOS
+        $pdf->SetWidths(array(80, 90));
+        $pdf->SetAligns(array('L', 'L'));
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Row(array("TRATAMIENTO:", strtoupper(html_entity_decode($f["name"]))));
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Row(array("FINALIDAD:", html_entity_decode($f["target"])));
+        $pdf->Row(array("CATEGORÍAS DE DATOS PERSONALES:", "Los necesarios para el mantenimiento de la relación comercial o negocial:"));
+        $pdf->Row(array("", " - Datos identificativos \n - Datos bancarios"));
+        $pdf->Row(array("CATEGORÍAS DE DESTINATARIOS A QUIÉN SE COMUNIQUEN LOS DATOS:", " - Administración tributaria \n - Entidades financieras \n - Gestorías / Asesorías"));
+        $pdf->Ln(5);
+    }
+    if ($f['idtype'] == 75) { //PREVENCIÓN
+        $pdf->SetWidths(array(80, 90));
+        $pdf->SetAligns(array('L', 'L'));
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Row(array("TRATAMIENTO:", strtoupper(html_entity_decode($f["name"]))));
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Row(array("FINALIDAD:", html_entity_decode($f["target"])));
+        $pdf->Row(array("CATEGORÍAS DE DATOS PERSONALES:", "Los necesarios para las finalidades descritas:"));
+        $pdf->Row(array("", " - Datos identificativos \n - Datos de características personales \n - Datos de salud"));
+        $pdf->Row(array("CATEGORÍAS DE DESTINATARIOS A QUIÉN SE COMUNIQUEN LOS DATOS:", " - No se contemplan cesiones de datos"));
+        $pdf->Ln(5);
+    }
+}
 
 //ANEXO III
 $pdf->AddPage();
