@@ -66,7 +66,7 @@ else {
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,strtoupper('acuerdan'),0,1,'C');
 $pdf->SetFont('Arial','',9);
-$pdf->MultiCell(0, 6, utf8_decode('Celebrar el presente contrato de acceso a datos por cuenta de terceros, que tiene por objeto garantizar la seguridad de datos de carácter personal y evitar su tratamiento o acceso no autorizado, o la pérdida de los mismos, conforme establece la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal.'), 0, 'J');
+$pdf->MultiCell(0, 6, utf8_decode('Celebrar el presente contrato de acceso a datos por cuenta de terceros, que tiene por objeto garantizar la seguridad de datos de carácter personal y evitar su tratamiento o acceso no autorizado, o la pérdida de los mismos,conforme establece la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal y al Art. 28 del Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos.'), 0, 'J');
 $pdf->Ln(5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,strtoupper('estipulaciones'),0,1,'C');
