@@ -163,9 +163,9 @@ if(isset($servicios_data[1])) {
     if(strcmp($servicios_data[1]["periodicidad"],"Pago único")!==0 && strcmp($servicios_data[1]["periodicidad"],"anualmente")!==0){$per=$servicios_data[1]["periodicidad"].".";$div=' dividido en '.$servicios_data[1]["num_cuotas"].' importes de '.$servicios_data[1]["cuota"].' EUROS,';}
 
     if($servicios_data[1]["precio"]==0){
-        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$servicios_data[1]["precio"].' EUROS al año.'), 0);
+        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$servicios_data[1]["precio"].' EUROS.'), 0);
     }else{
-        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$servicios_data[1]["precio"].' EUROS al año,'.$div.' impuestos no incluidos, que serán facturados por dicha entidad.'), 0);
+        $pdf->MultiCell(0, 6, utf8_decode('El precio fijado para los servicios de adaptación/actualización descritos, a ser percibido por ANÁLISIS Y GESTIÓN DE DATOS S.L., asciende a un total de '.$servicios_data[1]["precio"].' EUROS,'.$div.' impuestos no incluidos, que serán facturados por dicha entidad.'), 0);
         $pdf->Ln(5);
         if(strcmp($servicios_data[1]["pago"],"transferencia bancaria")==0){
             $pdf->MultiCell(0, 6, utf8_decode('El BENEFICIARIO abonará este importe mediante transferencia bancaria a la cuenta bancaria del PRESTATARIO con código IBAN ES56-0081-7424-5500-0122-9423 durante los diez primeros días del mes, comenzando en '.getMes($servicios_data[1]["mes_factura"]).' de '.$servicios_data[1]["year"].'.'), 0);
