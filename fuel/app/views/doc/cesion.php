@@ -94,7 +94,6 @@ $pdf->Cell(0,10,utf8_decode(mb_strtoupper('claúsulas')),0,1,'C');
 $pdf->SetFont('Arial','',9);
 
 $ficheros_str="";
-$str="el fichero denominado ".strtoupper($files[0]["type"]);
 if(count($files)>1){
     foreach($files as $k => $f) {
         if($k!=0) {
@@ -104,11 +103,14 @@ if(count($files)>1){
             $ficheros_str .= '"'.$f["type"].'"';
         }
     }
-    $str="los ficheros denominados ".strtoupper($ficheros_str);
+    $str="de los ficheros denominados ".strtoupper($ficheros_str);
+}
+else{
+    $str="del fichero denominado ".strtoupper($files[0]["type"]);
 }
 
 $pdf->MultiCell(0, 7, utf8_decode('PRIMERA. FICHEROS.'),0,'J');
-$pdf->MultiCell(0, 7, utf8_decode('El  Responsable  del  Fichero pone  a  disposición  del  Encargado  del  Tratamiento datos de los  ficheros  denominados '.$str.'.'),0,'J');
+$pdf->MultiCell(0, 7, utf8_decode('El Responsable del Fichero pone a disposición del Encargado del Tratamiento datos '.$str.'.'),0,'J');
 $pdf->Ln(3);
 $pdf->MultiCell(0, 7, utf8_decode('SEGUNDA. FINALIDAD.'),0,'J');
 $pdf->MultiCell(0, 7, utf8_decode('2.1. El acceso por parte del Encargado del Tratamiento a los datos de carácter personal contenidos en estos ficheros, se realizará única y exclusivamente con la finalidad de prestar servicios de '.html_entity_decode($ces["actividad"]).' para el Responsable del Fichero. Para llevar a cabo cualquier otra actividad que implique el tratamiento o utilización de los ficheros, que exceda de lo previsto, será necesario el consentimiento previo y por escrito del Responsable de los Ficheros.'),0,'J');
