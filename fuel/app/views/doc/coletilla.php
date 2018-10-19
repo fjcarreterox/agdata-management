@@ -5,7 +5,7 @@ $pos = strpos($name,"o-d");
 if($pos !== false){
 	$name = str_replace("o-d","O'd",strtolower($name));
 }
-$dir=html_entity_decode($dir);
+$dir=html_entity_decode(base64_decode($dir));
 $dir = str_replace("o-d","O'd",$dir);
 $pdf->AddFont('Arial','','arial.php');
 $title = 'DOCUMENTOS LEGALES LOPD: COLETILLA PARA E-MAIL';

@@ -158,7 +158,7 @@ class Controller_Doc extends Controller_Template{
     public function action_coletilla($idcliente){
         $data["name"] = Model_Cliente::find($idcliente)->get('nombre');
         $dir = Model_Cliente::find($idcliente)->get('direccion');
-        $data["dir"] = strtolower($dir).", ".Model_Cliente::find($idcliente)->get('cpostal').", ".Model_Cliente::find($idcliente)->get('loc').", en la provincia de ".Model_Cliente::find($idcliente)->get('prov');
+        $data["dir"] = base64_encode($dir.", ".Model_Cliente::find($idcliente)->get('cpostal').", ".Model_Cliente::find($idcliente)->get('loc').", en la provincia de ".Model_Cliente::find($idcliente)->get('prov'));
         return View::forge('doc/coletilla',$data)->render();
     }
 
