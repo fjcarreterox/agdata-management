@@ -113,15 +113,17 @@ if(isset($servicios_data[1])) {
     $pdf->MultiCell(0, 6, utf8_decode('Servicios iniciales de adaptación / actualización:'), 0);
     $pdf->SetFont('Arial', '', 12);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Análisis previo pormenorizado del estado del cliente. Auditoría previa y estudio de su documentación, para identificar deficiencias actuales en materia de protección de datos.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Auditoría en protección de datos para realizar un análisis previo del estado del cliente.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Elaboración del Documento de Seguridad del cliente, o actualización, si fuese necesario.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Redacción del Documento de Seguridad obligatorio y de sus modelos de anexos.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Notificaciones a la Agencia Española de Protección de Datos, de las modificaciones, bajas o altas necesarias para la correcta adecuación de sus ficheros de datos personales (exigencia obligatoria hasta el 25 de mayo de 2018).'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Cláusulas de confidencialidad y deber de secreto a firmar por los empleados con acceso a datos.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de documentos, contratos y cláusulas legales necesarios para asegurar el correcto cumplimiento de la normativa vigente en materia de protección de datos.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de cláusulas legales de solicitud de consentimiento expreso y cláusulas para e-mails.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Sesión formativa opcional para el personal con acceso a los ficheros de datos.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de contratos de cesión de datos a terceros, con arreglo a la normativa vigente.'), 0);
+    $pdf->Ln(5);
+    $pdf->MultiCell(0, 6, utf8_decode('- Cláusulas de recogida de Curriculum o de imágenes por cámaras de videovigilancia, en su caso.'), 0);
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('    Una vez concluidos estos servicios de adaptación / actualización inicial, se concretará entre las partes el inicio de los servicios de mantenimiento durante un periodo anual, que será renovado automáticamente y con idéntica duración si ninguna de las partes con un mes de antelación a su finalización, advierte de forma fehaciente su voluntad de rescindir el presente contrato.'), 0);
     $pdf->Ln(10);
@@ -136,15 +138,15 @@ if(isset($servicios_data[2])) {
     $pdf->MultiCell(0, 6, utf8_decode('Servicios de mantenimiento:'), 0);
     $pdf->SetFont('Arial', '', 12);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Asesoramiento continuo y la resolución de todo tipo de consultas planteadas por el Administrador de Fincas en materia de protección de datos al PRESTATARIO.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Recordatorio mensual de controles periódicos y tareas de revisión a realizar por el cliente.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Modificaciones posteriores del Documento de Seguridad, que deban realizarse cuando se produzcan las situaciones contempladas en la normativa que impliquen su modificación.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Actualización del Documento de Seguridad, cuando se produzcan cambios que impliquen modificación.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Notificaciones a la Agencia Española de Protección de Datos, de las modificaciones, bajas o altas necesarias para la correcta adecuación de sus ficheros de datos personales (exigencia obligatoria hasta el 25 de mayo de 2018).'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de cláusulas legales y contratos de cesión de datos a terceros que resulten necesarios.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de documentos, contratos y cláusulas legales que resulten necesarios para asegurar el correcto cumplimiento de la normativa vigente.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Asesoramiento jurídico continuo y resolución de todo tipo de consultas planteadas en materia de protección de datos por parte del cliente.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- La adaptación a posibles novedades en la normativa española y europea sobre protección de datos que se produzcan durante la vigencia del presente contrato.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- La adaptación a posibles novedades que puedan producirse en la normativa española de protección de datos, que se produzcan durante la vigencia del contrato de mantenimiento.'), 0);
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('- Realización de Auditoría Bienal obligatoria para los niveles de seguridad medio y alto, al final del segundo año de mantenimiento.'), 0);
     $pdf->Ln(5);
@@ -218,7 +220,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,utf8_decode('5ª.- NULIDAD PARCIAL'),0,1,'L');
 $pdf->SetFont('Arial','',12);
-$pdf->MultiCell(0,6,utf8_decode('Toda claúsula o disposición del presente contrato que sea declarada nula, ilegal o inválida, no afectará ni invalidará ninguna de las demás cláusulas y disposiciones, las cuales permanecerán plenamente vigentes.'),0);
+$pdf->MultiCell(0,6,utf8_decode('Toda cláusula o disposición del presente contrato que sea declarada nula, ilegal o inválida, no afectará ni invalidará ninguna de las demás cláusulas y disposiciones, las cuales permanecerán plenamente vigentes.'),0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',12);
@@ -230,7 +232,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,utf8_decode('7ª.- CARÁCTER MERCANTIL'),0,1,'L');
 $pdf->SetFont('Arial','',12);
-$pdf->MultiCell(0,6,utf8_decode('Este contrato tiene carácter mercantil, y se regirá por sus propias claúsulas y en lo no previsto en las mismas, se regirá por lo previsto en el Código Comercio español, leyes mercantiles españolas complementarias y aplicables al caso, y con carácter subsidiario por el Código Civil español.'),0);
+$pdf->MultiCell(0,6,utf8_decode('Este contrato tiene carácter mercantil, y se regirá por sus propias cláusulas y en lo no previsto en las mismas, se regirá por lo previsto en el Código Comercio español, leyes mercantiles españolas complementarias y aplicables al caso, y con carácter subsidiario por el Código Civil español.'),0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',12);
@@ -249,9 +251,10 @@ if(isset($servicios_data[2])) {
 }
 
 /* firmas */
+$tratamiento_ops = array("D.","Dª");
 $pdf->MultiCell(0,6,utf8_decode('Fdo. por el beneficiario                                                Fdo. por el prestatario'),0,'C');
 $pdf->Ln(30);
-$pdf->MultiCell(0,6,utf8_decode('    '.html_entity_decode($rep["nombre"]).'                                            D. Juan Andrés Carretero García'),0,'C');
+$pdf->MultiCell(0,6,utf8_decode('    '.html_entity_decode($tratamiento_ops[$rep["tratamiento"]]).' '.html_entity_decode($rep["nombre"]).'                                            D. Juan Andrés Carretero García'),0,'C');
 /* Imprimimos */
 $pdf->Output('CONTRATO-PRESTACION-SERVICIOS-'.html_entity_decode($customer->nombre).'.pdf','I');
 ?>
