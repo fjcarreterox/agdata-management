@@ -7,7 +7,6 @@
 			<th>Nombre cliente</th>
 			<th>CIF/NIF</th>
 			<th>Tipo de fichero</th>
-			<th>Inscrito en la AEPD</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
@@ -17,7 +16,6 @@
             <td><?php echo Model_Cliente::find($item->idcliente)->get('nombre'); ?></td>
             <td><?php echo Model_Cliente::find($item->idcliente)->get('cif_nif'); ?></td>
             <td><?php echo Model_Tipo_Fichero::find($item->idtipo)->get('tipo'); ?></td>
-			<td><?php if($item->inscrito){echo "SÍ";}else{echo "NO";}; ?></td>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">

@@ -8,8 +8,6 @@
             <th>Finalidad</th>
 			<th>Soporte</th>
 			<th>Nivel de Seguridad</th>
-			<th>Inscrito en la AEPD</th>
-			<th>Fecha de inscripción</th>
 			<th>Cesión a terceros</th>
 			<th>&nbsp;</th>
 		</tr>
@@ -28,8 +26,6 @@
                     default: echo "-- NO ESPECIFICADO --";
                 }
                 ?></td>
-			<td><?php if($item->inscrito){echo "SÍ";}else{echo "NO";}; ?></td>
-			<td><?php echo date_conv($item->fecha); ?></td>
 			<td><?php if($item->cesion){echo "SÍ";}else{echo "NO";}; ?></td>
 			<td>
 				<div class="btn-toolbar">

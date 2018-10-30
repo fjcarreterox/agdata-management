@@ -9,7 +9,6 @@ class Model_Fichero extends Model
 		'idcliente',
 		'soporte',
 		'nivel',
-		'inscrito',
 		'fecha',
 		'cesion',
 		'created_at',
@@ -34,8 +33,6 @@ class Model_Fichero extends Model
 		$val->add_field('idcliente', 'Cliente', 'required|valid_string[numeric]');
 		$val->add_field('soporte', 'Soporte del fichero', 'required|max_length[255]');
 		$val->add_field('nivel', 'Nivel de seguridad', 'required|valid_string[numeric]');
-		$val->add_field('inscrito', 'Inscrito en AEPD', 'required|valid_string[numeric]');
-		//$val->add_field('fecha', 'Fecha de inscripción', 'required');
 		$val->add_field('cesion', 'Cesión a terceros', 'required|valid_string[numeric]');
 		return $val;
 	}

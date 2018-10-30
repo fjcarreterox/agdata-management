@@ -86,7 +86,6 @@
                     <li><a href="clientes/mantenimiento">Clientes en mantenimiento</a></li>
                     <li><a href="clientes/com_mantenimiento">CC.PP. en mantenimiento</a></li>
                     <li><a href="tareas/historico">Histórico de tareas</a></li>
-                    <li><a href="ficheros/noinscritos">Ficheros pendientes de inscribir</a></li>
                     <li><a href="ficheros/list">Listado completo de ficheros</a></li>
                 </ul>
 			</div>

@@ -315,7 +315,6 @@
                         <td><strong>Nivel</strong></td>
                         <td><strong>Soporte</strong></td>
                         <td><strong>Cesión de datos</strong></td>
-                        <td><strong>Inscrito en la Agencia</strong></td>
                         <td>&nbsp;</td>
                     </tr>
                     </thead>
@@ -340,7 +339,6 @@
                                 ?></td>
                             <td><?php echo $f->soporte; ?></td>
                             <td><?php if($f->cesion){echo "SÍ";}else{echo "NO";}; ?></td>
-                            <td><?php if($f->inscrito){echo "SÍ (".date_conv($f->fecha).")";}else{echo "NO";}; ?></td>
                             <td><?php echo Html::anchor('ficheros/view/'.$f->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank')); ?>
                                 <?php echo Html::anchor('rel/estructura/data/'.$f->id, '<span class="glyphicon glyphicon-file"></span> Datos',array('class'=>'btn btn-info')); ?>
                                 <?php echo Html::anchor('ficheros/delete/'.$f->id, '<span class="glyphicon glyphicon-trash"></span> Borrar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarlo del sistema?')")); ?></td>

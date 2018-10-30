@@ -24,9 +24,6 @@
         }
     ?></p>
 <p>
-	<strong>Inscrito en la AEPD:</strong>
-	<?php if($fichero->inscrito){echo "SÍ";}else{echo "NO";}; ?></p>
-<p>
 	<strong>Fecha de inscripción:</strong>
 	<?php echo date_conv($fichero->fecha); ?></p>
 <p>

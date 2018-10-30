@@ -11,7 +11,6 @@ class Create_ficheros
 			'idtipo' => array('constraint' => 11, 'type' => 'int'),
 			'ubicacion' => array('constraint' => 255, 'type' => 'varchar'),
 			'soporte' => array('constraint' => 255, 'type' => 'varchar'),
-			'inscrito' => array('constraint' => 11, 'type' => 'int'),
 			'fecha' => array('type' => 'date'),
 			'cesion' => array('constraint' => 11, 'type' => 'int'),
 			'created_at' => array('constraint' => 11, 'type' => 'int', 'null' => true),
