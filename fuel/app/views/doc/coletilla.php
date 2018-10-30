@@ -18,7 +18,7 @@ $pdf->SetFont('Arial','',12);
 $pdf->Ln(5);
 $pdf->SetFont('Arial','BU',15);
 $pdf->MultiCell(0,10,strtoupper('coletilla para e-mails'),0,'C');
-$pdf->Ln(15);
+$pdf->Ln(10);
 $pdf->SetFont('Arial','',11);
 $pdf->MultiCell(0,10,'***************************************************************************************************************',0,'J');
 $pdf->SetFont('Arial','BI',11);
