@@ -13,17 +13,16 @@ class Controller_Ficheros extends Controller_Template
 		$this->template->content = View::forge('ficheros/list', $data);
 	}
 
-	public function action_noinscritos(){
-		$data['ficheros'] = Model_Fichero::find('all',array('where'=>array('inscrito'=>0)));
-		$this->template->title = "Ficheros pendientes de inscribir";
-		$this->template->content = View::forge('ficheros/noinscritos', $data);
-	}
-
     public function action_viewall($idcliente){
-        $data['ficheros'] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$idcliente)));
-        $this->template->title = "Ficheros de datos del cliente seleccionado";
-        $data['cliente'] = Model_Cliente::find($idcliente)->get('nombre');
-        $this->template->content = View::forge('ficheros/viewall', $data);
+		if(Session::get('idrol')==3 && strcmp(Session::get('iduser'),$idcliente)!=0){
+			return \Fuel\Core\Response::redirect('welcome/not_found');
+		}
+        else{
+            $data['ficheros'] = Model_Fichero::find('all',array('where'=>array('idcliente'=>$idcliente)));
+            $this->template->title = "Ficheros de datos del cliente seleccionado";
+            $data['cliente'] = Model_Cliente::find($idcliente)->get('nombre');
+            $this->template->content = View::forge('ficheros/viewall', $data);
+        }
     }
 
 	public function action_view($id = null){
@@ -51,9 +50,10 @@ class Controller_Ficheros extends Controller_Template
 					'idcliente' => Input::post('idcliente'),
 					'soporte' => Input::post('soporte'),
 					'nivel' => Input::post('nivel'),
-					'inscrito' => Input::post('inscrito'),
-					'fecha' => Input::post('fecha'),
-					'cesion' => Input::post('cesion'),
+					'base' => Input::post('base'),
+					'origen' => Input::post('origen'),
+					'recogida' => Input::post('recogida'),
+					'trans' => Input::post('trans')
 				));
 
 				if ($fichero and $fichero->save()){
@@ -102,9 +102,10 @@ class Controller_Ficheros extends Controller_Template
 			$fichero->idcliente = Input::post('idcliente');
 			$fichero->soporte = Input::post('soporte');
 			$fichero->nivel = Input::post('nivel');
-			$fichero->inscrito = Input::post('inscrito');
-			$fichero->fecha = Input::post('fecha');
-			$fichero->cesion = Input::post('cesion');
+			$fichero->base = Input::post('base');
+			$fichero->origen = Input::post('origen');
+			$fichero->recogida = Input::post('recogida');
+			$fichero->trans = Input::post('trans');
 
 			if ($fichero->save()){
 				Session::set_flash('success', 'Fichero de datos actualizado.');
@@ -121,9 +122,10 @@ class Controller_Ficheros extends Controller_Template
 				$fichero->idcliente = $val->validated('idcliente');
 				$fichero->soporte = $val->validated('soporte');
 				$fichero->nivel = $val->validated('nivel');
-				$fichero->inscrito = $val->validated('inscrito');
-				$fichero->fecha = $val->validated('fecha');
-				$fichero->cesion = $val->validated('cesion');
+				$fichero->base = $val->validated('base');
+				$fichero->origen = $val->validated('origen');
+				$fichero->recogida = $val->validated('recogida');
+				$fichero->trans = $val->validated('trans');
 
 				Session::set_flash('error', $val->error());
 			}
@@ -132,6 +134,7 @@ class Controller_Ficheros extends Controller_Template
 
         $data['tipos'] = Model_Tipo_Fichero::find('all');
         $data['idcliente'] = $fichero->idcliente;
+		$data['datos'] = array();
 
 		$this->template->title = "Editar datos de fichero de datos";
 		$this->template->content = View::forge('ficheros/edit',$data);

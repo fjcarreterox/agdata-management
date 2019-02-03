@@ -306,15 +306,21 @@
                 <br/>
                 <?php if(empty($ficheros)):?>
                     <p>Aún no se han registrado ficheros de datos para este cliente en el sistema. Utiliza el botón siguiente para crearlos.</p>
-                <?php else: ?>
+                <?php else:
+                    $soporte_ops = array(
+                        "digital"=>"En formato digital",
+                        "papel"=>"En papel",
+                        "mixto"=>"Mixto"
+                    );
+
+                    ?>
                     <h4>Ficheros de datos identificados</h4>
                 <table class="table table-striped table-bordered table-hover table-responsive">
                     <thead>
                     <tr class="text-center">
                         <td><strong>Tipo</strong></td>
-                        <td><strong>Nivel</strong></td>
-                        <td><strong>Soporte</strong></td>
-                        <td><strong>Cesión de datos</strong></td>
+                        <td><strong>Nivel de Seguridad</strong></td>
+                        <td><strong>Sistema de tratamiento</strong></td>
                         <td>&nbsp;</td>
                     </tr>
                     </thead>
@@ -337,8 +343,7 @@
                                         echo "-- NO ESPECIFICADO --";
                                 }
                                 ?></td>
-                            <td><?php echo $f->soporte; ?></td>
-                            <td><?php if($f->cesion){echo "SÍ";}else{echo "NO";}; ?></td>
+                            <td><?php echo $soporte_ops[$f->soporte]; ?></td>
                             <td><?php echo Html::anchor('ficheros/view/'.$f->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank')); ?>
                                 <?php echo Html::anchor('rel/estructura/data/'.$f->id, '<span class="glyphicon glyphicon-file"></span> Datos',array('class'=>'btn btn-info')); ?>
                                 <?php echo Html::anchor('ficheros/delete/'.$f->id, '<span class="glyphicon glyphicon-trash"></span> Borrar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarlo del sistema?')")); ?></td>

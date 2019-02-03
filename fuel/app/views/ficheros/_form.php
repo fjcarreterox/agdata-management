@@ -5,10 +5,28 @@ foreach($tipos as $t){
 }
 
 $soporte_ops = array(
-                    "digital"=>"En formato digital",
-                    "papel"=>"En papel",
-                    "mixto"=>"Mixto"
-                );
+    "digital"=>"En formato digital",
+    "papel"=>"En papel",
+    "mixto"=>"Mixto"
+);
+
+$base_ops = array(
+    "consent"=>"Consentimiento del interesado",
+    "interes"=>"Interés legítimo",
+    "ejecucion"=>"Ejecución de un contrato"
+);
+$origen_ops = array(
+    "propio"=>"El propio interesado o su representante legal",
+    "fuentes"=>"Fuentes accesibles al público",
+    "entpriv"=>"Entidades privadas",
+    "entpub"=>"Entidades públicas"
+);
+$recogida_ops = array(
+    "personalmente"=>"Personalmente",
+    "forms"=>"Formularios",
+    "email"=>"E-mail",
+    "internet"=>"Internet"
+);
 $boolean_ops = array( "0"=>"NO","1"=>"SÍ");
 
 $niveles_ops = array("NO ESPECIFICADO","Básico","Medio","Alto");
@@ -21,7 +39,7 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 		</div>
         <?php echo Form::input('idcliente', Input::post('idcliente', isset($fichero) ? $fichero->idcliente : $idcliente), array('class' => 'col-md-4 form-control', 'type'=>'hidden')); ?>
 		<div class="form-group">
-			<?php echo Form::label('Soporte en el que se almacena', 'soporte', array('class'=>'control-label')); ?>
+			<?php echo Form::label('Sistema de tratamiento', 'soporte', array('class'=>'control-label')); ?>
 			<?php echo Form::select('soporte', Input::post('soporte', isset($fichero) ? $fichero->soporte : ''),$soporte_ops, array('class' => 'col-md-4 form-control')); ?>
 		</div>
         <div class="form-group">
@@ -29,22 +47,26 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
             <?php echo Form::select('nivel', Input::post('nivel', isset($fichero) ? $fichero->nivel : ''),$niveles_ops, array('class' => 'col-md-4 form-control')); ?>
         </div>
         <div class="form-group">
-			<?php echo Form::label('Inscrito en la AEPD', 'inscrito', array('class'=>'control-label')); ?>
-			<?php echo Form::select('inscrito', Input::post('inscrito', isset($fichero) ? $fichero->inscrito : ''),$boolean_ops, array('class' => 'col-md-4 form-control')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Fecha de inscripción', 'fecha', array('class'=>'control-label')); ?>
-			<?php echo Form::input('fecha', Input::post('fecha', isset($fichero) ? $fichero->fecha : ''), array('class' => 'col-md-4 form-control', 'type'=>'date')); ?>
-		</div>
-		<div class="form-group">
-			<?php echo Form::label('Cesión del fichero a terceros', 'cesion', array('class'=>'control-label')); ?>
-			<?php echo Form::select('cesion', Input::post('cesion', isset($fichero) ? $fichero->cesion : ''),$boolean_ops, array('class' => 'col-md-4 form-control')); ?>
-		</div>
-<?php //print_r($datos);
+            <?php echo Form::label('Base de legitimación', 'base', array('class'=>'control-label')); ?>
+            <?php echo Form::select('base', Input::post('base', isset($fichero) ? $fichero->base : ''),$base_ops, array('class' => 'col-md-4 form-control')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo Form::label('Origen de los datos', 'origen', array('class'=>'control-label')); ?>
+            <?php echo Form::select('origen', Input::post('origen', isset($fichero) ? $fichero->origen : ''),$origen_ops, array('class' => 'col-md-4 form-control')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo Form::label('Procedimiento de recogida de datos', 'recogida', array('class'=>'control-label')); ?>
+            <?php echo Form::select('recogida', Input::post('recogida', isset($fichero) ? $fichero->recogida : ''),$recogida_ops, array('class' => 'col-md-4 form-control')); ?>
+        </div>
+        <div class="form-group">
+            <?php echo Form::label('Transferencias internacionales de datos', 'trans', array('class'=>'control-label')); ?>
+            <?php echo Form::select('trans', Input::post('trans', isset($fichero) ? $fichero->trans : ''),$boolean_ops, array('class' => 'col-md-4 form-control')); ?>
+        </div>
+<?php
+$datos_tmp=array();
 foreach($datos as $d){
     $datos_tmp[$d["tipo"]][$d["id"]] = $d["nombre"];
 }
-//print_r($datos_tmp);
 $tipo_ops = array("Datos de carácter identificativo","Datos de características personales","Datos de circunstancias sociales","Datos académicos y profesionales","Datos de detalles de empleo","Datos de información comercial","Datos económico-financieros y de seguros","Datos de transacciones","Datos especialmente protegidos");
 echo '<div class="panel-group" id="accordion">';
 $i=1;
@@ -74,9 +96,8 @@ foreach($datos_tmp as $t => $dt){
 }
 echo "</div>";
 ?>
-
         <br/>
-            <div class="form-group">
+        <div class="form-group">
 			<label class='control-label'>&nbsp;</label>
 			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar cambios', array('class' => 'btn btn-primary','type'=>'submit')); ?>
         </div>

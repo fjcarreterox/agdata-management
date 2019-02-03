@@ -9,8 +9,10 @@ class Model_Fichero extends Model
 		'idcliente',
 		'soporte',
 		'nivel',
-		'fecha',
-		'cesion',
+		'base',
+		'origen',
+		'recogida',
+		'trans',
 		'created_at',
 		'updated_at',
 	);
@@ -31,9 +33,12 @@ class Model_Fichero extends Model
 		$val = Validation::forge($factory);
 		$val->add_field('idtipo', 'Tipo de fichero', 'required|valid_string[numeric]');
 		$val->add_field('idcliente', 'Cliente', 'required|valid_string[numeric]');
-		$val->add_field('soporte', 'Soporte del fichero', 'required|max_length[255]');
+		$val->add_field('soporte', 'Sistema de tratamiento', 'required|max_length[255]');
 		$val->add_field('nivel', 'Nivel de seguridad', 'required|valid_string[numeric]');
-		$val->add_field('cesion', 'Cesión a terceros', 'required|valid_string[numeric]');
+		$val->add_field('base', 'Base de legitimación', 'required|max_length[255]');
+		$val->add_field('origen', 'Origen de los datos', 'required|max_length[255]');
+		$val->add_field('recogida', 'Procedimiento de recogida de datos', 'required|max_length[255]');
+		$val->add_field('trans', 'Transferencias internacionales de datos', 'required|max_length[255]');
 		return $val;
 	}
 }
