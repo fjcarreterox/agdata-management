@@ -13,11 +13,7 @@ class Model_Adaptacion extends Model
 		'num_laptop_online',
 		'pass_freq',
 		'backup_freq',
-		'management_sw',
-		'access_control',
-        'afiliacion',
-        'salud',
-        'consentimiento',
+		'storage',
 		'created_at',
 		'updated_at',
 	);
@@ -44,8 +40,7 @@ class Model_Adaptacion extends Model
 		$val->add_field('num_laptop_online', 'Núm. portátiles conectados', 'required|valid_string[numeric]');
 		$val->add_field('pass_freq', 'Frecuencia de cambio de contraseña', 'required|max_length[255]');
 		$val->add_field('backup_freq', 'Frecuencia de copias de seguridad', 'required|max_length[255]');
-		//$val->add_field('management_sw', 'Management Sw', 'required|max_length[255]');
-		//$val->add_field('access_control', 'Access Control', 'required|max_length[255]');
+		$val->add_field('storage', 'Donde se almacenand las copias de seguridad', 'required|max_length[255]');
 
 		return $val;
 	}

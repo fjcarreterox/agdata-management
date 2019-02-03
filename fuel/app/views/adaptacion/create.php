@@ -1,4 +1,4 @@
-<h2>Auditoría de <span class='muted'>adaptacion</span> para <?php echo $nombre;?></h2>
+<h2><strong>Cuestionario informático</strong> para <?php echo $nombre;?></h2>
 <br/>
 <?php
 $data['idcliente'] = $idcliente;

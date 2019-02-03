@@ -208,14 +208,14 @@
         </div>
         <div id="collapseFour" class="panel-collapse collapse">
             <div class="panel-body">
-                <p>En esta sección mostramos, por orden, los datos recogidos en el <b>cuestionario de la auditoría</b>, los <b>ficheros de datos identificados</b> y
+                <p>En esta sección mostramos, por orden, los datos recogidos en el <b>cuestionario informático</b>, los <b>ficheros de datos identificados</b> y
                     por último las <b>cesiones de datos</b>.</p>
                 <br/>
                 <?php if(empty($adaptacion)):?>
-                    <p>No se ha realizado el cuestionario básico de adaptación al cliente. Procede desde el siguiente botón:</p>
-                    <p><?php echo Html::anchor('adaptacion/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Cuestionario básico de adaptación', array('class' => 'btn btn-primary')); ?></p>
+                    <p>No se ha realizado el cuestionario informático al cliente. Procede desde el siguiente botón:</p>
+                    <p><?php echo Html::anchor('adaptacion/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Cuestionario informático', array('class' => 'btn btn-primary')); ?></p>
                 <?php else: ?>
-                    <h4>Datos obtenidos del cuestionario básico de adptación</h4>
+                    <h4>Datos obtenidos del <strong>cuestionario informático</strong></h4>
                     <table class="table table-striped table-bordered table-hover table-responsive">
                         <tbody>
                         <tr class="text-left">
@@ -247,61 +247,19 @@
                             <td><?php echo $adaptacion->backup_freq; ?></td>
                         </tr>
                         <tr class="text-left">
-                            <td>Software de gestión para almacenar datos de carácter personal</td>
-                            <td><?php if($adaptacion->management_sw!=''){echo $adaptacion->management_sw;}else{echo '<span class="red">-- NO ESPECIFICADO --</span>';} ?></td>
-                        </tr>
-                        <tr class="text-left">
-                            <td>Tipo de control de acceso a los ficheros de datos</td>
-                            <td><?php if($adaptacion->access_control!=''){echo $adaptacion->access_control;}else{echo '<span class="red">-- NO ESPECIFICADO --</span>';} ?></td>
-                        </tr>
-                        <tr>
-                            <td>Datos almacenados de afiliación sindical (pagos de las cuotas)</td>
+                            <td>Localización de las copias de seguridad</td>
                             <td><?php
-                            switch ($adaptacion->afiliacion) {
-                                case 0:
-                                    echo "NO";
-                                    break;
-                                case 1:
-                                    echo "SÍ";
-                                    break;
-                                default:
-                                    echo "-- NO ESPECIFICADO --";
-                            }
-                            ?></td>
-                        </tr>
-                        <tr>
-                            <td>Datos recabados de salud de los empleados</td>
-                            <td><?php
-                                switch ($adaptacion->salud) {
-                                    case 0:
-                                        echo "NO";
-                                        break;
-                                    case 1:
-                                        echo "SÍ";
-                                        break;
-                                    default:
-                                        echo "-- NO ESPECIFICADO --";
-                                }
-                                ?></td>
-                        </tr>
-                        <tr>
-                            <td>Consentimiento por escrito de lo anterior</td>
-                            <td><?php
-                                switch ($adaptacion->consentimiento) {
-                                    case 0:
-                                        echo "NO";
-                                        break;
-                                    case 1:
-                                        echo "SÍ";
-                                        break;
-                                    default:
-                                        echo "-- NO ESPECIFICADO --";
-                                }
-                                ?></td>
+                                $store_ops = array(
+                                    "pendrive"=>"Pendrive",
+                                    "disco"=>"Disco duro externo",
+                                    "nube"=>"Servicios en la nube",
+                                    "otros"=>"Otros"
+                                );
+                                if($adaptacion->storage!=''){echo $store_ops[$adaptacion->storage];}else{echo '<span class="red">-- NO ESPECIFICADO --</span>';} ?></td>
                         </tr>
                         </tbody>
                     </table>
-                    <p><?php echo Html::anchor('adaptacion/edit/'.$adaptacion->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos del cuestionario', array('class' => 'btn btn-success')); ?></p>
+                    <p><?php echo Html::anchor('adaptacion/edit/'.$adaptacion->id, '<span class="glyphicon glyphicon-pencil"></span> Editar datos del cuestionario informático', array('class' => 'btn btn-success')); ?></p>
                 <?php endif; ?>
                 <br/>
                 <?php if(empty($ficheros)):?>

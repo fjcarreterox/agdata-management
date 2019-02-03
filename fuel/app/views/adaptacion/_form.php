@@ -8,7 +8,13 @@ $pass_ops = array(
     "Semestral"=>"Semestral",
     "Anual"=>"Anual",
     "Nunca"=>"Nunca"
-                );
+);
+$store_ops = array(
+    "pendrive"=>"Pendrive",
+    "disco"=>"Disco duro externo",
+    "nube"=>"Servicios en la nube",
+    "otros"=>"Otros"
+);
 
 $bool_ops = array("NO","SÍ");
 
@@ -42,32 +48,16 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
         <?php echo Form::input('idcliente', Input::post('idcliente', isset($adaptacion) ? $adaptacion->idcliente : $idcliente), array('class' => 'col-md-4 form-control', 'type'=>'hidden')); ?>
 		<div class="form-group">
 			<?php echo Form::label('¿Con qué frecuencia se realizan cambios de constraseñas en los equipos?', 'pass_freq', array('class'=>'control-label')); ?>
-			<?php echo Form::select('pass_freq', Input::post('pass_freq', isset($adaptacion) ? $adaptacion->pass_freq : ''), $pass_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Pass freq')); ?>
+			<?php echo Form::select('pass_freq', Input::post('pass_freq', isset($adaptacion) ? $adaptacion->pass_freq : ''), $pass_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Frecuencia de cambio de contraseñas')); ?>
 		</div>
 		<div class="form-group">
 			<?php echo Form::label('¿Con qué frecuencia se realizan copias de seguridad de los equipos?', 'backup_freq', array('class'=>'control-label')); ?>
-			<?php echo Form::select('backup_freq', Input::post('backup_freq', isset($adaptacion) ? $adaptacion->backup_freq : ''),$pass_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Backup freq')); ?>
+			<?php echo Form::select('backup_freq', Input::post('backup_freq', isset($adaptacion) ? $adaptacion->backup_freq : ''),$pass_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Frecuencia de creación de copias de seguridad')); ?>
 		</div>
 		<div class="form-group">
-			<?php echo Form::label('¿Se emplea algún software de gestión para almacenar datos de carárter personal? (Vacío si no aplica)', 'management_sw', array('class'=>'control-label')); ?>
-			<?php echo Form::input('management_sw', Input::post('management_sw', isset($adaptacion) ? $adaptacion->management_sw : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el nombre de software de gestión')); ?>
+			<?php echo Form::label('¿Dónde se almacenan las copias de seguridad?', 'storage', array('class'=>'control-label')); ?>
+			<?php echo Form::select('storage', Input::post('storage', isset($adaptacion) ? $adaptacion->storage : ''), $store_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el medio donde se almacenan las copias de seguridad')); ?>
     	</div>
-		<div class="form-group">
-			<?php echo Form::label('¿Hay algún tipo de control de acceso físico a los ficheros de datos? (llave, portero automático, teclado de control de acceso)', 'access_control', array('class'=>'control-label')); ?>
-			<?php echo Form::input('access_control', Input::post('access_control', isset($adaptacion) ? $adaptacion->access_control : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Indique el tipo de control de acceso utilizado')); ?>
-		</div>
-        <div class="form-group">
-            <?php echo Form::label('¿Se almacenan datos de afiliación sindical para realizar los pagos de las cuotas?', 'afiliacion', array('class'=>'control-label')); ?>
-            <?php echo Form::select('afiliacion', Input::post('afiliacion', isset($adaptacion) ? $adaptacion->afiliacion : ''), $bool_ops, array('class' => 'col-md-4 form-control')); ?>
-        </div>
-        <div class="form-group">
-            <?php echo Form::label('¿Se recaban datos de salud de los empleados?', 'salud', array('class'=>'control-label')); ?>
-            <?php echo Form::select('salud', Input::post('salud', isset($adaptacion) ? $adaptacion->salud : ''), $bool_ops, array('class' => 'col-md-4 form-control')); ?>
-        </div>
-        <div class="form-group">
-            <?php echo Form::label('¿Existe para ello consentimiento por escrito del empleado?', 'consentimiento', array('class'=>'control-label')); ?>
-            <?php echo Form::select('consentimiento', Input::post('consentimiento', isset($adaptacion) ? $adaptacion->consentimiento : ''), $bool_ops, array('class' => 'col-md-4 form-control')); ?>
-        </div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
 			<?php echo Form::button('submit', '<span class="glyphicon glyphicon-floppy-save"></span> Guardar datos de auditoría', array('class' => 'btn btn-primary','type'=>'submit')); ?>

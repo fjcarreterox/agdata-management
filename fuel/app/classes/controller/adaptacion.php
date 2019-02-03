@@ -39,11 +39,7 @@ class Controller_Adaptacion extends Controller_Template
 					'num_laptop_online' => Input::post('num_laptop_online'),
 					'pass_freq' => Input::post('pass_freq'),
 					'backup_freq' => Input::post('backup_freq'),
-					'management_sw' => Input::post('management_sw'),
-					'access_control' => Input::post('access_control'),
-					'afiliacion' => Input::post('afiliacion'),
-					'salud' => Input::post('salud'),
-					'consentimiento' => Input::post('consentimiento'),
+					'storage' => Input::post('storage')
 				));
 
 				if ($adaptacion and $adaptacion->save()){
@@ -84,11 +80,7 @@ class Controller_Adaptacion extends Controller_Template
 			$adaptacion->num_laptop_online = Input::post('num_laptop_online');
 			$adaptacion->pass_freq = Input::post('pass_freq');
 			$adaptacion->backup_freq = Input::post('backup_freq');
-			$adaptacion->management_sw = Input::post('management_sw');
-			$adaptacion->access_control = Input::post('access_control');
-			$adaptacion->afiliacion = Input::post('afiliacion');
-			$adaptacion->salud = Input::post('salud');
-			$adaptacion->consentimiento = Input::post('consentimiento');
+			$adaptacion->storage = Input::post('storage');
 
 			if ($adaptacion->save()){
 				Session::set_flash('success', 'Datos del cuestionario básico actualizados.');
@@ -108,11 +100,7 @@ class Controller_Adaptacion extends Controller_Template
 				$adaptacion->num_laptop_online = $val->validated('num_laptop_online');
 				$adaptacion->pass_freq = $val->validated('pass_freq');
 				$adaptacion->backup_freq = $val->validated('backup_freq');
-				$adaptacion->management_sw = $val->validated('management_sw');
-				$adaptacion->access_control = $val->validated('access_control');
-				$adaptacion->afiliacion = $val->validated('afiliacion');
-				$adaptacion->salud = $val->validated('salud');
-				$adaptacion->consentimiento = $val->validated('consentimiento');
+				$adaptacion->storage = $val->validated('storage');
 
 				Session::set_flash('error', $val->error());
 			}
