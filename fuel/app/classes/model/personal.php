@@ -13,6 +13,7 @@ class Model_Personal extends Model
         'email',
 		'cargofuncion',
 		'relacion',
+		'access',
 		'fecha_alta',
 		'fecha_baja',
 		'created_at',
@@ -40,6 +41,7 @@ class Model_Personal extends Model
 		//$val->add_field('email', 'E-amil', 'required|max_length[255]');
 		//$val->add_field('cargofuncion', 'Cargofuncion', 'required|max_length[255]');
 		$val->add_field('relacion', 'Relacion', 'required|valid_string[numeric]');
+		$val->add_field('access', 'Acceso a los ficheros', 'required|max_length[255]');
 
 		return $val;
 	}

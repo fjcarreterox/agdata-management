@@ -76,6 +76,7 @@ class Controller_Personal extends Controller_Template
 					'email' => Input::post('email'),
 					'cargofuncion' => Input::post('cargofuncion'),
 					'relacion' => Input::post('relacion'),
+					'access' => Input::post('access'),
 					'fecha_alta' => Input::post('fecha_alta'),
 					'fecha_baja' => Input::post('fecha_baja'),
 				));
@@ -126,6 +127,7 @@ class Controller_Personal extends Controller_Template
 			$personal->email = Input::post('email');
 			$personal->cargofuncion = Input::post('cargofuncion');
 			$personal->relacion = Input::post('relacion');
+			$personal->access = Input::post('access');
 			$personal->fecha_alta = Input::post('fecha_alta');
 			$personal->fecha_baja = Input::post('fecha_baja');
 
@@ -148,6 +150,7 @@ class Controller_Personal extends Controller_Template
 				$personal->email = $val->validated('email');
 				$personal->cargofuncion = $val->validated('cargofuncion');
 				$personal->relacion = $val->validated('relacion');
+				$personal->access = $val->validated('access');
 				$personal->fecha_alta = $val->validated('fecha_alta');
 				$personal->fecha_baja = $val->validated('fecha_baja');
 				Session::set_flash('error', $val->error());
@@ -163,9 +166,16 @@ class Controller_Personal extends Controller_Template
 
 	public function action_delete($id = null){
 		is_null($id) and Response::redirect('personal/listall');
-
+        //TODO: this person appear on a contract? If so, put a zero in that field.
 		if ($personal = Model_Personal::find($id)){
-			$personal->delete();
+            $contracts = Model_Contrato::find('all',array('where'=>array('idpersonal'=>$id)));
+            if(count($contracts)>0){
+                foreach($contracts as $c){
+                    //marked as not available. We need to associate another person instead.
+                    $c->idpersonal=0;
+                }
+            }
+            //$personal->delete();
 			Session::set_flash('success', 'Trabajador borrado del sistema.');
 		}
 		else{

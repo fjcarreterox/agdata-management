@@ -16,6 +16,13 @@ if(isset($relaciones)) {
         $relaciones_opts[$r->id] = $r->nombre;
     }
 }
+
+$access_ops = array(
+    "create"=>"Creación",
+    "use"=>"Uso",
+    "delete"=>"Supresión"
+);
+
 echo Form::open(array("class"=>"form-horizontal")); ?>
 	<fieldset>
 		<div class="form-group">
@@ -50,6 +57,10 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::label('Relación con AGDATA', 'relacion', array('class'=>'control-label')); ?><span class="red"> *</span>
 			<?php echo Form::select('relacion', Input::post('relacion', isset($personal) ? $personal->relacion : ''),$relaciones_opts, array('class' => 'col-md-4 form-control', 'placeholder'=>'Tipo de relación con nosotros')); ?>
 		</div>
+        <div class="form-group">
+            <?php echo Form::label('Tipo de acceso a ficheros', 'access', array('class'=>'control-label')); ?><span class="red"> *</span>
+            <?php echo Form::select('access', Input::post('access', isset($personal) ? $personal->access : ''),$access_ops, array('class' => 'col-md-4 form-control', 'placeholder'=>'Tipo de relación con nosotros')); ?>
+        </div>
         <div class="form-group">
             <?php echo Form::label('Fecha de alta en el cliente', 'fecha_alta', array('class'=>'control-label')); ?>
             <?php echo Form::input('fecha_alta', Input::post('fecha_alta', isset($personal) ? $personal->fecha_alta : ''), array('class' => 'col-md-4 form-control', 'type'=>'date')); ?>
