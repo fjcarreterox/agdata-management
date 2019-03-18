@@ -37,6 +37,14 @@ if (!isset($idcliente)) {
     <h3>Listado de documentos</h3>
     <table class="table table-striped">
         <?php
+        //All in one doc
+        echo "<tr><td><strong>Documentación LOPD completa</strong></td>";
+        echo "<td>".Html::anchor('doc/allin1/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
+        //Rights letters
+        echo "<tr><td><strong>Cartas Ejercicio de derechos</strong></td>";
+        echo "<td>".Html::anchor('doc/letters/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
         //Security doc
         echo "<tr><td>Documento de seguridad</td>";
         echo "<td>".Html::anchor('clientes/doc_seguridad/' . $idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default'));
