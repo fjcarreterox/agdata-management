@@ -49,11 +49,20 @@ $niveles_ops = array("NO ESPECIFICADO","Básico","Medio","Alto");
         }
     ?></li>
     <li><strong>Base de legitimación:</strong>
-	<?php echo $base_ops[$fichero->base]; ?></li>
+	<?php
+        if($fichero->base){echo $base_ops[$fichero->base];}
+        else{ echo "N/D";}
+         ?></li>
     <li><strong>Origen de los datos:</strong>
-	<?php echo $origen_ops[$fichero->origen]; ?></li>
+	<?php
+        if($fichero->origen){echo $origen_ops[$fichero->origen];}
+        else{echo "N/D";}
+         ?></li>
     <li><strong>Procedimiento de recogida de datos:</strong>
-    <?php echo $recogida_ops[$fichero->recogida]; ?></li>
+    <?php
+        if($fichero->recogida){echo $recogida_ops[$fichero->recogida];}
+        else{echo "N/D";}
+    ?></li>
     <li><strong>Transferencias internacionales de datos:</strong>
     <?php echo $boolean_ops[$fichero->trans]; ?></li>
 </ul>

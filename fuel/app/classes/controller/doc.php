@@ -83,6 +83,29 @@ class Controller_Doc extends Controller_Template{
         //Obtaining the max level for all the registered files
         $max_level = 0;
         $levels = array("No especificado","Básico","Medio","Alto");
+    public function action_allin1($idc){
+        $c=Model_Cliente::find($idc);
+        $isCPP=($c->tipo == 6)? true: false;
+        //getting all the customer data
+        $data["idc"]=$idc;
+        $data["type"] = Model_Tipo_Cliente::find($c->tipo)->get('tipo');
+        $data["cname"]=$c->nombre;
+        $data["cif"]=$c->cif_nif;
+        $data["dir"]=$c->direccion;
+        $data["cp"]=$c->cpostal;
+        $data["loc"]=$c->loc;
+        $data["prov"]=$c->prov;
+        $data["email"]=$c->email;
+        $data["act"]=$c->actividad;
+        $data["web"]=$c->pweb;
+        //workers info
+        $data['trab'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$idc,'relacion'=>4)));
+        //Registered files info
+        $files_raw = Model_Fichero::find('all',array('where'=>array('idcliente'=>$idc)));
+        //Obtaining the max level for all the registered files
+        $max_level = 0;
+        $levels = array("No especificado","Básico","Medio","Alto");
+
         foreach($files_raw as $f){
             $files[]=array(
                 "id" => $f->id,
@@ -91,7 +114,10 @@ class Controller_Doc extends Controller_Template{
                 "target" => Model_Tipo_Fichero::find($f->idtipo)->get('finalidad'),
                 "level_name" => $levels[$f->nivel],
                 "idlevel" => $f->nivel,
-                "supp" => $f->soporte
+                "supp" => $f->soporte,
+                "base" => $f->base,
+                "origen" => $f->origen,
+                "recogida" => $f->recogida,
             );
             if($f->nivel > $max_level){
                 $max_level=$f->nivel;
@@ -122,14 +148,33 @@ class Controller_Doc extends Controller_Template{
             $data['reps'] = $reps_data;
             $data['num_reps'] = count($reps_data);
             $data['pres'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idc,'relacion'=>6)));
-            return View::forge('doc/seguridad_cpp',$data)->render();
+            return View::forge('doc/allin1_cpp',$data)->render();
         }
         else{
             $data['reps'] = Model_Personal::find('first', array('where' => array('idcliente' => $idc, 'relacion' => 1)));
             $data['rep_seg'] = Model_Personal::find('first', array('where' => array('idcliente' => $idc, 'relacion' => 3)));
             $data['personal'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idc,'relacion'=>6)));
-            return View::forge('doc/seguridad',$data)->render();
+            return View::forge('doc/allin1',$data)->render();
         }
+    }
+
+    public function action_letters($idc){
+        $c = Model_Cliente::find($idc);
+        $isCPP = ($c->tipo == 6) ? true : false;
+        //getting all the customer data
+        $data["idc"] = $idc;
+        $data["type"] = Model_Tipo_Cliente::find($c->tipo)->get('tipo');
+        $data["cname"] = $c->nombre;
+        $data["cif"] = $c->cif_nif;
+        $data["dir"] = $c->direccion;
+        $data["cp"] = $c->cpostal;
+        $data["loc"] = $c->loc;
+        $data["prov"] = $c->prov;
+        $data["email"] = $c->email;
+        $data["act"] = $c->actividad;
+        $data["web"] = $c->pweb;
+
+        return View::forge('doc/letters', $data)->render();
     }
 
     public function action_clausula($idcliente,$type){
