@@ -2,6 +2,7 @@
 <br/>
 <?php if ($clientes): ?>
 	<p>Nº total de clientes en el sistema: <strong><?php echo count($clientes); ?></strong></p>
+	<p><?php echo Html::anchor('clientes/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo cliente', array('class' => 'btn btn-success')); ?></p>
 	<table class="table table-striped">
 		<thead>
 		<tr>

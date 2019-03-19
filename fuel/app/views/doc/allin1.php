@@ -11,13 +11,13 @@ class PDFp extends PDF_MC_Table{
     function Header(){
         $this->SetFont('Arial','B',18);
         $this->Cell(0,25,utf8_decode('                DOCUMENTACIÓN LOPD'),0,0,'C');
-        $this->Ln(5);
+        $this->Ln(2.5);
         $this->SetFont('Arial','',13);
         $this->Cell(0,45,utf8_decode("                         ".mb_strtoupper(html_entity_decode($this->customer))),0,0,'C');
         $this->Ln(10);
         $this->Ln(10);
         $this->Image('http://gestion.agdata.es/assets/img/logo2.png',20,13,40);
-        $this->Ln(10);
+        $this->Ln(15);
     }
 
     function Footer(){
