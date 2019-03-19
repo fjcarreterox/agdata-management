@@ -200,11 +200,11 @@ foreach($files as $f){
     $pdf->SetWidths(array(65,100));
     $pdf->SetAligns(array('L','L'));
     $pdf->SetFont('Arial','B',10);
-    $pdf->Row(array("ACTIVIDAD DE TRATAMIENTO:",strtoupper($f["name"])));
+    $pdf->Row(array("ACTIVIDAD DE TRATAMIENTO:",mb_strtoupper($f["name"])));
     $pdf->SetFont('Arial','',10);
     if($f["base"]==""){$base="N/D";}
     else{$base=$base_ops[$f["base"]];}
-    $pdf->Row(array("BASE DE LEGITIMACIÓN",strtoupper($base)));
+    $pdf->Row(array("BASE DE LEGITIMACIÓN",mb_strtoupper($base)));
     $categorias="";
     $cat=array();
     $sdata = Model_Rel_Estructura::find('all',array('where'=>array('idfichero'=>$f['id'])));
@@ -213,14 +213,14 @@ foreach($files as $f){
         $cat[]=$type_ops[$datatype->tipo];
     }
     $categorias=implode("\n", array_unique($cat));
-    $pdf->Row(array("CATEGORÍA DE DATOS",strtoupper($categorias)));
-    $pdf->Row(array("SISTEMA DE TRATAMIENTO",strtoupper($f["supp"])));
+    $pdf->Row(array("CATEGORÍA DE DATOS",mb_strtoupper($categorias)));
+    $pdf->Row(array("SISTEMA DE TRATAMIENTO",mb_strtoupper($f["supp"])));
     if($f["origen"]==""){$origen="N/D";}
     else{$origen=$origen_ops[$f["origen"]];}
-    $pdf->Row(array("ORIGEN DE LOS DATOS",strtoupper($origen)));
+    $pdf->Row(array("ORIGEN DE LOS DATOS",mb_strtoupper($origen)));
     if($f["recogida"]==""){$rec="N/D";}
     else{$rec=$recogida_ops[$f["recogida"]];}
-    $pdf->Row(array("PROCEDIMIENTO DE RECOGIDA",strtoupper($rec)));
+    $pdf->Row(array("PROCEDIMIENTO DE RECOGIDA",mb_strtoupper($rec)));
     $pdf->Row(array("DURACIÓN DE OPERACIONES","HASTA FIN DE CONTRATO"));
     $pdf->Row(array("PLAZO PARA SUPRESIÓN DATOS","5 AÑOS SEGÚN NORMATIVA"));
     $pdf->Row(array("TRANSFERENCIA INTENACIONAL","NO SE CONTEMPLAN"));
@@ -235,7 +235,7 @@ foreach($files as $f){
         if($ces_names==""){$ces_names=html_entity_decode($ces_name);}
         else{$ces_names.="\n".html_entity_decode($ces_name);}
     }
-    $pdf->Row(array("ENCARGADOS DE TRATAMIENTO",$ces_names));
+    $pdf->Row(array("ENCARGADOS DE TRATAMIENTO",mb_strtoupper($ces_names)));
     $pdf->Ln(10);
 }
 
