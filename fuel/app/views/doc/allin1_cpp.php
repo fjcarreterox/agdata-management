@@ -166,6 +166,7 @@ foreach($ces as $c) {
     }
     $pdf->Row(array($ces_name, $ces_act, ""));
 }
+$pdf->Row(array("\n\n", "\n\n", "\n\n"));
 
 $pdf->AddPage();
 $pdf->Ln(10);

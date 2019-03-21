@@ -132,7 +132,7 @@ $pdf->Row(array("","Nombre completo","Datos de contacto (email, teléfono)"));
 $pdf->SetFont('Arial','',10);
 $pdf->SetAligns(array('L','L','L'));
 
-$pdf->Row(array("Responsable de Seguridad:\n\n",$rep_seg["nombre"],$rep_seg['tlfno']."\n\n".$rep_seg['email']));
+$pdf->Row(array("Responsable de Seguridad:\n\n",html_entity_decode($rep_seg["nombre"]),$rep_seg['tlfno']."\n\n".$rep_seg['email']));
 $pdf->Row(array("Responsable informático:\n\n","",""));
 $pdf->Row(array("Delegado de protección de datos:\n\n","Análisis y Gestión de Datos SL",""));
 $pdf->Ln(10);
@@ -145,7 +145,7 @@ $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Todas las empresas o terceros que tengan acceso a datos de los ficheros, para la prestación de servicios al responsable del tratamiento, deben suscribir un contrato de cesión de datos conforme al Art. 28 del Reglamento Europeo de Protección de Datos y adjuntarse al presente Protocolo de Seguridad (Anexo I).'),0,'J');
 $pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('En la actualidad, son:'),0,'J');
-$pdf->Ln(10);
+$pdf->Ln(5);
 $pdf->SetWidths(array(65,50,50));
 $pdf->SetAligns(array('C','C','C'));
 $pdf->SetFont('Arial','B',10);
@@ -160,6 +160,7 @@ foreach($ces as $c) {
     }
     $pdf->Row(array($ces_name, $ces_act, ""));
 }
+$pdf->Row(array("\n\n", "\n\n", "\n\n"));
 
 $pdf->AddPage();
 $pdf->Ln(10);
