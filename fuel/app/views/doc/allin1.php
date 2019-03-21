@@ -66,7 +66,7 @@ $date = "$m de $date_array[1]";
 
 $pdf->SetFont('Arial','I',11);
 $pdf->MultiCell(0,12,strtoupper($date),0,'C');
-$pdf->Ln(20);
+$pdf->Ln(85);
 
 $pdf->SetFont('Arial','BUI',9);
 $pdf->MultiCell(0,12,utf8_decode("NORMATIVA VIGENTE DE PROTECCIÓN DE DATOS"),0,'L');
@@ -132,10 +132,7 @@ $pdf->Row(array("","Nombre completo","Datos de contacto (email, teléfono)"));
 $pdf->SetFont('Arial','',10);
 $pdf->SetAligns(array('L','L','L'));
 
-$resp="";
-if($pres['nombre']){$resp=html_entity_decode($pres['nombre']);}
-
-$pdf->Row(array("Responsable de Seguridad:\n\n",$resp,$pres['tlfno']."\n\n".$pres['email']));
+$pdf->Row(array("Responsable de Seguridad:\n\n",$rep_seg["nombre"],$rep_seg['tlfno']."\n\n".$rep_seg['email']));
 $pdf->Row(array("Responsable informático:\n\n","",""));
 $pdf->Row(array("Delegado de protección de datos:\n\n","Análisis y Gestión de Datos SL",""));
 $pdf->Ln(10);
@@ -154,8 +151,14 @@ $pdf->SetAligns(array('C','C','C'));
 $pdf->SetFont('Arial','B',10);
 $pdf->Row(array("Encargado Tratamiento","Servicio prestado","Fecha firma contrato"));
 $pdf->SetFont('Arial','',10);
-for($i=0;$i<4;$i++) {
-    $pdf->Row(array("\n\n", "\n\n", "\n\n"));
+$ces_names="";
+foreach($ces as $c) {
+    $ces_name="";
+    if ($c->idcesionaria != 0) {
+        $ces_name = Model_Cliente::find($c->idcesionaria)->get("nombre");
+        $ces_act = Model_Cliente::find($c->idcesionaria)->get("actividad");
+    }
+    $pdf->Row(array($ces_name, $ces_act, ""));
 }
 
 $pdf->AddPage();
@@ -238,7 +241,7 @@ foreach($files as $f){
 
 //3
 $pdf->AddPage();
-$pdf->Ln(10);
+$pdf->Ln(2);
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode(strtoupper('3. EVALUACIÓN DE IMPACTO EN PROTECCIÓN DE DATOS')),0,'L');
 
@@ -262,7 +265,7 @@ $pdf->Ln(5);
 
 //4
 $pdf->AddPage();
-$pdf->Ln(10);
+$pdf->Ln(2);
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode(strtoupper('4. ANÁLISIS DE RIESGOS')),0,'L');
 $pdf->SetFont('Arial','',10);
@@ -306,7 +309,7 @@ $pdf->MultiCell(0,6,utf8_decode('Dichas medidas de seguridad deberán revisarse 
 
 //5
 $pdf->AddPage();
-$pdf->Ln(10);
+$pdf->Ln(2);
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode(mb_strtoupper('5. MEDIDAS DE SEGURIDAD')),0,'L');
 $pdf->SetFont('Arial','',10);
@@ -450,7 +453,7 @@ $pdf->MultiCell(0,6,utf8_decode('En dicha notificación se incluirá toda la inf
 
 //6
 $pdf->AddPage();
-$pdf->Ln(10);
+$pdf->Ln(2);
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode(mb_strtoupper('6. REVISIONES PERIÓDICAS')),0,'L');
 $pdf->SetFont('Arial','',10);
@@ -467,7 +470,7 @@ $pdf->MultiCell(0,6,utf8_decode('- Verificar el correcto cumplimiento de todas l
 
 //7
 $pdf->AddPage();
-$pdf->Ln(10);
+$pdf->Ln(2);
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,strtoupper(utf8_decode('7. ANEXOS')),0,'L');
 $pdf->SetFont('Arial','',10);
