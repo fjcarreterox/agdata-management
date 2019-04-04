@@ -62,7 +62,7 @@ $pdf->Ln(3);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,'PRIMERA',0,1,'L');
 $pdf->SetFont('Arial','',11);
-$pdf->MultiCell(0,6,utf8_decode('Que EL PRESTATARIO es una empresa que desarrolla, entre otras, la actividad de prestación de servicios de Auditoría de Seguridad en la Protección de Datos de Carácter Personal en aras a la adecuación de todo tipo de entidades y profesionales sometidos al cumplimiento de la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal (LOPD) y al Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales (Reglamento Europeo de Protección de Datos).'),0);
+$pdf->MultiCell(0,6,utf8_decode('Que EL PRESTATARIO es una empresa que desarrolla, entre otras, la actividad de prestación de servicios de Auditoría de Seguridad en la Protección de Datos de Carácter Personal en aras a la adecuación de todo tipo de entidades y profesionales sometidos al cumplimiento de la Ley Orgánica 3/2018 de Protección de Datos de Carácter Personal y garantía de derechos digitales (LOPDGDD) y al Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales (Reglamento Europeo de Protección de Datos).'),0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',12);
@@ -79,7 +79,7 @@ $pdf->Ln(5);
 
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(0,6,utf8_decode('CLAÚSULAS'),0,1,'C');
+$pdf->Cell(0,6,utf8_decode('CLÁUSULAS'),0,1,'C');
 $pdf->Ln(3);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,6,utf8_decode('1ª.- OBJETO'),0,1,'L');
@@ -112,13 +112,11 @@ if(isset($servicios_data[1])) {
     $pdf->MultiCell(0, 6, utf8_decode('Servicios iniciales de adaptación / actualización:'), 0);
     $pdf->SetFont('Arial', '', 12);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Análisis previo pormenorizado del estado del cliente. Auditoría previa y estudio de su documentación, para identificar deficiencias actuales en materia de protección de datos.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Análisis previo del estado del cliente y evaluación de deficiencias en materia de protección de datos.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Elaboración del Documento de Seguridad del cliente, o actualización, si fuese necesario.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Análisis de riesgos en protección de datos o Evaluación de impacto, según el caso.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Notificaciones a la Agencia Española de Protección de Datos, de las modificaciones, bajas o altas necesarias para la correcta adecuación de sus ficheros de datos personales (exigencia obligatoria hasta el 25 de mayo de 2018).'), 0);
-    $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de documentos, contratos y cláusulas legales necesarios para asegurar el correcto cumplimiento de la normativa vigente en materia de protección de datos.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Elaboración de toda la Documentación necesaria para asegurar el correcto cumplimiento de la normativa vigente en materia de protección de datos: Registro de Actividades de Tratamiento, contratos de cesión de datos, cláusulas legales para mails, para web, para recabar consentimiento de los interesados,...'), 0);
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('    Una vez concluidos estos servicios de adaptación / actualización inicial, se concretará entre las partes el inicio de los servicios de mantenimiento durante un periodo anual, que será renovado automáticamente y con idéntica duración si ninguna de las partes con un mes de antelación a su finalización, advierte de forma fehaciente su voluntad de rescindir el presente contrato.'), 0);
     $pdf->Ln(5);
@@ -133,11 +131,11 @@ if(isset($servicios_data[2])) {
     $pdf->MultiCell(0, 6, utf8_decode('Servicios de mantenimiento:'), 0);
     $pdf->SetFont('Arial', '', 12);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Asesoramiento continuo y la resolución de todo tipo de consultas planteadas por el Administrador de Fincas en materia de protección de datos al PRESTATARIO.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Recordatorio mensual de controles periódicos y tareas de revisión a realizar por el cliente.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Modificaciones posteriores del Documento de Seguridad, que deban realizarse cuando se produzcan las situaciones contempladas en la normativa que impliquen su modificación.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Asesoramiento continuo y la resolución de todo tipo de consultas planteadas por el cliente al PRESTATARIO en materia de protección de datos.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Notificaciones a la Agencia Española de Protección de Datos, de las modificaciones, bajas o altas necesarias para la correcta adecuación de sus ficheros de datos personales (exigencia obligatoria hasta el 25 de mayo de 2018).'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Modificaciones posteriores en la Documentación LOPD del cliente, que deban realizarse cuando se produzcan las situaciones contempladas en la normativa que impliquen su modificación.'), 0);
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('- Redacción de documentos, contratos y cláusulas legales que resulten necesarios para asegurar el correcto cumplimiento de la normativa vigente.'), 0);
     $pdf->Ln(5);
@@ -200,7 +198,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,utf8_decode('5ª.- NULIDAD PARCIAL'),0,1,'L');
 $pdf->SetFont('Arial','',12);
-$pdf->MultiCell(0,6,utf8_decode('Toda claúsula o disposición del presente contrato que sea declarada nula, ilegal o inválida, no afectará ni invalidará ninguna de las demás cláusulas y disposiciones, las cuales permanecerán plenamente vigentes.'),0);
+$pdf->MultiCell(0,6,utf8_decode('Toda cláusula o disposición del presente contrato que sea declarada nula, ilegal o inválida, no afectará ni invalidará ninguna de las demás cláusulas y disposiciones, las cuales permanecerán plenamente vigentes.'),0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',12);
@@ -212,7 +210,7 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,utf8_decode('7ª.- CARÁCTER MERCANTIL'),0,1,'L');
 $pdf->SetFont('Arial','',12);
-$pdf->MultiCell(0,6,utf8_decode('Este contrato tiene carácter mercantil, y se regirá por sus propias claúsulas y en lo no previsto en las mismas, se regirá por lo previsto en el Código Comercio español, leyes mercantiles españolas complementarias y aplicables al caso, y con carácter subsidiario por el Código Civil español.'),0);
+$pdf->MultiCell(0,6,utf8_decode('Este contrato tiene carácter mercantil, y se regirá por sus propias cláusulas y en lo no previsto en las mismas, se regirá por lo previsto en el Código Comercio español, leyes mercantiles españolas complementarias y aplicables al caso, y con carácter subsidiario por el Código Civil español.'),0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',12);
@@ -231,9 +229,10 @@ if(isset($servicios_data[2])) {
 }
 
 /* firmas */
+$tratamiento_ops = array("D.","Dª");
 $pdf->MultiCell(0,6,utf8_decode('Fdo. por el beneficiario                                                Fdo. por el prestatario'),0,'C');
 $pdf->Ln(30);
-$pdf->MultiCell(0,6,utf8_decode('    '.html_entity_decode($rep["nombre"]).'                                      D. Juan Andrés Carretero García'),0,'C');
+$pdf->MultiCell(0,6,utf8_decode('    '.html_entity_decode($tratamiento_ops[$rep["tratamiento"]]).' '.html_entity_decode($rep["nombre"]).'                                      D. Juan Andrés Carretero García'),0,'C');
 /* Imprimimos */
 $pdf->Output('CONTRATO-PRESTACION-SERVICIOS-'.html_entity_decode($customer->nombre).'.pdf','I');
 ?>

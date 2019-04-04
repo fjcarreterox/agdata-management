@@ -57,7 +57,12 @@ class Controller_Doc extends Controller_Template{
         }
 
         if($isCPP){
-            $data["aaff_nombre"] = Model_Cliente::find($rep->idcliente)->get('nombre');
+            if(Model_Cliente::find($rep->idcliente)){
+                $data["aaff_nombre"] = Model_Cliente::find($rep->idcliente)->get('nombre');
+            }
+            else{
+                $data["aaff_nombre"] = "    ";
+            }
             return View::forge('doc/contrato_cpp',$data)->render();
         }else{
             return View::forge('doc/contrato',$data)->render();

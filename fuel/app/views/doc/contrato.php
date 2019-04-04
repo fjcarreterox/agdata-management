@@ -62,7 +62,7 @@ $pdf->Ln(3);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,'PRIMERA',0,1,'L');
 $pdf->SetFont('Arial','',12);
-$pdf->MultiCell(0,6,utf8_decode('Que EL PRESTATARIO es una empresa que desarrolla, entre otras, la actividad de prestación de servicios de Auditoría de Seguridad en la Protección de Datos de Carácter Personal en aras a la adecuación de todo tipo de entidades y profesionales sometidos al cumplimiento de la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal (LOPD) y al Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales (Reglamento Europeo de Protección de Datos).'),0);
+$pdf->MultiCell(0,6,utf8_decode('Que EL PRESTATARIO es una empresa que desarrolla, entre otras, la actividad de prestación de servicios de Auditoría de Seguridad en la Protección de Datos de Carácter Personal en aras a la adecuación de todo tipo de entidades y profesionales sometidos al cumplimiento de la Ley Orgánica 3/2018 de Protección de Datos de Carácter Personal y garantía de derechos digitales (LOPDGDD) y al Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales (Reglamento Europeo de Protección de Datos).'),0);
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial','B',12);
@@ -79,7 +79,7 @@ $pdf->Ln(5);
 
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(0,10,utf8_decode('CLAÚSULAS'),0,1,'C');
+$pdf->Cell(0,10,utf8_decode('CLÁUSULAS'),0,1,'C');
 $pdf->Ln(3);
 
 $pdf->SetFont('Arial','B',12);
@@ -113,17 +113,11 @@ if(isset($servicios_data[1])) {
     $pdf->MultiCell(0, 6, utf8_decode('Servicios iniciales de adaptación / actualización:'), 0);
     $pdf->SetFont('Arial', '', 12);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Auditoría en protección de datos para realizar un análisis previo del estado del cliente.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Análisis previo del estado del cliente y evaluación de deficiencias en materia de protección de datos.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Redacción del Documento de Seguridad obligatorio y de sus modelos de anexos.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Análisis de riesgos en protección de datos o Evaluación de impacto, según el caso.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Cláusulas de confidencialidad y deber de secreto a firmar por los empleados con acceso a datos.'), 0);
-    $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de cláusulas legales de solicitud de consentimiento expreso y cláusulas para e-mails.'), 0);
-    $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de contratos de cesión de datos a terceros, con arreglo a la normativa vigente.'), 0);
-    $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Cláusulas de recogida de Curriculum o de imágenes por cámaras de videovigilancia, en su caso.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Elaboración de toda la Documentación necesaria para asegurar el correcto cumplimiento de la normativa vigente en materia de protección de datos: Registro de Actividades de Tratamiento, contratos de cesión de datos, cláusulas legales para mails, para web, para recabar consentimiento de los interesados,...'), 0);
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('    Una vez concluidos estos servicios de adaptación / actualización inicial, se concretará entre las partes el inicio de los servicios de mantenimiento durante un periodo anual, que será renovado automáticamente y con idéntica duración si ninguna de las partes con un mes de antelación a su finalización, advierte de forma fehaciente su voluntad de rescindir el presente contrato.'), 0);
     $pdf->Ln(10);
@@ -140,15 +134,13 @@ if(isset($servicios_data[2])) {
     $pdf->Ln(5);
     $pdf->MultiCell(0, 6, utf8_decode('- Recordatorio mensual de controles periódicos y tareas de revisión a realizar por el cliente.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Actualización del Documento de Seguridad, cuando se produzcan cambios que impliquen modificación.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Asesoramiento continuo y la resolución de todo tipo de consultas planteadas por el cliente al PRESTATARIO en materia de protección de datos.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de cláusulas legales y contratos de cesión de datos a terceros que resulten necesarios.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Modificaciones posteriores en la Documentación LOPD del cliente, que deban realizarse cuando se produzcan las situaciones contempladas en la normativa que impliquen su modificación.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Asesoramiento jurídico continuo y resolución de todo tipo de consultas planteadas en materia de protección de datos por parte del cliente.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- Redacción de documentos, contratos y cláusulas legales que resulten necesarios para asegurar el correcto cumplimiento de la normativa vigente.'), 0);
     $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- La adaptación a posibles novedades que puedan producirse en la normativa española de protección de datos, que se produzcan durante la vigencia del contrato de mantenimiento.'), 0);
-    $pdf->Ln(5);
-    $pdf->MultiCell(0, 6, utf8_decode('- Realización de Auditoría Bienal obligatoria para los niveles de seguridad medio y alto, al final del segundo año de mantenimiento.'), 0);
+    $pdf->MultiCell(0, 6, utf8_decode('- La adaptación a posibles novedades en la normativa española y europea sobre protección de datos que se produzcan durante la vigencia del presente contrato.'), 0);
     $pdf->Ln(5);
 }
 else{
