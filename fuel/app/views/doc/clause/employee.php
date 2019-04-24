@@ -32,7 +32,7 @@ foreach($rep as $r) {
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('En caso de incumplimiento de alguna de estas cláusulas, el empleado podrá ser sancionado por incurrir en responsabilidad contractual derivada de la relación laboral que le vincula. Si además, como consecuencia del incumplimiento, la empresa es sancionada como responsable del fichero, ésta podrá pedir daños y perjuicios al empleado que dolosamente haya realizado actos prohibidos en estas cláusulas.'), 0, 'J');
     $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('Asimismo, en cumplimiento de lo dispuesto en la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal (LOPD) y en el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos, '.$cname.', con CIF '.$cif.', le informa que los datos de carácter personal que nos ha facilitado formarán parte de un fichero automatizado del que es titular y único responsable '.$cname.'.'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('Asimismo, en cumplimiento de lo dispuesto en la Ley Orgánica 3/2018 de Protección de Datos de Carácter Personal y Garantía de Derechos Digitales (LOPDGDD) y en el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos, '.$cname.', con CIF '.$cif.', le informa que los datos de carácter personal que nos ha facilitado formarán parte de un fichero automatizado del que es titular y único responsable '.$cname.'.'), 0, 'J');
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('La finalidad de su creación, existencia y mantenimiento es el tratamiento de los datos con los exclusivos fines de gestionar las relaciones laborales (pago de nóminas, control de asistencia, seguros sociales) que mantiene con '.$cname.'. La base jurídica que legitima dicho tratamiento es el contrato de carácter laboral que le vincula a nuestra entidad.'), 0, 'J');
     $pdf->Ln(2);
@@ -41,9 +41,9 @@ foreach($rep as $r) {
     $pdf->MultiCell(0, 6, utf8_decode('En todo caso, Ud. podrá ejercitar en cualquier momento sus derechos de acceso, rectificación o supresión, o la limitación de su tratamiento, o a oponerse al mismo, dirigiéndose por escrito a nuestra sede situada en  '.$dir.'.'), 0, 'J');
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('Finalmente, le recordamos, por imperativo legal, su derecho a presentar una reclamación ante la Agencia Española de Protección de Datos, si considerara que el tratamiento de sus datos no es acorde a la normativa vigente.'), 0, 'J');
-    $pdf->Ln(10);
+    $pdf->Ln(5);
     $blank = 118-strlen($r["nombre"])-strlen($cname);
-    $pdf->MultiCell(0, 10, utf8_decode(html_entity_decode($r["nombre"]).str_repeat(" ", $blank).$cname), 0, 'C');
+    $pdf->MultiCell(0, 5, utf8_decode(html_entity_decode($r["nombre"]).str_repeat(" ", $blank).$cname), 0, 'C');
 }
 
 foreach($trab as $t) {
@@ -66,7 +66,7 @@ foreach($trab as $t) {
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('En caso de incumplimiento de alguna de estas cláusulas, el empleado podrá ser sancionado por incurrir en responsabilidad contractual derivada de la relación laboral que le vincula. Si además, como consecuencia del incumplimiento, la empresa es sancionada como responsable del fichero, ésta podrá pedir daños y perjuicios al empleado que dolosamente haya realizado actos prohibidos en estas cláusulas.'), 0, 'J');
     $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('Asimismo, en cumplimiento de lo dispuesto en la Ley Orgánica 15/1999 de Protección de Datos de Carácter Personal (LOPD) y en el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos, '.$cname.', con CIF '.$cif.', le informa que los datos de carácter personal que nos ha facilitado formarán parte de un fichero automatizado del que es titular y único responsable '.$cname.'.'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('Asimismo, en cumplimiento de lo dispuesto en la Ley Orgánica 3/2018 de Protección de Datos de Carácter Personal y Garantía de Derechos Digitales (LOPDGDD) y en el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos, '.$cname.', con CIF '.$cif.', le informa que los datos de carácter personal que nos ha facilitado formarán parte de un fichero automatizado del que es titular y único responsable '.$cname.'.'), 0, 'J');
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('La finalidad de su creación, existencia y mantenimiento es el tratamiento de los datos con los exclusivos fines de gestionar las relaciones laborales (pago de nóminas, control de asistencia, seguros sociales) que mantiene con '.$cname.'. La base jurídica que legitima dicho tratamiento es el contrato de carácter laboral que le vincula a nuestra entidad.'), 0, 'J');
     $pdf->Ln(2);
@@ -75,9 +75,9 @@ foreach($trab as $t) {
     $pdf->MultiCell(0, 6, utf8_decode('En todo caso, Ud. podrá ejercitar en cualquier momento sus derechos de acceso, rectificación o supresión, o la limitación de su tratamiento, o a oponerse al mismo, dirigiéndose por escrito a nuestra sede situada en  '.$dir.'.'), 0, 'J');
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('Finalmente, le recordamos, por imperativo legal, su derecho a presentar una reclamación ante la Agencia Española de Protección de Datos, si considerara que el tratamiento de sus datos no es acorde a la normativa vigente.'), 0, 'J');
-    $pdf->Ln(10);
+    $pdf->Ln(5);
     $blank = 118-strlen($t["nombre"])-strlen($cname);
-    $pdf->MultiCell(0, 10, utf8_decode(html_entity_decode($t["nombre"]).str_repeat(" ", $blank).$cname), 0, 'C');
+    $pdf->MultiCell(0, 6, utf8_decode(html_entity_decode($t["nombre"]).str_repeat(" ", $blank).$cname), 0, 'C');
 }
 // Write all to the output
 $pdf->Output("CLAUSULA-EMPLEADOS-".$cname.".pdf",'I');
