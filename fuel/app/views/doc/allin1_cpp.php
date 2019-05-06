@@ -715,4 +715,4 @@ $pdf->SetFont('Arial','B',20);
 $pdf->MultiCell(0,12,utf8_decode("CLÁUSULA INFORMATIVA\nEN LA RECEPCIÓN DE CVS"),0,'C');
 
 // Write all to the output
-$pdf->Output("DOC-SEGURIDAD-C.PP.-".$cname."-COMPLETO.pdf",'I');
+$pdf->Output("DOCUMENTACION-LOPD-C.PP.-".$cname.".pdf",'I');

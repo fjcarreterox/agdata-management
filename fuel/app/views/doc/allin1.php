@@ -263,7 +263,6 @@ $pdf->MultiCell(0,6,utf8_decode('  - Limitación del plazo de conservación'),0,
 $pdf->MultiCell(0,6,utf8_decode('  - Integridad y confidencialidad'),0,'J');
 $pdf->Ln(5);
 
-
 //4
 $pdf->AddPage();
 $pdf->Ln(2);
@@ -654,4 +653,4 @@ $pdf->SetFont('Arial','B',20);
 $pdf->MultiCell(0,12,utf8_decode("SOLICITUD DE ACCESO\nA IMÁGENES DE VIDEOVIGILANCIA"),0,'C');
 
 // Write all to the output
-$pdf->Output("DOC-SEGURIDAD-".$cname."-COMPLETO.pdf",'I');
+$pdf->Output("DOCUMENTACION-LOPD-".$cname.".pdf",'I');
