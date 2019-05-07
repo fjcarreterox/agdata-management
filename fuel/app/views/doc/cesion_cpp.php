@@ -27,7 +27,9 @@ $pdf->Cell(0,10,utf8_decode('Cdad. Propietarios '.$cname.' y '.html_entity_decod
 
 $pdf->SetFont('Arial','',12);
 $fecha = explode("-",date("d-m-Y"));
+$pdf->Ln(5);
 $pdf->Cell(0,10,'En Sevilla, a '.$fecha[0].' de '.getMes($fecha[1]).' de '.$fecha[2],0,1,'C');
+$pdf->Ln(5);
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,strtoupper('reunidos'),0,1,'C');
 

@@ -43,7 +43,10 @@ $pdf->SetDrawColor(255, 255, 255);
 $pdf->SetWidths(array(55,110));
 $pdf->SetAligns(array('L','L'));
 $pdf->SetFont('Arial','B',10);
-$pdf->Row(array("Nombre o Entidad:","C.PP. ".$cname));
+$name="";
+if($num_type!=6){$name = $cname;}
+else{$name="C.PP. ".$cname;}
+$pdf->Row(array("Nombre o Entidad:",$name));
 $pdf->Row(array("Dirección Completa:", $dir.', '.$cp.', '.$loc));
 $pdf->Ln(10);
 
@@ -83,7 +86,7 @@ $pdf->SetDrawColor(255, 255, 255);
 $pdf->SetWidths(array(55,110));
 $pdf->SetAligns(array('L','L'));
 $pdf->SetFont('Arial','B',10);
-$pdf->Row(array("Nombre o Entidad:","C.PP. ".$cname));
+$pdf->Row(array("Nombre o Entidad:",$name));
 $pdf->Row(array("Dirección Completa:", $dir.', '.$cp.', '.$loc));
 $pdf->Ln(10);
 
@@ -146,7 +149,7 @@ $pdf->SetDrawColor(255, 255, 255);
 $pdf->SetWidths(array(55,110));
 $pdf->SetAligns(array('L','L'));
 $pdf->SetFont('Arial','B',10);
-$pdf->Row(array("Nombre o Entidad:","C.PP. ".$cname));
+$pdf->Row(array("Nombre o Entidad:",$name));
 $pdf->Row(array("Dirección Completa:", $dir.', '.$cp.', '.$loc));
 $pdf->Ln(10);
 
@@ -198,7 +201,7 @@ $pdf->SetDrawColor(255, 255, 255);
 $pdf->SetWidths(array(55,110));
 $pdf->SetAligns(array('L','L'));
 $pdf->SetFont('Arial','B',10);
-$pdf->Row(array("Nombre o Entidad:","C.PP. ".$cname));
+$pdf->Row(array("Nombre o Entidad:",$name));
 $pdf->Row(array("Dirección Completa:", $dir.', '.$cp.', '.$loc));
 $pdf->Ln(10);
 
@@ -237,4 +240,4 @@ $pdf->MultiCell(0,6,utf8_decode('En ............................, a ......... de
 
 
 // Write all to the output
-$pdf->Output("CARTAS-DERECHOS-C.PP.-".$cname.".pdf",'I');
+$pdf->Output("CARTAS-DERECHOS-".$name.".pdf",'I');

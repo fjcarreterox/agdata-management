@@ -169,6 +169,7 @@ class Controller_Doc extends Controller_Template{
         //getting all the customer data
         $data["idc"] = $idc;
         $data["type"] = Model_Tipo_Cliente::find($c->tipo)->get('tipo');
+        $data["num_type"] = $c->tipo;
         $data["cname"] = $c->nombre;
         $data["cif"] = $c->cif_nif;
         $data["dir"] = $c->direccion;

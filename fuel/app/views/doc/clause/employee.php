@@ -75,7 +75,7 @@ foreach($trab as $t) {
     $pdf->MultiCell(0, 6, utf8_decode('En todo caso, Ud. podrá ejercitar en cualquier momento sus derechos de acceso, rectificación o supresión, o la limitación de su tratamiento, o a oponerse al mismo, dirigiéndose por escrito a nuestra sede situada en  '.$dir.'.'), 0, 'J');
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('Finalmente, le recordamos, por imperativo legal, su derecho a presentar una reclamación ante la Agencia Española de Protección de Datos, si considerara que el tratamiento de sus datos no es acorde a la normativa vigente.'), 0, 'J');
-    $pdf->Ln(5);
+    $pdf->Ln(15);
     $blank = 118-strlen($t["nombre"])-strlen($cname);
     $pdf->MultiCell(0, 6, utf8_decode(html_entity_decode($t["nombre"]).str_repeat(" ", $blank).$cname), 0, 'C');
 }
