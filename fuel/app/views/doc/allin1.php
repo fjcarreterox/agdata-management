@@ -167,12 +167,19 @@ $pdf->Ln(10);
 $pdf->SetFont('Arial','U',10);
 $pdf->MultiCell(0,6,utf8_decode('PERSONAL CON ACCESO A DATOS (CONTRATADOS POR EL RESPONSABLE)'),0,'J');
 $pdf->Ln(5);
-$pdf->SetWidths(array(45,20,40,35,25));
+$pdf->SetWidths(array(50,25,35,30,25));
 $pdf->SetAligns(array('C','C','C','C','C'));
 $pdf->SetFont('Arial','B',10);
 $pdf->Row(array("NOMBRE COMPLETO","DNI","CARGO / FUNCIÓN","TIPO ACCESO","CLÁUSULA FIRMADA"));
 $pdf->SetFont('Arial','',10);
-for($i=0;$i<18;$i++) {
+$num_trab=count($trab);
+if(!empty($reps)) {
+    $pdf->Row(array(html_entity_decode($reps["nombre"]), $reps["dni"], html_entity_decode($reps["cargofuncion"]), "\n\n", "\n\n"));
+}
+foreach($trab as $t) {
+    $pdf->Row(array(html_entity_decode($t["nombre"]), $t["dni"], html_entity_decode($t["cargofuncion"]), "\n\n", "\n\n"));
+}
+for($i=0;$i<17-$num_trab;$i++) {
     $pdf->Row(array("\n\n", "\n\n", "\n\n", "\n\n", "\n\n"));
 }
 $pdf->Ln(5);
