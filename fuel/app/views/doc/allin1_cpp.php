@@ -137,7 +137,6 @@ if($pres['nombre']){$resp=html_entity_decode($pres['nombre']);}
 
 $pdf->Row(array("Responsable de Seguridad:\n\n",$resp,$pres['tlfno']."\n\n".$pres['email']));
 $pdf->Row(array("Responsable informático:\n\n","",""));
-$pdf->Row(array("Delegado de protección de datos:\n\n","Análisis y Gestión de Datos SL",""));
 $pdf->Ln(10);
 
 $pdf->SetFont('Arial','U',10);
@@ -157,7 +156,6 @@ $pdf->SetFont('Arial','',10);
 foreach($reps as $rep) {
     $pdf->Row(array(html_entity_decode($rep["nombre_aaff"]), "Gestión de Fincas", ""));
 }
-$pdf->Row(array("\n\n", "\n\n", "\n\n"));
 
 $pdf->AddPage();
 $pdf->Ln(10);

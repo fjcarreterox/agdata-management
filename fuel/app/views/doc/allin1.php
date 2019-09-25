@@ -134,7 +134,6 @@ $pdf->SetAligns(array('L','L','L'));
 
 $pdf->Row(array("Responsable de Seguridad:\n\n",html_entity_decode($rep_seg["nombre"]),$rep_seg['tlfno']."\n\n".$rep_seg['email']));
 $pdf->Row(array("Responsable informático:\n\n","",""));
-$pdf->Row(array("Delegado de protección de datos:\n\n","Análisis y Gestión de Datos SL",""));
 $pdf->Ln(10);
 
 $pdf->SetFont('Arial','U',10);
@@ -160,7 +159,6 @@ foreach($ces as $c) {
     }
     $pdf->Row(array($ces_name, $ces_act, ""));
 }
-$pdf->Row(array("\n\n", "\n\n", "\n\n"));
 
 $pdf->AddPage();
 $pdf->Ln(10);
@@ -178,9 +176,6 @@ if(!empty($reps)) {
 }
 foreach($trab as $t) {
     $pdf->Row(array(html_entity_decode($t["nombre"]), $t["dni"], html_entity_decode($t["cargofuncion"]), "\n\n", "\n\n"));
-}
-for($i=0;$i<17-$num_trab;$i++) {
-    $pdf->Row(array("\n\n", "\n\n", "\n\n", "\n\n", "\n\n"));
 }
 $pdf->Ln(5);
 
@@ -241,7 +236,7 @@ foreach($files as $f){
             }
         }
         if($ces_names==""){$ces_names=html_entity_decode($ces_name);}
-        else{$ces_names.="\n".html_entity_decode($ces_name);}
+        else{$ces_names.=" / ".html_entity_decode($ces_name);}
     }
     $pdf->Row(array("ENCARGADOS DE TRATAMIENTO",mb_strtoupper($ces_names)));
     $pdf->Ln(5);
@@ -349,7 +344,7 @@ $pdf->MultiCell(0,6,utf8_decode('Los Responsable del Tratamiento  pueden atender
 $pdf->MultiCell(0,6,utf8_decode('La solicitud de ejercicio de derechos debe ser efectuada por el propio afectado, o representante legal, lo que se comprobará mediante la correspondiente acreditación.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('El Responsable del Tratamiento se encargará personalmente de la tramitación de las solicitudes de los interesados que reúnan los requisitos establecidos en este procedimiento, desde la recepción de la misma hasta la finalización de las gestiones correspondientes e información al interesado, y siempre dentro de los plazos establecidos.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('La carga de la prueba  recae sobre el responsable del tratamiento, que tendrá que justificar documentalmente que ha contestado a los derechos de acceso, rectificación, cancelación u oposición.'),0,'J');
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derecho de acceso'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
@@ -357,35 +352,34 @@ $pdf->MultiCell(0,6,utf8_decode('Es la facultad que tiene toda persona física d
 $pdf->MultiCell(0,6,utf8_decode('Ante la recepción de una solicitud de acceso del interesado a sus datos personales, el responsable del tratamiento deberá contestarle EN EL PLAZO DE UN MES desde la recepción de la solicitud, incluyendo toda la información que se mantenga concerniente al interesado.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Igualmente, se debe averiguar si estos datos han sido cedidos a algún tercero, indicándole al interesado, en caso afirmativo la empresa o entidad a la que han sido cedidos y los usos concretos del cesionario.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Se podrá denegar el acceso a los datos de carácter personal cuando el derecho se haya ejercitado de forma efectiva en un intervalo inferior a doce meses y no se acredite un interés legítimo al efecto, así como cuando la solicitud sea formulada por persona distinta del afectado que no le represente legalmente.'),0,'J');$pdf->Ln(2.5);
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derecho a la portabilidad de datos'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Es un complemento al derecho de acceso y otorga al interesado el derecho a recibir su información en un formato estructurado, de uso habitual y lectura mecánica, para poder transmitirlo a otro responsable de tratamiento.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('El responsable del tratamiento deberá contestar EN EL PLAZO DE UN MES desde la recepción de la solicitud, incluyendo toda la información que se mantenga concerniente al interesado.'),0,'J');
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derecho de rectificación'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Es el derecho del afectado a que se modifiquen los datos que le conciernen que sean inexactos o incompletos. El responsable del tratamiento deberá contestar EN EL PLAZO DE UN MES desde la recepción de la solicitud, salvo que sea imposible o exija un esfuerzo desproporcionado.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Si los datos rectificados hubieran sido comunicados a terceros, se deberá notificar la rectificación o cancelación a quien se hayan comunicado, para que procedan del mismo modo.'),0,'J');
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derecho de cancelación, supresión o derecho al olvido '),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('El derecho de cancelación da lugar a la supresión de los datos, una vez bloqueados durante los plazos legales previstos en la normativa, dejándolos a disposición de las Administraciones Públicas, Jueces y Tribunales, para la atención de las posibles responsabilidades nacidas del tratamiento.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Si los datos cancelados hubieran sido comunicados a terceros, se deberá notificar la cancelación a quien se hayan comunicado, para que procedan del mismo modo.'),0,'J');
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derecho al olvido'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Es el traslado al mundo digital de los derechos de cancelación y oposición y podrá ser ejercido por el interesado cuando exista un motivo legítimo y fundado respecto a su concreta situación personal que justifique el derecho de oposición solicitado.'),0,'J');
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derechos de oposición a la cesión de datos personales'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('El interesado podrá oponerse en cualquier momento al tratamiento de sus datos personales y sin coste alguno.'),0,'J');$pdf->Ln(2.5);
-$pdf->Ln(5);
 $pdf->MultiCell(0,6,utf8_decode('Los modelos de solicitud para cada uno de los derechos de los interesados, así como los modelos de las posibles respuestas para cada uno de los derechos, se adjuntan en el Anexo III.'),0,'J');
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
