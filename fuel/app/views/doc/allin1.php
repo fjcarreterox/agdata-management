@@ -22,9 +22,9 @@ class PDFp extends PDF_MC_Table{
 
     function Footer(){
         if($this->PageNo()!='{nb}') {
-            $this->SetY(-15);
-            $this->SetFont('Arial', 'I', 8);
-            $this->Cell(0, 10, utf8_decode('Página ' . $this->PageNo() . ' de {nb}'), 0, 0, 'C');
+            //$this->SetY(-15);
+            //$this->SetFont('Arial', 'I', 8);
+            //$this->Cell(0, 10, utf8_decode('Página ' . $this->PageNo() . ' de {nb}'), 0, 0, 'C');
         }
     }
 }
@@ -244,7 +244,7 @@ foreach($files as $f){
         else{$ces_names.="\n".html_entity_decode($ces_name);}
     }
     $pdf->Row(array("ENCARGADOS DE TRATAMIENTO",mb_strtoupper($ces_names)));
-    $pdf->Ln(10);
+    $pdf->Ln(5);
 }
 
 //3
@@ -332,14 +332,14 @@ $pdf->SetFont('Arial','U',10);
 $pdf->MultiCell(0,6,utf8_decode('FUNCIONES Y OBLIGACIONES DEL PERSONAL CON ACCESO AUTORIZADO A DATOS'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Todo el personal con acceso a los datos personales deberá tener conocimiento de las siguientes obligaciones con relación a los tratamientos de datos personales:'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - Se deberá evitar el acceso de personas no autorizadas a los datos personales, a tal fin se evitará: dejar los datos personales expuestos a terceros (pantallas electrónicas desatendidas, documentos en papel en zonas de acceso público, soportes con datos personales, etc.). Cuando se ausente del puesto de trabajo, se procederá al bloqueo de la pantalla o al cierre de la sesión.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - Los documentos en papel y soportes electrónicos se almacenarán en lugar seguro (armarios con llave o estancias de acceso restringido al personal autorizado).'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - No se desecharán documentos o soportes electrónicos (cd, pen drives, discos duros, etc.) con datos personales sin garantizar su destrucción, previo borrado de los datos.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - La realización de copias de documentos con datos personales únicamente podrá ser efectuadas bajo el control de personal con acceso autorizado.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - Se procederá a la destrucción de las copias desechadas o inútiles, para evitar en lo posible el acceso a la información en ellas contenida.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - En los casos de traslado físico de la documentación contenida en un fichero, el Responsable de Seguridad adoptarán las medidas dirigidas a impedir el acceso o manipulación de la información objeto de traslado.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - No se comunicarán datos personales o cualquier información confidencial a terceros sin la autorización escrita del titular del dato, y se prestará especial atención en no divulgar datos personales protegidos durante las llamadas telefónicas, correos electrónicos, etc.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - Si existiese alguna incidencia, el personal debe notificarla al responsable del fichero o al responsable de seguridad.'),0,'J');
+$pdf->MultiCell(0,5,utf8_decode('   - Se deberá evitar el acceso de personas no autorizadas a los datos personales, a tal fin se evitará: dejar los datos personales expuestos a terceros (pantallas electrónicas desatendidas, documentos en papel en zonas de acceso público, soportes con datos personales, etc.). Cuando se ausente del puesto de trabajo, se procederá al bloqueo de la pantalla o al cierre de la sesión.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - Los documentos en papel y soportes electrónicos se almacenarán en lugar seguro (armarios con llave o estancias de acceso restringido al personal autorizado).'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - No se desecharán documentos o soportes electrónicos (cd, pen drives, discos duros, etc.) con datos personales sin garantizar su destrucción, previo borrado de los datos.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - La realización de copias de documentos con datos personales únicamente podrá ser efectuadas bajo el control de personal con acceso autorizado.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - Se procederá a la destrucción de las copias desechadas o inútiles, para evitar en lo posible el acceso a la información en ellas contenida.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - En los casos de traslado físico de la documentación contenida en un fichero, el Responsable de Seguridad adoptarán las medidas dirigidas a impedir el acceso o manipulación de la información objeto de traslado.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - No se comunicarán datos personales o cualquier información confidencial a terceros sin la autorización escrita del titular del dato, y se prestará especial atención en no divulgar datos personales protegidos durante las llamadas telefónicas, correos electrónicos, etc.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - Si existiese alguna incidencia, el personal debe notificarla al responsable del fichero o al responsable de seguridad.'),0,'J');
 $pdf->Ln(5);
 $pdf->SetFont('Arial','U',10);
 $pdf->MultiCell(0,6,utf8_decode('PROCEDIMIENTO PARA EL EJERCICIO DE LOS DERECHOS DE LOS INTERESADOS'),0,'J');$pdf->Ln(2.5);
@@ -435,6 +435,8 @@ $pdf->MultiCell(0,6,utf8_decode('FICHEROS TEMPORALES O COPIAS DE TRABAJO'),0,'J'
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Todo fichero temporal o copia de trabajo, creado por tiempo determinado, deberá cumplir las mismas medidas de seguridad que los ficheros de datos originales, y serán borrados o destruidos una vez que hayan dejado de ser necesarios para los fines que motivaron su creación.'),0,'J');
 $pdf->Ln(5);
+
+$pdf->AddPage();
 $pdf->SetFont('Arial','U',10);
 $pdf->MultiCell(0,6,utf8_decode('GESTIÓN DE INCIDENCIAS DE SEGURIDAD'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
@@ -476,8 +478,7 @@ $pdf->MultiCell(0,6,utf8_decode('- Realizar cambios de contraseñas en todos los
 $pdf->MultiCell(0,6,utf8_decode('- Verificar el correcto cumplimiento de todas las medidas de seguridad implantadas'),0,'J');$pdf->Ln(2.5);
 
 //7
-$pdf->AddPage();
-$pdf->Ln(2);
+$pdf->Ln(10);
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,strtoupper(utf8_decode('7. ANEXOS')),0,'L');
 $pdf->SetFont('Arial','',10);

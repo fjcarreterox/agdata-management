@@ -17,7 +17,7 @@ class PDFp extends PDF_MC_Table{
         $this->Ln(10);
         $this->Ln(10);
         $this->Image('http://gestion.agdata.es/assets/img/logo2.png',20,13,40);
-        $this->Ln(10);
+        $this->Ln(12);
     }
 
     function Footer(){
