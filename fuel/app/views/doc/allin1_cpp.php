@@ -22,9 +22,9 @@ class PDFp extends PDF_MC_Table{
 
     function Footer(){
         if($this->PageNo()!='{nb}') {
-            $this->SetY(-15);
-            $this->SetFont('Arial', 'I', 8);
-            $this->Cell(0, 10, utf8_decode('Página ' . $this->PageNo() . ' de {nb}'), 0, 0, 'C');
+            //$this->SetY(-15);
+            //$this->SetFont('Arial', 'I', 8);
+            //$this->Cell(0, 10, utf8_decode('Página ' . $this->PageNo() . ' de {nb}'), 0, 0, 'C');
         }
     }
 }
@@ -102,10 +102,7 @@ $pdf->Cell(5,6,utf8_decode('    I. Contratos de Cesión con Encargados de Tratam
 $pdf->Cell(5,6,utf8_decode('    II. Cláusulas de Confidencialidad para empleados'),0,1,'L');
 $pdf->Cell(5,6,utf8_decode('    III. Documentos para el ejercicio de derechos'),0,1,'L');
 $pdf->Cell(5,6,utf8_decode('    IV. Registro de Incidencias'),0,1,'L');
-$pdf->Cell(5,6,utf8_decode('    V. Informe EIPD / Informe Análisis de Riesgos'),0,1,'L');
-$pdf->Cell(5,6,utf8_decode('    VI. Cláusula informativa en recepción de CVs'),0,1,'L');
-$pdf->Cell(5,6,utf8_decode('    VII. Otras cláusulas legales obligatorias'),0,1,'L');
-$pdf->Cell(5,6,utf8_decode('    VIII. Solicitud de acceso a imágenes de videovigilancia'),0,1,'L');
+$pdf->Cell(5,6,utf8_decode('    V. Solicitud de acceso a imágenes de videovigilancia'),0,1,'L');
 
 //1
 $pdf->AddPage();
@@ -237,7 +234,7 @@ foreach($files as $f){
         $rep_names=implode(", ",$temp);
     }
     $pdf->Row(array("ENCARGADOS DE TRATAMIENTO",mb_strtoupper(html_entity_decode($rep_names))));
-    $pdf->Ln(10);
+    $pdf->Ln(5);
 }
 
 //3
@@ -323,17 +320,17 @@ $pdf->MultiCell(0,6,utf8_decode('Las personas con acceso a los datos de carácte
 $pdf->MultiCell(0,6,utf8_decode('El responsable del tratamiento adoptará las medidas necesarias para que el personal conozca las normas de seguridad que afecten al desarrollo de sus funciones, así como las consecuencias en que pudiera incurrir en caso de incumplimiento. Con este fin se distribuirá una copia del punto 5 de este documento para su conocimiento.'),0,'J');
 $pdf->Ln(5);
 $pdf->SetFont('Arial','U',10);
-$pdf->MultiCell(0,6,utf8_decode('FUNCIONES Y OBLIGACIONES DEL PERSONAL CON ACCESO AUTORIZADO A DATOS'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('FUNCIONES Y OBLIGACIONES DEL PERSONAL CON ACCESO AUTORIZADO A DATOS'),0,'J');$pdf->Ln(2);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Todo el personal con acceso a los datos personales deberá tener conocimiento de las siguientes obligaciones con relación a los tratamientos de datos personales:'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - Se deberá evitar el acceso de personas no autorizadas a los datos personales, a tal fin se evitará: dejar los datos personales expuestos a terceros (pantallas electrónicas desatendidas, documentos en papel en zonas de acceso público, soportes con datos personales, etc.). Cuando se ausente del puesto de trabajo, se procederá al bloqueo de la pantalla o al cierre de la sesión.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - Los documentos en papel y soportes electrónicos se almacenarán en lugar seguro (armarios con llave o estancias de acceso restringido al personal autorizado).'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - No se desecharán documentos o soportes electrónicos (cd, pen drives, discos duros, etc.) con datos personales sin garantizar su destrucción, previo borrado de los datos.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - La realización de copias de documentos con datos personales únicamente podrá ser efectuadas bajo el control de personal con acceso autorizado.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - Se procederá a la destrucción de las copias desechadas o inútiles, para evitar en lo posible el acceso a la información en ellas contenida.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - En los casos de traslado físico de la documentación contenida en un fichero, el Responsable de Seguridad adoptarán las medidas dirigidas a impedir el acceso o manipulación de la información objeto de traslado.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - No se comunicarán datos personales o cualquier información confidencial a terceros sin la autorización escrita del titular del dato, y se prestará especial atención en no divulgar datos personales protegidos durante las llamadas telefónicas, correos electrónicos, etc.'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('   - Si existiese alguna incidencia, el personal debe notificarla al responsable del fichero o al responsable de seguridad.'),0,'J');
+$pdf->MultiCell(0,5,utf8_decode('   - Se deberá evitar el acceso de personas no autorizadas a los datos personales, a tal fin se evitará: dejar los datos personales expuestos a terceros (pantallas electrónicas desatendidas, documentos en papel en zonas de acceso público, soportes con datos personales, etc.). Cuando se ausente del puesto de trabajo, se procederá al bloqueo de la pantalla o al cierre de la sesión.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - Los documentos en papel y soportes electrónicos se almacenarán en lugar seguro (armarios con llave o estancias de acceso restringido al personal autorizado).'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - No se desecharán documentos o soportes electrónicos (cd, pen drives, discos duros, etc.) con datos personales sin garantizar su destrucción, previo borrado de los datos.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - La realización de copias de documentos con datos personales únicamente podrá ser efectuadas bajo el control de personal con acceso autorizado.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - Se procederá a la destrucción de las copias desechadas o inútiles, para evitar en lo posible el acceso a la información en ellas contenida.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - En los casos de traslado físico de la documentación contenida en un fichero, el Responsable de Seguridad adoptarán las medidas dirigidas a impedir el acceso o manipulación de la información objeto de traslado.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - No se comunicarán datos personales o cualquier información confidencial a terceros sin la autorización escrita del titular del dato, y se prestará especial atención en no divulgar datos personales protegidos durante las llamadas telefónicas, correos electrónicos, etc.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,5,utf8_decode('   - Si existiese alguna incidencia, el personal debe notificarla al responsable del fichero o al responsable de seguridad.'),0,'J');
 $pdf->Ln(5);
 $pdf->SetFont('Arial','U',10);
 $pdf->MultiCell(0,6,utf8_decode('PROCEDIMIENTO PARA EL EJERCICIO DE LOS DERECHOS DE LOS INTERESADOS'),0,'J');$pdf->Ln(2.5);
@@ -343,7 +340,7 @@ $pdf->MultiCell(0,6,utf8_decode('Los Responsable del Tratamiento  pueden atender
 $pdf->MultiCell(0,6,utf8_decode('La solicitud de ejercicio de derechos debe ser efectuada por el propio afectado, o representante legal, lo que se comprobará mediante la correspondiente acreditación.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('El Responsable del Tratamiento se encargará personalmente de la tramitación de las solicitudes de los interesados que reúnan los requisitos establecidos en este procedimiento, desde la recepción de la misma hasta la finalización de las gestiones correspondientes e información al interesado, y siempre dentro de los plazos establecidos.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('La carga de la prueba  recae sobre el responsable del tratamiento, que tendrá que justificar documentalmente que ha contestado a los derechos de acceso, rectificación, cancelación u oposición.'),0,'J');
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derecho de acceso'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
@@ -351,38 +348,38 @@ $pdf->MultiCell(0,6,utf8_decode('Es la facultad que tiene toda persona física d
 $pdf->MultiCell(0,6,utf8_decode('Ante la recepción de una solicitud de acceso del interesado a sus datos personales, el responsable del tratamiento deberá contestarle EN EL PLAZO DE UN MES desde la recepción de la solicitud, incluyendo toda la información que se mantenga concerniente al interesado.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Igualmente, se debe averiguar si estos datos han sido cedidos a algún tercero, indicándole al interesado, en caso afirmativo la empresa o entidad a la que han sido cedidos y los usos concretos del cesionario.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Se podrá denegar el acceso a los datos de carácter personal cuando el derecho se haya ejercitado de forma efectiva en un intervalo inferior a doce meses y no se acredite un interés legítimo al efecto, así como cuando la solicitud sea formulada por persona distinta del afectado que no le represente legalmente.'),0,'J');$pdf->Ln(2.5);
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derecho a la portabilidad de datos'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Es un complemento al derecho de acceso y otorga al interesado el derecho a recibir su información en un formato estructurado, de uso habitual y lectura mecánica, para poder transmitirlo a otro responsable de tratamiento.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('El responsable del tratamiento deberá contestar EN EL PLAZO DE UN MES desde la recepción de la solicitud, incluyendo toda la información que se mantenga concerniente al interesado.'),0,'J');
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derecho de rectificación'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Es el derecho del afectado a que se modifiquen los datos que le conciernen que sean inexactos o incompletos. El responsable del tratamiento deberá contestar EN EL PLAZO DE UN MES desde la recepción de la solicitud, salvo que sea imposible o exija un esfuerzo desproporcionado.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Si los datos rectificados hubieran sido comunicados a terceros, se deberá notificar la rectificación o cancelación a quien se hayan comunicado, para que procedan del mismo modo.'),0,'J');
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derecho de cancelación, supresión o derecho al olvido '),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('El derecho de cancelación da lugar a la supresión de los datos, una vez bloqueados durante los plazos legales previstos en la normativa, dejándolos a disposición de las Administraciones Públicas, Jueces y Tribunales, para la atención de las posibles responsabilidades nacidas del tratamiento.'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Si los datos cancelados hubieran sido comunicados a terceros, se deberá notificar la cancelación a quien se hayan comunicado, para que procedan del mismo modo.'),0,'J');
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derecho al olvido'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Es el traslado al mundo digital de los derechos de cancelación y oposición y podrá ser ejercido por el interesado cuando exista un motivo legítimo y fundado respecto a su concreta situación personal que justifique el derecho de oposición solicitado.'),0,'J');
-$pdf->Ln(5);
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','B',10);
 $pdf->MultiCell(0,6,utf8_decode('Derechos de oposición a la cesión de datos personales'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('El interesado podrá oponerse en cualquier momento al tratamiento de sus datos personales y sin coste alguno.'),0,'J');$pdf->Ln(2.5);
-$pdf->Ln(5);
 $pdf->MultiCell(0,6,utf8_decode('Los modelos de solicitud para cada uno de los derechos de los interesados, así como los modelos de las posibles respuestas para cada uno de los derechos, se adjuntan en el Anexo III.'),0,'J');
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
+$pdf->Ln(5);
 $pdf->MultiCell(0,10,utf8_decode('5.2. Medidas técnicas de seguridad.'),0,'L');
 $pdf->SetFont('Arial','U',10);
 $pdf->MultiCell(0,6,utf8_decode('SALVAGUARDA DEL SISTEMA INFORMÁTICO'),0,'J');$pdf->Ln(2.5);
@@ -429,11 +426,13 @@ $pdf->MultiCell(0,6,utf8_decode('FICHEROS TEMPORALES O COPIAS DE TRABAJO'),0,'J'
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Todo fichero temporal o copia de trabajo, creado por tiempo determinado, deberá cumplir las mismas medidas de seguridad que los ficheros de datos originales, y serán borrados o destruidos una vez que hayan dejado de ser necesarios para los fines que motivaron su creación.'),0,'J');
 $pdf->Ln(5);
+
+$pdf->AddPage();
+$pdf->Ln(2.5);
 $pdf->SetFont('Arial','U',10);
 $pdf->MultiCell(0,6,utf8_decode('GESTIÓN DE INCIDENCIAS DE SEGURIDAD'),0,'J');$pdf->Ln(2.5);
 $pdf->SetFont('Arial','',10);
 $pdf->MultiCell(0,6,utf8_decode('Una incidencia es cualquier evento que pueda producirse esporádicamente y pueda suponer un peligro para la seguridad de los ficheros, como pueden ser:'),0,'J');$pdf->Ln(2.5);
-
 $pdf->SetDrawColor(255, 255, 255);
 $pdf->SetWidths(array(70,70));
 $pdf->SetAligns(array('L','L'));
@@ -470,8 +469,7 @@ $pdf->MultiCell(0,6,utf8_decode('- Realizar cambios de contraseñas en todos los
 $pdf->MultiCell(0,6,utf8_decode('- Verificar el correcto cumplimiento de todas las medidas de seguridad implantadas'),0,'J');$pdf->Ln(2.5);
 
 //7
-$pdf->AddPage();
-$pdf->Ln(2);
+$pdf->Ln(10);
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,strtoupper(utf8_decode('7. ANEXOS')),0,'L');
 $pdf->SetFont('Arial','',10);
@@ -479,12 +477,7 @@ $pdf->MultiCell(0,6,utf8_decode('I. Contratos de Cesión con Encargados de Trata
 $pdf->MultiCell(0,6,utf8_decode('II. Cláusulas de Confidencialidad para empleados'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('III. Documentos para el ejercicio de derechos'),0,'J');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('IV. Registro de Incidencias'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('V. Otras cláusulas legales obligatorias'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('VI. Informe EIPD / Informe Análisis de Riesgos'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('VII. Solicitud de acceso a imágenes de videovigilancia'),0,'J');$pdf->Ln(2.5);
-$pdf->MultiCell(0,6,utf8_decode('VIII. Cláusula informativa en recepción de CVs'),0,'J');$pdf->Ln(2.5);
-
-
+$pdf->MultiCell(0,6,utf8_decode('V. Solicitud de acceso a imágenes de videovigilancia'),0,'J');$pdf->Ln(2.5);
 
 //Anexo I
 $pdf->AddPage();
@@ -535,8 +528,8 @@ if(empty($trab)){
     $pdf->MultiCell(0, 6, utf8_decode('Igualmente, queda informado que para alcanzar los fines arriba indicados, sus datos de carácter personal podrán ser cedidos a otras entidades para la prestación de servicios por cuenta de la empresa, cumpliendo en cualquier caso con lo estipulado en la LOPD.'), 0, 'J');
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('El abajo firmante podrá ejercitar los derechos de acceso, rectificación, cancelación y oposición, en el ámbito reconocido por la normativa española en protección de datos, dirigiéndose por escrito a nuestra sede situada en '.$dir.", ".$cp.', en '.$loc.', provincia de '.$prov.'.'), 0, 'J');
-    $pdf->Ln(5);
-    $pdf->MultiCell(0, 10, utf8_decode('..........................................................                                                                    Com. de Prop. '.$cname), 0, 'C');
+    $pdf->Ln(20);
+    $pdf->MultiCell(0, 10, utf8_decode('..........................................................                    Com. de Prop. '.$cname), 0, 'C');
 }
 else{
     foreach($trab as $t){
@@ -564,8 +557,8 @@ else{
         $pdf->MultiCell(0, 6, utf8_decode('Igualmente, queda informado que para alcanzar los fines arriba indicados, sus datos de carácter personal podrán ser cedidos a otras entidades para la prestación de servicios por cuenta de la empresa, cumpliendo en cualquier caso con lo estipulado en la LOPD.'), 0, 'J');
         $pdf->Ln(2);
         $pdf->MultiCell(0, 6, utf8_decode('El abajo firmante podrá ejercitar los derechos de acceso, rectificación, cancelación y oposición, en el ámbito reconocido por la normativa española en protección de datos, dirigiéndose por escrito a nuestra sede situada en '.$dir.", ".$cp.', en '.$loc.', provincia de '.$prov.'.'), 0, 'J');
-        $pdf->Ln(5);
-        $pdf->MultiCell(0, 10, utf8_decode('..........................................................                                                                    Com. de Prop. '.$cname), 0, 'C');
+        $pdf->Ln(20);
+        $pdf->MultiCell(0, 10, utf8_decode('..........................................................                       Com. de Prop. '.$cname), 0, 'C');
     }
 }
 
@@ -679,40 +672,7 @@ $pdf->SetFont('Arial','B',28);
 $pdf->MultiCell(0,12,strtoupper("ANEXO V"),0,'C');
 $pdf->Ln(5);
 $pdf->SetFont('Arial','B',20);
-$pdf->MultiCell(0,12,utf8_decode("OTRAS CLÁUSULAS\nLEGALES OBLIGATORIAS"),0,'C');
-
-//Anexo VI
-$pdf->AddPage();
-$pdf->SetFont('Arial','B',26);
-$pdf->Rect(25, 80, 160, 60, 10.5, 'DF');
-$pdf->Ln(50);
-$pdf->SetFont('Arial','B',28);
-$pdf->MultiCell(0,12,strtoupper("ANEXO VI"),0,'C');
-$pdf->Ln(5);
-$pdf->SetFont('Arial','B',20);
-$pdf->MultiCell(0,12,utf8_decode("INFORME EIPD\nINFORME ANÁLISIS DE RIESGOS"),0,'C');
-
-//Anexo VII
-$pdf->AddPage();
-$pdf->SetFont('Arial','B',26);
-$pdf->Rect(25, 80, 160, 60, 10.5, 'DF');
-$pdf->Ln(50);
-$pdf->SetFont('Arial','B',28);
-$pdf->MultiCell(0,12,strtoupper("ANEXO VII"),0,'C');
-$pdf->Ln(5);
-$pdf->SetFont('Arial','B',20);
 $pdf->MultiCell(0,12,utf8_decode("SOLICITUD DE ACCESO\nA IMÁGENES DE VIDEOVIGILANCIA"),0,'C');
-
-//Anexo VIII
-$pdf->AddPage();
-$pdf->SetFont('Arial','B',26);
-$pdf->Rect(25, 80, 160, 60, 10.5, 'DF');
-$pdf->Ln(50);
-$pdf->SetFont('Arial','B',28);
-$pdf->MultiCell(0,12,strtoupper("ANEXO VIII"),0,'C');
-$pdf->Ln(5);
-$pdf->SetFont('Arial','B',20);
-$pdf->MultiCell(0,12,utf8_decode("CLÁUSULA INFORMATIVA\nEN LA RECEPCIÓN DE CVS"),0,'C');
 
 // Write all to the output
 $pdf->Output("DOCUMENTACION-LOPD-C.PP.-".$cname.".pdf",'I');
