@@ -234,9 +234,9 @@ foreach($files as $f){
             if ($c->idcesionaria != 0) {
                 $ces_name = Model_Cliente::find($c->idcesionaria)->get("nombre");
             }
+            if($ces_names==""){$ces_names=html_entity_decode($ces_name);}
+            else{$ces_names.=" / ".html_entity_decode($ces_name);}
         }
-        if($ces_names==""){$ces_names=html_entity_decode($ces_name);}
-        else{$ces_names.=" / ".html_entity_decode($ces_name);}
     }
     $pdf->Row(array("ENCARGADOS DE TRATAMIENTO",mb_strtoupper($ces_names)));
     $pdf->Ln(5);

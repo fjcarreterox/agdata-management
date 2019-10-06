@@ -229,7 +229,7 @@ foreach($files as $f){
         foreach($reps as $rep) {
             $temp[]=$rep["nombre_aaff"];
         }
-        $rep_names=implode(", ",$temp);
+        $rep_names=implode(" / ",$temp);
     }
     $pdf->Row(array("ENCARGADOS DE TRATAMIENTO",mb_strtoupper(html_entity_decode($rep_names))));
     $pdf->Ln(5);
