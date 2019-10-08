@@ -145,19 +145,22 @@ $pdf->MultiCell(0,6,utf8_decode('Todas las empresas o terceros que tengan acceso
 $pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('En la actualidad, son:'),0,'J');
 $pdf->Ln(5);
-$pdf->SetWidths(array(65,50,50));
-$pdf->SetAligns(array('C','C','C'));
+$pdf->SetWidths(array(50,45,30,40));
+$pdf->SetAligns(array('C','C','C','C'));
 $pdf->SetFont('Arial','B',10);
-$pdf->Row(array("Encargado Tratamiento","Servicio prestado","Fecha firma contrato"));
+$pdf->Row(array("Encargado Tratamiento","Servicio prestado","Fichero","Fecha firma contrato"));
 $pdf->SetFont('Arial','',10);
 $ces_names="";
+$fich="";
 foreach($ces as $c) {
     $ces_name="";
+    $f=Model_Fichero::find($c->idfichero)->get("idtipo");
+    $fich=Model_Tipo_Fichero::find($f)->get("tipo");
     if ($c->idcesionaria != 0) {
         $ces_name = Model_Cliente::find($c->idcesionaria)->get("nombre");
         $ces_act = Model_Cliente::find($c->idcesionaria)->get("actividad");
     }
-    $pdf->Row(array($ces_name, $ces_act, ""));
+    $pdf->Row(array($ces_name, $ces_act,$fich, ""));
 }
 
 $pdf->AddPage();
