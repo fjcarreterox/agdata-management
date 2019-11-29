@@ -19,7 +19,8 @@ class Controller_Agenda extends Controller_Template
         $eventos = Model_Agenda::find('all',array('where'=>array(array('tipo'=>1),'or'=>array(array('tipo' ,'>', '2')))));
         foreach($eventos as $e){
             $cliente_name = "";
-            if($e->idcliente != 0){$cliente_name = Model_Cliente::find($e->idcliente)->get('nombre');}
+            $cl=Model_Cliente::find($e->idcliente);
+            if($e->idcliente != 0 && $cl != null){$cliente_name = $cl->get('nombre');}
             $data['eventos'][$e->id] = array(
                 "fecha" => $e->fecha,
                 "hora" => $e->hora,

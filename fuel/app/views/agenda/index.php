@@ -33,12 +33,13 @@
         </thead>
         <tbody>
         <?php foreach ($agendas as $item):
-            if($item->idcliente != 0){
+            $cl=Model_Cliente::find($item->idcliente);
+            if($item->idcliente != 0 && $cl != null){
                 $hora=explode(":",$item->hora);
                 ?>
                 <tr>
-                    <td><?php echo Model_Cliente::find($item->idcliente)->get('nombre'); /*Html::anchor('agenda/view_events/'.$item->idcliente,Model_Cliente::find($item->idcliente)->get('nombre'),array('title'=>'Ver eventos sólo de este cliente'));*/ ?></td>
-                    <td><?php echo Model_Cliente::find($item->idcliente)->get('tel'); ?></td>
+                    <td><?php echo $cl->get('nombre'); /*Html::anchor('agenda/view_events/'.$item->idcliente,Model_Cliente::find($item->idcliente)->get('nombre'),array('title'=>'Ver eventos sólo de este cliente'));*/ ?></td>
+                    <td><?php echo $cl->get('tel'); ?></td>
                     <td><?php $dist = abs(strtotime($item->fecha) - strtotime(date('Y-m-d'))) / (60*60*24);
                         if($item->fecha < date('Y-m-d')){
                             echo "<span class='red'>".date_conv($item->fecha)." a las $hora[0]:$hora[1]</span>";
@@ -65,11 +66,15 @@
                                 <?php echo Html::anchor('clientes/view/'.$item->idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Ficha Cliente', array('class' => 'btn btn-default')); ?>
                                 <?php echo Html::anchor('agenda/edit/'.$item->id, '<span class="glyphicon glyphicon-pencil"></span> Editar evento', array('class' => 'btn btn-success')); ?>
                                 <?php
-                                $tipo = Model_Cliente::find($item->idcliente)->get('tipo');
+                                $tipo = $cl->get('tipo');
                                 if($tipo ==1){$body=$body_aaff;}
                                 elseif($tipo == 7){$body=$body_proc;}
                                 elseif($tipo == 4){$body=$body_pod;}
-                                echo Html::mail_to(Model_Cliente::find($item->idcliente)->get('email'),'<span class="glyphicon glyphicon-envelope"></span> Enviar Info ',$subject.'&body='.$body , array('class' => 'btn btn-warning')); ?>
+                                $email="N/D";
+
+                                if($cl->get('email')!=null)
+                                    $email=$cl->get('email');
+                                echo Html::mail_to($email,'<span class="glyphicon glyphicon-envelope"></span> Enviar Info ',$subject.'&body='.$body , array('class' => 'btn btn-warning')); ?>
                                 <?php echo Html::anchor('agenda/delete/'.$item->id, '<span class="glyphicon glyphicon-trash"></span> Borrar evento', array('class' => 'btn btn-danger', 'onclick' => "return confirm('¿Estás seguro de esto?')")); ?>
                             </div>
                         </div>
