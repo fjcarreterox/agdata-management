@@ -33,6 +33,12 @@ class Controller_Doc extends Controller_Template{
         return View::forge('doc/cert',$data)->render();
     }
 
+    public function action_funciones($idcliente){
+        $data["cname"] = Model_Cliente::find($idcliente)->get('nombre');
+        $data['rep'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idcliente,'relacion'=>1)));
+        return View::forge('doc/funciones',$data)->render();
+    }
+
     public function action_presupuesto($idcliente){
         //TODO
     }

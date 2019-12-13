@@ -97,6 +97,9 @@ if (!isset($idcliente)) {
         echo "<tr><td>Cláusulas legales para empleados</td>";
         echo "<td>".Html::anchor('doc/clausula/'.$idcliente.'/E', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
 
+        echo "<tr><td>Funciones y obligaciones del personal</td>";
+        echo "<td>".Html::anchor('doc/funciones/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+
         if ($type != 6) {
             echo "<tr><td>Cláusula de recogida de datos de clientes</td>";
             echo "<td>" . Html::anchor('doc/clausula/' . $idcliente . '/C', '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
