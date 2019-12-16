@@ -26,7 +26,7 @@ foreach($rep as $r) {
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('SEGUNDO.- Comunicar a su superior inmediato cualquier incidencia que se produzca en el tratamiento de estos datos.'), 0, 'J');
     $pdf->Ln(2);
-    $pdf->MultiCell(0, 6, utf8_decode('TERCERO.- Seguir las instrucciones de '.$cname.' en relación a las políticas de protección de datos descritas en el documento de seguridad.'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('TERCERO.- Cumplir con las obligaciones en materia de seguridad de datos personales facilitadas por la empresa.'), 0, 'J');
     $pdf->Ln(2);
     $pdf->MultiCell(0, 6, utf8_decode('CUARTO.- Trasladar al Responsable de Seguridad cualquier comunicación que llegue a '.$cname.', relativa al ejercicio de los derechos de acceso, rectificación, cancelación y oposición por parte de los afectados respecto a sus datos de carácter personal.'), 0, 'J');
     $pdf->Ln(2);
