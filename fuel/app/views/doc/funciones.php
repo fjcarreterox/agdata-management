@@ -6,15 +6,17 @@ $pdf->SetTitle(utf8_decode($title));
 $pdf->SetAuthor('Análisis y gestión de datos S.L.');
 $pdf->SetMargins(20,6,20);
 $pdf->AliasNbPages();
-$rep_name=html_entity_decode($rep["nombre"]);
-
+$rep_name="XXXXXXXXXXXX";
+if($rep["nombre"]!="") {
+    $rep_name = html_entity_decode($rep["nombre"]);
+}
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0, 10, utf8_decode(mb_strtoupper('FUNCIONES Y OBLIGACIONES DEL PERSONAL')), 0, 'C');
 $pdf->MultiCell(0, 10, utf8_decode(mb_strtoupper('EN MATERIA DE SEGURIDAD DE DATOS PERSONALES')), 0, 'C');
 $pdf->Ln(5);
 $pdf->SetFont('Arial', '', 9);
-$pdf->MultiCell(0, 6, utf8_decode('En este documento se recogen las obligaciones que tienen los empleados de '.$cname.' y las funciones que tienen que desempeñar en relación a su puesto de trabajo y la utilización adecuada de todas las instalaciones y bienes de la empresa.'), 0, 'J');
+$pdf->MultiCell(0, 6, utf8_decode('En este documento se recogen las obligaciones que tienen los empleados de '.html_entity_decode($cname).' y las funciones que tienen que desempeñar en relación a su puesto de trabajo y la utilización adecuada de todas las instalaciones y bienes de la empresa.'), 0, 'J');
 $pdf->Ln(2);
 $pdf->MultiCell(0, 6, utf8_decode('El cumplimiento de la normativa vigente en materia de protección de datos tiene como objetivo primordial, entre otros, implementar las medidas de índole técnicas y organizativas necesarias para garantizar la seguridad que deben reunir tanto los ficheros automatizados como en papel, los centros de tratamiento, locales, equipos, sistemas, programas y personas que intervengan en el tratamiento de los datos de carácter personal.'), 0, 'J');
 $pdf->Ln(3);
