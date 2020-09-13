@@ -40,12 +40,15 @@ if(strcmp($rep_legal['dni'],'')!=0){
     $rep_dni = $rep_legal['dni'];
 }
 
+if(strcmp($loc,$prov)==0){$locprov=$loc;}
+else{$locprov=html_entity_decode($loc).', provincia de '. html_entity_decode($prov);}
+
 if(strcmp($rep_name,$cname)!=0) {
-    $pdf->MultiCell(0, 6, utf8_decode('De una parte, ' . $rep_name . ', mayor de edad, con  DNI ' . $rep_dni . ', en nombre y representación de ' . $cname . ', con domicilio en ' . html_entity_decode($dir) . ', C.P. ' . $cp . ' de ' . html_entity_decode($loc) . ', provincia de ' . html_entity_decode($prov) . ' y CIF nº ' . $cif_nif . ' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('De una parte, ' . $rep_name . ', mayor de edad, con  DNI ' . $rep_dni . ', en nombre y representación de ' . $cname . ', con domicilio en ' . html_entity_decode($dir) . ', C.P. ' . $cp . ' de ' . $locprov . ' y CIF nº ' . $cif_nif . ' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
 }else{
-    $pdf->MultiCell(0, 6, utf8_decode('De una parte, ' . $rep_name . ', mayor de edad, con  DNI ' . $rep_dni . ', en su propio nombre y representación, con domicilio en ' . html_entity_decode($dir) . ', C.P. ' . $cp . ' de ' . html_entity_decode($loc) . ', provincia de ' . html_entity_decode($prov) . ' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('De una parte, ' . $rep_name . ', mayor de edad, con  DNI ' . $rep_dni . ', en su propio nombre y representación, con domicilio en ' . html_entity_decode($dir) . ', C.P. ' . $cp . ' de ' . $locprov . ' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
 }
-    $pdf->Ln(5);
+$pdf->Ln(5);
 
 $ces_dir = html_entity_decode($ces["direccion"]);
 
@@ -53,16 +56,20 @@ $rep_ces_dni = "..................................";
 if(strcmp($rep_legal_ces->dni,'')!=0){
     $rep_ces_dni = $rep_legal_ces->dni;
 }
+
+if(strcmp($ces["loc"],$ces["prov"])==0){$ceslocprov=$ces["loc"];}
+else{$ceslocprov=html_entity_decode($ces["loc"]).', provincia de '. $ces["prov"];}
+
 //the second one is included in the first one
 if(strcmp(html_entity_decode($rep_legal_ces_name),html_entity_decode($ces["nombre"]))==0){
-    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_legal_ces_name . ', mayor de edad, con  DNI ' . $rep_ces_dni . ', en su propio nombre y representación, con domicilio en ' . $ces_dir . ', C.P. ' . $ces["cpostal"] . ' de ' . $ces["loc"] . ', provincia de ' . $ces["prov"] . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_legal_ces_name . ', mayor de edad, con  DNI ' . $rep_ces_dni . ', en su propio nombre y representación, con domicilio en ' . $ces_dir . ', C.P. ' . $ces["cpostal"] . ' de ' . $ceslocprov . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
 }
 else {
     $rep_ces_name=".....................................................................................";
     if(strcmp($rep_legal_ces_name,'')!=0){
         $rep_ces_name = html_entity_decode($rep_legal_ces_name);
     }
-    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_ces_name . ', mayor de edad, con  DNI ' . $rep_ces_dni . ', en nombre y representación de ' . html_entity_decode($ces["nombre"]) . ', con domicilio en ' . $ces_dir . ', C.P. ' . $ces["cpostal"] . ' de ' . $ces["loc"] . ', provincia de ' . $ces["prov"] . ' y CIF nº ' . $ces["cif_nif"] . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_ces_name . ', mayor de edad, con  DNI ' . $rep_ces_dni . ', en nombre y representación de ' . html_entity_decode($ces["nombre"]) . ', con domicilio en ' . $ces_dir . ', C.P. ' . $ces["cpostal"] . ' de ' . $ceslocprov . ' y CIF nº ' . $ces["cif_nif"] . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
 }
 
 $pdf->SetFont('Arial','B',12);
@@ -94,7 +101,7 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,10,utf8_decode(mb_strtoupper('claúsulas')),0,1,'C');
 $pdf->SetFont('Arial','',9);
-
+$pdf->Ln(10);
 $ficheros_str="";
 if(count($files)>1){
     foreach($files as $k => $f) {
@@ -130,7 +137,8 @@ $pdf->MultiCell(0, 7, utf8_decode('3.3. El Encargado del Tratamiento se comprome
 $pdf->Ln(3);
 $pdf->MultiCell(0, 7, utf8_decode('CUARTA. EJERCICIO DE DERECHOS.'),0,'J');
 $pdf->MultiCell(0, 7, utf8_decode('Cuando los titulares de los datos ejerciten alguno de los derechos ARCO (acceso, rectificación, cancelación, oposición) directamente frente al Encargado del Tratamiento y soliciten el ejercicio frente al Responsable de los Ficheros, el Encargado del Tratamiento le trasladará dicha solicitud en el plazo de 3 días, a fin de que el Responsable de los Ficheros la resuelva en los plazos legales previstos en la normativa.'),0,'J');
-$pdf->Ln(15);
+
+$pdf->AddPage();
 $pdf->MultiCell(0, 7, utf8_decode('QUINTA. RESOLUCIÓN.'),0,'J');
 $pdf->MultiCell(0, 7, utf8_decode('5.1. Una vez cumplida la prestación contractual, o bien en el supuesto de resolución, los datos de carácter personal que pudieran permanecer en poder del Encargado del Tratamiento deberán serán destruidos o devueltos al Responsable del Fichero, al igual que cualquier soporte o documento en los que conste algún dato de carácter personal objeto de tratamiento.'),0,'J');
 $pdf->Ln(3);
@@ -158,9 +166,9 @@ $pdf->MultiCell(0, 7, utf8_decode('Tanto el Responsable del Fichero como el Enca
 /* signatures */
 $pdf->SetLeftMargin(20);
 $pdf->SetFont('Arial','',9);
-$pdf->Ln(10);
+$pdf->Ln(12);
 //$pdf->MultiCell(0, 6, utf8_decode($cname.'                                                                            '. $rep_legal_ces_name), 0, 'C');
-$pdf->MultiCell(0, 6, utf8_decode($cname.'                                                                            '.html_entity_decode($ces["nombre"])), 0, 'C');
+$pdf->MultiCell(0, 6, utf8_decode($cname.'                                               '.html_entity_decode($ces["nombre"])), 0, 'C');
 $nombre_empresa="              ";
 if($ces["tipo"] != 3){
     $nombre_empresa=$ces["nombre"];

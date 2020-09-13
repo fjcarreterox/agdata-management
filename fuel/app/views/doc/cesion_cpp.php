@@ -43,7 +43,11 @@ $pres_dni="...............................";
 if($pres->dni!=""){
     $pres_dni=$pres->dni;
 }
-$pdf->MultiCell(0, 6, utf8_decode('De una parte, '.$pres_name.', mayor de edad, con DNI '.$pres_dni.', en nombre y representación de la Comunidad de Propietarios '.$cname.' en su calidad de PRESIDENTE, con domicilio en '.html_entity_decode($dir).' con C.P. '.$cp.' de '.html_entity_decode($loc).', provincia de '.html_entity_decode($prov).' y CIF nº '.$cif_nif.' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
+
+if(strcmp($loc,$prov)==0){$preslocprov=$loc;}
+else{$preslocprov=html_entity_decode($loc).', provincia de '. html_entity_decode($prov);}
+
+$pdf->MultiCell(0, 6, utf8_decode('De una parte, '.$pres_name.', mayor de edad, con DNI '.$pres_dni.', en nombre y representación de la Comunidad de Propietarios '.$cname.' en su calidad de PRESIDENTE, con domicilio en '.html_entity_decode($dir).' con C.P. '.$cp.' de '.$preslocprov.' y CIF nº '.$cif_nif.' (En adelante RESPONSABLE DEL FICHERO)'), 0, 'J');
 $pdf->Ln(5);
 
 $rep_name = html_entity_decode($rep["nombre"]);
@@ -57,12 +61,15 @@ if($rep["aaff_type"]==1){
     $rep_type="como Administrador de Fincas, ";
 }
 
+if(strcmp($aaff_loc,$aaff_prov)==0){$aafflocprov=$aaff_loc;}
+else{$aafflocprov=$aaff_loc.', provincia de '. $aaff_prov;}
+
 //the second one is included in the first one
 if(strcmp($rep_name,$aaff_name) == 0){
-    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_name . ', mayor de edad con  DNI ' . $rep["dni"] . ', en representación propia y '.$rep_type.'con domicilio en ' . $aaff_dir . ', con C.P. ' . $rep["cp"] . ' de ' . $aaff_loc . ', provincia de ' . $aaff_prov . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_name . ', mayor de edad con  DNI ' . $rep["dni"] . ', en representación propia y '.$rep_type.'con domicilio en ' . $aaff_dir . ', con C.P. ' . $rep["cp"] . ' de ' . $aafflocprov . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
 }
 else {
-    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_name . ', mayor de edad con  DNI ' . $rep["dni"] . ', en representación de ' . html_entity_decode($rep["nombre_aaff"]) . ' con CIF ' . $rep["cif_nif"] . ', '.$rep_type.'con domicilio en ' . $aaff_dir . ', con C.P. ' . $rep["cp"] . ' de ' . $aaff_loc . ', provincia de ' . $aaff_prov . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
+    $pdf->MultiCell(0, 6, utf8_decode('De otra, ' . $rep_name . ', mayor de edad con  DNI ' . $rep["dni"] . ', en representación de ' . html_entity_decode($rep["nombre_aaff"]) . ' con CIF ' . $rep["cif_nif"] . ', '.$rep_type.'con domicilio en ' . $aaff_dir . ', con C.P. ' . $rep["cp"] . ' de ' . $aafflocprov . ' (En adelante ENCARGADO DEL TRATAMIENTO)'), 0, 'J');
 }
 $pdf->Ln(3);
 
@@ -151,7 +158,7 @@ $pdf->Ln(5);
 $pdf->MultiCell(0, 7, utf8_decode('Las partes contratantes se someten expresamente al fuero de los Juzgados y Tribunales de la ciudad de Sevilla, para cuantas acciones o reclamaciones pudieran derivarse de este contrato.'),0,'J');
 $pdf->Ln(3);
 $pdf->MultiCell(0, 7, utf8_decode('Tanto el Responsable del Fichero como el Encargado del Tratamiento, aceptan el presente contrato en los términos y clausulas estipuladas en el mismo, y en prueba de ello, y para cumplimiento de lo convenido, lo firman por duplicado.'),0,'J');
-$pdf->Ln(10);
+$pdf->Ln(12);
 
 $pdf->SetLeftMargin(20);
 $pdf->SetFont('Arial','',9);
@@ -161,6 +168,6 @@ if(strpos($rep["nombre"],"......")===false){
 else{
     $signature = "...............................";
 }
-$pdf->MultiCell(0, 6, utf8_decode('C.PP ' . $cname . '                                         ' . $signature), 0, 'C');
+$pdf->MultiCell(0, 6, utf8_decode('C.PP ' . $cname . '                      ' . $signature), 0, 'C');
 
 $pdf->Output("CONTRATO-CESION-C.PP.-".$cname.".pdf",'I');

@@ -116,7 +116,11 @@ $pdf->SetAligns(array('L','L'));
 $pdf->SetFont('Arial','B',10);
 $pdf->Row(array("Denominación social:",$cname));
 $pdf->Row(array("C.I.F.:",$cif));
-$pdf->Row(array("Dirección completa:",$dir.', '.$cp.', '.$loc.', '.$prov));
+
+if(strcmp($loc,$prov)==0){$locprov=$loc;}
+else{$locprov=$loc.', '.$prov;}
+
+$pdf->Row(array("Dirección completa:",$dir.', '.$cp.', '.$locprov));
 $pdf->Row(array("Correo electrónico:",$email));
 $pdf->Row(array("Actividad principal:",html_entity_decode($act)));
 $pdf->Row(array("Página web:",$web));
@@ -132,8 +136,9 @@ $pdf->Row(array("","Nombre completo","Datos de contacto (email, teléfono)"));
 $pdf->SetFont('Arial','',10);
 $pdf->SetAligns(array('L','L','L'));
 
-$pdf->Row(array("Responsable de Seguridad:\n\n",html_entity_decode($rep_seg["nombre"]),$rep_seg['tlfno']."\n\n".$rep_seg['email']));
-$pdf->Row(array("Responsable informático:\n\n","",""));
+if($rep_seg['tlfno']==0){$tlfno='';}else{$tlfno=$rep_seg['tlfno'];}
+
+$pdf->Row(array("Responsable de Seguridad:\n\n","\n".html_entity_decode($rep_seg["nombre"]),$tlfno."\n".$rep_seg['email']));
 $pdf->Ln(10);
 
 $pdf->SetFont('Arial','U',10);
