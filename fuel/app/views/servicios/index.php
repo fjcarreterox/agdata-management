@@ -12,11 +12,12 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach ($servicios as $item): ?>
+<?php
+	$cat_ops = array("LOPD","COMUNICACIÓN","GESTORÍA","NEOS","CAE");
+	foreach ($servicios as $item): ?>
         <tr>
 			<td><?php echo $item->nombre; ?></td>
 			<td><?php
-                $cat_ops = array("LOPD","COMUNICACIÓN","GESTORÍA");
 				echo $cat_ops[$item->categoria];
 				?></td>
 			<td>

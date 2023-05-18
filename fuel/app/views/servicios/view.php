@@ -6,7 +6,7 @@
 <p>
     <strong>Categoría:</strong>
     <?php
-    $cat_ops = array("LOPD","COMUNICACIÓN","GESTORÍA");
+    $cat_ops = array("LOPD","COMUNICACIÓN","GESTORÍA","NEOS","CAE");
     echo $cat_ops[$servicio->categoria];
     ?></p>
 <br/>

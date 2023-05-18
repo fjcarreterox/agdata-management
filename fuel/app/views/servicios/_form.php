@@ -1,5 +1,5 @@
 <?php
-$cat_ops = array("LOPD","COMUNICACIÓN","GESTORÍA");
+$cat_ops = array("LOPD","COMUNICACIÓN","GESTORÍA","NEOS","CAE");
 echo Form::open(array("class"=>"form-horizontal")); ?>
 	<fieldset>
 		<div class="form-group">
