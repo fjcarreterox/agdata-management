@@ -30,10 +30,8 @@
                         case 1: echo "LOPD";break;
                         case 2: echo "LOPD";break;
                         case 3: echo "GESTORÍA";break;
-                        case 4: echo "COMUNICACIÓN";break;
-                        case 5: echo "COMUNICACIÓN";break;
-                        case 6: echo "COMUNICACIÓN";break;
-                        case 7: echo "COMUNICACIÓN";break;
+                        case 4: echo "CD-NEOS";break;
+                        case 5: echo "CAE";break;
                     }
                 }
                 else{
