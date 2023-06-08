@@ -66,7 +66,7 @@
 			<p><a class="btn btn-danger" href="welcome/logout">Salir del sistema <span class="glyphicon glyphicon-log-out"></span></a></p>
 		</div>
 		<div class="row">
-            <div class="col-md-4">
+            <!--<div class="col-md-4">
                 <h2>Menú Comercial</h2>
                 <ul>
                     <li><a href="clientes/create">Añadir Nuevo Contacto</a></li>
@@ -78,25 +78,27 @@
                     <li><a href="clientes/nointeresados">No interesados</a></li>
                     <li><a href="agenda/usercal/<?php echo Session::get('iduser');?>">Mi calendario <span class="glyphicon glyphicon-calendar"></span></a></li>
                 </ul>
-            </div>
+            </div>-->
 			<div class="col-md-4">
 				<h2>Menú LOPD</h2>
                 <ul>
-                    <li><a href="clientes/adaptacion">Clientes en adaptación</a></li>
+                    <!--<li><a href="clientes/adaptacion">Clientes en adaptación</a></li>-->
                     <li><a href="clientes/mantenimiento">Clientes en mantenimiento</a></li>
                     <li><a href="clientes/com_mantenimiento">CC.PP. en mantenimiento</a></li>
                 </ul>
 			</div>
-			<!--<div class="col-md-4">
-				<h2>Menú Comunicación</h2>
+			<div class="col-md-4">
+				<h2>Menú C.A.E</h2>
 				<ul>
-                    <li><a href="clientes/filter/4">Clientes de Blogs</a></li>
-                    <li><a href="clientes/filter/5">Clientes de Redes Sociales</a></li>
-                    <li><a href="clientes/filter/7">Clientes de Eventos</a></li>
-					<li><a href="clientes/filter/6">Clientes de Diseño</a></li>
-					<li><a href="XXX">Gestión de llamadas de comunicación <span class="glyphicon glyphicon-earphone"></span></a></li>
+                    <li><a href="clientes/filter/4">Nueva empresa contrata</a></li>
 				</ul>
-			</div>-->
+			</div>
+            <div class="col-md-4">
+                <h2>Menú CD+NEOS</h2>
+                <ul>
+                    <li><a href="clientes/filter/4">TBC</a></li>
+                </ul>
+            </div>
 		</div>
         <div class="row">
             <div class="col-md-4">
@@ -122,7 +124,7 @@
                     <li><a href="estados/presupuesto">Estados de los presupuestos</a></li>
                     <li><a href="relacion">Tipos de relaciones de personal con AGDATA</a></li>
                     <li><a href="tipo/plantilla">Tipos de plantillas para mailings</a></li>
-                    <li><a href="tipo/situacion">Tipos de situaciones de clientes en adaptación</a></li>
+                    <li><a href="tipo/situacion">Tipos de situaciones de clientes</a></li>
                     <li><a href="tipo/tarea">Tipos de tareas a completar</a></li>
                     <li><a href="tipo/datos">Tipos de datos (estructura de ficheros)</a></li>
                 </ul>
