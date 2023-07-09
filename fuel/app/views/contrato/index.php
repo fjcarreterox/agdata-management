@@ -26,13 +26,8 @@
 			<td><?php
                 $serv=Model_Servicios_Contratado::find('first',array('where'=>array('idcontrato'=>$item->id)));
                 if($serv != null){
-                    switch($serv->idtipo_servicio){
-                        case 1: echo "LOPD";break;
-                        case 2: echo "LOPD";break;
-                        case 3: echo "GESTORÍA";break;
-                        case 4: echo "CD-NEOS";break;
-                        case 5: echo "CAE";break;
-                    }
+                    if(Model_Servicio::find($serv->idtipo_servicio)){echo Model_Servicio::find($serv->idtipo_servicio)->get('nombre');}
+                    else{echo "<span class='red'>CONTRATO NO RECONOCIDO</span> (idcliente: <b>$item->idcliente</b>)";}
                 }
                 else{
                     echo '<span class="red">N/D</span>';

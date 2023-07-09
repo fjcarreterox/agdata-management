@@ -45,11 +45,11 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial','',12);
 $extra_txt = "";
 if(strcmp($rep->nombre,$customer->nombre) != 0){
-    $extra_txt = " como representante legal de ".html_entity_decode($customer->nombre).",";
+    $extra_txt = " en nombre y representación de ".html_entity_decode($customer->nombre).",";
 }
-$pdf->MultiCell(0,6,utf8_decode('          De una parte, '.$tratamiento_ops[$rep->tratamiento] .' '. html_entity_decode($rep->nombre).', mayor de edad, con DNI nº '.$rep->dni.','.$extra_txt.' con domicilio en '.html_entity_decode($customer->direccion).', C.P '.$customer->cpostal.', en '.html_entity_decode($customer->loc).', provincia de '.html_entity_decode($customer->prov).' y con CIF nº '.$customer->cif_nif.' (en adelante, EL BENEFICIARIO).'),0);
+$pdf->MultiCell(0,6,utf8_decode('          De una parte, D. Juan Andrés Carretero García, mayor de edad, con DNI nº 28.770.539-T, en nombre y representación de ANÁLISIS Y GESTIÓN DE DATOS, S.L. (AGDATA), con domicilio social en Calle Matrona María Jesús Corchero Delgado, nº 60, C.P. 41111, Almensilla, y CIF nº  B-91341297 (en adelante, EL PRESTATARIO).'),0);
 $pdf->Ln(5);
-$pdf->MultiCell(0,6,utf8_decode('          De otra, D. Juan Andrés Carretero García, mayor de edad, con DNI nº 28.770.539-T, en nombre y representación de ANÁLISIS Y GESTIÓN DE DATOS, S.L. (AGDATA), con domicilio social en Plaza Padre Jerónimo de Córdoba, nº 13, 6ºB, C.P. 41003, Sevilla, y CIF nº  B-91.341.297 (en adelante, EL PRESTATARIO).'),0);
+$pdf->MultiCell(0,6,utf8_decode('          De otra, '.$tratamiento_ops[$rep->tratamiento] .' '. html_entity_decode($rep->nombre).', mayor de edad, con DNI nº '.$rep->dni.','.$extra_txt.' y con CIF '.$customer->cif_nif.', con domicilio social en '.html_entity_decode($customer->direccion).', C.P '.$customer->cpostal.', en '.html_entity_decode($customer->loc).' ('.html_entity_decode($customer->prov).'), sociedad que ejerce su actividad de administración de fincas, y actúa como mandataria de (en adelante, EL BENEFICIARIO).'),0);
 $pdf->Ln(5);
 $pdf->MultiCell(0,6,utf8_decode('        Ambas partes (en adelante "las partes") se reconocen mutua y recíprocamente, la capacidad legal necesaria y suficiente para el otorgamiento del presente contrato mercantil y'),0);
 $pdf->Ln(5);

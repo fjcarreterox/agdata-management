@@ -59,12 +59,19 @@ class Controller_Doc extends Controller_Template{
                 $data['services'] = $serv;
                 return View::forge('doc/contrato_gestoria', $data)->render();
             }
+            //Id tipo NEOs
+            /*else if($serv->idtipo_servicio==8){
+                $data['services'] = $serv;
+                return View::forge('doc/contrato_neos', $data)->render();
+            }*/
             $data['services'][0] = $serv;
         }
 
         if($isCPP){
             if(Model_Cliente::find($rep->idcliente)){
+                $data["aaff"] = Model_Cliente::find($rep->idcliente);
                 $data["aaff_nombre"] = Model_Cliente::find($rep->idcliente)->get('nombre');
+                $data["aaff_cif"] = Model_Cliente::find($rep->idcliente)->get('cif_nif');
             }
             else{
                 $data["aaff_nombre"] = "    ";
@@ -91,9 +98,61 @@ class Controller_Doc extends Controller_Template{
         $data['trab'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$idc,'relacion'=>4)));
         //Registered files info
         $files_raw = Model_Fichero::find('all',array('where'=>array('idcliente'=>$idc)));
+        $files=array();
         //Obtaining the max level for all the registered files
         $max_level = 0;
         $levels = array("No especificado","Básico","Medio","Alto");
+        if($files_raw!=null){
+            foreach($files_raw as $f){
+                $files[]=array(
+                    "id" => $f->id,
+                    "idtype" => $f->idtipo,
+                    "name" => Model_Tipo_Fichero::find($f->idtipo)->get('tipo'),
+                    "target" => Model_Tipo_Fichero::find($f->idtipo)->get('finalidad'),
+                    "level_name" => $levels[$f->nivel],
+                    "idlevel" => $f->nivel,
+                    "supp" => $f->soporte
+                );
+                if($f->nivel > $max_level){
+                    $max_level=$f->nivel;
+                }
+            }
+        }
+        $data['files'] = $files;
+        $data['max_level'] = $max_level;
+        $data['ces'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$idc)));
+
+        if($isCPP){
+            $rels_aaff = Model_Rel_Comaaff::find('all',array('where'=>array('idcom'=>$idc)));
+            $reps_data = null;
+            foreach($rels_aaff as $rel_aaff) {
+                $aaff = Model_Cliente::find($rel_aaff->idaaff);
+                $rep = Model_Personal::find('first', array('where' => array('idcliente' => $aaff->id, 'relacion' => 1)));
+                if ($rep != null) {
+                    $reps_data[] = array(
+                        "nombre" => $rep->get('nombre'),
+                        "dni" => $rep->get('dni'),
+                        "nombre_aaff" => $aaff->nombre,
+                        "dir" => $aaff->direccion,
+                        "cp" => $aaff->cpostal,
+                        "loc" => $aaff->loc,
+                        "prov" => $aaff->prov
+                    );
+                }
+            }
+            $data['reps'] = $reps_data;
+            $data['num_reps'] = count($reps_data);
+            $data['pres'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idc,'relacion'=>6)));
+            return View::forge('doc/seguridad_cpp',$data)->render();
+        }
+        else{
+            $data['reps'] = Model_Personal::find('first', array('where' => array('idcliente' => $idc, 'relacion' => 1)));
+            $data['rep_seg'] = Model_Personal::find('first', array('where' => array('idcliente' => $idc, 'relacion' => 3)));
+            $data['personal'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idc,'relacion'=>6)));
+            return View::forge('doc/seguridad',$data)->render();
+        }
+    }
+
     public function action_allin1($idc){
         $c=Model_Cliente::find($idc);
         $isCPP=($c->tipo == 6)? true: false;
