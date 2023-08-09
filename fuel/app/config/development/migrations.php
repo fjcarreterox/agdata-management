@@ -38,6 +38,8 @@ return array (
         29 => '030_create_rel_estructuras',
         30 => '031_create_facturas',
         31 => '032_create_qevents',
+        32 => '033_create_infocaes',
+        33 => '034_create_rel_comconts',
       ),
     ),
     'module' => 

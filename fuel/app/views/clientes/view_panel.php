@@ -137,11 +137,11 @@
     </div>
 
     <!-- SECOND PANEL -->
-    <div class="panel panel-default" id="panel2">
+    <!--<div class="panel panel-default" id="panel2">
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo" class="collapsed">
-                    Presupuestación
+                    Presupuestación (Deprecated)
                 </a></span>
             </h3>
         </div>
@@ -150,25 +150,25 @@
                 <h4>Presupuesto asociado</h4>
                 <?php if(empty($presupuestos)):?>
                     <p>Aún no existe un presupuesto en el sistema asociado a este cliente. Puedes crearlo desde aquí pulsando en el siguiente botón:</p>
-                    <p><?php echo Html::anchor('presupuesto/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Crear nuevo presupuesto', array('class' => 'btn btn-success')); ?></p>
+                    <p><?php /*echo Html::anchor('presupuesto/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Crear nuevo presupuesto', array('class' => 'btn btn-success'));*/ ?></p>
                 <?php else: ?>
                     <p>Se han encontrado los siguientes presupuestos:</p>
                     <?php
-                        foreach($presupuestos as $p) {
+                        /*foreach($presupuestos as $p) {
                             echo Html::anchor('presupuesto/view/' . $p->id, 'Presupuesto nº' . $p->num_p, array('target'=>'_blank','title'=>'Se abre en ventana nueva'));
-                        }
+                        }*/
                     ?>
                 <?php endif; ?>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <!-- THIRD PANEL -->
     <div class="panel panel-default" id="panel3">
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseThree" href="#collapseThree" class="collapsed">
-                    Servicios contratados y forma de pago
+                    Contratos y Servicios
                 </a></span>
             </h3>
         </div>
@@ -202,7 +202,7 @@
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseFour" href="#collapseFour" class="collapsed">
-                    Auditoría de adaptación
+                    Protección de Datos
                 </a></span>
             </h3>
         </div>
@@ -381,7 +381,7 @@
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseFive" href="#collapseFive" class="collapsed">
-                    Auditoría de mantenimiento
+                    Certificado Digital / NEOS
                 </a></span>
             </h3>
         </div>
@@ -396,70 +396,76 @@
         <div class="panel-heading">
             <h3 class="panel-title datos_cliente"><span class="muted">
                 <a data-toggle="collapse" data-target="#collapseSix" href="#collapseSix" class="collapsed">
-                    Comunicación
+                    C.A.E.
                 </a></span>
             </h3>
         </div>
         <div id="collapseSix" class="panel-collapse collapse">
             <div class="panel-body">
-                <p><?php echo Html::anchor('comunicacion/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Cuestionario genérico', array('class' => 'btn btn-primary')); ?></p>
                 <p><?php
-                    if($events != null){
-                        echo "<h4>Datos de eventos</h4>";
+                    if($infocae != null){
+                        echo "<h4>Información C.A.E.</h4>";
+                        if(count($infocae)>1){echo "¡Se han encontrado varias entradas para la misma empresa!. Contacta al administrador.";}
                         ?>
                         <table class="table table-striped table-bordered table-hover table-responsive">
                             <thead>
                                 <tr class="text-center">
-                                    <td><strong>Tipo</strong></td>
-                                    <td><strong>Fecha y hora</strong></td>
-                                    <td><strong>Localización</strong></td>
-                                    <td>&nbsp;</td>
+                                    <td><strong>Listado de instalaciones</strong></td>
+                                    <td><strong>Acciones</strong></td>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php
-                            $type_ops = array(
-                                "N/D" => "-- NO DEFINIDO --",
-                                "comida" => "Comida/Cena de empresa",
-                                "marca" => "Evento corporativo para conocer la marca",
-                                "producto" => "Evento corporativo para presentar un producto",
-                                "premios" => "Evento de entrega de premios para personal",
-                                "diplomas" => "Evento de entrega de diplomas formativos",
-                                "obsequios" => "Evento de obsequios a clientes",
-                                "sorteo" => "Evento de sorteos o promociones",
-                                "colaborativo" => "Evento colaborativo con otra empresa",
-                                "formacion" => "Jornada de formación",
-                                "abiertas" => "Jornada de puertas abiertas",
-                                "ocio" => "Actividades de ocio para el personal",
-                                "prensa" => "Ruedas de prensa",
-                                "otro" => "Otro",
-                            );
-                            $loc_ops = array(
-                                "N/D" => "-- NO DEFINIDO --",
-                                "hotel" => "Hotel",
-                                "emblema" => "Lugar emblemático de la ciudad",
-                                "propias" => "Estancias propias",
-                                "sala" => "Sala de reunión",
-                                "restaurante" => "Restaurante / Club",
-                                "finca" => "Finca rústica",
-                                "otro" => "Otro",
-                            );
-                            foreach($events as $e): ?>
+                            $servicios="";
+                            foreach($infocae as $info):
+                                foreach($info as $i => $v):
+                                    if($v==1 and $i!='id' and $i!='idcliente')$servicios=$servicios." // ".$i;
+                                endforeach; ?>
                                 <tr>
-                                    <td><?php echo $type_ops[$e->type]; ?></td>
-                                    <td><?php echo $e->date_time; ?></td>
-                                    <td><?php echo $loc_ops[$e->location]; ?></td>
-                                    <td><?php echo Html::anchor('qevents/view/'.$e->id, '<span class="glyphicon glyphicon-eye-open"></span> Detalle',array('class'=>'btn btn-default','target'=>'_blank','title'=>'Se abre en ventana nueva...')); ?>
-                                        <?php echo Html::anchor('qevents/edit/'.$e->id, '<span class="glyphicon glyphicon-pencil"></span> Editar',array('class'=>'btn btn-success')); ?>
-                                        <?php echo Html::anchor('qevents/delete/'.$e->id, '<span class="glyphicon glyphicon-trash"></span> Borrar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminarla del sistema?')")); ?></td>
+                                    <td><?php echo $servicios; ?></td>
+                                    <td><?php echo Html::anchor('infocae/report/'.$info->id, '<span class="glyphicon glyphicon-eye-open"></span> Generar Informe C.A.E.',array('class'=>'btn btn-info','target'=>'_blank','title'=>'Se abre en ventana nueva...')); ?>
+                                        <?php echo Html::anchor('infocae/edit/'.$info->id, '<span class="glyphicon glyphicon-pencil"></span> Editar información C.A.E.',array('class'=>'btn btn-success')); ?>
+                                        <?php echo Html::anchor('infocae/delete/'.$info->id, '<span class="glyphicon glyphicon-trash"></span> Borrar información C.A.E.',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminar esta información del sistema?')")); ?></td>
                                 </tr>
+
                             <?php endforeach; ?>
                             </tbody>
                         </table>
                     <?php
+                    }else{?>
+                        <p><?php echo Html::anchor('infocae/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Cuestionario evaluación de riesgos', array('class' => 'btn btn-primary')); ?></p>
+                    <?php
                     }
-                    echo Html::anchor('qevents/create/' . $cliente->id, '<span class="glyphicon glyphicon-plus"></span> Cuestionario para eventos', array('class' => 'btn btn-primary'));
-                    ?></p>
+                    echo "<h4>Servicios Externos</h4>";
+                        if(count($rel_comconts)>0){
+                    ?>
+                        <table class="table table-striped table-bordered table-hover table-responsive">
+                            <thead>
+                                <tr class="text-center">
+                                    <td><strong>Servicios externo</strong></td>
+                                    <td><strong>Contrata</strong></td>
+                                    <td><strong>Email</strong></td>
+                                    <td><strong>Fecha informe</strong></td>
+                                    <td><strong>Acciones</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $servicios = array("Conserjería","Limpieza","Vigilancia","Socorrista","Seguros","Mantenimientos","Otros");
+                                foreach($rel_comconts as $contratas){ ?>
+                                <tr><td><?php echo $servicios[$contratas->servicio]; ?></td>
+                                    <td><?php echo Model_Cliente::find($contratas->idcontrata)->get('nombre'); ?></td>
+                                    <td><?php echo Model_Cliente::find($contratas->idcontrata)->get('email'); ?></td>
+                                    <td><?php echo $contratas->fechaenvio; ?></td>
+                                    <td><?php echo Html::anchor('rel_comconts/update_date/'.$contratas->id, '<span class="glyphicon glyphicon-calendar"></span> Notificar',array('class'=>'btn btn-info','title'=>'Actualiza la fecha de envío del informe')); ?>
+                                    <?php $rel="";echo Html::anchor('rel_comconts/edit/'.$contratas->id, '<span class="glyphicon glyphicon-pencil"></span> Editar',array('class'=>'btn btn-success')); ?>
+                                    <?php echo Html::anchor('rel_comconts/delete/'.$contratas->id, '<span class="glyphicon glyphicon-remove-sign"></span> Eliminar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminar esta relación de contrata del sistema?')")); ?></td></tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                        <?php } ?>
+                <p><?php echo Html::anchor('rel_comconts/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo servicio externo', array('class' => 'btn btn-primary')); ?>
+                    <?php echo Html::anchor('clientes/create/', '<span class="glyphicon glyphicon-plus"></span> Añadir nueva empresa contrata', array('class' => 'btn btn-danger')); ?></p>
             </div>
         </div>
     </div>

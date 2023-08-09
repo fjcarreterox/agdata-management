@@ -39,14 +39,14 @@ class Controller_Tipo_Clientes extends Controller_Template
 
 				if ($tipo_cliente and $tipo_cliente->save())
 				{
-					Session::set_flash('success', 'Added tipo_cliente #'.$tipo_cliente->id.'.');
+					Session::set_flash('success', 'Añadido nuevo tipo de cliente: #'.$tipo_cliente->id.'.');
 
 					Response::redirect('tipo/clientes');
 				}
 
 				else
 				{
-					Session::set_flash('error', 'Could not save tipo_cliente.');
+					Session::set_flash('error', 'No se ha podido guardar el nuevo tipo de cliente.');
 				}
 			}
 			else
@@ -55,7 +55,7 @@ class Controller_Tipo_Clientes extends Controller_Template
 			}
 		}
 
-		$this->template->title = "Tipo_Clientes";
+		$this->template->title = "Tipo de Clientes";
 		$this->template->content = View::forge('tipo/clientes/create');
 
 	}

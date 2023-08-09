@@ -98,13 +98,6 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/adaptacion', $data);
     }
 
-    public function action_nointeresados(){
-        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>4)));
-        $data['intro'] = "No Interesados";
-        $this->template->title = "Contactos aún no interesados";
-        $this->template->content = View::forge('clientes/nointeresados', $data);
-    }
-
     public function action_mantenimiento(){
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>6,array('tipo','<>',6))));
         $data['intro'] = "en régimen de mantenimiento de la LOPD";
@@ -230,6 +223,9 @@ class Controller_Clientes extends Controller_Template
             $data['cesiones'] = Model_Cesione::find('all',array('where'=>array('idcliente'=>$id)));
             $data['contactos'] = Model_Personal::find('all',array('where'=>array('idcliente'=>$id)));
             $data['grupossedes'] = Model_Gruposede::find('all',array('where'=>array('idcliente'=>$id)));
+            //$data["events"] = Model_Qevent::find('all',array('where'=>array('idcustomer'=>$id)));
+            $data["infocae"] = Model_Infocae::find('all',array('where'=>array('idcliente'=>$id)));
+            $data["rel_comconts"] = Model_Rel_Comcont::find('all',array('where'=>array('idcom'=>$id)));
         }
 
 		$this->template->title = "Ficha completa de cliente";
