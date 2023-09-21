@@ -445,7 +445,7 @@
                                     <td><strong>Servicios externo</strong></td>
                                     <td><strong>Contrata</strong></td>
                                     <td><strong>Email</strong></td>
-                                    <td><strong>Fecha informe</strong></td>
+                                    <td><strong>Fecha envío informe</strong></td>
                                     <td><strong>Acciones</strong></td>
                                 </tr>
                             </thead>
@@ -454,18 +454,19 @@
                                 $servicios = array("Conserjería","Limpieza","Vigilancia","Socorrista","Seguros","Mantenimientos","Otros");
                                 foreach($rel_comconts as $contratas){ ?>
                                 <tr><td><?php echo $servicios[$contratas->servicio]; ?></td>
-                                    <td><?php echo Model_Cliente::find($contratas->idcontrata)->get('nombre'); ?></td>
+                                    <td><?php echo Model_Cliente::find($contratas->idcontrata)->get('nombre');echo "(".Model_Cliente::find($contratas->idcontrata)->get('actividad').")" ?></td>
                                     <td><?php echo Model_Cliente::find($contratas->idcontrata)->get('email'); ?></td>
                                     <td><?php echo $contratas->fechaenvio; ?></td>
                                     <td><?php echo Html::anchor('rel_comconts/update_date/'.$contratas->id, '<span class="glyphicon glyphicon-calendar"></span> Notificar',array('class'=>'btn btn-info','title'=>'Actualiza la fecha de envío del informe')); ?>
                                     <?php $rel="";echo Html::anchor('rel_comconts/edit/'.$contratas->id, '<span class="glyphicon glyphicon-pencil"></span> Editar',array('class'=>'btn btn-success')); ?>
-                                    <?php echo Html::anchor('rel_comconts/delete/'.$contratas->id, '<span class="glyphicon glyphicon-remove-sign"></span> Eliminar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminar esta relación de contrata del sistema?')")); ?></td></tr>
+                                    <?php echo Html::anchor('rel_comconts/delete/'.$contratas->id, '<span class="glyphicon glyphicon-remove-sign"></span> Eliminar',array('class'=>'btn btn-danger','onclick'=>"return confirm('¿Estás seguro de querer eliminar esta relación de contrata del sistema?')")); ?>
+                                    <?php echo Html::anchor('clientes/view/'.$contratas->idcontrata, '<span class="glyphicon glyphicon-bookmark"></span> Ver Ficha Contrata',array('class'=>'btn btn-primary','target'=>"_blank")); ?></td></tr>
                                 <?php } ?>
                             </tbody>
                         </table>
                         <?php } ?>
                 <p><?php echo Html::anchor('rel_comconts/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo servicio externo', array('class' => 'btn btn-primary')); ?>
-                    <?php echo Html::anchor('clientes/create/', '<span class="glyphicon glyphicon-plus"></span> Añadir nueva empresa contrata', array('class' => 'btn btn-danger')); ?></p>
+                    <?php echo Html::anchor('clientes/create/', '<span class="glyphicon glyphicon-plus"></span> Añadir nueva empresa contrata', array('class' => 'btn btn-danger','target'=>"_blank")); ?></p>
             </div>
         </div>
     </div>
