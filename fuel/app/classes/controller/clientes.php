@@ -311,6 +311,7 @@ class Controller_Clientes extends Controller_Template
 					'num_trab' => Input::post('num_trab'),
 					'email' => Input::post('email'),
 					'actividad' => Input::post('actividad'),
+					'password' => Input::post('password'),
 					'observ' => Input::post('observ'),
 					'pending' => Input::post('pending'),
 					'estado' => Input::post('estado'),
@@ -360,13 +361,14 @@ class Controller_Clientes extends Controller_Template
             $cliente->num_trab = Input::post('num_trab');
             $cliente->email = Input::post('email');
             $cliente->actividad = Input::post('actividad');
+            $cliente->password = Input::post('password');
             $cliente->observ = Input::post('observ');
             $cliente->pending = Input::post('pending');
             $cliente->estado = Input::post('estado');
             $cliente->idsituacion = Input::post('idsituacion');
 
             if ($cliente->save()){
-                $t = Model_Tarea::forge();
+                /*$t = Model_Tarea::forge();
                 if($cliente->estado == 5){ //creating adaptation tasks
                     if(!$t->existsAdapTasks($id)){
                         \Fuel\Core\Log::error("---CREATING ADAPT TASKS!!");
@@ -378,7 +380,7 @@ class Controller_Clientes extends Controller_Template
                         \Fuel\Core\Log::error("---CREATING SUPP TASKS!!");
                         $t->createSuppTasks($id);
                     }
-                }
+                }*/
                 Session::set_flash('success', 'Datos de cliente actualizados.');
                 Response::redirect('clientes/view/'.$id);
             }

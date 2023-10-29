@@ -29,6 +29,10 @@ echo Form::open(array("class"=>"form-horizontal")); ?>
 			<?php echo Form::select('tipo', Input::post('tipo', isset($cliente) ? $cliente->tipo : ''), $tipos_sel ,array('class' => 'col-md-4 form-control', 'placeholder'=>'Tipo de cliente')); ?>
 		</div>
         <div class="form-group">
+            <?php echo Form::label('Número de Colegiado', 'password', array('class'=>'control-label')); ?>
+            <?php echo Form::input('password', Input::post('password', isset($cliente) ? $cliente->password : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Núm. Colegiado')); ?>
+        </div>
+        <div class="form-group">
             <?php echo Form::label('Provincia', 'prov', array('class'=>'control-label')); ?><span class="red"> *</span>
             <?php echo Form::input('prov', Input::post('prov', isset($cliente) ? $cliente->prov : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Provincia')); ?>
         </div>

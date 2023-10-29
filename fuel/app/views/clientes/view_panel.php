@@ -40,9 +40,9 @@
                         <td><?php if($cliente->iban!=''){echo $cliente->iban;}else{echo '<span class="red">-- FALTA IBAN --</span>';} ?></td>
                         <td>Núm. trabajadores: <?php echo $cliente->num_trab;?></td>
                         <td><?php if($cliente->idsituacion!=0){echo Model_Tipo_Situacion::find($cliente->idsituacion)->get('tipo');}else{echo '<span class="red">-- SITUACIÓN N/D --</span>';} ?></td>
-                        <td><?php echo "Clave interna: ";
-                            if($cliente->password != NULL){echo "SÍ";}
-                            else{echo "NO";}
+                        <td><?php echo "Colegiado: ";
+                            if($cliente->password != NULL){echo $cliente->password;}
+                            else{echo '<span class="red">-- FALTA NÚM. --</span>';}
                             ?></td>
                     </tr>
                     <tr>
@@ -80,9 +80,9 @@
                 <?php echo Html::anchor('clientes', '<span class="glyphicon glyphicon-backward"></span> Volver al listado de clientes',array('class'=>'btn btn-danger')); ?>&nbsp;
                 <?php echo Html::anchor('agenda/create/'.$cliente->id, '<span class="glyphicon glyphicon-plus"></span> Crear nuevo evento',array('class'=>'btn btn-primary')); ?>&nbsp;
                 <?php
-                if($cliente->password != NULL) {$btn_title="Cambiar contraseña";}
-                else{$btn_title="Generar nueva contraseña";}
-                echo Html::anchor('clientes/new_pass/' . $cliente->id, '<span class="glyphicon glyphicon-envelope"></span> '.$btn_title, array('class' => 'btn btn-warning'));
+                //if($cliente->password != NULL) {$btn_title="Cambiar contraseña";}
+                //else{$btn_title="Generar nueva contraseña";}
+                //echo Html::anchor('clientes/new_pass/' . $cliente->id, '<span class="glyphicon glyphicon-envelope"></span> '.$btn_title, array('class' => 'btn btn-warning'));
                 ?>
                 <br/><br/>
                 <h4>Personal de contacto</h4>
