@@ -24,15 +24,13 @@ if($pos !== false){
 $pdf->MultiCell(0,10,utf8_decode(mb_strtoupper($name)),0,'C');
 $pdf->Ln(10);
 $pdf->SetFont('Futura','',14);
-$pdf->MultiCell(0,8,utf8_decode('Ha superado favorablemente la auditoría de adaptación a la Ley Orgánica 15/1999 de Protección de Datos de carácter personal realizada por Análisis y Gestión de Datos S.L., quedando a disposición de la Agencia Española de Protección de Datos.'),0,'J');
+$pdf->MultiCell(0,8,utf8_decode('Cumple actualmente los parámetros de protección de datos establecidos en la Ley Orgánica 3/2018 de Protección de Datos de Carácter Personal y garantía de derechos digitales (LOPDGDD) y en el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales, una vez implantadas todas las medidas de seguridad técnicas y jurídicas que garantizan su correcto cumplimiento.'),0,'J');
 $pdf->Ln(5);
-$pdf->MultiCell(0,8,utf8_decode('Asímismo certifica el continuo cumplimiento de las disposiciones legales vigentes en materia de protección de datos, como consecuencia de los servicios de mantenimiento LOPD que se han contratado con esta empresa.'),0,'J');
+$pdf->MultiCell(0,8,utf8_decode('Para que así conste y surta los efectos oportunos, se expide el presente certificado Nº      , con vigencia de UN AÑO, en'),0,'J');
 $pdf->Ln(5);
-$pdf->MultiCell(0,8,utf8_decode('Para que así conste, y surta los efectos oportunos, se expide el presente certificado en'),0,'J');
+$pdf->MultiCell(0,8,utf8_decode('                    					Sevilla, a '.date('d',time()).' de '.getMes(date('m',time())).' de '.date('Y',time())),0,'J');
 $pdf->Ln(5);
-$pdf->MultiCell(0,8,utf8_decode('                    Sevilla, a '.date('d',time()).' de '.getMes(date('m',time())).' de '.date('Y',time())),0,'J');
-$pdf->Ln(10);
-$pdf->SetFont('Futura','',18);
-$pdf->MultiCell(0,8,utf8_decode('D. Miguel Ángel Chávez López       '),0,'R');
+$pdf->SetFont('Futura','',16);
+$pdf->MultiCell(0,8,utf8_decode('D. Juan Andrés Carretero García       '),0,'R');
 
-$pdf->Output("CERTIFICADO-$name.pdf",'I');
+$pdf->Output("CERTIFICADO-LOPD-$name.pdf",'I');
