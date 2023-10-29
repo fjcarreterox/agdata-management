@@ -46,13 +46,13 @@ if (!isset($idcliente)) {
         echo "<td>".Html::anchor('doc/letters/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
 
         //Security doc
-        echo "<tr><td>Documento de seguridad</td>";
-        echo "<td>".Html::anchor('clientes/doc_seguridad/' . $idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default'));
-        echo "&nbsp;".Html::anchor('doc/seguridad/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+        //echo "<tr><td>Documento de seguridad</td>";
+        //echo "<td>".Html::anchor('clientes/doc_seguridad/' . $idcliente, '<span class="glyphicon glyphicon-eye-open"></span> Vista previa', array('class' => 'btn btn-default'));
+        //echo "&nbsp;".Html::anchor('doc/seguridad/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
 
         //Portada
-        echo "<tr><td>Portada de la documentación</td>";
-        echo "<td>".Html::anchor('doc/portada/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
+        //echo "<tr><td>Portada de la documentación</td>";
+        //echo "<td>".Html::anchor('doc/portada/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
 
         //cesiones
         if(isset($cesiones)) {
