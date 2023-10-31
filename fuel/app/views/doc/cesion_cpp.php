@@ -170,4 +170,4 @@ else{
 }
 $pdf->MultiCell(0, 6, utf8_decode('C.PP ' . $cname . '                      ' . $signature), 0, 'C');
 
-$pdf->Output("CONTRATO-CESION-C.PP.-".$cname.".pdf",'I');
+$pdf->Output("CONTRATO-CESION-DATOS-C.PP.-".$cname.".pdf",'I');
