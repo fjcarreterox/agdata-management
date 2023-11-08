@@ -75,7 +75,7 @@ class Controller_Clientes extends Controller_Template
             }
         }
         else{
-            $clientes = Model_Cliente::find('all', array(
+            /*$clientes = Model_Cliente::find('all', array(
                 'where' => array(
                     array('estado', 5),
                     'or' => array(
@@ -83,7 +83,9 @@ class Controller_Clientes extends Controller_Template
                     ),
                 ),
                 'order_by' => array('nombre' => 'asc')
-            ));
+            ));*/
+
+            $clientes = Model_Cliente::find('all',array('order_by'=>array('nombre'=>'asc')));
 
             $data['clientes'] = $clientes;
         }
