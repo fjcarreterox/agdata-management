@@ -38,10 +38,8 @@ if (!isset($idcliente)) {
         echo "<tr><td>Declaración de vigencia de cargos</td>";
         echo "<td>".Html::anchor('doc/vigencia/'.$idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank'))."</td></tr>";
 
-        if (Model_Fichero::find('first',array('where'=>array('idcliente'=>$idcliente,'idtipo'=>6)))!=null) {
-            echo "<tr><td>Declaración NO tener el Acta de Constitución</td>";
-            echo "<td>" . Html::anchor('doc/noacta/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
-        }
+        echo "<tr><td>Declaración NO tener el Acta de Constitución</td>";
+        echo "<td>" . Html::anchor('doc/noacta/' . $idcliente, '<span class="glyphicon glyphicon-file"></span> Generar PDF', array('class' => 'btn btn-info', 'target' => '_blank')) . "</td></tr>";
 
         ?>
     </table>
