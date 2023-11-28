@@ -93,6 +93,27 @@ class Controller_Clientes extends Controller_Template
         $this->template->content = View::forge('clientes/doclopd', $data);
     }
 
+    public function action_declaraciones(){
+
+        if (Input::method() == 'POST'){
+            $idcliente = Input::post('idcliente');
+            if($idcliente==0){
+                Session::set_flash('error', 'Por favor, selecciona un cliente válido.');
+                Response::redirect('clientes/declaraciones');
+            }
+
+            $data['idcliente'] = $idcliente;
+            $data['name'] = Model_Cliente::find($idcliente)->get('nombre');
+            $data['type'] = Model_Cliente::find($idcliente)->get('tipo');
+        }
+        else{
+            $clientes = Model_Cliente::find('all',array('where'=>array('tipo'=>6)));
+            $data['clientes'] = $clientes;
+        }
+        $this->template->title = "Declaraciones NEOS";
+        $this->template->content = View::forge('clientes/declaraciones', $data);
+    }
+
     public function action_adaptacion(){
         $data['clientes'] = Model_Cliente::find('all',array('where'=>array('estado'=>5)));
         $data['intro'] = "en proceso de adaptación a la LOPD";

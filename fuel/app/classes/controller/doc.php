@@ -310,6 +310,25 @@ class Controller_Doc extends Controller_Template{
         return View::forge('doc/solicitud',$data)->render();
     }
 
+    public function action_vigencia($idc){
+        $data["name"] = Model_Cliente::find($idc)->get('nombre');
+        $data["cif"] = Model_Cliente::find($idc)->get('cif_nif');
+        $data['pres'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idc,'relacion'=>6)));
+        $af = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$idc)));
+        $data["afname"] = Model_Cliente::find($af->idaaff)->get('nombre');
+        $data["afdir1"] = Model_Cliente::find($af->idaaff)->get('direccion');
+        $data["afdir2"] = Model_Cliente::find($af->idaaff)->get('cpostal').' de '.Model_Cliente::find($af->idaaff)->get('prov');
+        $data["rep"] = Model_Personal::find('first', array('where' => array('idcliente' => $af->idaaff, 'relacion' => 1)));
+        return View::forge('doc/vigencia',$data)->render();
+    }
+
+    public function action_noacta($idc){
+        $data['pres'] = Model_Personal::find('first',array('where'=>array('idcliente'=>$idc,'relacion'=>6)));
+        $data["name"] = Model_Cliente::find($idc)->get('nombre');
+        $data["cif"] = Model_Cliente::find($idc)->get('cif_nif');
+        return View::forge('doc/noacta',$data)->render();
+    }
+
     public function action_cesion($idc,$idces){
         $c=Model_Cliente::find($idc);
         $isCPP=($c->tipo == 6)? true: false;

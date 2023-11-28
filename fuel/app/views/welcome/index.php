@@ -97,6 +97,7 @@
                 <h2>Menú CD+NEOS</h2>
                 <ul>
                     <li><a href="clientes/filter/4">TBC</a></li>
+                    <li><a href="clientes/declaraciones">Declaraciones para firmar</a></li>
                 </ul>
             </div>
 		</div>
