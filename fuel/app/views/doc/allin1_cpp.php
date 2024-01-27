@@ -156,13 +156,13 @@ $pdf->Ln(10);
 $pdf->SetFont('Arial','U',10);
 $pdf->MultiCell(0,6,utf8_decode('PERSONAL CON ACCESO A DATOS (CONTRATADOS POR EL RESPONSABLE)'),0,'J');
 $pdf->Ln(5);
-$pdf->SetWidths(array(45,20,40,35,25));
+$pdf->SetWidths(array(45,25,40,30,25));
 $pdf->SetAligns(array('C','C','C','C','C'));
 $pdf->SetFont('Arial','B',10);
 $pdf->Row(array("NOMBRE COMPLETO","DNI","CARGO / FUNCIÓN","TIPO ACCESO","CLÁUSULA FIRMADA"));
 $pdf->SetFont('Arial','',10);
-for($i=0;$i<3;$i++) {
-    $pdf->Row(array("\n\n", "\n\n", "\n\n", "\n\n", "\n\n"));
+foreach($trab as $t) {
+    $pdf->Row(array(html_entity_decode($t["nombre"]), $t["dni"], html_entity_decode($t["cargofuncion"]), "\n\n", "\n\n"));
 }
 $pdf->Ln(5);
 
