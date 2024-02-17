@@ -5,9 +5,9 @@
 	<thead>
 		<tr class="text-center">
 			<th>Nombre/Razón social</th>
-			<th>Teléfono</th>
-			<th>Población</th>
-			<th>Estado</th>
+			<th>CIF</th>
+			<th>Email</th>
+			<th>Actividad</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
@@ -15,9 +15,9 @@
 <?php foreach ($clientes as $item): ?>
         <tr class="text-center">
 			<td><?php echo $item->nombre; ?></td>
-			<td><?php echo $item->tel; ?></td>
-			<td><?php echo $item->loc." - ".$item->prov; ?></td>
-			<td><?php echo Model_Estados_Cliente::find($item->estado)->get('nombre'); ?></td>
+			<td><?php echo $item->cif_nif; ?></td>
+			<td><?php echo $item->email; ?></td>
+			<td><?php echo $item->actividad; ?></td>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
