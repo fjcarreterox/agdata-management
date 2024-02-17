@@ -218,7 +218,7 @@ class Controller_Clientes extends Controller_Template
     }
 
     public function action_contratas(){
-        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('tipo'=>12)));
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('tipo'=>12),'order_by'=>'nombre'));
         $data['intro'] = "Contratas";
         $this->template->title = "Contratas";
         $this->template->content = View::forge('clientes/contratas', $data);

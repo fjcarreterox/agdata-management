@@ -13,7 +13,7 @@
 	</thead>
 	<tbody>
 <?php foreach ($clientes as $item): ?>
-        <tr class="text-center">
+        <tr>
 			<td><?php echo $item->nombre; ?></td>
 			<td><?php echo $item->cif_nif; ?></td>
 			<td><?php echo $item->email; ?></td>
