@@ -145,9 +145,9 @@ class Controller_Clientes extends Controller_Template
                 $data['intro'] = "servicio de gestión de blogs";
                 $this->template->title = "Clientes con servicio de blogs";
                 break;
-            case 5: //social
-                $data['intro'] = "servicio de gestión de Redes Sociales";
-                $this->template->title = "Clientes con servicio de Redes Sociales";
+            case 5: //CAE
+                $data['intro'] = "servicio C.A.E.";
+                $this->template->title = "Clientes con servicio C.A.E.";
                 break;
             case 6: //design
                 $data['intro'] = "servicio de diseño";
@@ -215,6 +215,13 @@ class Controller_Clientes extends Controller_Template
         $data['intro'] = "Podólogos";
         $this->template->title = "Podólogos";
         $this->template->content = View::forge('clientes/podologos', $data);
+    }
+
+    public function action_contratas(){
+        $data['clientes'] = Model_Cliente::find('all',array('where'=>array('tipo'=>12)));
+        $data['intro'] = "Contratas";
+        $this->template->title = "Contratas";
+        $this->template->content = View::forge('clientes/contratas', $data);
     }
 
     public function action_potenciales()

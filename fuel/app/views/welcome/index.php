@@ -79,6 +79,7 @@
                     <li><a href="agenda/usercal/<?php echo Session::get('iduser');?>">Mi calendario <span class="glyphicon glyphicon-calendar"></span></a></li>
                 </ul>
             </div>-->
+            <?php if(Session::get('idrol')==4 || Session::get('idrol')==1):?>
 			<div class="col-md-4">
 				<h2>Menú LOPD</h2>
                 <ul>
@@ -87,12 +88,20 @@
                     <li><a href="clientes/com_mantenimiento">CC.PP. en mantenimiento</a></li>
                 </ul>
 			</div>
+            <?php endif; ?>
+            <?php if(Session::get('idrol')==2 || Session::get('idrol')==1):?>
 			<div class="col-md-4">
 				<h2>Menú C.A.E</h2>
 				<ul>
-                    <li><a href="clientes/filter/4">Nueva empresa contrata</a></li>
+                    <li><a href="clientes/filter/5">Listado de clientes CAE</a></li>
+                    <li><a href="clientes/contratas">Listado de contratas</a></li>
+                    <!--<li><a href="/">Informes CAE</a></li>
+                    <li><a href="/">Revisiones anuales</a></li>
+                    <li><a href="/">Tareas CAE pendientes</a></li>-->
 				</ul>
 			</div>
+            <?php endif; ?>
+            <?php if(Session::get('idrol')==1):?>
             <div class="col-md-4">
                 <h2>Menú CD+NEOS</h2>
                 <ul>
@@ -100,8 +109,22 @@
                     <li><a href="clientes/declaraciones">Declaraciones para firmar</a></li>
                 </ul>
             </div>
+            <?php endif; ?>
 		</div>
         <div class="row">
+            <?php if(Session::get('idrol')==4 || Session::get('idrol')==1):?>
+                <div class="col-md-4">
+                    <h2>Documentación</h2>
+                    <ul>
+                        <li><a href="contrato">Contratos</a></li>
+                        <li><a href="clientes/doclopd">Documentación LOPD</a></li>
+                        <li><a href="doc/index">Documentos comerciales</a></li>
+                        <li><a href="doc/aaff">Documentos para AA.FF.</a></li>
+                        <li><a href="procedimiento">Procedimientos</a></li>
+                        <li><a href="doc/report">Informes</a></li>
+                    </ul>
+                </div>
+            <?php endif; ?>
             <div class="col-md-4">
                 <h2>Clientes</h2>
                 <ul>
@@ -131,17 +154,6 @@
                 </ul>
             </div>
          <?php endif; ?>
-            <div class="col-md-4">
-                <h2>Documentación</h2>
-                <ul>
-                    <li><a href="contrato">Contratos</a></li>
-                    <li><a href="clientes/doclopd">Documentación LOPD</a></li>
-                    <li><a href="doc/index">Documentos comerciales</a></li>
-                    <li><a href="doc/aaff">Documentos para AA.FF.</a></li>
-                    <li><a href="procedimiento">Procedimientos</a></li>
-                    <li><a href="doc/report">Informes</a></li>
-                </ul>
-            </div>
         </div>
 		<hr/>
 		<footer>
