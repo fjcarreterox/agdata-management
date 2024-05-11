@@ -105,8 +105,10 @@
             <div class="col-md-4">
                 <h2>Menú CD+NEOS</h2>
                 <ul>
-                    <li><a href="clientes/filter/4">TBC</a></li>
+                    <li><a href="clientes/filter/4">Listado de Clientes CD+NEOS</a></li>
+                    <li><a href="clientes/filter/4">Control de vencimientos</a></li>
                     <li><a href="clientes/declaraciones">Declaraciones para firmar</a></li>
+                    <li><a href="clientes/filter/4">Tareas CD-NEOS pendientes</a></li>
                 </ul>
             </div>
             <?php endif; ?>
@@ -131,7 +133,7 @@
                     <li><a href="clientes/create">Añadir Nuevo Cliente</a></li>
                     <li><a href="clientes/aaff">Relación de AA.FF.</a></li>
                     <li><a href="personal/listall">Personas de contacto y Empleados</a></li>
-                    <li><a href="agenda/activos">Llamadas y visitas a clientes</a></li>
+                    <li><a href="agenda/index">Llamadas y visitas a clientes</a></li>
                     <li><a href="clientes">Listado completo de clientes</a></li>
                 </ul>
             </div>
