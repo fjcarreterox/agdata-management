@@ -130,6 +130,8 @@ class Controller_Clientes extends Controller_Template
 
     public function action_filter($idtype){
 
+        $isCAE=false;
+
         switch($idtype){
             case 1:
                 $data['intro'] = "en proceso de adaptación a la LOPD";
@@ -148,6 +150,7 @@ class Controller_Clientes extends Controller_Template
             case 5: //CAE
                 $data['intro'] = "servicio C.A.E.";
                 $this->template->title = "Clientes con servicio C.A.E.";
+                $isCAE=true;
                 break;
             case 6: //design
                 $data['intro'] = "servicio de diseño";
@@ -159,14 +162,19 @@ class Controller_Clientes extends Controller_Template
                 break;
         }
         $data["clientes"] = array();
-        $servs = Model_Servicios_Contratado::find('all',array('where'=>array('idtipo_servicio'=>$idtype)));
+        $servs = Model_Servicios_Contratado::find('all',array('where'=>array(array('idtipo_servicio', 'in', array(5,7,9,10)))));
         foreach($servs as $s){
             $contract= Model_Contrato::find($s->idcontrato);
             if (Model_Cliente::find($contract->idcliente) != null) {
                 $data["clientes"][] = Model_Cliente::find($contract->idcliente);
             }
         }
-        $this->template->content = View::forge('clientes/filter', $data);
+        if($isCAE){
+            $this->template->content = View::forge('clientes/filterCAE', $data);
+        }
+        else{
+            $this->template->content = View::forge('clientes/filter', $data);
+        }
     }
 
     public function action_nointeresados(){
