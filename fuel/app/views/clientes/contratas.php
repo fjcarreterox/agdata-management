@@ -1,5 +1,6 @@
 <h2><span class="muted">Clientes</span> en el sistema: <u><?php echo $intro; ?></u></h2>
 <br/>
+<p><?php echo Html::anchor('clientes/create', '<span class="glyphicon glyphicon-plus"></span> Añadir una nueva Empresa Contrata', array('class' => 'btn btn-success')); ?>&nbsp;<?php echo Html::anchor('clientes/index', '<span class="glyphicon glyphicon-eye-open"></span> Ver listado completo de clientes', array('class' => 'btn btn-default')); ?></p>
 <?php if ($clientes): ?>
 <table class="table table-striped">
 	<thead>
@@ -38,4 +39,4 @@
 <p>No se han encontrado clientes que cumplan los criterios de búsqueda establecidos.</p>
 <?php endif; ?>
 <br/>
-<p><?php echo Html::anchor('clientes/create', '<span class="glyphicon glyphicon-plus"></span> Añadir un nuevo cliente', array('class' => 'btn btn-success')); ?>&nbsp;<?php echo Html::anchor('clientes/index', '<span class="glyphicon glyphicon-eye-open"></span> Ver listado completo de clientes', array('class' => 'btn btn-default')); ?></p>
+<p><?php echo Html::anchor('clientes/create', '<span class="glyphicon glyphicon-plus"></span> Añadir una nueva Empresa Contrata', array('class' => 'btn btn-success')); ?>&nbsp;<?php echo Html::anchor('clientes/index', '<span class="glyphicon glyphicon-eye-open"></span> Ver listado completo de clientes', array('class' => 'btn btn-default')); ?></p>
