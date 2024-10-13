@@ -473,19 +473,19 @@ $pdf->Row(array("16","Golpes y cortes con objetos o herramientas","TOLERABLE"));
 $pdf->Row(array("17","Contactos eléctricos","TOLERABLE"));
 $pdf->Row(array("18","Atropellos o golpes y choques con o contra vehículos. Accidentes de tránsito (In itinere)","TRIVIAL"));
 $pdf->Row(array("19","Proyección de fragmentos o partículas","TRIVIAL"));
-$pdf->Row(array("20","Estrés térmico","XXXX"));
+$pdf->Row(array("20","Estrés térmico","Real Decreto 486/1997, de 14 de abril, por el que se establecen las disposiciones mínimas de seguridad y salud en los lugares de trabajo."));
 $pdf->Row(array("21","Señalización","Real Decreto 486/1997, de 14 de abril, por el que se establecen las disposiciones mínimas de seguridad y salud en los lugares de trabajo."));
 $pdf->Row(array("21","Condiciones Ambientales","Real Decreto 486/1997, de 14 de abril, por el que se establecen las disposiciones mínimas de seguridad y salud en los lugares de trabajo."));
 $pdf->Row(array("21","Servicios Higiénicos, Formación e información, Orden y limpieza, Evacuaciones, Vigilancia de la Salud","Real Decreto 486/1997, de 14 de abril, por el que se establecen las disposiciones mínimas de seguridad y salud en los lugares de trabajo."));
-$pdf->Row(array("21","Ascensores","XXXX"));
+$pdf->Row(array("21","Ascensores","Real Decreto 203/2016, de 20 de mayo, por el que se establecen los requisitos esenciales de seguridad para la comercialización de ascensores y componentes de seguridad para ascensores."));
 $pdf->Row(array("21","Formación e información","Real Decreto 486/1997, de 14 de abril, por el que se establecen las disposiciones mínimas de seguridad y salud en los lugares de trabajo."));
 $pdf->Row(array("21","Orden y limpieza","Real Decreto 486/1997, de 14 de abril, por el que se establecen las disposiciones mínimas de seguridad y salud en los lugares de trabajo."));
 $pdf->Row(array("21","Humedades","Real Decreto 486/1997, de 14 de abril, por el que se establecen las disposiciones mínimas de seguridad y salud en los lugares de trabajo."));
-$pdf->Row(array("21","Evacuaciones","XXX"));
-$pdf->Row(array("21","Vigilancia de la salud","XXX"));
-$pdf->Row(array("21","Botiquín","XXX"));
-$pdf->Row(array("21","Piscina","XXX"));
-$pdf->Row(array("21","Cuarto de calderas","XXX"));
+$pdf->Row(array("21","Evacuaciones","Art. 20 de la Ley 31/1995, de 8 de noviembre, de Prevención de Riesgos Laborales."));
+$pdf->Row(array("21","Vigilancia de la salud","Art. 20 de la Ley 31/1995, de 8 de noviembre, de Prevención de Riesgos Laborales."));
+$pdf->Row(array("21","Botiquín","Real Decreto 486/1997, de 14 de abril, por el que se establecen las disposiciones mínimas de seguridad y salud en los lugares de trabajo."));
+$pdf->Row(array("21","Piscina"," Decreto 485/2019, de 4 de junio, por el que se aprueba el Reglamento Técnico-Sanitario de las Piscinas en Andalucía."));
+$pdf->Row(array("21","Cuarto de calderas","Real Decreto 486/1997, de 14 de abril, por el que se establecen las disposiciones mínimas de seguridad y salud en los lugares de trabajo."));
 $pdf->Ln(10);
 
 //4.2
