@@ -150,6 +150,13 @@
                     <?php echo Form::radio('jardines', Input::post('jardines', 1), isset($infocae) && $infocae->jardines==1 ? true : null);?>
                 </td>
             </tr>
+            <tr>
+                <td><?php echo Form::label('Num. páginas Anexo', 'anexo', array('class'=>'control-label'));?></td>
+                <td>
+                    <?php echo Form::input('anexo', Input::post('anexo', isset($infocae) ? $infocae->anexo : 1), array('class' => 'col-md-4 form-control', 'placeholder'=>'Número de páginas en blanco en el Anexo'));?>
+
+                </td>
+            </tr>
         </table>
         <br/>
 		<div class="form-group">

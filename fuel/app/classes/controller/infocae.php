@@ -51,11 +51,12 @@ class Controller_Infocae extends Controller_Template
 					'piscina' => Input::post('piscina'),
 					'aseopiscina' => Input::post('aseopiscina'),
 					'jardines' => Input::post('jardines'),
+					'anexo' => Input::post('anexo'),
 				));
 
 				if ($infocae and $infocae->save())
 				{
-					Session::set_flash('success', 'Added infocae #'.$infocae->id.'.');
+					Session::set_flash('success', 'Se ha almacenado correctamente la información para el Informe CAE: #'.$infocae->id.'.');
 					Response::redirect('clientes/view/'.$idcliente);
 				}
 
@@ -108,6 +109,7 @@ class Controller_Infocae extends Controller_Template
 			$infocae->piscina = Input::post('piscina');
 			$infocae->aseopiscina = Input::post('aseopiscina');
 			$infocae->jardines = Input::post('jardines');
+			$infocae->anexo = Input::post('anexo');
 
 			if ($infocae->save())
 			{
@@ -141,6 +143,7 @@ class Controller_Infocae extends Controller_Template
 				$infocae->piscina = $val->validated('piscina');
 				$infocae->aseopiscina = $val->validated('aseopiscina');
 				$infocae->jardines = $val->validated('jardines');
+				$infocae->anexo = $val->validated('anexo');
 
 				Session::set_flash('error', $val->error());
 			}
@@ -160,20 +163,15 @@ class Controller_Infocae extends Controller_Template
 	{
 		is_null($id) and Response::redirect('/');
 
-		if ($infocae = Model_Infocae::find($id))
-		{
+		if ($infocae = Model_Infocae::find($id)) {
+			$idc=$infocae->get('idcliente');
 			$infocae->delete();
-
 			Session::set_flash('success', 'Información C.A.E. eliminada del sistema: #'.$id);
 		}
-
-		else
-		{
+		else {
 			Session::set_flash('error', 'No se ha podido eliminar la información C.A.E. del sistema: #'.$id);
 		}
-
-		Response::redirect('/');
-
+		Response::redirect('/clientes/view/'.$idc);
 	}
 
     public function action_report($id = null)
@@ -183,6 +181,17 @@ class Controller_Infocae extends Controller_Template
         if ($infocae = Model_Infocae::find($id))
         {
             $rel_aaff = Model_Rel_Comaaff::find('first',array('where'=>array('idcom'=>$infocae->idcliente)));
+            $rel_cont = Model_Rel_Comcont::find('all',array('where'=>array('idcom'=>$infocae->idcliente)));
+            $contratas=array();
+			foreach($rel_cont as $r){
+                $c=array();
+				$c['nombre']=Model_Cliente::find($r->idcontrata)->get("nombre");
+				$c['cif']=Model_Cliente::find($r->idcontrata)->get("cif_nif");
+				$c['servicio']=$r->servicio;
+                $contratas[]=$c;
+			}
+            $data["infocae"]=$infocae;
+            $data["contratas"]=$contratas;
             $data["adminfincas"]=Model_Cliente::find($rel_aaff->idaaff)->get("nombre");
             $data["cname"]=Model_Cliente::find($infocae->idcliente)->get("nombre");
             $data["cif"]=Model_Cliente::find($infocae->idcliente)->get("cif_nif");

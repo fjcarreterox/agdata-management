@@ -420,7 +420,8 @@
                             foreach($infocae as $info):
                                 foreach($info as $i => $v):
                                     if($v==1 and $i!='id' and $i!='idcliente')$servicios=$servicios." // ".$i;
-                                endforeach; ?>
+                                endforeach;
+                                $servicios.= " (".$info->anexo." hojas de Anexo)"?>
                                 <tr>
                                     <td><?php echo $servicios; ?></td>
                                     <td><?php echo Html::anchor('infocae/report/'.$info->id, '<span class="glyphicon glyphicon-eye-open"></span> Generar Informe C.A.E.',array('class'=>'btn btn-info','target'=>'_blank','title'=>'Se abre en ventana nueva...')); ?>

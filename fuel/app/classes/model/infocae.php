@@ -22,6 +22,7 @@ class Model_Infocae extends Model
 		'piscina',
 		'aseopiscina',
 		'jardines',
+		'anexo',
 		'created_at',
 		'updated_at',
 	);
@@ -57,6 +58,7 @@ class Model_Infocae extends Model
 		$val->add_field('piscina', 'Piscina', 'required|valid_string[numeric]');
 		$val->add_field('aseopiscina', 'Aseopiscina', 'required|valid_string[numeric]');
 		$val->add_field('jardines', 'Jardines', 'required|valid_string[numeric]');
+		$val->add_field('anexo', 'Anexo', 'required|valid_string[numeric]');
 
 		return $val;
 	}
