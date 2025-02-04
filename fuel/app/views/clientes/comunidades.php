@@ -6,6 +6,7 @@
 		<tr>
 			<th>Nombre/Razón social</th>
 			<th>CIF/NIF</th>
+			<th>C.Postal</th>
 			<th>Estado</th>
 			<th>&nbsp;</th>
 		</tr>
@@ -21,6 +22,7 @@
             <tr>
                 <td><?php echo $com->nombre; ?></td>
                 <td><?php echo $com->cif_nif; ?></td>
+                <td><?php echo $com->cpostal; ?></td>
                 <td><?php echo Model_Estados_Cliente::find($com->estado)->get('nombre'); ?></td>
                 <td>
                     <div class="btn-toolbar">
