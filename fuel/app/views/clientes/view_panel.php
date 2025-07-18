@@ -387,7 +387,10 @@
         </div>
         <div id="collapseFive" class="panel-collapse collapse">
             <div class="panel-body">
-                <p>Pendiente de rellenar</p>
+                <p>Boton INFO</p>
+                <p>Certificado actual. AGDATA o Externo</p>
+                <p>Fecha de vencimiento</p>
+                <p>Mail para envío de notificaciones</p>
             </div>
         </div>
     </div>
