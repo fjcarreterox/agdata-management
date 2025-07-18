@@ -175,7 +175,7 @@ class Controller_Doc extends Controller_Template{
         //Obtaining the max level for all the registered files
         $max_level = 0;
         $levels = array("No especificado","Básico","Medio","Alto");
-
+        $files=array();
         foreach($files_raw as $f){
             $files[]=array(
                 "id" => $f->id,
