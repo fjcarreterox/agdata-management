@@ -1246,7 +1246,7 @@ $pdf->SetFont('Arial','B',12);
 $pdf->MultiCell(0,10,utf8_decode('6. CONCLUSIONES'),0,'L');
 $pdf->Ln(5);
 $pdf->SetFont('Arial','',10);
-$pdf->MultiCell(0,6,utf8_decode('El resultado de la Evaluación de Riesgos pone de manifiesto la existencia de situaciones de riesgo y/o incumplimientos reglamentarios que deben ser evitados o minimizados, para ello se proponen una serie de medidas preventivas que deberán formar parte de la planificación de la actividad preventiva, que deberá ser aprobada e implantada por parte de los responsables pertinentes de conformidad con la Ley de Prevención de Riesgos Laborales.'),0,'J');$pdf->Ln(2.5);
+$pdf->MultiCell(0,6,utf8_decode('El resultado de la Evaluación de Riesgos pone de manifiesto la existencia de situaciones de riesgo que deben ser evitados o minimizados, para ello se han detallado una serie de medidas preventivas (punto 4.2 del presente informe) que deberán ser aprobadas e implantadas por parte de la Comunidad de Propietarios, para dar cumplimiento a la Ley de Prevención de Riesgos Laborales.'),0,'J');$pdf->Ln(2.5);
 $pdf->Ln(50);
 $pdf->MultiCell(0,6,utf8_decode('Informe elaborado por: D. Patricio García Alonso'),0,'R');$pdf->Ln(2.5);
 $pdf->MultiCell(0,6,utf8_decode('Técnico Superior en Prevención de Riesgos Laborales'),0,'R');$pdf->Ln(2.5);
