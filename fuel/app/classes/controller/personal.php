@@ -209,8 +209,7 @@ class Controller_Personal extends Controller_Template
         $data = array();
         if($idcliente) {
             $tipo_cliente = Model_Cliente::find($idcliente)->get('tipo');
-            $rep_legal[] = array();
-            $rep_legal[] = Model_Personal::find('first', array('where' => array('idcliente' => $idcliente, 'relacion' => 1)));
+            //$rep_legal[] = array();
             //communities and asociations are diferent on this
             if ($tipo_cliente == 6 || $tipo_cliente == 10) {
                 //Look for its aaff
@@ -220,15 +219,14 @@ class Controller_Personal extends Controller_Template
                     }
                 }
             }
+            else{
+                $rep_legal[] = Model_Personal::find('first', array('where' => array('idcliente' => $idcliente, 'relacion' => 1)));
+            }
 
             if (count($rep_legal) > 0) {
-                foreach ($rep_legal as $i => $rep) {
-                    if (count($rep) > 0) {
-                        $data[$i]["id"] = $rep->id;
-                        $data[$i]["nombre"] = $rep->nombre;
-                        $data[$i]["cargo"] = $rep->cargofuncion;
-                    }
-                }
+                $data[0]["id"] = $rep_legal[0]->id;
+                $data[0]["nombre"] = $rep_legal[0]->nombre;
+                $data[0]["cargo"] = $rep_legal[0]->cargofuncion;
                 $data["message"] = "TODO OK.";
             } else {
                 $data["idcliente"] = $idcliente;
